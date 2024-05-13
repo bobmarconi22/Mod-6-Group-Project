@@ -21,12 +21,10 @@ Mod 6 Group Project - Yelp Clone
 
 - Name, Review, Rating,
 
-
 - Foreign ID's:
     - UserId
     - BusinessId
     - Photos
-
 
 # Search/Filter
 - Users should be able to search by name, category, and or price.
@@ -47,19 +45,16 @@ Mod 6 Group Project - Yelp Clone
     - UserId
     - ReviewId (nullable)
 
-
 # Bonus: Google Maps API
 - Users should be able to see business locations on google maps.
 
 - Add location to search
 - Add get directions
 
-
 # Bonus: Friends
 - Users should be able to view their friends reviews and images.
 - Users should be able to add new friends.
 - Users should be able to remove friends.
-
 
 - userTable:
     - Id
