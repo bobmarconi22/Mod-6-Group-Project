@@ -64,4 +64,3 @@ Mod 6 Group Project - Yelp Clone
     - Phone (Optional)
     - Location
 
-![alt text](image.png)
