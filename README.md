@@ -12,7 +12,6 @@ Mod 6 Group Project - Yelp Clone
             - Description
             - Images
             - Hours
-            - Business type(Restaurant/Services)
             - Category(American, Plumbing, Korean, Carpentry)(At least 1, max 3)
             - Address
             - avg price (num of $)
