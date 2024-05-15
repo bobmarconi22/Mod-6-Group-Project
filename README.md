@@ -1,7 +1,7 @@
 # Mod-6-Group-Project
 Mod 6 Group Project - Yelp Clone
 
-## Businesses
+## Businesses - CRUD
 - Users should be able to view all businesses.
 - Users should be able to add their own business.
 - Users should be able to update their business information.
@@ -29,7 +29,7 @@ Mod 6 Group Project - Yelp Clone
 
 - As a **Consumer** I want to view potential Businesses in the area, so that I can learn how they are regarded by the general public, and decide if I want to do business with them.
 
-## Reviews
+## Reviews - CRUD
 - Users should be able to view all reviews on a business.
 - Users should be able to add a review to a business
 - Users should be able to update their review on a business.
@@ -51,7 +51,7 @@ Mod 6 Group Project - Yelp Clone
 
 - As a **Consumer** I want to view reviews for Businesses in the area, I can learn more about them, I also want to post my experiences at businesses that I have visited, so others can take my experiences into consideration. I also want to be able to update/delete my review details, so that I can keep my experience accurate pending any changes, or remove it.
 
-## Search/Filter
+## Search/Filter - CRU
 - Users should be able to search by name, category, and or price.
 - Users should be able to view the results of their search.
 
@@ -63,7 +63,7 @@ Mod 6 Group Project - Yelp Clone
 
 - As a **General User** I want to be able to find certain types of businesses based on filters or keywords so that I can find the businesses that match my search.
 
-## Images
+## Images - CRD
 - Users should be able to view all images on an associated business.
 - Users should be able to add an image to either their business or a business they have visited.
 - Users should be able to remove their images from a business.
