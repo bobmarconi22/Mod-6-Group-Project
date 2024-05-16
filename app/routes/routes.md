@@ -461,16 +461,6 @@ Creates and returns a new shop.
             "postal_code": "12345",
             "country": "US"
           },
-           "Images": [
-             {
-                "id": 1,
-                "userId": 1,
-                "shopId": 1,
-                "reviewId": 1,
-                "imgLink": "img.png",
-                "previewImage": true,
-             },
-          ]
     }
     ```
 
@@ -903,12 +893,6 @@ Create and return a new review for a shop specified by id.
     {
       "review": "This was an awesome shop!",
       "rating": 5,
-       "ReviewImages": [
-                {
-                "id": 1,
-                "img_link": "image url"
-                }
-            ]
     }
     ```
 
@@ -985,7 +969,8 @@ Create and return a new image for a review specified by id.
 
     ```json
     {
-      "url": "image url"
+      "url": "image url",
+      "preview_image": "False"
     }
     ```
 
@@ -998,7 +983,8 @@ Create and return a new image for a review specified by id.
     ```json
     {
       "id": 1,
-      "url": "image url"
+      "url": "image url",
+      "preview_image": "False"
     }
     ```
 
@@ -1014,7 +1000,7 @@ Create and return a new image for a review specified by id.
     }
     ```
 
-* Error response: Cannot add any more images because there is a maximum of 10
+* Error response: Cannot add any more images because there is a maximum of 3
   images per resource
   * Status Code: 403
   * Headers:
