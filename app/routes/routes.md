@@ -65,8 +65,8 @@ Returns the information about the current user that is logged in.
     {
       "user": {
         "id": 1,
-        "firstName": "John",
-        "lastName": "Smith",
+        "first_name": "John",
+        "last_name": "Smith",
         "email": "john.smith@gmail.com",
         "username": "JohnSmith"
       }
@@ -115,8 +115,8 @@ information.
     {
       "user": {
         "id": 1,
-        "firstName": "John",
-        "lastName": "Smith",
+        "first_name": "John",
+        "last_name": "Smith",
         "email": "john.smith@gmail.com",
         "username": "JohnSmith"
       }
@@ -166,8 +166,8 @@ user's information.
 
     ```json
     {
-      "firstName": "John",
-      "lastName": "Smith",
+      "first_name": "John",
+      "last_name": "Smith",
       "email": "john.smith@gmail.com",
       "username": "JohnSmith",
       "password": "secret password"
@@ -184,8 +184,8 @@ user's information.
     {
       "user": {
         "id": 1,
-        "firstName": "John",
-        "lastName": "Smith",
+        "first_name": "John",
+        "last_name": "Smith",
         "email": "john.smith@gmail.com",
         "username": "JohnSmith"
       }
@@ -234,8 +234,8 @@ user's information.
       "errors": {
         "email": "Invalid email",
         "username": "Username is required",
-        "firstName": "First Name is required",
-        "lastName": "Last Name is required"
+        "first_name": "First Name is required",
+        "last_name": "Last Name is required"
       }
     }
     ```
@@ -263,7 +263,7 @@ Returns all the shops.
       "Shops": [
         {
           "id": 1,
-          "ownerId": 1,
+          "owner_id": 1,
           "name": "App Academy",
           "description": "Place where web developers are created",
           "hours": { "Monday": "1:00-16:00" ,
@@ -274,12 +274,12 @@ Returns all the shops.
                      "Saturday": "2:00-7:00",
                      "Sunday": "2:00-7:00"},
           "website": "www.coffee.com",
-          "phoneNumber": "123-456-7890",
-          "priceRange": 1,
-          "createdAt": "2021-11-19 20:39:36",
-          "updatedAt": "2021-11-19 20:39:36",
-          "previewImage": "img.png",
-          "avgRating": 4.5,
+          "phone_number": "123-456-7890",
+          "price_range": 1,
+          "created_at": "2021-11-19 20:39:36",
+          "updated_at": "2021-11-19 20:39:36",
+          "preview_image": "img.png",
+          "avg_rating": 4.5,
           "categories": ["American", "To-Go", "Outdoor Seating"]
         }
       ]
@@ -307,7 +307,7 @@ Returns all the shops owned (created) by the current user.
       "Shops": [
         {
           "id": 1,
-          "ownerId": 1,
+          "owner_id": 1,
           "name": "App Academy",
           "description": "Place where web developers are created",
           "hours": { "Monday": "1:00-16:00" ,
@@ -318,12 +318,12 @@ Returns all the shops owned (created) by the current user.
                      "Saturday": "2:00-7:00",
                      "Sunday": "2:00-7:00"},
           "website": "www.coffee.com",
-          "phoneNumber": "123-456-7890",
-          "priceRange": 1,
-          "createdAt": "2021-11-19 20:39:36",
-          "updatedAt": "2021-11-19 20:39:36",
-          "previewImage": "img.png",
-          "avgRating": 4.5,
+          "phone_number": "123-456-7890",
+          "price_range": 1,
+          "created_at": "2021-11-19 20:39:36",
+          "updated_at": "2021-11-19 20:39:36",
+          "preview_image": "img.png",
+          "avg_rating": 4.5,
           "categories": ["American", "To-Go", "Outdoor Seating"]
         }
       ]
@@ -337,7 +337,7 @@ Returns the details of a shop specified by its id.
 * Require Authentication: false
 * Request
   * Method: GET
-  * URL: /api/shops/:shopId
+  * URL: /api/shops/:shop_id
   * Body: none
 
 * Successful Response
@@ -351,7 +351,7 @@ Returns the details of a shop specified by its id.
       "Shops": [
         {
           "id": 1,
-          "ownerId": 1,
+          "owner_id": 1,
           "name": "App Academy",
           "description": "Place where web developers are created",
           "hours": { "Monday": "1:00-16:00" ,
@@ -362,16 +362,16 @@ Returns the details of a shop specified by its id.
                      "Saturday": "2:00-7:00",
                      "Sunday": "2:00-7:00"},
           "website": "www.coffee.com",
-          "phoneNumber": "123-456-7890",
-          "priceRange": 1,
-          "createdAt": "2021-11-19 20:39:36",
-          "updatedAt": "2021-11-19 20:39:36",
-          "previewImage": "img.png",
-          "avgRating": 4.5,
+          "phone_number": "123-456-7890",
+          "price_range": 1,
+          "created_at": "2021-11-19 20:39:36",
+          "updated_at": "2021-11-19 20:39:36",
+          "preview_image": "img.png",
+          "avg_rating": 4.5,
           "categories": ["American", "To-Go", "Outdoor Seating"],
           "Addresses": {
             "id": 1,
-            "shopId": 1,
+            "shop_id": 1,
             "address_line1": "123 Coffee Way",
             "city": "Espresso",
             "state": "CF",
@@ -382,29 +382,29 @@ Returns the details of a shop specified by its id.
             {
             "User":{
                 "id":1,
-                "firstName": "Bob",
-                "lastName": "Marconi",
+                "first_name": "Bob",
+                "last_name": "Marconi",
                 "city": "Espresso",
                 "state": "CF",
-                "numReviews": 16,
-                "numImages": 30
+                "num_reviews": 16,
+                "num_images": 30
             },
             "review": "I love this place I go here all the time!",
             "rating": 5,
-            "createdAt": "2021-11-19 20:39:36",
-            "updatedAt": "2021-11-19 20:39:36"
+            "created_at": "2021-11-19 20:39:36",
+            "updated_at": "2021-11-19 20:39:36"
             },
           ],
           "Images": [
              {
                 "id": 1,
                 "userId": 1,
-                "shopId": 1,
+                "shop_id": 1,
                 "reviewId": 1,
-                "imgLink": "img.png",
-                "previewImage": true,
-                "createdAt": "2021-11-19 20:39:36",
-                "updatedAt": "2021-11-19 20:39:36"
+                "img_link": "img.png",
+                "preview_image": true,
+                "created_at": "2021-11-19 20:39:36",
+                "updated_at": "2021-11-19 20:39:36"
              },
           ]
         }
@@ -448,12 +448,12 @@ Creates and returns a new shop.
                      "Saturday": "2:00-7:00",
                      "Sunday": "2:00-7:00"},
           "website": "www.coffee.com",
-          "phoneNumber": "123-456-7890",
-          "priceRange": 1,
+          "phone_number": "123-456-7890",
+          "price_range": 1,
           "categories": ["American", "To-Go", "Outdoor Seating"],
           "Addresses": {
             "id": 1,
-            "shopId": 1,
+            "shop_id": 1,
             "address_line1": "123 Coffee Way",
             "city": "Espresso",
             "state": "CF",
@@ -474,7 +474,7 @@ Creates and returns a new shop.
       "Shops": [
         {
           "id": 1,
-          "ownerId": 1,
+          "owner_id": 1,
           "name": "App Academy",
           "description": "Place where web developers are created",
           "hours": { "Monday": "1:00-16:00" ,
@@ -485,16 +485,16 @@ Creates and returns a new shop.
                      "Saturday": "2:00-7:00",
                      "Sunday": "2:00-7:00"},
           "website": "www.coffee.com",
-          "phoneNumber": "123-456-7890",
-          "priceRange": 1,
-          "createdAt": "2021-11-19 20:39:36",
-          "updatedAt": "2021-11-19 20:39:36",
-          "previewImage": "img.png",
-          "avgRating": 4.5,
+          "phone_number": "123-456-7890",
+          "price_range": 1,
+          "created_at": "2021-11-19 20:39:36",
+          "updated_at": "2021-11-19 20:39:36",
+          "preview_image": "img.png",
+          "avg_rating": 4.5,
           "categories": ["American", "To-Go", "Outdoor Seating"],
           "Addresses": {
             "id": 1,
-            "shopId": 1,
+            "shop_id": 1,
             "address_line1": "123 Coffee Way",
             "city": "Espresso",
             "state": "CF",
@@ -505,29 +505,29 @@ Creates and returns a new shop.
             {
             "User":{
                 "id":1,
-                "firstName": "Bob",
-                "lastName": "Marconi",
+                "first_name": "Bob",
+                "last_name": "Marconi",
                 "city": "Espresso",
                 "state": "CF",
-                "numReviews": 16,
-                "numImages": 30
+                "num_reviews": 16,
+                "num_images": 30
             },
             "review": "I love this place I go here all the time!",
             "rating": 5,
-            "createdAt": "2021-11-19 20:39:36",
-            "updatedAt": "2021-11-19 20:39:36"
+            "created_at": "2021-11-19 20:39:36",
+            "updated_at": "2021-11-19 20:39:36"
             },
           ],
           "Images": [
              {
                 "id": 1,
                 "userId": 1,
-                "shopId": 1,
+                "shop_id": 1,
                 "reviewId": 1,
-                "imgLink": "img.png",
-                "previewImage": true,
-                "createdAt": "2021-11-19 20:39:36",
-                "updatedAt": "2021-11-19 20:39:36"
+                "img_link": "img.png",
+                "preview_image": true,
+                "created_at": "2021-11-19 20:39:36",
+                "updated_at": "2021-11-19 20:39:36"
              },
           ]
         }
@@ -550,8 +550,8 @@ Creates and returns a new shop.
         "hours": "Hours of operation is required",
         "categories": "Please list at least one category",
         "website": "Invalid website input",
-        "phoneNumber": "Please input a valid phone number",
-        "priceRange": "Please provide a valid price range from 1 to 5",
+        "phone_number": "Please input a valid phone number",
+        "price_range": "Please provide a valid price range from 1 to 5",
         "Address": "Please enter a valid Address"
       }
     }
@@ -615,7 +615,7 @@ Updates and returns an existing shop.
 * Require proper authorization: shop must belong to the current user
 * Request
   * Method: PUT
-  * URL: /api/shops/:shopId
+  * URL: /api/shops/:shop_id
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -632,12 +632,12 @@ Updates and returns an existing shop.
                      "Saturday": "2:00-7:00",
                      "Sunday": "2:00-7:00"},
           "website": "www.coffee.com",
-          "phoneNumber": "123-456-7890",
-          "priceRange": 1,
+          "phone_number": "123-456-7890",
+          "price_range": 1,
           "categories": ["American", "To-Go", "Outdoor Seating"],
           "Addresses": {
             "id": 1,
-            "shopId": 1,
+            "shop_id": 1,
             "address_line1": "123 Coffee Way",
             "city": "Espresso",
             "state": "CF",
@@ -658,7 +658,7 @@ Updates and returns an existing shop.
     ```json
     {
           "id": 1,
-          "ownerId": 1,
+          "owner_id": 1,
           "name": "App Academy",
           "description": "Place where web developers are created",
           "hours": { "Monday": "1:00-16:00" ,
@@ -669,14 +669,14 @@ Updates and returns an existing shop.
                      "Saturday": "2:00-7:00",
                      "Sunday": "2:00-7:00"},
           "website": "www.coffee.com",
-          "phoneNumber": "123-456-7890",
-          "priceRange": 1,
-          "createdAt": "2021-11-19 20:39:36",
-          "updatedAt": "2021-11-19 20:39:36",
+          "phone_number": "123-456-7890",
+          "price_range": 1,
+          "created_at": "2021-11-19 20:39:36",
+          "updated_at": "2021-11-19 20:39:36",
           "categories": ["American", "To-Go", "Outdoor Seating"],
           "Addresses": {
             "id": 1,
-            "shopId": 1,
+            "shop_id": 1,
             "address_line1": "123 Coffee Way",
             "city": "Espresso",
             "state": "CF",
@@ -701,8 +701,8 @@ Updates and returns an existing shop.
         "hours": "Hours of operation is required",
         "categories": "Please list at least one category",
         "website": "Invalid website input",
-        "phoneNumber": "Please input a valid phone number",
-        "priceRange": "Please provide a valid price range from 1 to 5",
+        "phone_number": "Please input a valid phone number",
+        "price_range": "Please provide a valid price range from 1 to 5",
         "Address": "Please enter a valid Address"
       }
     }
@@ -728,7 +728,7 @@ Deletes an existing shop.
 * Require proper authorization: shop must belong to the current user
 * Request
   * Method: DELETE
-  * URL: /api/shops/:shopId
+  * URL: /api/shops/:shop_id
   * Body: none
 
 * Successful Response
@@ -779,20 +779,20 @@ Returns all the reviews written by the current user.
         {
           "id": 1,
           "userId": 1,
-          "shopId": 1,
+          "shop_id": 1,
           "review": "This was an awesome shop!",
           "rating": 5,
-          "createdAt": "2021-11-19 20:39:36",
-          "updatedAt": "2021-11-19 20:39:36" ,
+          "created_at": "2021-11-19 20:39:36",
+          "updated_at": "2021-11-19 20:39:36" ,
           "shop": {
                  "id": 1,
-                "ownerId": 1,
+                "owner_id": 1,
                 "name": "App Academy",
-                "priceRange": 1,
+                "price_range": 1,
                 "categories": ["American", "To-Go", "Outdoor Seating"],
                 "Addresses": {
                     "id": 1,
-                    "shopId": 1,
+                    "shop_id": 1,
                     "address_line1": "123 Coffee Way",
                     "city": "Espresso",
                     "state": "CF",
@@ -818,7 +818,7 @@ Returns all the reviews that belong to a shop specified by id.
 * Require Authentication: false
 * Request
   * Method: GET
-  * URL: /api/shops/:shopId/reviews
+  * URL: /api/shops/:shop_id/reviews
   * Body: none
 
 * Successful Response
@@ -833,19 +833,19 @@ Returns all the reviews that belong to a shop specified by id.
             {
             "id": 1,
             "userId": 1,
-            "shopId": 1,
+            "shop_id": 1,
             "review": "This was an awesome shop!",
             "rating": 5,
-            "createdAt": "2021-11-19 20:39:36",
-            "updatedAt": "2021-11-19 20:39:36",
+            "created_at": "2021-11-19 20:39:36",
+            "updated_at": "2021-11-19 20:39:36",
              "User":{
                 "id":1,
-                "firstName": "Bob",
-                "lastName": "Marconi",
+                "first_name": "Bob",
+                "last_name": "Marconi",
                 "city": "Espresso",
                 "state": "CF",
-                "numReviews": 16,
-                "numImages": 30
+                "num_reviews": 16,
+                "num_images": 30
             },
             "ReviewImages": [
                 {
@@ -877,7 +877,7 @@ Create and return a new review for a shop specified by id.
 * Require Authentication: true
 * Request
   * Method: POST
-  * URL: /api/shops/:shopId/reviews
+  * URL: /api/shops/:shop_id/reviews
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -909,11 +909,11 @@ Create and return a new review for a shop specified by id.
     {
       "id": 1,
       "userId": 1,
-      "shopId": 1,
+      "shop_id": 1,
       "review": "This was an awesome shop!",
       "rating": 5,
-      "createdAt": "2021-11-19 20:39:36",
-      "updatedAt": "2021-11-19 20:39:36",
+      "created_at": "2021-11-19 20:39:36",
+      "updated_at": "2021-11-19 20:39:36",
       "Images": [
          {
         "id": 9,
@@ -1010,11 +1010,11 @@ Update and return an existing review.
     {
       "id": 1,
       "userId": 1,
-      "shopId": 1,
+      "shop_id": 1,
       "review": "This was an awesome shop!",
       "rating": 5,
-      "createdAt": "2021-11-19 20:39:36",
-      "updatedAt": "2021-11-20 10:06:40",
+      "created_at": "2021-11-19 20:39:36",
+      "updated_at": "2021-11-20 10:06:40",
        "Images": [
          {
         "id": 9,
@@ -1159,7 +1159,7 @@ Return shops filtered by query parameters.
       "shops": [
         {
           "id": 1,
-          "ownerId": 1,
+          "owner_id": 1,
           "name": "App Academy",
           "description": "Place where web developers are created",
           "hours": { "Monday": "1:00-16:00" ,
@@ -1170,12 +1170,12 @@ Return shops filtered by query parameters.
                      "Saturday": "2:00-7:00",
                      "Sunday": "2:00-7:00"},
           "website": "www.coffee.com",
-          "phoneNumber": "123-456-7890",
-          "priceRange": 1,
-          "createdAt": "2021-11-19 20:39:36",
-          "updatedAt": "2021-11-19 20:39:36",
-          "previewImage": "img.png",
-          "avgRating": 4.5,
+          "phone_number": "123-456-7890",
+          "price_range": 1,
+          "created_at": "2021-11-19 20:39:36",
+          "updated_at": "2021-11-19 20:39:36",
+          "preview_image": "img.png",
+          "avg_rating": 4.5,
           "categories": ["American", "To-Go", "Outdoor Seating"]
         }
       ],
