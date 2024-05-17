@@ -1,8 +1,8 @@
 from .db import db, environment, SCHEMA
 from .shop import Shop
 
-class Category(db.Model):
-    __tablename__ = 'categories'
+class SelectedCategory(db.Model):
+    __tablename__ = 'selected_categories'
 
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}

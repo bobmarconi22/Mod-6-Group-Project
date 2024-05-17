@@ -9,7 +9,7 @@ class Menu(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(15), nullable=False)
-    price = db.Column(db.Integer, nullable=False)
+    price = db.Column(db.Decimal, nullable=False)
     shop_id = db.Column(db.Integer, db.ForeignKey('shops.id'), nullable=False)
     popular_item = db.Column(db.Boolean, default=False)
 
