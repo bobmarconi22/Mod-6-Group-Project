@@ -31,6 +31,7 @@ function LoginFormModal() {
   return (
     <>
       <h1>Log In</h1>
+      {errors.server && <p>{errors.server}</p>}
       <form onSubmit={handleSubmit}>
         <label>
           Email

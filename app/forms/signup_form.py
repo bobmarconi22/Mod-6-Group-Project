@@ -30,8 +30,7 @@ class SignUpForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), user_exists])
     first_name = StringField('First Name', validators=[DataRequired()])
     last_name = StringField('Last Name', validators=[DataRequired()])
-    phone_number = StringField('Phone (optional)', validators=[DataRequired()])
+    phone_number = StringField('Phone (optional)')
     city = StringField('City', validators=[DataRequired()])
     state = SelectField('State', choices=[(state, state) for state in States], validators=[DataRequired()])
     password = StringField('Password', validators=[DataRequired()])
-

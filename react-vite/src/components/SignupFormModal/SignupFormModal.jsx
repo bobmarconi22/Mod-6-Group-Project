@@ -94,7 +94,6 @@ function SignupFormModal() {
             type="text"
             value={phoneNumber}
             onChange={(e) => setPhoneNumber(e.target.value)}
-            required
           />
         </label>
         {errors.phoneNumber && <p>{errors.phoneNumber}</p>}
