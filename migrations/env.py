@@ -10,7 +10,7 @@ from alembic import context
 
 import os
 environment = os.getenv("FLASK_ENV")
-SCHEMA = os.environ.get("brew_review_schema")
+SCHEMA = os.environ.get("SCHEMA")
 
 
 # this is the Alembic Config object, which provides
