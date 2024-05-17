@@ -12,6 +12,9 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
+    phone = db.Column(db.String(10), unique=True)
+    city = db.Column(db.String(25), nullable=False)
+    state = db.Column(db.String(25), nullable=False)
     hashed_password = db.Column(db.String(255), nullable=False)
 
     shop = db.relationship('Shop', back_populates='owner')
