@@ -1,5 +1,4 @@
 from .db import db, environment, SCHEMA
-from .shop import Shop
 
 class Image(db.Model):
     __tablename__ = 'images'

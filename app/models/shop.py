@@ -1,11 +1,5 @@
 from .db import db, environment, SCHEMA
 from sqlalchemy.dialects.postgresql import JSON
-from .user import User
-from .address import Address
-from .selected_category import SelectedCategory
-from .review import Review
-from .image import Image
-from .menu import Menu
 
 class Shop(db.Model):
     __tablename__ = 'shops'

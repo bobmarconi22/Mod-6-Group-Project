@@ -1,5 +1,5 @@
 from .db import db, environment, SCHEMA
-from .shop import Shop
+
 
 class Address(db.Model):
     __tablename__ = 'addresses'
