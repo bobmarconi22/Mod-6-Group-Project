@@ -1,0 +1,186 @@
+from app.models import db, Menu, environment, SCHEMA
+from sqlalchemy.sql import text
+
+def seed_menus():
+    menus = [
+        # Shop 1
+        Menu(name='Cold Brew', price=5, shop_id=1, popular_item=True),
+        Menu(name='Espresso', price=3, shop_id=1, popular_item=True),
+        Menu(name='Pumpkin Spice Latte', price=5.5, shop_id=1, popular_item=True),
+        Menu(name='Iced Coffee', price=4, shop_id=1, popular_item=True),
+        Menu(name='Flat White', price=5, shop_id=1, popular_item=True),
+        Menu(name='Americano', price=4, shop_id=1, popular_item=False),
+        Menu(name='Iced Americano', price=4, shop_id=1, popular_item=False),
+        Menu(name='Hot Chocolate', price=3.5, shop_id=1, popular_item=False),
+        Menu(name='Vanilla Bean Frappuccino', price=5.5, shop_id=1, popular_item=False),
+        Menu(name='Blonde Roast', price=3, shop_id=1, popular_item=False),
+        Menu(name='Mocha Frappuccino', price=5.5, shop_id=1, popular_item=False),
+        Menu(name='Caramel Latte', price=5.5, shop_id=1, popular_item=False),
+        Menu(name='Dark Roast', price=3, shop_id=1, popular_item=False),
+        Menu(name='Chai Tea Latte', price=5, shop_id=1, popular_item=False),
+        Menu(name='Café Misto', price=4, shop_id=1, popular_item=False),
+
+        # Shop 2
+        Menu(name='Americano', price=4, shop_id=2, popular_item=False),
+        Menu(name='Latte', price=5, shop_id=2, popular_item=True),
+        Menu(name='Caramel Macchiato', price=5.5, shop_id=2, popular_item=True),
+        Menu(name='Cappuccino', price=4.5, shop_id=2, popular_item=True),
+        Menu(name='Vanilla Latte', price=5.5, shop_id=2, popular_item=True),
+        Menu(name='Iced Latte', price=5, shop_id=2, popular_item=True),
+        Menu(name='Mocha', price=5.5, shop_id=2, popular_item=False),
+        Menu(name='Iced Mocha', price=5.5, shop_id=2, popular_item=False),
+        Menu(name='Iced Chai Tea Latte', price=5, shop_id=2, popular_item=False),
+        Menu(name='Matcha Green Tea', price=5.5, shop_id=2, popular_item=False),
+        Menu(name='Cinnamon Dolce Latte', price=5.5, shop_id=2, popular_item=False),
+        Menu(name='Blonde Vanilla Latte', price=5.5, shop_id=2, popular_item=False),
+        Menu(name='Iced Matcha Latte', price=5.5, shop_id=2, popular_item=False),
+        Menu(name='Flat White', price=5, shop_id=2, popular_item=False),
+        Menu(name='Café Au Lait', price=4, shop_id=2, popular_item=False),
+
+        # Shop 3
+        Menu(name='Cappuccino', price=4.5, shop_id=3, popular_item=True),
+        Menu(name='Mocha', price=5.5, shop_id=3, popular_item=False),
+        Menu(name='Hazelnut Latte', price=5.5, shop_id=3, popular_item=True),
+        Menu(name='Peppermint Mocha', price=5.5, shop_id=3, popular_item=True),
+        Menu(name='Cortado', price=4, shop_id=3, popular_item=True),
+        Menu(name='Affogato', price=6, shop_id=3, popular_item=True),
+        Menu(name='Double Espresso', price=4, shop_id=3, popular_item=False),
+        Menu(name='Café au Lait', price=4, shop_id=3, popular_item=False),
+        Menu(name='Turmeric Latte', price=5.5, shop_id=3, popular_item=False),
+        Menu(name='Iced Flat White', price=5, shop_id=3, popular_item=False),
+        Menu(name='Nitro Cold Brew', price=6, shop_id=3, popular_item=False),
+        Menu(name='Vietnamese Coffee', price=5.5, shop_id=3, popular_item=False),
+        Menu(name='Rose Latte', price=5.5, shop_id=3, popular_item=False),
+        Menu(name='Caramel Frappuccino', price=5.5, shop_id=3, popular_item=False),
+        Menu(name='Coconut Milk Latte', price=5.5, shop_id=3, popular_item=False),
+
+        # Shop 4
+        Menu(name='Flat White', price=5, shop_id=4, popular_item=True),
+        Menu(name='Macchiato', price=4.5, shop_id=4, popular_item=False),
+        Menu(name='Cinnamon Dolce Latte', price=5.5, shop_id=4, popular_item=True),
+        Menu(name='Nitro Cold Brew', price=6, shop_id=4, popular_item=True),
+        Menu(name='Matcha Latte', price=5.5, shop_id=4, popular_item=True),
+        Menu(name='Red Eye', price=4.5, shop_id=4, popular_item=False),
+        Menu(name='Iced Latte', price=5, shop_id=4, popular_item=False),
+        Menu(name='Iced Coffee', price=4, shop_id=4, popular_item=True),
+        Menu(name='Chai Latte', price=5, shop_id=4, popular_item=False),
+        Menu(name='Honey Almond Milk Flat White', price=5.5, shop_id=4, popular_item=False),
+        Menu(name='Toasted White Chocolate Mocha', price=5.5, shop_id=4, popular_item=False),
+        Menu(name='Pumpkin Cream Cold Brew', price=5.5, shop_id=4, popular_item=False),
+        Menu(name='Salted Caramel Mocha', price=5.5, shop_id=4, popular_item=False),
+        Menu(name='Gingerbread Latte', price=5.5, shop_id=4, popular_item=False),
+        Menu(name='Chocolate Cream Cold Brew', price=5.5, shop_id=4, popular_item=False),
+
+        # Shop 5
+        Menu(name='Affogato', price=6, shop_id=5, popular_item=True),
+        Menu(name='Iced Coffee', price=4, shop_id=5, popular_item=True),
+        Menu(name='Irish Coffee', price=6.5, shop_id=5, popular_item=True),
+        Menu(name='Turkish Coffee', price=4.5, shop_id=5, popular_item=False),
+        Menu(name='White Chocolate Mocha', price=5.5, shop_id=5, popular_item=True),
+        Menu(name='Espresso', price=3, shop_id=5, popular_item=True),
+        Menu(name='Vanilla Latte', price=5.5, shop_id=5, popular_item=False),
+        Menu(name='Pumpkin Spice Latte', price=5.5, shop_id=5, popular_item=False),
+        Menu(name='Hot Chocolate', price=3.5, shop_id=5, popular_item=False),
+        Menu(name='Iced Matcha Latte', price=5.5, shop_id=5, popular_item=False),
+        Menu(name='Cold Foam Cold Brew', price=5.5, shop_id=5, popular_item=False),
+        Menu(name='Toffee Nut Latte', price=5.5, shop_id=5, popular_item=False),
+        Menu(name='Coconut Milk Mocha Macchiato', price=5.5, shop_id=5, popular_item=False),
+        Menu(name='Cinnamon Almond Milk Macchiato', price=5.5, shop_id=5, popular_item=False),
+        Menu(name='Honey Citrus Mint Tea', price=5, shop_id=5, popular_item=False),
+
+        # Shop 6
+        Menu(name='Café Latte', price=5, shop_id=6, popular_item=True),
+        Menu(name='Mocha', price=5.5, shop_id=6, popular_item=True),
+        Menu(name='Vanilla Latte', price=5.5, shop_id=6, popular_item=True),
+        Menu(name='Flat White', price=5, shop_id=6, popular_item=True),
+        Menu(name='Espresso', price=3, shop_id=6, popular_item=True),
+        Menu(name='Iced Coffee', price=4, shop_id=6, popular_item=False),
+        Menu(name='Cold Brew', price=5, shop_id=6, popular_item=False),
+        Menu(name='Nitro Cold Brew', price=6, shop_id=6, popular_item=False),
+        Menu(name='Cappuccino', price=4.5, shop_id=6, popular_item=False),
+        Menu(name='Blonde Roast', price=3, shop_id=6, popular_item=False),
+        Menu(name='Pike Place Roast', price=3, shop_id=6, popular_item=False),
+        Menu(name='Iced Americano', price=4, shop_id=6, popular_item=False),
+        Menu(name='Caramel Macchiato', price=5.5, shop_id=6, popular_item=False),
+        Menu(name='Iced Chai Latte', price=5, shop_id=6, popular_item=False),
+        Menu(name='Matcha Green Tea Latte', price=5.5, shop_id=6, popular_item=False),
+
+        # Shop 7
+        Menu(name='Americano', price=4, shop_id=7, popular_item=True),
+        Menu(name='Iced Latte', price=5, shop_id=7, popular_item=True),
+        Menu(name='Mocha', price=5.5, shop_id=7, popular_item=True),
+        Menu(name='Vanilla Latte', price=5.5, shop_id=7, popular_item=True),
+        Menu(name='Caramel Frappuccino', price=5.5, shop_id=7, popular_item=True),
+        Menu(name='Flat White', price=5, shop_id=7, popular_item=False),
+        Menu(name='Cappuccino', price=4.5, shop_id=7, popular_item=False),
+        Menu(name='Espresso', price=3, shop_id=7, popular_item=False),
+        Menu(name='Iced Coffee', price=4, shop_id=7, popular_item=False),
+        Menu(name='Chai Latte', price=5, shop_id=7, popular_item=False),
+        Menu(name='Toasted White Chocolate Mocha', price=5.5, shop_id=7, popular_item=False),
+        Menu(name='Matcha Latte', price=5.5, shop_id=7, popular_item=False),
+        Menu(name='Honey Almond Milk Flat White', price=5.5, shop_id=7, popular_item=False),
+        Menu(name='Cold Brew', price=5, shop_id=7, popular_item=False),
+        Menu(name='Nitro Cold Brew', price=6, shop_id=7, popular_item=False),
+
+        # Shop 8
+        Menu(name='Iced Americano', price=4, shop_id=8, popular_item=True),
+        Menu(name='Cortado', price=4, shop_id=8, popular_item=True),
+        Menu(name='Turkish Coffee', price=4.5, shop_id=8, popular_item=True),
+        Menu(name='Nitro Cold Brew', price=6, shop_id=8, popular_item=True),
+        Menu(name='Cinnamon Dolce Latte', price=5.5, shop_id=8, popular_item=True),
+        Menu(name='Flat White', price=5, shop_id=8, popular_item=False),
+        Menu(name='Espresso', price=3, shop_id=8, popular_item=False),
+        Menu(name='Iced Latte', price=5, shop_id=8, popular_item=False),
+        Menu(name='Matcha Latte', price=5.5, shop_id=8, popular_item=False),
+        Menu(name='Caramel Macchiato', price=5.5, shop_id=8, popular_item=False),
+        Menu(name='Iced Mocha', price=5.5, shop_id=8, popular_item=False),
+        Menu(name='Honey Oat Milk Latte', price=5.5, shop_id=8, popular_item=False),
+        Menu(name='Blonde Vanilla Latte', price=5.5, shop_id=8, popular_item=False),
+        Menu(name='Pistachio Latte', price=5.5, shop_id=8, popular_item=False),
+        Menu(name='Café Misto', price=4, shop_id=8, popular_item=False),
+
+        # Shop 9
+        Menu(name='Café au Lait', price=4, shop_id=9, popular_item=True),
+        Menu(name='Iced Mocha', price=5.5, shop_id=9, popular_item=True),
+        Menu(name='Iced Americano', price=4, shop_id=9, popular_item=True),
+        Menu(name='Flat White', price=5, shop_id=9, popular_item=True),
+        Menu(name='Latte', price=5, shop_id=9, popular_item=True),
+        Menu(name='Espresso', price=3, shop_id=9, popular_item=False),
+        Menu(name='Cold Brew', price=5, shop_id=9, popular_item=False),
+        Menu(name='Cappuccino', price=4.5, shop_id=9, popular_item=False),
+        Menu(name='Macchiato', price=4.5, shop_id=9, popular_item=False),
+        Menu(name='Hot Chocolate', price=3.5, shop_id=9, popular_item=False),
+        Menu(name='Mocha', price=5.5, shop_id=9, popular_item=False),
+        Menu(name='Nitro Cold Brew', price=6, shop_id=9, popular_item=False),
+        Menu(name='Vanilla Latte', price=5.5, shop_id=9, popular_item=False),
+        Menu(name='Chai Latte', price=5, shop_id=9, popular_item=False),
+        Menu(name='White Chocolate Mocha', price=5.5, shop_id=9, popular_item=False),
+
+        # Shop 10
+        Menu(name='Double Espresso', price=4, shop_id=10, popular_item=False),
+        Menu(name='Iced Coffee', price=4, shop_id=10, popular_item=True),
+        Menu(name='Espresso', price=3, shop_id=10, popular_item=True),
+        Menu(name='Americano', price=4, shop_id=10, popular_item=True),
+        Menu(name='Cappuccino', price=4.5, shop_id=10, popular_item=True),
+        Menu(name='Latte', price=5, shop_id=10, popular_item=True),
+        Menu(name='Flat White', price=5, shop_id=10, popular_item=False),
+        Menu(name='Macchiato', price=4.5, shop_id=10, popular_item=False),
+        Menu(name='Mocha', price=5.5, shop_id=10, popular_item=False),
+        Menu(name='Pumpkin Spice Latte', price=5.5, shop_id=10, popular_item=False),
+        Menu(name='Vanilla Latte', price=5.5, shop_id=10, popular_item=False),
+        Menu(name='Hot Chocolate', price=3.5, shop_id=10, popular_item=False),
+        Menu(name='Nitro Cold Brew', price=6, shop_id=10, popular_item=False),
+        Menu(name='Caramel Macchiato', price=5.5, shop_id=10, popular_item=False),
+        Menu(name='Café au Lait', price=4, shop_id=10, popular_item=False),
+    ]
+
+    db.session.add_all(menus)
+    db.session.commit()
+
+def undo_menus():
+    if environment == "production":
+        db.session.execute(f"TRUNCATE table {SCHEMA}.menus RESTART IDENTITY CASCADE;")
+    else:
+        db.session.execute(text("DELETE FROM menus"))
+
+    db.session.commit()
