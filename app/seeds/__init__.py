@@ -25,11 +25,11 @@ def seed():
         # Make sure to add all your other model's undo functions below
         undo_users()
         undo_shops()
-        undo_selected_categories()
         undo_reviews()
         undo_menus()
         undo_images()
         undo_categories()
+        undo_selected_categories()
         undo_addresses()
     seed_users()
     seed_shops()
@@ -47,10 +47,10 @@ def seed():
 def undo():
     undo_users()
     undo_shops()
-    undo_selected_categories()
     undo_reviews()
     undo_menus()
     undo_images()
     undo_categories()
+    undo_selected_categories()
     undo_addresses()
     # Add other undo functions here
