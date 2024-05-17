@@ -800,7 +800,7 @@ Returns all the reviews written by the current user.
                     "country": "US"
                 },
           },
-          "ReviewImages": [
+          "review_images": [
             {
               "id": 1,
               "img_link": "image url"
@@ -847,7 +847,7 @@ Returns all the reviews that belong to a shop specified by id.
                 "num_reviews": 16,
                 "num_images": 30
             },
-            "ReviewImages": [
+            "review_images": [
                 {
                 "id": 1,
                 "img_link": "image url"
