@@ -1,11 +1,11 @@
 # Mod-6-Group-Project
 Mod 6 Group Project - Yelp Clone
 
-## Businesses - CRUD
-- Users should be able to view all businesses.
-- Users should be able to add their own business.
-- Users should be able to update their business information.
-- Users should be able to delete their business.
+## Shops - CRUD
+- Users should be able to view all Shops.
+- Users should be able to add their own Shop.
+- Users should be able to update their Shop information.
+- Users should be able to delete their Shop.
 
         Required:
             - Name
@@ -24,15 +24,15 @@ Mod 6 Group Project - Yelp Clone
         Accesses:
             - Reviews
 
-- As a **Business Owner** I want to be able to list my business so that I can improve Business through word of mouth and recommendations, by consumers. I also want to be able to update/delete my business details, so that I can keep my business information up to date, or remove it.
+- As a **Shop Owner** I want to be able to list my Shop so that I can improve Shop through word of mouth and recommendations, by consumers. I also want to be able to update/delete my Shop details, so that I can keep my Shop information up to date, or remove it.
 
-- As a **Consumer** I want to view potential Businesses in the area, so that I can learn how they are regarded by the general public, and decide if I want to do business with them.
+- As a **Consumer** I want to view potential Shops in the area, so that I can learn how they are regarded by the general public, and decide if I want to do Shop with them.
 
 ## Reviews - CRUD
-- Users should be able to view all reviews on a business.
-- Users should be able to add a review to a business
-- Users should be able to update their review on a business.
-- Users should be able to delete their review from a business.
+- Users should be able to view all reviews on a Shop.
+- Users should be able to add a review to a Shop
+- Users should be able to update their review on a Shop.
+- Users should be able to delete their review from a Shop.
 
         Required:
             - Auth
@@ -44,11 +44,11 @@ Mod 6 Group Project - Yelp Clone
 
         Accesses:
             - User (First Name/Last Name/Location/etc.)
-            - Business (Name/Existing Reviews/ect.)
+            - Shop (Name/Existing Reviews/ect.)
 
-- As a **Business Owner** I want to be able to list my business' Reviews so that I can improve my Business based on previous customers feedback, and attract new customers.
+- As a **Shop Owner** I want to be able to list my Shop' Reviews so that I can improve my Shop based on previous customers feedback, and attract new customers.
 
-- As a **Consumer** I want to view reviews for Businesses in the area, I can learn more about them, I also want to post my experiences at businesses that I have visited, so others can take my experiences into consideration. I also want to be able to update/delete my review details, so that I can keep my experience accurate pending any changes, or remove it.
+- As a **Consumer** I want to view reviews for Shops in the area, I can learn more about them, I also want to post my experiences at Shops that I have visited, so others can take my experiences into consideration. I also want to be able to update/delete my review details, so that I can keep my experience accurate pending any changes, or remove it.
 
 ## Search/Filter - CRU
 - Users should be able to search by name, category, and or price.
@@ -60,31 +60,31 @@ Mod 6 Group Project - Yelp Clone
             - Tags: Radio R-Tags / S-tags (or search, can select multiple)
             - Price: Radio '$$$$$' select
 
-- As a **General User** I want to be able to find certain types of businesses based on filters or keywords so that I can find the businesses that match my search.
+- As a **General User** I want to be able to find certain types of Shops based on filters or keywords so that I can find the Shops that match my search.
 
 ## Images - CRD
-- Users should be able to view all images on an associated business.
-- Users should be able to add an image to either their business or a business they have visited.
-- Users should be able to remove their images from a business.
+- Users should be able to view all images on an associated Shop.
+- Users should be able to add an image to either their Shop or a Shop they have visited.
+- Users should be able to remove their images from a Shop.
 
         Accessed through:
-            - BusinessId
+            - ShopId
             - UserId
             - ReviewId (nullable)
 
-- As a **Business Owner** I want to be able to show off images of my Business, both taken by me and by customers, so that I can attract new clients. I also want to be able to remove images that I submitted for my business, so that I can keep things up to date in the event of renovations.
+- As a **Shop Owner** I want to be able to show off images of my Shop, both taken by me and by customers, so that I can attract new clients. I also want to be able to remove images that I submitted for my Shop, so that I can keep things up to date in the event of renovations.
 
-- As a **Consumer** I want to view and Post images, for businesses that I have visited or that I am thinking about visiting, so that I can provide or receive general feedback about the businesses as a whole. I also want to be able to delete photos on my reviews, so that I can keep things fully accurate and up to date.
+- As a **Consumer** I want to view and Post images, for Shops that I have visited or that I am thinking about visiting, so that I can provide or receive general feedback about the Shops as a whole. I also want to be able to delete photos on my reviews, so that I can keep things fully accurate and up to date.
 
 ## Bonus: Google Maps API
-- Users should be able to see business locations on google maps.
+- Users should be able to see Shop locations on google maps.
 
 - Add location to search
 - Add get directions
 
-- As a **Business Owner** I want to provide the location of my business so that my customers can easily acquire directions or details about the address.
+- As a **Shop Owner** I want to provide the location of my Shop so that my customers can easily acquire directions or details about the address.
 
-- As a **Consumer** I want to be able to view where a business is, in regards to my location, so that I can evaluate if it is worth making the trip.
+- As a **Consumer** I want to be able to view where a Shop is, in regards to my location, so that I can evaluate if it is worth making the trip.
 
 ## Bonus: Friends
 - Users should be able to view their friends reviews and images.
