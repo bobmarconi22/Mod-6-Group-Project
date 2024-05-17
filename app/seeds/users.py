@@ -4,21 +4,21 @@ from sqlalchemy.sql import text
 # Adds a demo user, you can add other users here if you want
 def seed_users():
     users = [
-        User(first_name='Demo', last_name='User', username='demo_u', email='demo@aa.io', password='password', city='New York', state='NY', phone_number='555-0001'),
-        User(first_name='Marnie', last_name='Smith', username='marnie_s', email='marnie@aa.io', password='password', city='Los Angeles', state='CA', phone_number='555-0002'),
-        User(first_name='Bobbie', last_name='Brown', username='bobbie_b', email='bobbie@aa.io', password='password', city='Chicago', state='IL', phone_number='555-0003'),
-        User(first_name='Alice', last_name='Johnson', username='alice_j', email='alice@aa.io', password='password', city='Houston', state='TX', phone_number='555-0004'),
-        User(first_name='John', last_name='Doe', username='john_d', email='john@aa.io', password='password', city='Phoenix', state='AZ', phone_number='555-0005'),
-        User(first_name='Jane', last_name='Doe', username='jane_d', email='jane@aa.io', password='password', city='Philadelphia', state='PA', phone_number='555-0006'),
-        User(first_name='Mike', last_name='Davis', username='mike_d', email='mike@aa.io', password='password', city='San Antonio', state='TX', phone_number='555-0007'),
-        User(first_name='Sarah', last_name='Miller', username='sarah_m', email='sarah@aa.io', password='password', city='San Diego', state='CA', phone_number='555-0008'),
-        User(first_name='David', last_name='Wilson', username='david_w', email='david@aa.io', password='password', city='Dallas', state='TX', phone_number='555-0009'),
-        User(first_name='Laura', last_name='Moore', username='laura_m', email='laura@aa.io', password='password', city='San Jose', state='CA', phone_number='555-0010'),
-        User(first_name='James', last_name='Taylor', username='james_t', email='james@aa.io', password='password', city='Austin', state='TX', phone_number='555-0011'),
-        User(first_name='Emily', last_name='Anderson', username='emily_a', email='emily@aa.io', password='password', city='Jacksonville', state='FL', phone_number='555-0012'),
-        User(first_name='Robert', last_name='Thomas', username='robert_t', email='robert@aa.io', password='password', city='Fort Worth', state='TX', phone_number='555-0013'),
-        User(first_name='Linda', last_name='Jackson', username='linda_j', email='linda@aa.io', password='password', city='Columbus', state='OH', phone_number='555-0014'),
-        User(first_name='Charles', last_name='White', username='charles_w', email='charles@aa.io', password='password', city='Charlotte', state='NC', phone_number='555-0015')
+        User(first_name='Demo', last_name='User', username='demo_u', email='demo@aa.io', password='password', city='New York', state='NY', phone_number='555-555-0001'),
+        User(first_name='Marnie', last_name='Smith', username='marnie_s', email='marnie@aa.io', password='password', city='Los Angeles', state='CA', phone_number='555-555-0002'),
+        User(first_name='Bobbie', last_name='Brown', username='bobbie_b', email='bobbie@aa.io', password='password', city='Chicago', state='IL', phone_number='555-555-0003'),
+        User(first_name='Alice', last_name='Johnson', username='alice_j', email='alice@aa.io', password='password', city='Houston', state='TX', phone_number='555-555-0004'),
+        User(first_name='John', last_name='Doe', username='john_d', email='john@aa.io', password='password', city='Phoenix', state='AZ', phone_number='555-555-0005'),
+        User(first_name='Jane', last_name='Doe', username='jane_d', email='jane@aa.io', password='password', city='Philadelphia', state='PA', phone_number='555-555-0006'),
+        User(first_name='Mike', last_name='Davis', username='mike_d', email='mike@aa.io', password='password', city='San Antonio', state='TX', phone_number='555-555-0007'),
+        User(first_name='Sarah', last_name='Miller', username='sarah_m', email='sarah@aa.io', password='password', city='San Diego', state='CA', phone_number='555-555-0008'),
+        User(first_name='David', last_name='Wilson', username='david_w', email='david@aa.io', password='password', city='Dallas', state='TX', phone_number='555-555-0009'),
+        User(first_name='Laura', last_name='Moore', username='laura_m', email='laura@aa.io', password='password', city='San Jose', state='CA', phone_number='555-555-0010'),
+        User(first_name='James', last_name='Taylor', username='james_t', email='james@aa.io', password='password', city='Austin', state='TX', phone_number='555-555-0011'),
+        User(first_name='Emily', last_name='Anderson', username='emily_a', email='emily@aa.io', password='password', city='Jacksonville', state='FL', phone_number='555-555-0012'),
+        User(first_name='Robert', last_name='Thomas', username='robert_t', email='robert@aa.io', password='password', city='Fort Worth', state='TX', phone_number='555-555-0013'),
+        User(first_name='Linda', last_name='Jackson', username='linda_j', email='linda@aa.io', password='password', city='Columbus', state='OH', phone_number='555-555-0014'),
+        User(first_name='Charles', last_name='White', username='charles_w', email='charles@aa.io', password='password', city='Charlotte', state='NC', phone_number='555-555-0015')
     ]
 
     db.session.add_all(users)
