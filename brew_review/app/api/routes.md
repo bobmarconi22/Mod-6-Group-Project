@@ -398,7 +398,7 @@ Returns the details of a shop specified by its id.
           "Images": [
              {
                 "id": 1,
-                "userId": 1,
+                "user_id": 1,
                 "shop_id": 1,
                 "reviewId": 1,
                 "img_link": "img.png",
@@ -521,7 +521,7 @@ Creates and returns a new shop.
           "Images": [
              {
                 "id": 1,
-                "userId": 1,
+                "user_id": 1,
                 "shop_id": 1,
                 "reviewId": 1,
                 "img_link": "img.png",
@@ -778,7 +778,7 @@ Returns all the reviews written by the current user.
       "Reviews": [
         {
           "id": 1,
-          "userId": 1,
+          "user_id": 1,
           "shop_id": 1,
           "review": "This was an awesome shop!",
           "rating": 5,
@@ -832,7 +832,7 @@ Returns all the reviews that belong to a shop specified by id.
         "Reviews": [
             {
             "id": 1,
-            "userId": 1,
+            "user_id": 1,
             "shop_id": 1,
             "review": "This was an awesome shop!",
             "rating": 5,
@@ -908,7 +908,7 @@ Create and return a new review for a shop specified by id.
     ```json
     {
       "id": 1,
-      "userId": 1,
+      "user_id": 1,
       "shop_id": 1,
       "review": "This was an awesome shop!",
       "rating": 5,
@@ -1009,7 +1009,7 @@ Update and return an existing review.
     ```json
     {
       "id": 1,
-      "userId": 1,
+      "user_id": 1,
       "shop_id": 1,
       "review": "This was an awesome shop!",
       "rating": 5,
