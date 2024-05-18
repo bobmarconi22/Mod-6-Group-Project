@@ -1,6 +1,7 @@
 from .db import db, environment, SCHEMA
 from sqlalchemy.dialects.postgresql import JSON
 
+
 class Shop(db.Model):
     __tablename__ = 'shops'
 
