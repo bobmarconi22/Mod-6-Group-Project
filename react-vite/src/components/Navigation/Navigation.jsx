@@ -8,11 +8,10 @@ function Navigation() {
     <div className="nav-bar">
       <NavLink to="/">
         <img id='nav-logo' src="../../public/favicon.ico" />
-        <span id='nav-logo-text'>Brew Review</span>
       </NavLink>
       <input placeholder="places to visit" className="search-bar"></input>
       <div>
-        <span className="nav-text">BrewReview for Business</span>
+        {/* <span className="nav-text">BrewReview for Business</span> */}
         <span className="nav-text">Write a Review</span>
         <ProfileButton />
       </div>

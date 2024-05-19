@@ -4,19 +4,50 @@
 // import { useModal } from "../../context/Modal";
 import "./LandingPage.css";
 
-function LoginFormModal() {
+function LandingPage() {
   // const dispatch = useDispatch();
+  let shopsList = ['temp shop seeder', 'temp shop seeder', 'temp shop seeder', 'temp shop seeder', 'temp shop seeder', 'temp shop seeder']
+  const shopMapper =
+    // temporary code until seeder data is used, swap inputs with seeder info
+    shopsList.map(shop => {
+      return (
+        <div className="shop-container">
+          <img src='temp.png'></img>
+          <div className="shop-text">Coffee shop name</div>
+          <div className="shop-text">Rating & num review</div>
+          <div className="shop-text">Price Range & Categories</div>
+          <div className="shop-text">Get Directions</div>
+          <div className="shop-text">Open until time</div>
+        </div>
+      )
+    });
+
   return (
     <>
-      <h1>Categories</h1>
-      <div className="all-category-container">
-        <div className="category-container">American</div>
-        <div className="category-container">French</div>
-        <div className="category-container">Italian</div>
+      <div id="category-section-container">
+        <h1>Categories</h1>
+        <div className="category-list-container">
+          <div className="category-box">American</div>
+          <div className="category-box">French</div>
+          <div className="category-box">Italian</div>
+          <div className="category-box">Late Night</div>
+          <div className="category-box">Espresso</div>
+          <div className="category-box">Latte</div>
+          <div className="category-box">Mocha</div>
+          <div className="category-box">Frappe</div>
+        </div>
       </div>
 
+      <div id="shop-section-contianer">
+        <h1># all Coffee Shops</h1>
+        <div className="shop-list-container">
+          <>
+            {shopMapper}
+          </>
+        </div>
+      </div>
     </>
   );
 }
 
-export default LoginFormModal;
+export default LandingPage;
