@@ -1,18 +1,11 @@
-.signup-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 400px;
-    padding: 20px;
-
-}
-
-.signup-form-container {
+.create-shop-form {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.signup-input {
-    margin-bottom: 10px;
+.hours-input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
