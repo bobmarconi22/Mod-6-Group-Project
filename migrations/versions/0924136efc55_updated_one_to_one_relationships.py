@@ -12,6 +12,10 @@ from sqlalchemy.dialects.postgresql import JSON
 from sqlalchemy import Text
 #DONT FORGET TO IMPORT JSON AND TEXT
 
+import os
+environment = os.getenv("FLASK_ENV")
+SCHEMA = os.environ.get("SCHEMA")
+
 # revision identifiers, used by Alembic.
 revision = '0924136efc55'
 down_revision = None
@@ -103,6 +107,9 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+
+    if environment == "production":
+        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
     # ### end Alembic commands ###
 
 
