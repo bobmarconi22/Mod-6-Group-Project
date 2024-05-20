@@ -16,8 +16,8 @@ function LandingPage() {
           <div className="shop-text">Coffee shop name</div>
           <div className="shop-text">Rating & num review</div>
           <div className="shop-text">Price Range & Categories</div>
-          <div className="shop-text">Get Directions</div>
-          <div className="shop-text">Open until time</div>
+          <button className="shop-text">Get Directions</button>
+          <div className="shop-text">Open until (time)</div>
         </div>
       )
     });
