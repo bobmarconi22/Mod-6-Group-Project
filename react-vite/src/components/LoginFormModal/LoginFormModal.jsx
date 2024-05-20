@@ -55,6 +55,11 @@ function LoginFormModal() {
         />
         {errors.password && <p>{errors.password}</p>}
         <button className='login-button' type="submit">Log In</button>
+        <button className='login-button' type="submit" onClick={() => {
+          setEmail('demo@aa.io');
+          setPassword('password');
+          handleSubmit();
+        }}>Demo User</button>
       </form>
     </div>
   );
