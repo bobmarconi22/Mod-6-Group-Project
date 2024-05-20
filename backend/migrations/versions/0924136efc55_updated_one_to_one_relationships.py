@@ -1,8 +1,8 @@
-"""Updated relationships
+"""Updated one to one relationships
 
-Revision ID: 401cfde87420
+Revision ID: 0924136efc55
 Revises:
-Create Date: 2024-05-19 22:29:10.915860
+Create Date: 2024-05-19 23:14:32.897349
 
 """
 from alembic import op
@@ -10,9 +10,10 @@ import sqlalchemy as sa
 from sqlalchemy.dialects import postgresql
 from sqlalchemy.dialects.postgresql import JSON
 from sqlalchemy import Text
+#DONT FORGET TO IMPORT JSON AND TEXT
 
 # revision identifiers, used by Alembic.
-revision = '401cfde87420'
+revision = '0924136efc55'
 down_revision = None
 branch_labels = None
 depends_on = None

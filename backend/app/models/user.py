@@ -18,7 +18,7 @@ class User(db.Model, UserMixin):
     state = db.Column(db.String(25), nullable=False)
     hashed_password = db.Column(db.String(255), nullable=False)
 
-    shop = db.relationship('Shop', back_populates='owner')
+    shop = db.relationship('Shop', back_populates='owner', uselist=False) #one to one relationship
     image = db.relationship('Image', back_populates='image_owner')
     review = db.relationship('Review', back_populates='reviewer')
 
@@ -43,6 +43,4 @@ class User(db.Model, UserMixin):
             'phone_number': self.phone_number,
             'city': self.city,
             'state': self.state
-            
-
         }

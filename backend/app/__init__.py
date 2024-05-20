@@ -64,6 +64,9 @@ def inject_csrf_token(response):
         httponly=True)
     return response
 
+@app.route("/api")
+def hello_world():
+    return "Hello I'm running!"
 
 @app.route("/api/docs")
 def api_help():

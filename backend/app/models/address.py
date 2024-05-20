@@ -16,16 +16,15 @@ class Address(db.Model):
     postal_code = db.Column(db.String(50), nullable=False)
     country = db.Column(db.String(50), nullable=False)
 
-    shop = db.relationship('Shop', back_populates='address')
+    shop = db.relationship('Shop', back_populates='address', uselist=False) # one to one relationship needs uselist=false
 
-def to_dict(self):
-    return {
-        'id': self.id,
-        'shop': self.shop.to_dict(),
-        'address_line1': self.address_line1,
-        'address_line2': self.address_line2,
-        'city': self.city,
-        'state': self.state,
-        'postal_code': self.postal_code,
-        'country': self.country,
-    }
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'address_line1': self.address_line1,
+            'address_line2': self.address_line2,
+            'city': self.city,
+            'state': self.state,
+            'postal_code': self.postal_code,
+            'country': self.country,
+        }

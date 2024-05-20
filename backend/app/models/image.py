@@ -25,6 +25,5 @@ class Image(db.Model):
             'review_id': self.review_id,
             'img_link': self.img_link,
             'preview_image': self.preview_image,
-            'image_owner': self.image_owner.to_dict(),
-            'shop': self.shop.to_dict(),
+            'image_owner': self.image_owner.to_dict() if self.image_owner else None,
         }
