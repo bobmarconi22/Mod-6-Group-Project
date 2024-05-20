@@ -17,7 +17,7 @@ class Image(db.Model):
     shop = db.relationship('Shop', back_populates='image')
     review = db.relationship('Review', back_populates='image')
 
-    def to_dict(self):
+    def to_dict(self, include_image_owner=True):
         return {
             'id': self.id,
             'user_id': self.user_id,
@@ -25,5 +25,5 @@ class Image(db.Model):
             'review_id': self.review_id,
             'img_link': self.img_link,
             'preview_image': self.preview_image,
-            'image_owner': self.image_owner.to_dict() if self.image_owner else None,
+
         }

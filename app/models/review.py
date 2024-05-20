@@ -17,12 +17,12 @@ class Review(db.Model):
     shop = db.relationship('Shop', back_populates='review')
     image = db.relationship('Image', back_populates='review')
 
-    def to_dict(self):
-       state = instance_state(self)
+    def to_dict(self, include_shop=False, include_reviewer=False):
+        state = instance_state(self)
 
-       review_dict = {
+        review_dict = {
             'id': self.id,
-            # 'user_id': self.user_id,
+            'user_id': self.user_id,
             'shop_id': self.shop_id,
             'review': self.review,
             'rating': self.rating,
@@ -30,6 +30,13 @@ class Review(db.Model):
             # 'shop': self.shop.to_dict(),
 
         }
-       if 'image' in state.dict:
+        if 'image' in state.dict:
              review_dict['images'] = [img.to_dict() for img in self.image]
-       return review_dict
+        
+        if include_reviewer:
+            review_dict['reviewer'] = self.reviewer.to_dict()
+
+        if include_shop:
+           review_dict['shop'] = self.shop.to_dict()
+
+        return  review_dict

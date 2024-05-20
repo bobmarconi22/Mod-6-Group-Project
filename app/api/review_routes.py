@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify
 from flask_login import login_required, current_user
-from app.models import Review
+from app.models import Review, Shop, Image
+from sqlalchemy.orm import joinedload
 
 review_routes = Blueprint('reviews', __name__)
 
@@ -8,10 +9,8 @@ review_routes = Blueprint('reviews', __name__)
 @login_required
 def current_user_reviews():
 
-    reviews = Review.query.filter_by(user_id=current_user.id).all()
+    reviews = Review.query.options(joinedload(Review.shop), joinedload(Review.image)).filter_by(user_id=current_user.id).all()
 
-    print(reviews)
+    return [review.to_dict(include_shop=True, include_reviewer=True) for review in reviews]
 
-    user_reviews = [review.to_dict() for review in reviews]
 
-    return user_reviews
