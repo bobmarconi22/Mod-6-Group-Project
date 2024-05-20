@@ -1,8 +1,8 @@
 """updated oncascade
 
-Revision ID: f8053261cdc5
+Revision ID: 1f24d5fe4458
 Revises:
-Create Date: 2024-05-20 14:28:52.020116
+Create Date: 2024-05-20 14:33:19.379632
 
 """
 from alembic import op
@@ -14,7 +14,7 @@ environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
 # revision identifiers, used by Alembic.
-revision = 'f8053261cdc5'
+revision = '1f24d5fe4458'
 down_revision = None
 branch_labels = None
 depends_on = None
