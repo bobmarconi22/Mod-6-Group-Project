@@ -1,8 +1,8 @@
 """initial migrate
 
-Revision ID: 4f695cf4d270
+Revision ID: 0ed51d9946d2
 Revises:
-Create Date: 2024-05-20 13:32:08.087583
+Create Date: 2024-05-20 13:40:11.262633
 
 """
 from alembic import op
@@ -14,7 +14,7 @@ environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
 # revision identifiers, used by Alembic.
-revision = '4f695cf4d270'
+revision = '0ed51d9946d2'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -68,7 +68,7 @@ def upgrade():
     )
     op.create_table('menus',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('name', sa.String(length=15), nullable=False),
+    sa.Column('name', sa.String(length=50), nullable=False),
     sa.Column('price', sa.Numeric(), nullable=False),
     sa.Column('shop_id', sa.Integer(), nullable=False),
     sa.Column('popular_item', sa.Boolean(), nullable=True),
@@ -97,7 +97,7 @@ def upgrade():
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('shop_id', sa.Integer(), nullable=False),
     sa.Column('review_id', sa.Integer(), nullable=True),
-    sa.Column('img_link', sa.String(length=50), nullable=False),
+    sa.Column('img_link', sa.String(length=500), nullable=False),
     sa.Column('preview_image', sa.Boolean(), nullable=True),
     sa.ForeignKeyConstraint(['review_id'], ['reviews.id'], ),
     sa.ForeignKeyConstraint(['shop_id'], ['shops.id'], ),
