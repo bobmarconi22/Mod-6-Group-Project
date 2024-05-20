@@ -1,8 +1,8 @@
-"""updated oncascade
+"""updated seeds json
 
-Revision ID: 1f24d5fe4458
+Revision ID: 9ff36b0694bf
 Revises:
-Create Date: 2024-05-20 14:33:19.379632
+Create Date: 2024-05-20 15:17:39.454148
 
 """
 from alembic import op
@@ -14,7 +14,7 @@ environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
 # revision identifiers, used by Alembic.
-revision = '1f24d5fe4458'
+revision = '9ff36b0694bf'
 down_revision = None
 branch_labels = None
 depends_on = None
