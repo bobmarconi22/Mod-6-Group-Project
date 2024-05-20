@@ -11,6 +11,7 @@ def current_user_reviews():
 
     reviews = Review.query.options(joinedload(Review.shop), joinedload(Review.image)).filter_by(user_id=current_user.id).all()
 
+
     return [review.to_dict(include_shop=True, include_reviewer=True) for review in reviews]
 
 

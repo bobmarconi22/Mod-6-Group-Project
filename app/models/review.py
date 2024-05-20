@@ -1,5 +1,6 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from sqlalchemy.orm.attributes import instance_state
+from datetime import datetime, timezone
 
 class Review(db.Model):
     __tablename__ = 'reviews'
@@ -12,6 +13,8 @@ class Review(db.Model):
     shop_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('shops.id'), ondelete='CASCADE'), nullable=False)
     review = db.Column(db.String(500), nullable=False)
     rating = db.Column(db.Integer, nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.now(timezone.utc))
+    updated_at = db.Column(db.DateTime, default=datetime.now(timezone.utc))
 
     reviewer = db.relationship('User', back_populates='review')
     shop = db.relationship('Shop', back_populates='review')
@@ -26,17 +29,26 @@ class Review(db.Model):
             'shop_id': self.shop_id,
             'review': self.review,
             'rating': self.rating,
-            'reviewer': self.reviewer.to_dict() if self.reviewer else None,
-            # 'shop': self.shop.to_dict(),
-
+            'created_at': self.created_at,
+            'updated_at': self.updated_at,
+            'reviewer': {
+                'first_name': self.reviewer.first_name,
+                'city': self.reviewer.city,
+                'state': self.reviewer.state
+            },
+            'shop': {
+                'name': self.shop.name,
+                'id': self.shop.id
+            }
+ 
         }
         if 'image' in state.dict:
-             review_dict['images'] = [img.to_dict() for img in self.image]
+            review_dict['images'] = [
+                {
+                    'img_link': img.img_link, 
+                    'preview_image': img.preview_image
+                } 
+                for img in self.image]
 
-        if include_reviewer:
-            review_dict['reviewer'] = self.reviewer.to_dict()
-
-        if include_shop:
-           review_dict['shop'] = self.shop.to_dict()
 
         return  review_dict
