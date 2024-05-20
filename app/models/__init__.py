@@ -4,5 +4,5 @@ from .address import Address
 from .image import Image
 from .menu import Menu
 from .review import Review
-from .shop import Shop, selected_category, Category
+from .shop import Shop, selected_categories, Category
 from .db import environment, SCHEMA

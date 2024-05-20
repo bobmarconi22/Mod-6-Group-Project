@@ -1,9 +1,9 @@
-from app.models import db, environment, SCHEMA, selected_category
+from app.models import db, environment, SCHEMA, selected_categories
 
 from sqlalchemy.sql import text
 
 def seed_selected_categories():
-    selected_categories = [
+    selected = [
         # Spot 1
         {'shop_id': 1, 'category_id': 1},
         {'shop_id': 1, 'category_id': 5},
@@ -55,7 +55,7 @@ def seed_selected_categories():
         {'shop_id': 10, 'category_id': 25}
     ]
 
-    db.session.execute(selected_category.insert(), selected_categories)
+    db.session.execute(selected_categories.insert(), selected)
     db.session.commit()
 
 def undo_selected_categories():

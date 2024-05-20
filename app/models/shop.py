@@ -23,7 +23,7 @@ class Shop(db.Model):
 
     owner = db.relationship('User', back_populates='shop', uselist=False) #also one to one
     address = db.relationship('Address', back_populates='shop', uselist=False) #THis is one to one so needs uselist=False
-    categories= db.relationship('Category', secondary='selected_category', back_populates='shops')
+    categories= db.relationship('Category', secondary='selected_categories', back_populates='shops')
     review = db.relationship('Review', back_populates='shop')
     image = db.relationship('Image', back_populates='shop')
     menu = db.relationship('Menu', back_populates='shop')
@@ -69,7 +69,7 @@ class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(25), nullable=False)
 
-    shops = db.relationship('Shop', secondary='selected_category', back_populates='categories')
+    shops = db.relationship('Shop', secondary='selected_categories', back_populates='categories')
 
     def to_dict(self, include_shops=False):
 
@@ -85,12 +85,12 @@ class Category(db.Model):
        return category_dict
 
 
-selected_category = db.Table (
-    "selected_category",
+selected_categories = db.Table (
+    "selected_categories",
     db.Column("shop_id", db.Integer, db.ForeignKey(add_prefix_for_prod('shops.id')), primary_key=True),
     db.Column("category_id", db.Integer, db.ForeignKey(add_prefix_for_prod('categories.id')), primary_key=True)
 
 )
 
 if environment == "production":
-    selected_category.schema = SCHEMA
+    selected_categories.schema = SCHEMA
