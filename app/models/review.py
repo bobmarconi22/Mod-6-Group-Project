@@ -26,17 +26,24 @@ class Review(db.Model):
             'shop_id': self.shop_id,
             'review': self.review,
             'rating': self.rating,
-            'reviewer': self.reviewer.to_dict() if self.reviewer else None,
-            # 'shop': self.shop.to_dict(),
-
+            'reviewer': {
+                'first_name': self.reviewer.first_name,
+                'city': self.reviewer.city,
+                'state': self.reviewer.state
+            },
+            'shop': {
+                'name': self.shop.name,
+                'id': self.shop.id
+            }
+ 
         }
         if 'image' in state.dict:
-             review_dict['images'] = [img.to_dict() for img in self.image]
-        
-        if include_reviewer:
-            review_dict['reviewer'] = self.reviewer.to_dict()
+            review_dict['images'] = [
+                {
+                    'img_link': img.img_link, 
+                    'preview_image': img.preview_image
+                } 
+                for img in self.image]
 
-        if include_shop:
-           review_dict['shop'] = self.shop.to_dict()
 
         return  review_dict
