@@ -15,3 +15,16 @@ class Review(db.Model):
     reviewer = db.relationship('User', back_populates='review')
     shop = db.relationship('Shop', back_populates='review')
     image = db.relationship('Image', back_populates='review')
+
+    def to_dict(self):
+       print("THIS IS PRINT====>", self.shop.to_dict())
+       return { 
+            'id': self.id,
+            # 'user_id': self.user_id,
+            'shop_id': self.shop_id,
+            'review': self.review,
+            'rating': self.rating,
+            'reviewer': self.reviewer.to_dict(),
+            # 'shop': self.shop.to_dict(),
+            # 'image': [img.to_dict() for img in self.image]
+        }
