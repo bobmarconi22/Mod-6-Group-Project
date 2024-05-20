@@ -18,6 +18,11 @@
     margin: 40px 30px;
 }
 
+.category-box:hover {
+    box-shadow: 0px 0px 20px;
+    cursor: pointer;
+}
+
 #shop-section-contianer {
     display: flex;
     flex-direction: column;

@@ -9,7 +9,8 @@ function LandingPage() {
   let shopsList = ['temp shop seeder', 'temp shop seeder', 'temp shop seeder', 'temp shop seeder', 'temp shop seeder', 'temp shop seeder']
   const shopMapper =
     // temporary code until seeder data is used, swap inputs with seeder info
-    shopsList.map(shop => {
+    // add to map input later { shop, id }
+    shopsList.map(() => {
       return (
         <div className="shop-container">
           <img src='temp.png'></img>
