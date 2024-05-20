@@ -24,12 +24,13 @@ def current_user_shops():
 @shop_routes.route("/")
 
 def get_all_shops():
-    shops = Shop.query.options(joinedload(Shop.categories), joinedload(Shop.address)).all()
+    shops = Shop.query.options(joinedload(Shop.categories), joinedload(Shop.address), joinedload(Shop.review)).all()
     shop_dicts = []
     for shop in shops:
          shop_dict = shop.to_dict(include_categories=True)
          shop_dict['preview_image'] = Image.query.filter_by(shop_id = shop.id, preview_image=True).first().to_dict()
          shop_dicts.append(shop_dict)
+
 
 
     return jsonify(shop_dicts)
