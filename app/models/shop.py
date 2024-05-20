@@ -2,6 +2,7 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from sqlalchemy.dialects.postgresql import JSON
 from sqlalchemy.orm.attributes import instance_state
+from datetime import datetime, timezone
 
 
 
@@ -20,6 +21,8 @@ class Shop(db.Model):
     website = db.Column(db.String(500), nullable=False)
     phone_number = db.Column(db.String(10))
     price_range = db.Column(db.Integer, nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.now(timezone.utc))
+    updated_at = db.Column(db.DateTime, default=datetime.now(timezone.utc))
 
     owner = db.relationship('User', back_populates='shop', uselist=False) #also one to one
     address = db.relationship('Address', back_populates='shop', uselist=False) #THis is one to one so needs uselist=False
@@ -40,6 +43,9 @@ class Shop(db.Model):
             'website': self.website,
             'phone_number': self.phone_number,
             'price_range': self.price_range,
+            'created_at': self.created_at,
+            'updated_at': self.updated_at,
+
         }
             # Checks if they've been eager loaded and doesn't include if they aren't there
         if 'owner' in state.dict:

@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify
 
 from flask_login import login_required, current_user
-from app.models import Shop, selected_categories, Category, Image
+from app.models import Shop, selected_categories, Category, Image, Review
 from sqlalchemy.orm import joinedload
 from flask_login import login_required
 
@@ -32,3 +32,11 @@ def get_all_shops():
          shop_dicts.append(shop_dict)
 
     return jsonify(shop_dicts)
+
+
+
+
+# REVIEW ROUTES 
+
+#GET ALL REVIEWS BY SHOP'S ID
+
