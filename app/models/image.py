@@ -10,7 +10,7 @@ class Image(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     shop_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('shops.id')), nullable=False)
     review_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('reviews.id')))
-    img_link = db.Column(db.String(50), nullable=False)
+    img_link = db.Column(db.String(500), nullable=False)
     preview_image = db.Column(db.Boolean, default=False)
 
     image_owner = db.relationship('User', back_populates='image')
