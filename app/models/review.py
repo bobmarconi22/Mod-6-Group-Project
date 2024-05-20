@@ -1,4 +1,5 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
+from sqlalchemy.orm.attributes import instance_state
 
 class Review(db.Model):
     __tablename__ = 'reviews'
@@ -17,8 +18,9 @@ class Review(db.Model):
     image = db.relationship('Image', back_populates='review')
 
     def to_dict(self):
+       state = instance_state(self)
 
-       return {
+       review_dict = {
             'id': self.id,
             # 'user_id': self.user_id,
             'shop_id': self.shop_id,
@@ -26,5 +28,8 @@ class Review(db.Model):
             'rating': self.rating,
             'reviewer': self.reviewer.to_dict() if self.reviewer else None,
             # 'shop': self.shop.to_dict(),
-            # 'image': [img.to_dict() for img in self.image]
+
         }
+       if 'image' in state.dict:
+             review_dict['images'] = [img.to_dict() for img in self.image]
+       return review_dict
