@@ -1,17 +1,18 @@
-"""join table and Text in migration
+"""Updated relationships
 
-Revision ID: 40b740ed18ed
-Revises: 
-Create Date: 2024-05-19 19:34:45.270966
+Revision ID: 401cfde87420
+Revises:
+Create Date: 2024-05-19 22:29:10.915860
 
 """
 from alembic import op
 import sqlalchemy as sa
 from sqlalchemy.dialects import postgresql
+from sqlalchemy.dialects.postgresql import JSON
 from sqlalchemy import Text
 
 # revision identifiers, used by Alembic.
-revision = '40b740ed18ed'
+revision = '401cfde87420'
 down_revision = None
 branch_labels = None
 depends_on = None

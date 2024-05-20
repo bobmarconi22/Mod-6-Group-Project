@@ -280,7 +280,7 @@ Returns all the shops.
           "updated_at": "2021-11-19 20:39:36",
           "preview_image": "img.png",
           "avg_rating": 4.5,
-          "categories": ["American", "To-Go", "Outdoor Seating"]
+          "Categories": ["American", "To-Go", "Outdoor Seating"]
         }
       ]
     }
@@ -324,7 +324,7 @@ Returns all the shops owned (created) by the current user.
           "updated_at": "2021-11-19 20:39:36",
           "preview_image": "img.png",
           "avg_rating": 4.5,
-          "categories": ["American", "To-Go", "Outdoor Seating"]
+          "Categories": ["American", "To-Go", "Outdoor Seating"]
         }
       ]
     }
@@ -368,7 +368,7 @@ Returns the details of a shop specified by its id.
           "updated_at": "2021-11-19 20:39:36",
           "preview_image": "img.png",
           "avg_rating": 4.5,
-          "categories": ["American", "To-Go", "Outdoor Seating"],
+          "Categories": ["American", "To-Go", "Outdoor Seating"],
           "Addresses": {
             "id": 1,
             "shop_id": 1,
@@ -450,7 +450,7 @@ Creates and returns a new shop.
           "website": "www.coffee.com",
           "phone_number": "123-456-7890",
           "price_range": 1,
-          "categories": ["American", "To-Go", "Outdoor Seating"],
+          "Categories": ["American", "To-Go", "Outdoor Seating"],
           "Addresses": {
             "id": 1,
             "shop_id": 1,
@@ -491,7 +491,7 @@ Creates and returns a new shop.
           "updated_at": "2021-11-19 20:39:36",
           "preview_image": "img.png",
           "avg_rating": 4.5,
-          "categories": ["American", "To-Go", "Outdoor Seating"],
+          "Categories": ["American", "To-Go", "Outdoor Seating"],
           "Addresses": {
             "id": 1,
             "shop_id": 1,
@@ -634,7 +634,7 @@ Updates and returns an existing shop.
           "website": "www.coffee.com",
           "phone_number": "123-456-7890",
           "price_range": 1,
-          "categories": ["American", "To-Go", "Outdoor Seating"],
+          "Categories": ["American", "To-Go", "Outdoor Seating"],
           "Addresses": {
             "id": 1,
             "shop_id": 1,
@@ -673,7 +673,7 @@ Updates and returns an existing shop.
           "price_range": 1,
           "created_at": "2021-11-19 20:39:36",
           "updated_at": "2021-11-19 20:39:36",
-          "categories": ["American", "To-Go", "Outdoor Seating"],
+          "Categories": ["American", "To-Go", "Outdoor Seating"],
           "Addresses": {
             "id": 1,
             "shop_id": 1,
