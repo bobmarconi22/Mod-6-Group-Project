@@ -9,7 +9,7 @@ class Menu(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False)
     price = db.Column(db.Numeric, nullable=False)
-    shop_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('shops.id')), nullable=False)
+    shop_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('shops.id'), ondelete='CASCADE'), nullable=False)
     popular_item = db.Column(db.Boolean, default=False)
 
     shop = db.relationship('Shop', back_populates='menu')

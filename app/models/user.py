@@ -18,9 +18,9 @@ class User(db.Model, UserMixin):
     state = db.Column(db.String(25), nullable=False)
     hashed_password = db.Column(db.String(255), nullable=False)
 
-    shop = db.relationship('Shop', back_populates='owner', uselist=False) #one to one relationship
-    image = db.relationship('Image', back_populates='image_owner')
-    review = db.relationship('Review', back_populates='reviewer')
+    shop = db.relationship('Shop', back_populates='owner', uselist=False, cascade='all, delete-orphan') #one to one relationship and delete user shop if user is deleted
+    image = db.relationship('Image', back_populates='image_owner', cascade='all, delete-orphan') #delete user images if user is deleted
+    review = db.relationship('Review', back_populates='reviewer', cascade='all, delete-orphan') #will delete user reviews if user is deleted
 
     @property
     def password(self):

@@ -13,7 +13,7 @@ class Shop(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    owner_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
+    owner_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id'), ondelete='CASCADE'), nullable=False)
     name = db.Column(db.String(40), nullable=False)
     description = db.Column(db.String(255), nullable=False)
     hours = db.Column(JSON, nullable=False)
@@ -21,12 +21,12 @@ class Shop(db.Model):
     phone_number = db.Column(db.String(10))
     price_range = db.Column(db.Integer, nullable=False)
 
-    owner = db.relationship('User', back_populates='shop', uselist=False) #also one to one
-    address = db.relationship('Address', back_populates='shop', uselist=False) #THis is one to one so needs uselist=False
+    owner = db.relationship('User', back_populates='shop', uselist=False)
+    address = db.relationship('Address', back_populates='shop', uselist=False, cascade='all, delete-orphan') #deletes address if shop is deleted
     categories= db.relationship('Category', secondary='selected_categories', back_populates='shops')
-    review = db.relationship('Review', back_populates='shop')
-    image = db.relationship('Image', back_populates='shop')
-    menu = db.relationship('Menu', back_populates='shop')
+    review = db.relationship('Review', back_populates='shop', cascade='all, delete-orphan') #deletes all reviews if shop is deleted
+    image = db.relationship('Image', back_populates='shop', cascade='all, delete-orphan') #deletes all images if shop is deleted
+    menu = db.relationship('Menu', back_populates='shop', cascade='all, delete-orphan') #deletes all menus if shop deleted
 
     def to_dict(self, include_categories= False):
         state = instance_state(self)
@@ -87,9 +87,8 @@ class Category(db.Model):
 
 selected_categories = db.Table (
     "selected_categories",
-    db.Column("shop_id", db.Integer, db.ForeignKey(add_prefix_for_prod('shops.id')), primary_key=True),
-    db.Column("category_id", db.Integer, db.ForeignKey(add_prefix_for_prod('categories.id')), primary_key=True)
-
+    db.Column("shop_id", db.Integer, db.ForeignKey(add_prefix_for_prod('shops.id'), ondelete='CASCADE'), primary_key=True),
+    db.Column("category_id", db.Integer, db.ForeignKey(add_prefix_for_prod('categories.id'), ondelete='CASCADE'), primary_key=True)
 )
 
 if environment == "production":

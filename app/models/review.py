@@ -8,14 +8,14 @@ class Review(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
-    shop_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('shops.id')), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id'), ondelete='CASCADE'), nullable=False)
+    shop_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('shops.id'), ondelete='CASCADE'), nullable=False)
     review = db.Column(db.String(500), nullable=False)
     rating = db.Column(db.Integer, nullable=False)
 
     reviewer = db.relationship('User', back_populates='review')
     shop = db.relationship('Shop', back_populates='review')
-    image = db.relationship('Image', back_populates='review')
+    image = db.relationship('Image', back_populates='review', cascade='all, delete-orphan')
 
     def to_dict(self, include_shop=False, include_reviewer=False):
         state = instance_state(self)
@@ -32,7 +32,7 @@ class Review(db.Model):
         }
         if 'image' in state.dict:
              review_dict['images'] = [img.to_dict() for img in self.image]
-        
+
         if include_reviewer:
             review_dict['reviewer'] = self.reviewer.to_dict()
 
