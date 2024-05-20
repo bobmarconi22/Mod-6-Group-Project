@@ -13,3 +13,12 @@ class Menu(db.Model):
     popular_item = db.Column(db.Boolean, default=False)
 
     shop = db.relationship('Shop', back_populates='menu')
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'price': self.price,
+            'shop_id': self.shop_id,
+            'popular_item': self.popular_item,
+        }
