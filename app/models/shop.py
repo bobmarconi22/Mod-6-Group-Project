@@ -55,7 +55,7 @@ class Shop(db.Model):
 
          #   Defaulting to not include categories will prevent an infinite loop since it's many to many.
         if include_categories:
-            shop_dict['categories'] = [category.to_dict() for category in self.categories]
+            shop_dict['categories'] = [category.to_dict(include_shops=False, just_name=True) for category in self.categories]
         return {shop_dict['name']: shop_dict}
 
 
@@ -71,7 +71,7 @@ class Category(db.Model):
 
     shops = db.relationship('Shop', secondary='selected_categories', back_populates='categories')
 
-    def to_dict(self, include_shops=False):
+    def to_dict(self, include_shops=False, just_name=False):
 
        category_dict =  {
             'id': self.id,
@@ -82,7 +82,8 @@ class Category(db.Model):
        if include_shops:
         category_dict['shops'] = [shop.to_dict() for shop in self.shops]
 
-       return category_dict
+       res = self.name if just_name else category_dict #if you want just the name in an array then include just_name=True
+       return res
 
 
 selected_categories = db.Table (

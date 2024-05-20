@@ -31,4 +31,5 @@ def get_all_shops():
          shop_dict['preview_image'] = Image.query.filter_by(shop_id = shop.id, preview_image=True).first().to_dict()
          shop_dicts.append(shop_dict)
 
+
     return jsonify(shop_dicts)
