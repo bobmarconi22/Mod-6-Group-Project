@@ -32,7 +32,12 @@ function SignupFormModal() {
       thunkSignup({
         email,
         username,
-        password,
+        'first_name': firstName,
+        'last_name': lastName,
+        'phone_number': phoneNumber,
+        city,
+        state,
+        password
       })
     );
 
@@ -44,73 +49,73 @@ function SignupFormModal() {
   };
 
   return (
-    <>
+    <div className='signup-container'>
       <h1>Sign Up</h1>
       {errors.server && <p>{errors.server}</p>}
-      <form onSubmit={handleSubmit}>
-        <label>
+      <form className="signup-form-container" onSubmit={handleSubmit}>
+        <label className='signup-label'>
           Email
           <input
             type="text"
-            value={email}
+            className="signup-input" value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
         </label>
         {errors.email && <p>{errors.email}</p>}
-        <label>
+        <label className='signup-label'>
           Username
           <input
             type="text"
-            value={username}
+            className="signup-input" value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
           />
         </label>
         {errors.username && <p>{errors.username}</p>}
-        <label>
+        <label className='signup-label'>
           First Name
           <input
             type="text"
-            value={firstName}
+            className="signup-input" value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
             required
           />
         </label>
         {errors.firstName && <p>{errors.firstName}</p>}
-        <label>
+        <label className='signup-label'>
           Last Name
           <input
             type="text"
-            value={lastName}
+            className="signup-input" value={lastName}
             onChange={(e) => setLastName(e.target.value)}
             required
           />
         </label>
         {errors.lastName && <p>{errors.lastName}</p>}
-        <label>
+        <label className='signup-label'>
           Phone Number <i>optional</i>
           <input
             type="text"
-            value={phoneNumber}
+            className="signup-input" value={phoneNumber}
             onChange={(e) => setPhoneNumber(e.target.value)}
           />
         </label>
         {errors.phoneNumber && <p>{errors.phoneNumber}</p>}
-        <label>
+        <label className='signup-label'>
           City
           <input
             type="text"
-            value={city}
+            className="signup-input" value={city}
             onChange={(e) => setCity(e.target.value)}
             required
           />
         </label>
         {errors.city && <p>{errors.city}</p>}
-        <label>
+        <label className='signup-label'>
           State:
           <select
-            value={state}
+            className="signup-input" value={state}
             onChange={(e) => setState(e.target.value)}
             required
           >
@@ -170,29 +175,29 @@ function SignupFormModal() {
           </select>
         </label>
         {errors.state && <p>{errors.state}</p>}
-        <label>
+        <label className='signup-label'>
           Password
           <input
             type="password"
-            value={password}
+            className="signup-input" value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
         </label>
         {errors.password && <p>{errors.password}</p>}
-        <label>
+        <label className='signup-label'>
           Confirm Password
           <input
             type="password"
-            value={confirmPassword}
+            className="signup-input" value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
           />
         </label>
         {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
-        <button type="submit">Sign Up</button>
+        <button className="signup-button" type="submit">Sign Up</button>
       </form>
-    </>
+    </div>
   );
 }
 
