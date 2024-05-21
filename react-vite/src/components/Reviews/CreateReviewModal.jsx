@@ -28,8 +28,8 @@ function CreateReviewModal() {
     return (
         <>
             <h1>{shop.name}</h1>
-            <form>
-                
+            <form onSubmit={handleSubmit}>
+                <div></div>
             </form>
         </>
     )
