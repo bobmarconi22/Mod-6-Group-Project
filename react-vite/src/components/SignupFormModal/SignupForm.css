@@ -2,13 +2,20 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 400px;
+    padding: 20px;
     margin: 0 auto;
+  
 }
 
 .signup-form-container {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.signup-input {
+    margin-bottom: 10px;
     width: 300px;
     padding: 0px 50px;
 }

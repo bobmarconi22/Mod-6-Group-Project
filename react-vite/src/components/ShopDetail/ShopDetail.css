@@ -1,0 +1,34 @@
+#shop-detail-cover-container {
+    background-color: white;
+    width: fit-content;
+    border: black solid;
+    padding: 10px;
+}
+
+.shop-detail-heading-container {
+    background-color: white;
+    width: fit-content;
+    border: black solid;
+    padding: 10px;
+}
+
+.see-all-photos-button {
+    background-color: white;
+    width: fit-content;
+    border: black solid;
+    padding: 10px;
+}
+
+#shop-detail-additional-info-container {
+    background-color: white;
+    width: fit-content;
+    border: black solid;
+    padding: 10px;
+}
+
+#hours-address-container {
+    background-color: white;
+    width: fit-content;
+    border: black solid;
+    padding: 10px;
+}

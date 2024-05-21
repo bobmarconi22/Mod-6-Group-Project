@@ -1,0 +1,8 @@
+.dollar {
+    color: lightgrey;
+    display: inline-flex;
+  }
+
+  .dollar-filled {
+    color: black;
+  }
