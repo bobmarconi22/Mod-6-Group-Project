@@ -1,5 +1,7 @@
 import { NavLink } from "react-router-dom";
 import ProfileButton from "./ProfileButton";
+import OpenModalButton from "../OpenModalButton";
+import CreateReviewModal from '../Reviews/CreateReviewModal'
 import "./Navigation.css";
 
 
@@ -12,7 +14,10 @@ function Navigation() {
       <input placeholder="places to visit" className="search-bar"></input>
       <div>
         {/* <span className="nav-text">BrewReview for Business</span> */}
-        <span className="nav-text">Write a Review</span>
+        <OpenModalButton
+            buttonText="Write a Review"
+            modalComponent={<CreateReviewModal />}
+        />
         <ProfileButton />
       </div>
     </div>

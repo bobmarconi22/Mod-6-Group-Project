@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 
 from flask_login import login_required, current_user
 from app.models import db, Shop, Address, selected_categories, Category, Image, Review
@@ -7,6 +7,7 @@ from flask_login import login_required
 from ..forms.shop_form import ShopForm
 from .utils import find_avg
 from ..forms.address_form import AddressForm
+from ..forms.review_form import ReviewForm
 
 shop_routes = Blueprint('shops', __name__)
 
@@ -116,4 +117,43 @@ def create_shop(body):
 
 # REVIEW ROUTES
 
-#GET ALL REVIEWS BY SHOP'S ID
+# Create a Review for a shop based on the shop's id
+
+@shop_routes.route('/<shop_id>/reviews', methods=['POST'])
+@login_required
+def create_review(shop_id):
+    body = request.get_json()
+
+    review_form = ReviewForm(body.review)
+    if review_form.validate_on_submit():
+        new_review = Review(
+            user_id = current_user.id,
+            shop_id = shop_id, 
+            review = review_form.review.data,
+            rating = review_form.rating.data
+        )
+        db.session.add(new_review)
+        db.session.commit
+
+        image_urls = [review_form.img_url1.data, review_form.img_url2.data, review_form.img_url3.data]
+        for img_url in image_urls:
+            if img_url:  # Check if the img_url is not empty
+                new_image = Image(
+                    user_id=current_user.id,
+                    shop_id=shop_id,
+                    review_id=new_review.id,
+                    img_link=img_url,
+                    preview_image=False
+                )
+                db.session.add(new_image)
+
+        db.session.commit()
+
+        review = Review.query.options(joinedload(Review.images)).filter_by(id=new_review.id).first()
+
+        return review.to_dict(include_reviewer=True)
+
+    else:
+        return jsonify({'errors': review_form.errors})
+    
+        
