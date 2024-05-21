@@ -4,7 +4,7 @@ from flask_login import login_required, current_user
 from app.models import Shop, selected_categories, Category, Image, Review
 from sqlalchemy.orm import joinedload
 from flask_login import login_required
-
+from .utils import find_avg
 
 shop_routes = Blueprint('shops', __name__)
 
@@ -29,8 +29,10 @@ def get_all_shops():
     for shop in shops:
          shop_dict = shop.to_dict(include_categories=True)
          shop_dict['preview_image'] = Image.query.filter_by(shop_id = shop.id, preview_image=True).first().to_dict()
+         avg = find_avg(shop)
+         del shop_dict[shop.name]['review']
+         shop_dict['avg_rating'] = avg
          shop_dicts.append(shop_dict)
-
 
 
     return jsonify(shop_dicts)
