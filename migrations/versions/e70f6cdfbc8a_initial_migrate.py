@@ -1,19 +1,20 @@
 """initial migrate
 
-Revision ID: 475ec1ad5264
+Revision ID: e70f6cdfbc8a
 Revises:
-Create Date: 2024-05-20 20:14:10.491778
+Create Date: 2024-05-20 20:38:28.859524
 
 """
 from alembic import op
 import sqlalchemy as sa
 from sqlalchemy.dialects import postgresql
+from sqlalchemy import Text
 import os
 environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
 # revision identifiers, used by Alembic.
-revision = '475ec1ad5264'
+revision = 'e70f6cdfbc8a'
 down_revision = None
 branch_labels = None
 depends_on = None
