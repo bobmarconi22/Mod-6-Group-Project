@@ -5,8 +5,9 @@ import { useDispatch, useSelector } from "react-redux";
 
 
 function SearchBar() {
-    const [categories, setCategories] = useState([]);
+    const [categories, setCategories] = useState("");
     const [isLoaded, setIsLoaded] = useState(false);
+    const [name, setName] = useState('')
     const [priceRange, setPriceRange] = useState({"1": false, "2": false, "3": false, "4": false, "5": false})
     const allCategories = useSelector((state) => state.categories.categories);
     const navigate = useNavigate();
@@ -22,13 +23,7 @@ function SearchBar() {
 
 
 
-    const handleCategoriesChange = (e) => {
-    if (categories.includes(e.target.value)) {
-      setCategories(categories.filter((x) => x !== e.target.value));
-    } else {
-      setCategories((prevCategories) => [...prevCategories, e.target.value]);
-    }
-  };
+
 
    const handlePriceRangeToggle = (e) => {
     const value = e.target.value;
@@ -39,32 +34,37 @@ function SearchBar() {
   };
 
 // Search by name
-  const handleSearchByName = (e) => {
+  const handleSearch= async (e) => {
     e.preventDefault()
+    let priceRangeArr = Object.keys(priceRange).filter(num => priceRange[num] === true)
+
+    const query = {
+        priceRange,
+        categories,
+        name,
+    }
+
+    let queriedShops = await dispatch(searchShops(query))
+
+    navigate('/shops/search')
   }
-// Search by filters
-  const handleFilterSearch = (e) => {
-    e.preventDefault()
-  }
+
 
     return (
     isLoaded && (
       <div className="search-bar">
-        <form onSubmit={(e) => handleSearchByName(e)}>
+        <form onSubmit={(e) => handleSearch(e)}>
             <div>
-          <input placeholder="Search by name of shop"></input>
+          <input placeholder="Search by name of shop" value={name} onChange={(e)=> setName(e.target.value)}></input>
           </div>
-          <button type="submit">Search by Shop Name</button>
-          </form>
-          <form on onSubmit={(e) => handleFilterSearch(e)}>
           <div>
-
           <label>
             Categories
             <select
               value={categories}
-              onChange={(e) => handleCategoriesChange(e)}
+              onChange={(e) => setCategories(e.target.value)}
             >
+                <option value="" disabled selected>Choose a category</option>
               {Object.entries(allCategories).map((category, index) => (
                 <option
                   key={index}
@@ -94,7 +94,7 @@ function SearchBar() {
               &#36; &#36; &#36; &#36; &#36;
             </button>
           </div>
-          <button type="submit">Filter Shops</button>
+          <button type="submit">Search</button>
         </form>
       </div>
     )
