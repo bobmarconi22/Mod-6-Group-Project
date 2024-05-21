@@ -1,6 +1,6 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from sqlalchemy.orm.attributes import instance_state
-from datetime import datetime, timezone
+from datetime import datetime
 
 class Review(db.Model):
     __tablename__ = 'reviews'
@@ -13,8 +13,8 @@ class Review(db.Model):
     shop_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('shops.id'), ondelete='CASCADE'), nullable=False)
     review = db.Column(db.String(500), nullable=False)
     rating = db.Column(db.Integer, nullable=False)
-    created_at = db.Column(db.DateTime, default=datetime.now(timezone.utc))
-    updated_at = db.Column(db.DateTime, default=datetime.now(timezone.utc))
+    created_at = db.Column(db.DateTime, default=datetime.now)
+    updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
 
     reviewer = db.relationship('User', back_populates='review')
     shop = db.relationship('Shop', back_populates='review')

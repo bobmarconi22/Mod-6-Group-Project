@@ -6,3 +6,5 @@ def find_avg(shop):
         sum_reviews = reduce(lambda acc, review: acc + review.rating, shop.review, 0)
     avg_rating = round(sum_reviews/ num_reviews, 2)
     return "{:.2f}".format(avg_rating)
+
+

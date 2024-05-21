@@ -1,8 +1,8 @@
-"""initial migrate
+"""fix date issue
 
-Revision ID: e70f6cdfbc8a
-Revises:
-Create Date: 2024-05-20 20:38:28.859524
+Revision ID: 1334a8c4a4a2
+Revises: 
+Create Date: 2024-05-20 20:32:38.301115
 
 """
 from alembic import op
@@ -14,7 +14,7 @@ environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
 # revision identifiers, used by Alembic.
-revision = 'e70f6cdfbc8a'
+revision = '1334a8c4a4a2'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -114,7 +114,7 @@ def upgrade():
     )
 
     if environment == "production":
-        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
+     op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
     # ### end Alembic commands ###
 
 

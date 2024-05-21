@@ -40,7 +40,5 @@ def get_all_shops():
 
 
 
-# REVIEW ROUTES 
 
-#GET ALL REVIEWS BY SHOP'S ID
 
