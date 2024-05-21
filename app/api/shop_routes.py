@@ -24,8 +24,10 @@ def get_shop_by_id(id):
         return jsonify({"error": "Shop not found"}), 404
 
     shop_dict = shop.to_dict(include_categories= True)
-    avg = find_avg(shop)
-    shop_dict['avg_rating'] = avg
+    avg_and_num_reviews = find_avg(shop)
+    shop_dict['avg_rating'] = avg_and_num_reviews['avg']
+    shop_dict['num_reviews'] = avg_and_num_reviews['num_reviews']
+
 
     return jsonify(shop_dict)
 
@@ -39,9 +41,11 @@ def current_user_shops():
      for shop in shops:
           shop_dict = shop.to_dict(include_categories=True)
           shop_dict['preview_image'] = Image.query.filter_by(shop_id = shop.id, preview_image=True).first().to_dict()
-          avg = find_avg(shop)
-          shop_dict['avg_rating'] = avg
-          del shop_dict[shop.name]['review']
+          avg_and_num_reviews = find_avg(shop)
+          shop_dict['avg_rating'] = avg_and_num_reviews['avg']
+          shop_dict['num_reviews'] = avg_and_num_reviews['num_reviews']
+
+          del shop_dict['review']
           shop_dicts.append(shop_dict)
 
      return jsonify(shop_dicts)
@@ -56,9 +60,11 @@ def get_all_shops():
     for shop in shops:
          shop_dict = shop.to_dict(include_categories=True)
          shop_dict['preview_image'] = Image.query.filter_by(shop_id = shop.id, preview_image=True).first().to_dict()
-         avg = find_avg(shop)
-         del shop_dict[shop.name]['review']
-         shop_dict['avg_rating'] = avg
+         avg_and_num_reviews = find_avg(shop)
+         shop_dict['avg_rating'] = avg_and_num_reviews['avg']
+         shop_dict['num_reviews'] = avg_and_num_reviews['num_reviews']
+         del shop_dict['review']
+
          shop_dicts.append(shop_dict)
 
 

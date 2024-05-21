@@ -62,7 +62,7 @@ class Shop(db.Model):
          #   Defaulting to not include categories will prevent an infinite loop since it's many to many.
         if include_categories:
             shop_dict['categories'] = [category.to_dict(include_shops=False, just_name=True) for category in self.categories]
-        return {shop_dict['name']: shop_dict}
+        return shop_dict
 
 
 
