@@ -6,7 +6,7 @@ import {
 } from "redux";
 import thunk from "redux-thunk";
 import sessionReducer from "./session";
-import shopsReducer from "./shop"
+import shopsReducer from "./shops";
 import categoriesReducer from "./category";
 import reviewReducer from "./reviews";
 

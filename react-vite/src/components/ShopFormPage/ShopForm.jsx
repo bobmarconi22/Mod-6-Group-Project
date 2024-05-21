@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createShop } from "../../redux/shop";
+import { createShop } from "../../redux/shops";
 import { useNavigate } from "react-router-dom";
 import "./ShopForm.css";
 import { getAllCategories } from "../../redux/category";
@@ -119,7 +119,7 @@ function ShopFormPage() {
 
     if (Object.keys(err).length === 0) {
       const newShop = {
-        shop:  {
+        shop: {
           name,
           owner_id: sessionUser.id,
           description,
@@ -448,11 +448,11 @@ function ShopFormPage() {
           {errors.categories && <p>{errors.categories}</p>}
           {edit &&
             <>
-            <h2>Images</h2>
-            <input
-              type="text"
-              value={'images'}
-            />
+              <h2>Images</h2>
+              <input
+                type="text"
+                value={'images'}
+              />
             </>
           }
           <button type="submit">Create Shop</button>
