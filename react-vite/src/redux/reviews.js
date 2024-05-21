@@ -4,7 +4,7 @@ export const CREATE_REVIEW = 'reviews/CREATE_REVIEW'
 export const UPDATE_REVIEW = 'reviews/UPDATE_REVIEW'
 export const DELETE_REVIEW = 'reviews/DELETE REVIEW'
 
-// action creators 
+// action creators
 
 export const createReview = (review) => ({
     type: CREATE_REVIEW,
@@ -12,10 +12,11 @@ export const createReview = (review) => ({
 })
 
 export const deleteReview = (reviewId) => ({
-    type: DELETE_REVIEW 
+    type: DELETE_REVIEW,
+    reviewId
 })
 
-// thunk action creators 
+// thunk action creators
 
 export const createAReview = (newReviewData, shopId) => async (dispatch) => {
     const res = await fetch(`/api/shops/${shopId}/reviews`, {
@@ -27,7 +28,7 @@ export const createAReview = (newReviewData, shopId) => async (dispatch) => {
     })
     if (res.ok) {
         const newReview = await res.json()
-        dispatch(createReview(newReview)) 
+        dispatch(createReview(newReview))
         return newReview
     } else {
         const errors = await res.json()
@@ -42,10 +43,10 @@ const reviewReducer = (state = {}, action) => {
         case CREATE_REVIEW: {
             return {...state, ...action.review}
         }
-        default: 
+        default:
         return state
-    }   
-    
+    }
+
 }
 
 export default reviewReducer

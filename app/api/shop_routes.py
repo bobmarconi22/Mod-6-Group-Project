@@ -11,8 +11,6 @@ from ..forms.review_form import ReviewForm
 
 shop_routes = Blueprint('shops', __name__)
 
-
-
 #GET SHOP BY ID
 @shop_routes.route("/<int:id>")
 def get_shop_by_id(id):
@@ -71,47 +69,63 @@ def get_all_shops():
     return jsonify(shop_dicts)
 
 # CREATE SHOP
-@shop_routes.route("/new-shop", methods=['POST'])
-def create_shop(body):
-    shop_form = ShopForm(body.shop)
-    if shop_form.validate_on_submit():
-        new_shop = Shop(
-            name=shop_form.name.data,
-            description=shop_form.description.data,
-            hours = {
-                'monday': f'{shop_form.monday_open.data} - {shop_form.monday_close.data}',
-                'tuesday': f'{shop_form.tuesday_open.data} - {shop_form.tuesday_close.data}',
-                'wednesday': f'{shop_form.wednesday_open.data} - {shop_form.wednesday_close.data}',
-                'thursday': f'{shop_form.thursday_open.data} - {shop_form.thursday_close.data}',
-                'friday': f'{shop_form.friday_open.data} - {shop_form.friday_close.data}',
-                'saturday': f'{shop_form.saturday_open.data} - {shop_form.saturday_close.data}',
-                'sunday': f'{shop_form.sunday_open.data} - {shop_form.sunday_close.data}',
-            },
-            website=shop_form.website.data,
-            phone_number=shop_form.phone_number.data,
-            price_range=shop_form.price_range.data
-        )
+@shop_routes.route("/", methods=['POST'])
+@login_required
+def create_shop():
+    data = request.get_json()
+    shop_form = ShopForm(data)
+    address_form = AddressForm(data)
+    shop_form['csrf_token'].data = request.cookies['csrf_token']
+    address_form['csrf_token'].data = request.cookies['csrf_token']
+    print('===========>',data)
+    if shop_form.validate_on_submit() and address_form.validate_on_submit():
+        try:
+            new_shop = Shop(
+                name=shop_form.name.data,
+                description=shop_form.description.data,
+                hours={
+                    'monday': f'{shop_form.monday_open.data} - {shop_form.monday_close.data}',
+                    'tuesday': f'{shop_form.tuesday_open.data} - {shop_form.tuesday_close.data}',
+                    'wednesday': f'{shop_form.wednesday_open.data} - {shop_form.wednesday_close.data}',
+                    'thursday': f'{shop_form.thursday_open.data} - {shop_form.thursday_close.data}',
+                    'friday': f'{shop_form.friday_open.data} - {shop_form.friday_close.data}',
+                    'saturday': f'{shop_form.saturday_open.data} - {shop_form.saturday_close.data}',
+                    'sunday': f'{shop_form.sunday_open.data} - {shop_form.sunday_close.data}',
+                },
+                website=shop_form.website.data,
+                phone_number=shop_form.phone_number.data,
+                price_range=shop_form.price_range.data,
+                owner_id=current_user.id  # Assuming the Shop model has an owner_id field
+            )
 
-        db.session.add(new_shop)
-        db.session.commit()
+            db.session.add(new_shop)
+            db.session.commit()
 
-        new_id = Shop.query.filter(Shop.name == shop_form.name.data)
+            new_shop_address = Address(
+                shop_id=new_shop.id,
+                address_line1=address_form.address_line1.data,
+                address_line2=address_form.address_line2.data,
+                city=address_form.city.data,
+                state=address_form.state.data,
+                postal=address_form.postal.data,
+                country=address_form.country.data
+            )
+            db.session.add(new_shop_address)
+            db.session.commit()
 
-        address_form = AddressForm(body.address)
-        new_shop_address = Address(
-            shop_id = new_id,
-            address_line1=address_form.address_line1.data,
-            address_line2=address_form.address_line2.data,
-            city=address_form.city.data,
-            state=address_form.state.data,
-            postal=address_form.postal.data,
-            country=address_form.country.data
-        )
-        db.session.add(new_shop_address)
-        db.session.commit()
+            categories = data.get('categories', [])
+            for category_id in categories:
+                db.session.execute(selected_categories.insert().values(shop_id=new_shop.id, category_id=category_id))
+            db.session.commit()
 
-
-
+            return jsonify(new_shop.to_dict()), 201
+        except Exception as e:
+            db.session.rollback()
+            print(f"Error creating shop: {e}")
+            return jsonify({'error': str(e)}), 500
+    else:
+        errors = {**shop_form.errors, **address_form.errors}
+        return jsonify(errors), 400
 
 
 
