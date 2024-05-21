@@ -122,33 +122,38 @@ function ShopFormPage() {
 
     if (Object.keys(err).length === 0) {
       const newShop = {
-        name,
-        owner_id: sessionUser.id,
-        description,
-        hours,
-        website,
-        phone_number: phoneNumber,
-        price_range: priceRange,
-        monday_open: hours.Monday.open,
-        monday_close: hours.Monday.close,
-        tuesday_open: hours.Tuesday.open,
-        tuesday_close: hours.Tuesday.close,
-        wednesday_open: hours.Wednesday.open,
-        wednesday_close: hours.Wednesday.close,
-        thursday_open: hours.Thursday.open,
-        thursday_close: hours.Thursday.close,
-        friday_open: hours.Friday.open,
-        friday_close: hours.Friday.close,
-        saturday_open: hours.Saturday.open,
-        saturday_close: hours.Saturday.close,
-        sunday_open: hours.Sunday.open,
-        sunday_close: hours.Sunday.close,
-        address_line1: streetOne,
-        address_line2: streetTwo,
-        city,
-        state,
-        postal_code: postal,
-        country,
+        shop: {
+          name,
+          owner_id: sessionUser.id,
+          description,
+          hours,
+          website,
+          phone_number: phoneNumber,
+          price_range: priceRange,
+          monday_open: hours.Monday.open,
+          monday_close: hours.Monday.close,
+          tuesday_open: hours.Tuesday.open,
+          tuesday_close: hours.Tuesday.close,
+          wednesday_open: hours.Wednesday.open,
+          wednesday_close: hours.Wednesday.close,
+          thursday_open: hours.Thursday.open,
+          thursday_close: hours.Thursday.close,
+          friday_open: hours.Friday.open,
+          friday_close: hours.Friday.close,
+          saturday_open: hours.Saturday.open,
+          saturday_close: hours.Saturday.close,
+          sunday_open: hours.Sunday.open,
+          sunday_close: hours.Sunday.close,
+        },
+        address: {
+          shop_id: newShop.id,
+          address_line1: streetOne,
+          address_line2: streetTwo,
+          city,
+          state,
+          postal_code: postal,
+          country,
+        },
         categories,
       };
       const data = await dispatch(createShop(newShop));
@@ -450,7 +455,10 @@ function ShopFormPage() {
           {edit && (
             <>
               <h2>Images</h2>
-              <input type="text" value={"images"} />
+              <input
+                type="text"
+                value={'images'}
+              />
             </>
           )}
           <button type="submit">Create Shop</button>

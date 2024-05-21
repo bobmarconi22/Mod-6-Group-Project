@@ -34,3 +34,13 @@
   height: 30px;
   width: 60%;
 }
+
+/* Search Bar CSS */
+.dollar {
+    color: lightgrey;
+    display: inline-flex;
+  }
+
+  .dollar-filled {
+    color: black;
+  }

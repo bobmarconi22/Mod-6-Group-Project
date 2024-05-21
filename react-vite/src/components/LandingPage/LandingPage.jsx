@@ -1,28 +1,40 @@
 // import { useState } from "react";
 // import { thunkLogin } from "../../redux/session";
-// import { useDispatch } from "react-redux";
 // import { useModal } from "../../context/Modal";
-import { loadShopsThunk } from "../../redux/shops";
-import "./LandingPage.css";
+
 import { useEffect } from "react";
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { loadShopsThunk } from "../../redux/shops";
+
+import "./LandingPage.css";
 
 function LandingPage() {
   const dispatch = useDispatch();
 
-  let shopsList = ['temp shop seeder', 'temp shop seeder', 'temp shop seeder', 'temp shop seeder', 'temp shop seeder', 'temp shop seeder']
+  // let shopsList = ['temp shop seeder', 'temp shop seeder', 'temp shop seeder', 'temp shop seeder', 'temp shop seeder', 'temp shop seeder']
+  let shopsObj = useSelector((state) => state.shops)
+  let shopsArr = Object.values(shopsObj)
+  console.log(shopsArr)
+
   const shopMapper =
     // temporary code until seeder data is used, swap inputs with seeder info
     // add to map input later { shop, id }
-    shopsList.map((shop, i) => {
+    // need to change values after backend response is changed 5/22
+    shopsArr.map((shop, i) => {
       return (
         <div key={i} className="shop-container">
           <img src='img.png'></img>
-          <div className="shop-text">Coffee shop name</div>
-          <div className="shop-text">Rating & num review</div>
-          <div className="shop-text">Price Range & Categories</div>
-          <button className="shop-text">Get Directions</button>
-          <div className="shop-text">Open until (time)</div>
+          <div className="shop-text">{shop.name}</div>
+          <div className="shop-text">{'Rating: ' + shop.avg_rating + ' Number of Reviews: ' + shop.num_reviews}</div>
+          <div className="shop-text">
+            {'Price Range: ' + shop.price_range}
+            <div>
+              {'categories: ' + shop.categories}
+            </div>
+          </div>
+          <button className="shop-text" onClick={() => alert('Function coming soon')}>Get Directions</button>
+          {/* open time is difficult to use for front end given this format */}
+          {/* <div className="shop-text">{shop.hours}</div> */}
         </div>
       )
     });

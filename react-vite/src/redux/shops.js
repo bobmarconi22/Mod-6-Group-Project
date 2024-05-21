@@ -1,29 +1,35 @@
-const LOAD_SHOPS = "/shops/LOAD_SPOTS";
+// const LOAD_SHOPS = "LOAD_SHOPS'
+const CREATE_SHOP = "CREATE_SHOP";
+const LOAD_SHOP_DETAIL = 'LOAD_SHOP_DETAIL";
 const CREATE_SHOP = "CREATE_SHOP";
 
 // action creator
 export const loadShops = (shops) => ({
   type: LOAD_SHOPS,
-  shops,
-});
+  shops
+})
 
 export const addShop = (shop) => ({
   type: CREATE_SHOP,
   payload: shop,
 });
 
+export const loadShopDetail = (shop) => ({
+  type: LOAD_SHOP_DETAIL,
+  payload: shop,
+})
+
 // thunk action creators
 export const loadShopsThunk = () => async (dispatch) => {
-  const response = await fetch("/api/shops");
+  const response = await fetch('/api/shops')
+  console.log('this is the response', response)
 
   if (response.ok) {
-    const shops = await response.json();
-    shops.forEach(shop => console.log(shop))
-
-    dispatch(loadShops(shops));
-    return shops;
+    const shops = await response.json()
+    dispatch(loadShops(shops))
+    return shops
   }
-};
+}
 
 export const createShop = (newShop) => async (dispatch) => {
   const res = await fetch("/api/shops", {
@@ -31,32 +37,45 @@ export const createShop = (newShop) => async (dispatch) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(newShop),
   });
-  if (res.ok){
-    const data = await res.json();
-    dispatch(addShop(data));
-    return data;
-  }
+  const data = await res.json();
+  dispatch(addShop(data));
+  return data
 };
 
-// shops reducer
+export const loadShopDetailThunk = (id) => async (dispatch) => {
+  const response = await fetch(`/api/shops/${id}`)
+  console.log('this is the response', response)
+
+  if (response.ok) {
+    const shop = await response.json()
+    dispatch(loadShopDetail(shop))
+    return shop
+  }
+}
+
 const shopsReducer = (state = {}, action) => {
-  const allShops = {};
+  let allShops = {};
+  let newState = {};
+
   switch (action.type) {
-    case LOAD_SHOPS:{
-      // flattening shops data into object
-      action.shops.forEach((shop) => {
-        allShops[shop.id] = shop;
+    case LOAD_SHOPS:
+      action.shops.forEach(shop => {
+        allShops[shop.id] = shop
       });
-      return allShops;
-    }
-    case CREATE_SHOP:{
+      return allShops
+    case CREATE_SHOP: {
       const newState = { ...state };
-      newState.shops = { ...state.shops, [action.payload.id]: action.payload };
+      newState = { ...state, [action.payload.id]: action.payload };
       return newState;
+    }
+    case LOAD_SHOP_DETAIL: {
+      const newState = { ...state };
+      newState = { ...state, 'ShopDetail': action }
     }
     default:
       return state;
   }
-};
+}
+
 
 export default shopsReducer;
