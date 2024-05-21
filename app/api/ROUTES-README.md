@@ -280,8 +280,19 @@ Returns all the shops.
           "updated_at": "2021-11-19 20:39:36",
           "preview_image": "img.png",
           "avg_rating": 4.5,
-          "Categories": ["American", "To-Go", "Outdoor Seating"]
-        }
+          "address": {
+                "address_line1": "123 Espresso Lane",
+                "address_line2": null,
+                "city": "Philadelphia",
+                "country": "United States of America",
+                "id": 1,
+                "postal_code": "19107",
+                "state": "PA"
+            },
+           "categories": [
+              "Outdoor Seating",
+                "Organic Coffee",
+                "Dinner Menu"
       ]
     }
     ```
@@ -324,7 +335,20 @@ Returns all the shops owned (created) by the current user.
           "updated_at": "2021-11-19 20:39:36",
           "preview_image": "img.png",
           "avg_rating": 4.5,
-          "Categories": ["American", "To-Go", "Outdoor Seating"]
+            "address": {
+                "address_line1": "123 Espresso Lane",
+                "address_line2": null,
+                "city": "Philadelphia",
+                "country": "United States of America",
+                "id": 1,
+                "postal_code": "19107",
+                "state": "PA"
+            },
+           "categories": [
+               "Outdoor Seating",
+                "Organic Coffee",
+                "Dinner Menu"
+      ]
         }
       ]
     }
@@ -368,7 +392,11 @@ Returns the details of a shop specified by its id.
           "updated_at": "2021-11-19 20:39:36",
           "preview_image": "img.png",
           "avg_rating": 4.5,
-          "Categories": ["American", "To-Go", "Outdoor Seating"],
+           "categories": [
+               "Outdoor Seating",
+                "Organic Coffee",
+                "Dinner Menu"
+      ],
           "Addresses": {
             "id": 1,
             "shop_id": 1,
@@ -450,7 +478,11 @@ Creates and returns a new shop.
           "website": "www.coffee.com",
           "phone_number": "123-456-7890",
           "price_range": 1,
-          "Categories": ["American", "To-Go", "Outdoor Seating"],
+           "categories": [
+                "Outdoor Seating",
+                "Organic Coffee",
+                "Dinner Menu"
+      ],
           "Addresses": {
             "id": 1,
             "shop_id": 1,
@@ -491,7 +523,11 @@ Creates and returns a new shop.
           "updated_at": "2021-11-19 20:39:36",
           "preview_image": "img.png",
           "avg_rating": 4.5,
-          "Categories": ["American", "To-Go", "Outdoor Seating"],
+           "categories": [
+                "Outdoor Seating",
+                "Organic Coffee",
+                "Dinner Menu"
+      ],
           "Addresses": {
             "id": 1,
             "shop_id": 1,
@@ -634,7 +670,11 @@ Updates and returns an existing shop.
           "website": "www.coffee.com",
           "phone_number": "123-456-7890",
           "price_range": 1,
-          "Categories": ["American", "To-Go", "Outdoor Seating"],
+           "categories": [
+               "Outdoor Seating",
+                "Organic Coffee",
+                "Dinner Menu"
+      ],
           "Addresses": {
             "id": 1,
             "shop_id": 1,
@@ -673,7 +713,11 @@ Updates and returns an existing shop.
           "price_range": 1,
           "created_at": "2021-11-19 20:39:36",
           "updated_at": "2021-11-19 20:39:36",
-          "Categories": ["American", "To-Go", "Outdoor Seating"],
+           "categories": [
+                "Outdoor Seating",
+                "Organic Coffee",
+                "Dinner Menu"
+      ],
           "Addresses": {
             "id": 1,
             "shop_id": 1,
@@ -789,8 +833,12 @@ Returns all the reviews written by the current user.
                 "owner_id": 1,
                 "name": "App Academy",
                 "price_range": 1,
-                "categories": ["American", "To-Go", "Outdoor Seating"],
-                "Addresses": {
+                 "categories": [
+                  "Outdoor Seating",
+                "Organic Coffee",
+                "Dinner Menu"
+      ],
+                "Address": {
                     "id": 1,
                     "shop_id": 1,
                     "address_line1": "123 Coffee Way",

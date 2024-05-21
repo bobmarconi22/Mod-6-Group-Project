@@ -53,9 +53,15 @@ def sign_up():
     if form.validate_on_submit():
         user = User(
             username=form.data['username'],
+            first_name=form.data['first_name'],
+            last_name=form.data['last_name'],
             email=form.data['email'],
+            phone_number=form.data['phone_number'],
+            city=form.data['city'],
+            state=form.data['state'],
             password=form.data['password']
         )
+        print('=============>', user)
         db.session.add(user)
         db.session.commit()
         login_user(user)

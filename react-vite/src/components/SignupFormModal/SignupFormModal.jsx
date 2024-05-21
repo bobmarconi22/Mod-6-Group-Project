@@ -32,7 +32,12 @@ function SignupFormModal() {
       thunkSignup({
         email,
         username,
-        password,
+        'first_name': firstName,
+        'last_name': lastName,
+        'phone_number': phoneNumber,
+        city,
+        state,
+        password
       })
     );
 

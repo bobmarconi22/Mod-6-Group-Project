@@ -1,8 +1,8 @@
-"""initial migrate
+"""fix date issue
 
-Revision ID: 0ed51d9946d2
-Revises:
-Create Date: 2024-05-20 13:40:11.262633
+Revision ID: 1334a8c4a4a2
+Revises: 
+Create Date: 2024-05-20 20:32:38.301115
 
 """
 from alembic import op
@@ -14,7 +14,7 @@ environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
 # revision identifiers, used by Alembic.
-revision = '0ed51d9946d2'
+revision = '1334a8c4a4a2'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -37,6 +37,8 @@ def upgrade():
     sa.Column('city', sa.String(length=25), nullable=False),
     sa.Column('state', sa.String(length=25), nullable=False),
     sa.Column('hashed_password', sa.String(length=255), nullable=False),
+    sa.Column('created_at', sa.DateTime(), nullable=True),
+    sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email'),
     sa.UniqueConstraint('phone_number'),
@@ -51,7 +53,9 @@ def upgrade():
     sa.Column('website', sa.String(length=500), nullable=False),
     sa.Column('phone_number', sa.String(length=10), nullable=True),
     sa.Column('price_range', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['owner_id'], ['users.id'], ),
+    sa.Column('created_at', sa.DateTime(), nullable=True),
+    sa.Column('updated_at', sa.DateTime(), nullable=True),
+    sa.ForeignKeyConstraint(['owner_id'], ['users.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('addresses',
@@ -63,7 +67,7 @@ def upgrade():
     sa.Column('state', sa.String(length=50), nullable=False),
     sa.Column('postal_code', sa.String(length=50), nullable=False),
     sa.Column('country', sa.String(length=50), nullable=False),
-    sa.ForeignKeyConstraint(['shop_id'], ['shops.id'], ),
+    sa.ForeignKeyConstraint(['shop_id'], ['shops.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('menus',
@@ -72,7 +76,7 @@ def upgrade():
     sa.Column('price', sa.Numeric(), nullable=False),
     sa.Column('shop_id', sa.Integer(), nullable=False),
     sa.Column('popular_item', sa.Boolean(), nullable=True),
-    sa.ForeignKeyConstraint(['shop_id'], ['shops.id'], ),
+    sa.ForeignKeyConstraint(['shop_id'], ['shops.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('reviews',
@@ -81,15 +85,17 @@ def upgrade():
     sa.Column('shop_id', sa.Integer(), nullable=False),
     sa.Column('review', sa.String(length=500), nullable=False),
     sa.Column('rating', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['shop_id'], ['shops.id'], ),
-    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.Column('created_at', sa.DateTime(), nullable=True),
+    sa.Column('updated_at', sa.DateTime(), nullable=True),
+    sa.ForeignKeyConstraint(['shop_id'], ['shops.id'], ondelete='CASCADE'),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('selected_categories',
     sa.Column('shop_id', sa.Integer(), nullable=False),
     sa.Column('category_id', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['category_id'], ['categories.id'], ),
-    sa.ForeignKeyConstraint(['shop_id'], ['shops.id'], ),
+    sa.ForeignKeyConstraint(['category_id'], ['categories.id'], ondelete='CASCADE'),
+    sa.ForeignKeyConstraint(['shop_id'], ['shops.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('shop_id', 'category_id')
     )
     op.create_table('images',
@@ -99,14 +105,16 @@ def upgrade():
     sa.Column('review_id', sa.Integer(), nullable=True),
     sa.Column('img_link', sa.String(length=500), nullable=False),
     sa.Column('preview_image', sa.Boolean(), nullable=True),
-    sa.ForeignKeyConstraint(['review_id'], ['reviews.id'], ),
-    sa.ForeignKeyConstraint(['shop_id'], ['shops.id'], ),
-    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.Column('created_at', sa.DateTime(), nullable=True),
+    sa.Column('updated_at', sa.DateTime(), nullable=True),
+    sa.ForeignKeyConstraint(['review_id'], ['reviews.id'], ondelete='CASCADE'),
+    sa.ForeignKeyConstraint(['shop_id'], ['shops.id'], ondelete='CASCADE'),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
     )
 
     if environment == "production":
-        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
+     op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
     # ### end Alembic commands ###
 
 

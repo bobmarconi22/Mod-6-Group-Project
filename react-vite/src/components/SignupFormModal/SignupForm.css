@@ -4,7 +4,8 @@
     align-items: center;
     width: 400px;
     padding: 20px;
-
+    margin: 0 auto;
+  
 }
 
 .signup-form-container {
@@ -15,4 +16,23 @@
 
 .signup-input {
     margin-bottom: 10px;
+    width: 300px;
+    padding: 0px 50px;
+}
+
+.signup-label {
+    padding-top: 15px;
+    padding-bottom: 5px;
+    align-self: flex-start;
+}
+
+.signup-input {
+    width: 100%
+}
+
+.signup-button {
+    margin-top: 30px;
+    margin-bottom: 45px;
+    width: 100%;
+    padding: 15px;
 }
