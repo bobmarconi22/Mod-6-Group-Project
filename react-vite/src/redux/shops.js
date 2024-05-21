@@ -1,8 +1,7 @@
 // const LOAD_SHOPS = "LOAD_SHOPS'
+const LOAD_SHOPS = "LOAD_SHOPS";
 const CREATE_SHOP = "CREATE_SHOP";
-const LOAD_SHOP_DETAIL = 'LOAD_SHOP_DETAIL";
-const CREATE_SHOP = "CREATE_SHOP";
-const LOAD_SHOP_DETAILS = 'LOAD_SHOP_DETAIL'
+const LOAD_SHOP_DETAILS = "LOAD_SHOP_DETAILS";
 
 // action creator
 export const loadShops = (shops) => ({
