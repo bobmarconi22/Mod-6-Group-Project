@@ -290,18 +290,9 @@ Returns all the shops.
                 "state": "PA"
             },
            "categories": [
-                {
-                    "id": 1,
-                    "name": "Outdoor Seating"
-                },
-                {
-                    "id": 5,
-                    "name": "Organic Coffee"
-                },
-                {
-                    "id": 9,
-                    "name": "Dinner Menu"
-                }
+              "Outdoor Seating",
+                "Organic Coffee",
+                "Dinner Menu"
       ]
     }
     ```
@@ -354,18 +345,9 @@ Returns all the shops owned (created) by the current user.
                 "state": "PA"
             },
            "categories": [
-                {
-                    "id": 1,
-                    "name": "Outdoor Seating"
-                },
-                {
-                    "id": 5,
-                    "name": "Organic Coffee"
-                },
-                {
-                    "id": 9,
-                    "name": "Dinner Menu"
-                }
+               "Outdoor Seating",
+                "Organic Coffee",
+                "Dinner Menu"
       ]
         }
       ]
@@ -411,18 +393,9 @@ Returns the details of a shop specified by its id.
           "preview_image": "img.png",
           "avg_rating": 4.5,
            "categories": [
-                {
-                    "id": 1,
-                    "name": "Outdoor Seating"
-                },
-                {
-                    "id": 5,
-                    "name": "Organic Coffee"
-                },
-                {
-                    "id": 9,
-                    "name": "Dinner Menu"
-                }
+               "Outdoor Seating",
+                "Organic Coffee",
+                "Dinner Menu"
       ],
           "Addresses": {
             "id": 1,
@@ -506,18 +479,9 @@ Creates and returns a new shop.
           "phone_number": "123-456-7890",
           "price_range": 1,
            "categories": [
-                {
-                    "id": 1,
-                    "name": "Outdoor Seating"
-                },
-                {
-                    "id": 5,
-                    "name": "Organic Coffee"
-                },
-                {
-                    "id": 9,
-                    "name": "Dinner Menu"
-                }
+                "Outdoor Seating",
+                "Organic Coffee",
+                "Dinner Menu"
       ],
           "Addresses": {
             "id": 1,
@@ -560,18 +524,9 @@ Creates and returns a new shop.
           "preview_image": "img.png",
           "avg_rating": 4.5,
            "categories": [
-                {
-                    "id": 1,
-                    "name": "Outdoor Seating"
-                },
-                {
-                    "id": 5,
-                    "name": "Organic Coffee"
-                },
-                {
-                    "id": 9,
-                    "name": "Dinner Menu"
-                }
+                "Outdoor Seating",
+                "Organic Coffee",
+                "Dinner Menu"
       ],
           "Addresses": {
             "id": 1,
@@ -716,18 +671,9 @@ Updates and returns an existing shop.
           "phone_number": "123-456-7890",
           "price_range": 1,
            "categories": [
-                {
-                    "id": 1,
-                    "name": "Outdoor Seating"
-                },
-                {
-                    "id": 5,
-                    "name": "Organic Coffee"
-                },
-                {
-                    "id": 9,
-                    "name": "Dinner Menu"
-                }
+               "Outdoor Seating",
+                "Organic Coffee",
+                "Dinner Menu"
       ],
           "Addresses": {
             "id": 1,
@@ -768,18 +714,9 @@ Updates and returns an existing shop.
           "created_at": "2021-11-19 20:39:36",
           "updated_at": "2021-11-19 20:39:36",
            "categories": [
-                {
-                    "id": 1,
-                    "name": "Outdoor Seating"
-                },
-                {
-                    "id": 5,
-                    "name": "Organic Coffee"
-                },
-                {
-                    "id": 9,
-                    "name": "Dinner Menu"
-                }
+                "Outdoor Seating",
+                "Organic Coffee",
+                "Dinner Menu"
       ],
           "Addresses": {
             "id": 1,
@@ -897,18 +834,9 @@ Returns all the reviews written by the current user.
                 "name": "App Academy",
                 "price_range": 1,
                  "categories": [
-                {
-                    "id": 1,
-                    "name": "Outdoor Seating"
-                },
-                {
-                    "id": 5,
-                    "name": "Organic Coffee"
-                },
-                {
-                    "id": 9,
-                    "name": "Dinner Menu"
-                }
+                  "Outdoor Seating",
+                "Organic Coffee",
+                "Dinner Menu"
       ],
                 "Address": {
                     "id": 1,
