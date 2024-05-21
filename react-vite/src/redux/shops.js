@@ -11,6 +11,7 @@ export const loadShops = (shops) => ({
 // thunk action creators
 export const loadShopsThunk = () => async (dispatch) => {
     const response = await csrfFetch('/api/shops')
+    console.log('this is the response', response)
 
     if (response.ok) {
         const shops = await response.json()
@@ -27,10 +28,11 @@ const shopsReducer = (state = {}, action) => {
 
     switch (action.type) {
         case LOAD_SHOPS:
-            action.shops.Shops.forEach(shop => {
+            // flattening shops data into object
+            action.shops.forEach(shop => {
                 allShops[shop.id] = shop
             });
-            return { ...state, allShops }
+            return allShops
         default:
             return state
     }
