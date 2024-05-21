@@ -18,8 +18,8 @@ class User(db.Model, UserMixin):
     city = db.Column(db.String(25), nullable=False)
     state = db.Column(db.String(25), nullable=False)
     hashed_password = db.Column(db.String(255), nullable=False)
-    created_at = db.Column(db.DateTime, default=datetime.now(timezone.utc))
-    updated_at = db.Column(db.DateTime, default=datetime.now(timezone.utc))
+    created_at = db.Column(db.DateTime, default=datetime.now)
+    updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
 
     shop = db.relationship('Shop', back_populates='owner', uselist=False, cascade='all, delete-orphan') #one to one relationship and delete user shop if user is deleted
     image = db.relationship('Image', back_populates='image_owner', cascade='all, delete-orphan') #delete user images if user is deleted

@@ -2,7 +2,7 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from sqlalchemy.dialects.postgresql import JSON
 from sqlalchemy.orm.attributes import instance_state
-from datetime import datetime, timezone
+from datetime import datetime
 
 
 
@@ -21,8 +21,8 @@ class Shop(db.Model):
     website = db.Column(db.String(500), nullable=False)
     phone_number = db.Column(db.String(10))
     price_range = db.Column(db.Integer, nullable=False)
-    created_at = db.Column(db.DateTime, default=datetime.now(timezone.utc))
-    updated_at = db.Column(db.DateTime, default=datetime.now(timezone.utc))
+    created_at = db.Column(db.DateTime, default=datetime.now)
+    updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
 
     owner = db.relationship('User', back_populates='shop', uselist=False)
     address = db.relationship('Address', back_populates='shop', uselist=False, cascade='all, delete-orphan') #deletes address if shop is deleted
