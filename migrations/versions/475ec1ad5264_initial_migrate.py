@@ -1,20 +1,19 @@
-"""updated seeds json
+"""initial migrate
 
-Revision ID: 9ff36b0694bf
+Revision ID: 475ec1ad5264
 Revises:
-Create Date: 2024-05-20 15:17:39.454148
+Create Date: 2024-05-20 20:14:10.491778
 
 """
 from alembic import op
 import sqlalchemy as sa
 from sqlalchemy.dialects import postgresql
-from sqlalchemy import Text
 import os
 environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
 # revision identifiers, used by Alembic.
-revision = '9ff36b0694bf'
+revision = '475ec1ad5264'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -37,6 +36,8 @@ def upgrade():
     sa.Column('city', sa.String(length=25), nullable=False),
     sa.Column('state', sa.String(length=25), nullable=False),
     sa.Column('hashed_password', sa.String(length=255), nullable=False),
+    sa.Column('created_at', sa.DateTime(), nullable=True),
+    sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email'),
     sa.UniqueConstraint('phone_number'),
@@ -51,6 +52,8 @@ def upgrade():
     sa.Column('website', sa.String(length=500), nullable=False),
     sa.Column('phone_number', sa.String(length=10), nullable=True),
     sa.Column('price_range', sa.Integer(), nullable=False),
+    sa.Column('created_at', sa.DateTime(), nullable=True),
+    sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['owner_id'], ['users.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
     )
@@ -81,6 +84,8 @@ def upgrade():
     sa.Column('shop_id', sa.Integer(), nullable=False),
     sa.Column('review', sa.String(length=500), nullable=False),
     sa.Column('rating', sa.Integer(), nullable=False),
+    sa.Column('created_at', sa.DateTime(), nullable=True),
+    sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['shop_id'], ['shops.id'], ondelete='CASCADE'),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
@@ -99,11 +104,14 @@ def upgrade():
     sa.Column('review_id', sa.Integer(), nullable=True),
     sa.Column('img_link', sa.String(length=500), nullable=False),
     sa.Column('preview_image', sa.Boolean(), nullable=True),
+    sa.Column('created_at', sa.DateTime(), nullable=True),
+    sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['review_id'], ['reviews.id'], ondelete='CASCADE'),
     sa.ForeignKeyConstraint(['shop_id'], ['shops.id'], ondelete='CASCADE'),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
     )
+
     if environment == "production":
         op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
     # ### end Alembic commands ###
