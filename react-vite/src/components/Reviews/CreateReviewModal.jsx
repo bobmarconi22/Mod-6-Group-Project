@@ -1,7 +1,8 @@
-import { useDispatch } from 'react-redux'
-import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect, useState } from 'react'
 import { useModal } from '../../context/Modal'
-import { useParams } from 'react-router>-dom'
+import { useParams } from 'react-router-dom'
+import { loadShopDetailsThunk } from '../../redux/shops'
 
 
 function CreateReviewModal() {
@@ -12,12 +13,17 @@ function CreateReviewModal() {
 
     const {closeModal} = useModal()
 
-
-
-    //const shop = useSelector((state => state.shop.)
-
-
+    const {id} = useParams()
     const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(loadShopDetailsThunk(id))
+    },[dispatch])
+
+    const shop = useSelector((state) => state.shops.ShopDetails)
+    console.log(shop)
+
+    
 
     return (
         <>
