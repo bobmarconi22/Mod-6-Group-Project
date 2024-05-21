@@ -3,7 +3,7 @@ from wtforms import StringField, StringField, IntegerField
 from wtforms.validators import DataRequired, NumberRange
 from app.models import Shop
 
-class LoginForm(FlaskForm):
+class ShopForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
     description = StringField('Description', validators=[DataRequired()])
     monday_open = StringField('Monday Open')
@@ -23,3 +23,9 @@ class LoginForm(FlaskForm):
     website = StringField('Website', validators=[DataRequired()])
     phone_number = StringField('Phone', validators=[DataRequired()])
     price_range = IntegerField('Price', validators=[DataRequired(), NumberRange(min=1, max=5)])
+    address_line1 = StringField('Address Line 1', validators=[DataRequired()])
+    address_line2 = StringField('Address Line 2', validators=[DataRequired()])
+    city = StringField('City', validators=[DataRequired()])
+    state = StringField('State', validators=[DataRequired()])
+    postal = StringField('Postal', validators=[DataRequired()])
+    country = StringField('Country', validators=[DataRequired()])

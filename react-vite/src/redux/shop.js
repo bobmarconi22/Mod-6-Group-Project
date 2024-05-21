@@ -13,6 +13,7 @@ export const createShop = (newShop) => async (dispatch) => {
   });
   const data = await res.json();
   dispatch(addShop(data));
+  return data
 };
 
 const initialState = { shops: {} };
