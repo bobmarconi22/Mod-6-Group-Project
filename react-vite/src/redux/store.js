@@ -7,7 +7,7 @@ import {
 import thunk from "redux-thunk";
 import sessionReducer from "./session";
 import shopsReducer from "./shops";
-import categoriesReducer from "./category";
+import categoriesReducer from "./categories";
 import reviewReducer from "./reviews";
 
 const rootReducer = combineReducers({

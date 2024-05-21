@@ -1,4 +1,4 @@
-import { getAllCategories } from "../../redux/category";
+import { getAllCategories } from "../../redux/categories";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
