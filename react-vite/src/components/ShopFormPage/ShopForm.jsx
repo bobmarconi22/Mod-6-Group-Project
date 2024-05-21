@@ -11,6 +11,7 @@ function ShopFormPage() {
   const sessionUser = useSelector((state) => state.session.user);
   const allCategories = useSelector((state) => state.categories.categories);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [edit, setEdit] = useState(true)
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [hours, setHours] = useState({
@@ -22,7 +23,7 @@ function ShopFormPage() {
     Saturday: { open: "Open", close: "Close" },
     Sunday: { open: "Open", close: "Close" },
   });
-  const [selectedDays, setSelectedDays] = useState([]);
+  const [selectedDay, setSelectedDay] = useState('Monday');
   const [streetOne, setStreetOne] = useState("");
   const [streetTwo, setStreetTwo] = useState("");
   const [city, setCity] = useState("");
@@ -118,34 +119,38 @@ function ShopFormPage() {
 
     if (Object.keys(err).length === 0) {
       const newShop = {
-        name,
-        owner_id: sessionUser.id,
-        description,
-        hours,
-        website,
-        phone_number: phoneNumber,
-        price_range: priceRange,
-        shop_id: newShop.id,
-        address_line1: streetOne,
-        address_line2: streetTwo,
-        city,
-        state,
-        postal_code: postal,
-        country,
-        monday_open: hours.Monday.open,
-        monday_close: hours.Monday.close,
-        tuesday_open: hours.Tuesday.open,
-        tuesday_close: hours.Tuesday.close,
-        wednesday_open: hours.Wednesday.open,
-        wednesday_close: hours.Wednesday.close,
-        thursday_open: hours.Thursday.open,
-        thursday_close: hours.Thursday.close,
-        friday_open: hours.Friday.open,
-        friday_close: hours.Friday.close,
-        saturday_open: hours.Saturday.open,
-        saturday_close: hours.Saturday.close,
-        sunday_open: hours.Sunday.open,
-        sunday_close: hours.Sunday.close,
+        shop:  {
+          name,
+          owner_id: sessionUser.id,
+          description,
+          hours,
+          website,
+          phone_number: phoneNumber,
+          price_range: priceRange,
+          monday_open: hours.Monday.open,
+          monday_close: hours.Monday.close,
+          tuesday_open: hours.Tuesday.open,
+          tuesday_close: hours.Tuesday.close,
+          wednesday_open: hours.Wednesday.open,
+          wednesday_close: hours.Wednesday.close,
+          thursday_open: hours.Thursday.open,
+          thursday_close: hours.Thursday.close,
+          friday_open: hours.Friday.open,
+          friday_close: hours.Friday.close,
+          saturday_open: hours.Saturday.open,
+          saturday_close: hours.Saturday.close,
+          sunday_open: hours.Sunday.open,
+          sunday_close: hours.Sunday.close,
+        },
+        address: {
+          shop_id: newShop.id,
+          address_line1: streetOne,
+          address_line2: streetTwo,
+          city,
+          state,
+          postal_code: postal,
+          country,
+        },
         categories,
       };
       const data = await dispatch(createShop(newShop));
@@ -205,23 +210,22 @@ function ShopFormPage() {
             Hours
             <div>
               <select
-                multiple
-                value={selectedDays}
+                value={selectedDay}
                 onChange={(e) =>
-                  setSelectedDays((prevDays) => [prevDays, e.target.value])
+                  setSelectedDay((prevDays) => [prevDays, e.target.value])
                 }
                 required
               >
-                {selectedDays.map((day, index) => (
+                {Object.keys(hours).map((day, index) => (
                   <option key={index} value={day}>
                     {day}
                   </option>
                 ))}
               </select>
-              {console.log("===============>", selectedDays)}
+              {console.log("===============>", selectedDay)}
               <select
-                value={selectedDays.open}
-                onChange={(e) => handleOpenChange(selectedDays, e.target.value)}
+                value={selectedDay.open}
+                onChange={(e) => handleOpenChange(selectedDay, e.target.value)}
                 required
               >
                 <option value="Open" disabled>
@@ -235,8 +239,8 @@ function ShopFormPage() {
               </select>
               -
               <select
-                value={selectedDays.close}
-                onChange={(e) => handleCloseChange(selectedDays, e.target.value)}
+                value={selectedDay.close}
+                onChange={(e) => handleCloseChange(selectedDay, e.target.value)}
                 required
               >
                 <option value="Close" disabled>
@@ -246,7 +250,7 @@ function ShopFormPage() {
                   .filter(
                     (time) =>
                       times.indexOf(time) >
-                      times.indexOf(hours[selectedDays].open)
+                      times.indexOf(hours[selectedDay].open)
                   )
                   .map((time, index) => (
                     <option key={index} value={time}>
@@ -432,7 +436,7 @@ function ShopFormPage() {
                   key={index}
                   value={category[1].name}
                   disabled={
-                    categories.length === 3 &&
+                    categories.length === 8 &&
                     !categories.includes(category[1].name)
                   }
                 >
@@ -442,6 +446,15 @@ function ShopFormPage() {
             </select>
           </label>
           {errors.categories && <p>{errors.categories}</p>}
+          {edit &&
+            <>
+            <h2>Images</h2>
+            <input
+              type="text"
+              value={'images'}
+            />
+            </>
+          }
           <button type="submit">Create Shop</button>
         </form>
       </div>

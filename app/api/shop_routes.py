@@ -65,8 +65,8 @@ def get_all_shops():
 
 # CREATE SHOP
 @shop_routes.route("/new-shop", methods=['POST'])
-def create_shop():
-    shop_form = ShopForm()
+def create_shop(body):
+    shop_form = ShopForm(body.shop)
     if shop_form.validate_on_submit():
         new_shop = Shop(
             name=shop_form.name.data,
@@ -90,7 +90,7 @@ def create_shop():
 
         new_id = Shop.query.filter(Shop.name == shop_form.name.data)
 
-        address_form = AddressForm()
+        address_form = AddressForm(body.address)
         new_shop_address = Address(
             shop_id = new_id,
             address_line1=address_form.address_line1.data,
@@ -102,6 +102,8 @@ def create_shop():
         )
         db.session.add(new_shop_address)
         db.session.commit()
+
+
 
 
 
