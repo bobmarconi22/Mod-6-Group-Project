@@ -2,10 +2,14 @@
 // import { thunkLogin } from "../../redux/session";
 // import { useDispatch } from "react-redux";
 // import { useModal } from "../../context/Modal";
+import { loadShopsThunk } from "../../redux/shops";
 import "./LandingPage.css";
+import { useEffect } from "react";
+import { useDispatch } from 'react-redux'
 
 function LandingPage() {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
+
   let shopsList = ['temp shop seeder', 'temp shop seeder', 'temp shop seeder', 'temp shop seeder', 'temp shop seeder', 'temp shop seeder']
   const shopMapper =
     // temporary code until seeder data is used, swap inputs with seeder info
@@ -13,7 +17,7 @@ function LandingPage() {
     shopsList.map((shop, i) => {
       return (
         <div key={i} className="shop-container">
-          <img src='temp.png'></img>
+          <img src='img.png'></img>
           <div className="shop-text">Coffee shop name</div>
           <div className="shop-text">Rating & num review</div>
           <div className="shop-text">Price Range & Categories</div>
@@ -22,6 +26,10 @@ function LandingPage() {
         </div>
       )
     });
+
+  useEffect(() => {
+    dispatch(loadShopsThunk())
+  }, [dispatch])
 
   return (
     <>
