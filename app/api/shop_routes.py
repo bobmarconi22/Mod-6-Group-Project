@@ -18,7 +18,8 @@ def get_shop_by_id(id):
         joinedload(Shop.categories),
         joinedload(Shop.address),
         joinedload(Shop.review),
-        joinedload(Shop.image)
+        joinedload(Shop.image),
+        joinedload(Shop.menu)
     ).get(id)
     if not shop:
         return jsonify({"error": "Shop not found"}), 404
