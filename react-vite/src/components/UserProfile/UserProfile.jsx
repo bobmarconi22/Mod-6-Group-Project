@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 function UserProfile() {
   const sessionUser = useSelector((state) => state.session.user);
   const userReviews = useSelector((state) => state.reviews.userReviews);
-  const userShops = useSelector((state) => state.shops.userShops);
+  const userShops = useSelector((state) => state.shops.userShops || {});
   const [isLoaded, setIsLoaded] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate()

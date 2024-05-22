@@ -34,8 +34,6 @@ export const updateShop = (shop) => ({
 // Thunk action creators
 export const loadShopsThunk = () => async (dispatch) => {
   const response = await fetch("/api/shops");
-  console.log("this is the response", response);
-
   if (response.ok) {
     const shops = await response.json();
     dispatch(loadShops(shops));
@@ -49,18 +47,19 @@ export const createShopThunk = (newShop) => async (dispatch) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(newShop),
   });
-
+  console.log(res)
   if (res.ok) {
-    const data = await res.json();
-    dispatch(addShop(data));
-    return data;
+    const shop = await res.json()
+    dispatch(addShop(shop))
+    return shop
+  } else {
+    const errors = await res.json()
+    return errors
   }
 };
 
 export const loadShopDetailsThunk = (id) => async (dispatch) => {
   const response = await fetch(`/api/shops/${id}`);
-  console.log("this is the response", response);
-
   if (response.ok) {
     const shop = await response.json();
     dispatch(loadShopDetails(shop));
@@ -101,22 +100,23 @@ const shopsReducer = (state = {}, action) => {
         allShops[shop.id] = shop;
       });
       return { ...state, ...allShops };
+  }
     case CREATE_SHOP:
-      return { ...state, [action.payload.id]: action.payload };
+return { ...state, [action.payload.id]: action.payload };
     case LOAD_SHOP_DETAILS:
-      return { ...state, ShopDetails: action.payload };
+return { ...state, ShopDetails: action.payload };
     case USER_SHOPS:
-      newState = { ...state, userShops: {} };
-      action.payload.forEach((shop) => {
-        newState.userShops[shop.id] = shop;
-      });
-      return newState;
+newState = { ...state, userShops: {} };
+action.payload.forEach((shop) => {
+  newState.userShops[shop.id] = shop;
+});
+return newState;
     case UPDATE_SHOP:
-      newState = { ...state };
-      newState[action.payload.id] = action.payload
-      return newState
+newState = { ...state };
+newState[action.payload.id] = action.payload
+return newState
     default:
-      return state;
+return state;
   }
 };
 

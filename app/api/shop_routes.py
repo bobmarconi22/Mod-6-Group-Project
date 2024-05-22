@@ -70,17 +70,17 @@ def get_all_shops():
     return jsonify(shop_dicts)
 
 # CREATE SHOP
-@shop_routes.route("/", methods=['POST'])
+@shop_routes.route("/new", methods=['POST'])
 @login_required
 def create_shop():
-    data = request.get_json()
-    shop_form = ShopForm(data)
-    address_form = AddressForm(data)
+    print('hello from route')
+    body = request.get_json()
+    shop_form = ShopForm()
+    address_form = AddressForm()
     shop_form['csrf_token'].data = request.cookies['csrf_token']
     address_form['csrf_token'].data = request.cookies['csrf_token']
-    print('===========>',data)
+    print(address_form.validate_on_submit())
     if shop_form.validate_on_submit() and address_form.validate_on_submit():
-        try:
             new_shop = Shop(
                 name=shop_form.name.data,
                 description=shop_form.description.data,
@@ -101,6 +101,7 @@ def create_shop():
 
             db.session.add(new_shop)
             db.session.commit()
+            print('===============================>',new_shop)
 
             new_shop_address = Address(
                 shop_id=new_shop.id,
@@ -108,26 +109,21 @@ def create_shop():
                 address_line2=address_form.address_line2.data,
                 city=address_form.city.data,
                 state=address_form.state.data,
-                postal=address_form.postal.data,
+                postal_code=address_form.postal_code.data,
                 country=address_form.country.data
             )
             db.session.add(new_shop_address)
             db.session.commit()
 
-            categories = data.get('categories', [])
+            categories = body.get('categories', [])
             for category_id in categories:
                 db.session.execute(selected_categories.insert().values(shop_id=new_shop.id, category_id=category_id))
             db.session.commit()
 
-            return jsonify(new_shop.to_dict()), 201
-        except Exception as e:
-            db.session.rollback()
-            print(f"Error creating shop: {e}")
-            return jsonify({'error': str(e)}), 500
-    else:
-        errors = {**shop_form.errors, **address_form.errors}
-        return jsonify(errors), 400
+            shop = Shop.query.options(joinedload(Shop.address), joinedload(Shop.categories)).filter_by(id = new_shop.id).first()
 
+            print(jsonify(shop.to_dict(include_categories=True)))
+            return jsonify(shop.to_dict(include_categories= True))
 
 
 # REVIEW ROUTES

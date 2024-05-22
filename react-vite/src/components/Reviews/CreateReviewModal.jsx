@@ -15,18 +15,16 @@ function CreateReviewModal() {
     const [img2, setImg2] = useState('')
     const [img3, setImg3] = useState('')
 
-    const [errors, setEerrors] = useState({})
+    // const [errors, setErrors] = useState({})
 
     const {closeModal} = useModal()
 
     const {id} = useParams()
     const dispatch = useDispatch()
 
-    const current_user = useSelector((state) => state.session.user);
-
     useEffect(() => {
         dispatch(loadShopDetailsThunk(id))
-    },[dispatch])
+    },[id, dispatch])
 
     const shop = useSelector((state) => state.shops.ShopDetails)
     console.log(shop)
@@ -42,9 +40,9 @@ function CreateReviewModal() {
         img_url3: (img3.length > 0 && img3)
     }
 
-    const response = await dispatch(createAReview(reviewData, id))
-    
-        closeModal()
+    dispatch(createAReview(reviewData, id)).then(() => closeModal())
+
+
     }
 
 
@@ -53,33 +51,33 @@ function CreateReviewModal() {
             <h1>{shop && shop.name}</h1>
             <form onSubmit={handleSubmit}>
                 <BeanRating setBeans={setBeans} filledBeans={beans}/>
-                <input className='review' 
+                <input className='review'
                     type='text'
                     placeholder='Leave your review here...'
                     value={review}
                     onChange={(e) => setReview(e.target.value)}
                     required
-                />  
-                <input className='img' 
+                />
+                <input className='img'
                     type='text'
                     placeholder='img url here'
                     value={img1}
                     onChange={(e) => setImg1(e.target.value)}
-                    
+
                 />
-                <input className='img' 
+                <input className='img'
                     type='text'
                     placeholder='img url here'
                     value={img2}
                     onChange={(e) => setImg2(e.target.value)}
-                    
+
                 />
-                <input className='img' 
+                <input className='img'
                     type='text'
                     placeholder='img url here'
                     value={img3}
                     onChange={(e) => setImg3(e.target.value)}
-                    
+
                 />
                 <button onSubmit={handleSubmit}>Create Review</button>
 
