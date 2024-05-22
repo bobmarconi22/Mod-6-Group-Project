@@ -1,4 +1,7 @@
 import './ShopDetails.css'
+import OpenModalButton from "../OpenModalButton";
+import CreateReviewModal from '../Reviews/CreateReviewModal'
+
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { loadShopDetailsThunk } from '../../redux/shops'
@@ -67,6 +70,10 @@ function ShopDetails() {
                     {shopDetails?.description}
                 </div>
             </div>
+            <OpenModalButton
+                buttonText="Write a Review"
+                modalComponent={<CreateReviewModal />}
+            />
         </>
     )
 

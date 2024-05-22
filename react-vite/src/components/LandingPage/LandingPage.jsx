@@ -63,7 +63,7 @@ function LandingPage() {
         <h1># all Coffee Shops</h1>
         <div className="shop-list-container">
           <>
-            <ShopCardMaker shopsArr={shopsArr}/>
+            <ShopCardMaker shopsArr={shopsArr} />
           </>
         </div>
       </div>
