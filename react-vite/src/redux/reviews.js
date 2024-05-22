@@ -28,7 +28,7 @@ export const createAReview = (newReviewData, shopId) => async (dispatch) => {
     const res = await fetch(`/api/shops/${shopId}/reviews`, {
         method: 'POST',
         headers: {
-            'Concent-Type': 'application/json'
+            'Content-Type': 'application/json'
         },
         body: JSON.stringify(newReviewData)
     })
