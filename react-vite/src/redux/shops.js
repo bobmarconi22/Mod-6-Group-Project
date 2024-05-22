@@ -93,30 +93,31 @@ export const updateShopThunk = (shop) => async (dispatch) => {
 const shopsReducer = (state = {}, action) => {
   let newState = {}
   switch (action.type) {
-    case LOAD_SHOPS:
+    case LOAD_SHOPS: {
       // flattening
       const allShops = {};
       action.payload.forEach((shop) => {
         allShops[shop.id] = shop;
       });
       return { ...state, ...allShops };
-  }
+    }
     case CREATE_SHOP:
-return { ...state, [action.payload.id]: action.payload };
+      return { ...state, [action.payload.id]: action.payload };
     case LOAD_SHOP_DETAILS:
-return { ...state, ShopDetails: action.payload };
+      return { ...state, ShopDetails: action.payload };
     case USER_SHOPS:
-newState = { ...state, userShops: {} };
-action.payload.forEach((shop) => {
-  newState.userShops[shop.id] = shop;
-});
-return newState;
-    case UPDATE_SHOP:
-newState = { ...state };
-newState[action.payload.id] = action.payload
-return newState
-    default:
-return state;
+      newState = { ...state, userShops: {} };
+      action.payload.forEach((shop) => {
+        newState.userShops[shop.id] = shop;
+      });
+      return newState;
+    case UPDATE_SHOP: {
+        const newState = { ...state };
+        newState[action.payload.id] = action.payload
+        return newState
+    }
+      default:
+    return state;
   }
 };
 
