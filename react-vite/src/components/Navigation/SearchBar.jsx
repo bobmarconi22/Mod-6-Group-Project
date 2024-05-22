@@ -1,4 +1,4 @@
-import { getAllCategories } from "../../redux/category";
+import { getAllCategories } from "../../redux/categories";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,7 +9,6 @@ function SearchBar() {
     const [isLoaded, setIsLoaded] = useState(false);
     const [priceRange, setPriceRange] = useState({"1": false, "2": false, "3": false, "4": false, "5": false})
     const allCategories = useSelector((state) => state.categories.categories);
-    const navigate = useNavigate();
     const dispatch = useDispatch();
 
     useEffect( () => {
@@ -56,7 +55,7 @@ function SearchBar() {
           </div>
           <button type="submit">Search by Shop Name</button>
           </form>
-          <form on onSubmit={(e) => handleFilterSearch(e)}>
+          <form onSubmit={(e) => handleFilterSearch(e)}>
           <div>
 
           <label>

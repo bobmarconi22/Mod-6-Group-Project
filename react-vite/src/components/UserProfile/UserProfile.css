@@ -1,0 +1,56 @@
+#user-page-title{
+    text-align: center;
+    padding-top: 20px;
+}
+
+#user-page-subtitle{
+    text-align: center;
+}
+
+#profile-info{
+    text-align: center;
+    border: 1px solid black;
+    margin: 0 auto;
+    width: 250px;
+    margin-bottom: 20px;
+}
+
+#profile-info > h2{
+    border-bottom: 1px solid black;
+    padding-bottom: 5px;
+}
+
+.profile-section{
+    text-align: center;
+    border: 1px solid black;
+    margin: 0 auto;
+    margin-bottom: 5px;
+}
+
+.profile-section > h2{
+    border-bottom: 1px solid black;
+    padding-bottom: 5px;
+}
+
+#user-profile-edit{
+    font-size: 10px;
+    text-decoration: underline;
+}
+
+.profile-review-tile{
+    border: 1px solid black;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    margin-bottom: 15px;
+}
+
+.profile-shop-tile{
+    border: 1px solid black;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    margin-bottom: 15px;
+}
