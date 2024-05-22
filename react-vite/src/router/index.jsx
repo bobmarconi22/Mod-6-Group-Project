@@ -4,7 +4,7 @@ import SignupFormPage from "../components/SignupFormPage";
 import LandingPage from "../components/LandingPage";
 import ShopFormPage from "../components/ShopFormPage";
 import Layout from "./Layout";
-import ShopDetail from "../components/ShopDetail";
+import ShopDetails from "../components/ShopDetails";
 import UserProfile from "../components/UserProfile";
 import SearchPage from "../components/SearchPage";
 
@@ -30,7 +30,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "shops/:id",
-        element: <ShopDetail />,
+        element: <ShopDetails />,
       },
       {
         path: "/profile",
@@ -38,7 +38,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/search",
-        element: <SearchPage/>
+        element: <SearchPage />
       }
     ],
   },

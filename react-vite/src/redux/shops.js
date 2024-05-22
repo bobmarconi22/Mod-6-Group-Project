@@ -1,5 +1,5 @@
 const LOAD_SHOPS = "LOAD_SHOPS";
-const LOAD_SHOP_DETAIL = "LOAD_SHOP_DETAIL";
+const LOAD_SHOP_DETAILS = "LOAD_SHOP_DETAILS";
 const CREATE_SHOP = "CREATE_SHOP";
 const USER_SHOPS = "USER_SHOPS";
 
@@ -14,8 +14,8 @@ export const addShop = (shop) => ({
   payload: shop,
 });
 
-export const loadShopDetail = (shop) => ({
-  type: LOAD_SHOP_DETAIL,
+export const loadShopDetails = (shop) => ({
+  type: LOAD_SHOP_DETAILS,
   payload: shop,
 });
 
@@ -56,7 +56,7 @@ export const loadShopDetailsThunk = (id) => async (dispatch) => {
 
   if (response.ok) {
     const shop = await response.json();
-    dispatch(loadShopDetail(shop));
+    dispatch(loadShopDetails(shop));
     return shop;
   }
 };
@@ -80,8 +80,8 @@ const shopsReducer = (state = {}, action) => {
       return { ...state, ...allShops };
     case CREATE_SHOP:
       return { ...state, [action.payload.id]: action.payload };
-    case LOAD_SHOP_DETAIL:
-      return { ...state, ShopDetail: action.payload };
+    case LOAD_SHOP_DETAILS:
+      return { ...state, ShopDetails: action.payload };
     case USER_SHOPS:
       const newState = { ...state, userShops: {} };
       action.payload.forEach((shop) => {
