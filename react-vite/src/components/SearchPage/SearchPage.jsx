@@ -9,7 +9,6 @@ function SearchPage() {
   useEffect(() => {
     console.log("USE EFFECT RUNNING")
     const queryString = location.search;
-    console.log("QUERY STRING", queryString)
     fetch(`/api/search${queryString}`)
       .then(response => {
         // Check if response is OK and log the response status
