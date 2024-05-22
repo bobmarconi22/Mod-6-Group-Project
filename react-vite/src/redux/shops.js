@@ -42,7 +42,7 @@ export const loadShopsThunk = () => async (dispatch) => {
 };
 
 export const createShopThunk = (newShop) => async (dispatch) => {
-  const res = await fetch("/api/shops", {
+  const res = await fetch("/api/shops/new", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(newShop),
