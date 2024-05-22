@@ -1,6 +1,7 @@
 import { useState } from 'react'
-import { PiCoffeeBeanLight } from "react-icons/pi";
+import { CiCoffeeBean } from "react-icons/ci";
 import { BiSolidCoffeeBean } from "react-icons/bi";
+
 
 const BeanRating =({setBeans, filledBeans}) => {
 
@@ -15,9 +16,13 @@ const BeanRating =({setBeans, filledBeans}) => {
             onMouseLeave={() => setActiveRating(0)} 
             onClick={() => setBeans(i)}
           >
-            {activeRating > i - 1 || filledStars > i - 1 ? <PiCoffeeBeanLight /> : <BiSolidCoffeeBean />}
+            {activeRating > i - 1 || filledBeans > i - 1 ? 
+            < BiSolidCoffeeBean />
+            : < CiCoffeeBean/>}
           </div>
         ))}
       </div>
     )
 }
+
+export {BeanRating}

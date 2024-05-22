@@ -1,4 +1,4 @@
-import { getAllCategories } from "../../redux/category";
+import { getAllCategories } from "../../redux/categories";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -56,7 +56,7 @@ function SearchBar() {
           </div>
           <button type="submit">Search by Shop Name</button>
           </form>
-          <form on onSubmit={(e) => handleFilterSearch(e)}>
+          <form onSubmit={(e) => handleFilterSearch(e)}>
           <div>
 
           <label>
