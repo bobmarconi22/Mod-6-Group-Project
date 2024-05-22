@@ -40,7 +40,9 @@ def current_user_shops():
      shop_dicts = []
      for shop in shops:
           shop_dict = shop.to_dict(include_categories=True)
-          shop_dict['preview_image'] = Image.query.filter_by(shop_id = shop.id, preview_image=True).first().to_dict()
+          preview_image = Image.query.filter_by(shop_id = shop.id, preview_image=True).first()
+          if (preview_image):
+            shop_dict['preview_image'] = preview_image.to_dict()
           avg_and_num_reviews = find_avg(shop)
           shop_dict['avg_rating'] = avg_and_num_reviews['avg']
           shop_dict['num_reviews'] = avg_and_num_reviews['num_reviews']
