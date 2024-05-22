@@ -6,6 +6,7 @@ import ShopFormPage from "../components/ShopFormPage";
 import Layout from "./Layout";
 import ShopDetail from "../components/ShopDetail";
 import UserProfile from "../components/UserProfile";
+import SearchPage from "../components/SearchPage";
 
 export const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ export const router = createBrowserRouter([
         path: "/profile",
         element: <UserProfile />,
       },
+      {
+        path: "/search",
+        element: <SearchPage/>
+      }
     ],
   },
 ]);

@@ -9,5 +9,4 @@ search_routes = Blueprint('search', __name__)
 
 @search_routes.route('/', methods=['POST'])
 def search_shops():
-    # query will always be shops- if there's a name we ignore the other parameters
-    pass
+   return

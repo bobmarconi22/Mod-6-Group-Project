@@ -11,7 +11,7 @@ function SearchBar() {
     const [priceRange, setPriceRange] = useState({"1": false, "2": false, "3": false, "4": false, "5": false})
     const allCategories = useSelector((state) => state.categories.categories);
     const dispatch = useDispatch();
-
+    const navigate = useNavigate();
     useEffect( () => {
     const fetchCategories = async () => {
       await dispatch(getAllCategories());
@@ -45,7 +45,7 @@ function SearchBar() {
     const params = new URLSearchParams(query)
 
     console.log("url =====> ", `/shops/search${params.toString()}`)
-    navigate(`/shops/search?${params.toString()}`)
+    navigate(`/search?${params.toString()}`)
   }
 
 
@@ -57,8 +57,6 @@ function SearchBar() {
           <input placeholder="Search by name of shop" value={name} onChange={(e)=> setName(e.target.value)}></input>
           </div>
           <button type="submit">Search by Shop Name</button>
-          </form>
-          <form onSubmit={(e) => handleFilterSearch(e)}>
           <div>
           <label>
             Categories
