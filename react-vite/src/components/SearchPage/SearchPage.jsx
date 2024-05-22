@@ -29,25 +29,6 @@ function SearchPage() {
       });
   }, [location.search]);
 
-    // const shopMapper =
-    // filteredShops.map((shop, i) => {
-    //   return (
-    //     <div key={i} className="shop-container">
-    //       <img src='img.png'></img>
-    //       <div className="shop-text">{shop.name}</div>
-    //       <div className="shop-text">{'Rating: ' + shop.avg_rating + ' Number of Reviews: ' + shop.num_reviews}</div>
-    //       <div className="shop-text">
-    //         {'Price Range: ' + shop.price_range}
-    //         <div>
-    //           {'categories: ' + shop.categories}
-    //         </div>
-    //       </div>
-    //       <button className="shop-text" onClick={() => alert('Function coming soon')}>Get Directions</button>
-    //     </div>
-    //   )
-    // });
-
-
 
     return (
         !loading && filteredShops.length > 0 ? (<div>
