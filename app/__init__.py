@@ -11,11 +11,8 @@ from .api.review_routes import review_routes
 from .api.shop_routes import shop_routes
 from .api.category_routes import category_routes
 from .api.search_routes import search_routes
-from flask_login import login_required, current_user
 from .seeds import seed_commands
 from .config import Config
-from ..app.forms.shop_form import ShopForm
-from ..app.forms.address_form import AddressForm
 
 app = Flask(__name__, static_folder='../react-vite/dist', static_url_path='/')
 

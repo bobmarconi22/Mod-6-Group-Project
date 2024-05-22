@@ -42,7 +42,7 @@ export const createAReview = (newReviewData, shopId) => async (dispatch) => {
     }
 }
 
-export const getReviewsByUserId = () => async (dispatch) => {
+export const getReviewsByUserId = (userId) => async (dispatch) => {
     const res = await fetch(`/api/reviews/current`)
     if (res.ok) {
         const reviews = await res.json()
