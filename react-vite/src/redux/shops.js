@@ -47,7 +47,6 @@ export const createShopThunk = (newShop) => async (dispatch) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(newShop),
   });
-  console.log(res)
   if (res.ok) {
     const shop = await res.json()
     dispatch(addShop(shop))
