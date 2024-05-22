@@ -3,7 +3,7 @@ import "./UserProfile.css";
 import { FaUserCircle } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { getReviewsByUserId } from "../../redux/reviews";
-import { getShopsByUserId } from "../../redux/shops";
+import { getShopsByUserIdThunk } from "../../redux/shops";
 import { useNavigate } from "react-router-dom";
 
 
@@ -19,8 +19,8 @@ function UserProfile() {
   const navigate = useNavigate()
   useEffect(() => {
     if (sessionUser) {
-      dispatch(getReviewsByUserId(sessionUser.id)).then(() => {});
-      dispatch(getShopsByUserId(sessionUser.id)).then(() => {
+      dispatch(getReviewsByUserId(sessionUser.id)).then(() => { });
+      dispatch(getShopsByUserIdThunk(sessionUser.id)).then(() => {
         setIsLoaded(true);
       });
     }
@@ -55,7 +55,7 @@ function UserProfile() {
         </div>
         {isLoaded &&
           <div className="profile-section">
-          <h2 id="user-page-subtitle">Your Reviews</h2>
+            <h2 id="user-page-subtitle">Your Reviews</h2>
             {Object.values(userReviews).map((review) => (
               <a className="profile-review-tile" onClick={() => navigate('/shops/${review.shop_id}')} key={review.id}>
                 <h4>{review.shop.name}</h4>
@@ -73,33 +73,33 @@ function UserProfile() {
                 <p>{review.created_at}</p>
               </a>
             ))}
-        </div>}
+          </div>}
 
         {isLoaded && (
-            <div className="profile-section">
-              <h2>Your Shops</h2>
-              {Object.values(userShops).map((shop) => (
-                <a className="profile-shop-tile" onClick={() => navigate('/shops/${shop.id}')} key={shop.id}>
-                  <img src="img.png"></img>
-                  <div className="user-shop-text">{shop.name}</div>
-                  <p>
-                    {shop.address.address_line1} {shop.address.address_line2}{" "}
-                    {shop.address.city}, {shop.address.state},{" "}
-                    {shop.address.postal_code}
-                  </p>
-                  <div className="user-shop-text">
-                    {"Rating: " +
-                      shop.avg_rating +
-                      " Number of Reviews: " +
-                      shop.num_reviews}
-                  </div>
-                  <div className="user-shop-text">
-                    {"Price Range: " + shop.price_range}
-                    <div>{"categories: " + shop.categories}</div>
-                  </div>
-                </a>
-              ))}
-            </div>
+          <div className="profile-section">
+            <h2>Your Shops</h2>
+            {Object.values(userShops).map((shop) => (
+              <a className="profile-shop-tile" onClick={() => navigate('/shops/${shop.id}')} key={shop.id}>
+                <img src="img.png"></img>
+                <div className="user-shop-text">{shop.name}</div>
+                <p>
+                  {shop.address.address_line1} {shop.address.address_line2}{" "}
+                  {shop.address.city}, {shop.address.state},{" "}
+                  {shop.address.postal_code}
+                </p>
+                <div className="user-shop-text">
+                  {"Rating: " +
+                    shop.avg_rating +
+                    " Number of Reviews: " +
+                    shop.num_reviews}
+                </div>
+                <div className="user-shop-text">
+                  {"Price Range: " + shop.price_range}
+                  <div>{"categories: " + shop.categories}</div>
+                </div>
+              </a>
+            ))}
+          </div>
         )}
       </>
     )

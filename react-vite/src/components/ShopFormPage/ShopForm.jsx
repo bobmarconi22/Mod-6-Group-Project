@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createShop } from "../../redux/shops";
+import { createShopThunk } from "../../redux/shops";
 import { useNavigate } from "react-router-dom";
 import "./ShopForm.css";
 import { getAllCategories } from "../../redux/categories";
@@ -156,11 +156,11 @@ function ShopFormPage() {
         },
         categories,
       };
-      const data = await dispatch(createShop(newShop));
+      const data = await dispatch(createShopThunk(newShop));
       dispatch(loadShopsThunk())
-      if(!data.ok){
-      navigate('/')
-    }
+      if (!data.ok) {
+        navigate('/')
+      }
     }
 
   };
