@@ -130,6 +130,16 @@ def create_shop():
             return jsonify(shop.to_dict(include_categories= True))
 
 
+#DELETE SHOP
+@shop_routes.route("/<int:shop_id>/delete", methods=['DELETE'])
+@login_required
+def delete_shop(shop_id):
+    shop = Shop.query.get(shop_id)
+
+    db.session.delete(shop)
+    db.session.commit()
+
+
 # REVIEW ROUTES
 
 # Create a Review for a shop based on the shop's id

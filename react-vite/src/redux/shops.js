@@ -2,7 +2,7 @@ const LOAD_SHOPS = "LOAD_SHOPS";
 const LOAD_SHOP_DETAILS = "LOAD_SHOP_DETAILS";
 const CREATE_SHOP = "CREATE_SHOP";
 const UPDATE_SHOP = "UPDATE_SHOP"
-// const DELETE_SHOP = 'DELETE_SHOP'
+const DELETE_SHOP = 'DELETE_SHOP'
 const USER_SHOPS = "USER_SHOPS";
 
 // Action creators
@@ -28,6 +28,11 @@ export const userShops = (shops) => ({
 
 export const updateShop = (shop) => ({
   type: UPDATE_SHOP,
+  payload: shop
+})
+
+export const deleteShop = (shop) => ({
+  type: DELETE_SHOP,
   payload: shop
 })
 
@@ -88,6 +93,13 @@ export const updateShopThunk = (shop) => async (dispatch) => {
   }
 }
 
+export const deleteShopThunk = (id) => async (dispatch) => {
+  await fetch(`/api/shops/${id}/delete`, {
+    method: "DELETE",
+  });
+  await dispatch(getShopsByUserIdThunk());
+  return;
+};
 // Shops Reducer
 const shopsReducer = (state = {}, action) => {
   let newState = {}
