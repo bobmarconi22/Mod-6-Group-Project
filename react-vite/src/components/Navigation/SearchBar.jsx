@@ -64,7 +64,7 @@ function SearchBar() {
               value={categories}
               onChange={(e) => setCategories(e.target.value)}
             >
-                <option value="" disabled selected>Choose a category</option>
+                <option value="" disabled>Choose a category</option>
               {Object.entries(allCategories).map((category, index) => (
                 <option
                   key={index}
