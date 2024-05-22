@@ -27,8 +27,6 @@ export const userShops = (shops) => ({
 // Thunk action creators
 export const loadShopsThunk = () => async (dispatch) => {
   const response = await fetch("/api/shops");
-  console.log("this is the response", response);
-
   if (response.ok) {
     const shops = await response.json();
     dispatch(loadShops(shops));
@@ -37,13 +35,13 @@ export const loadShopsThunk = () => async (dispatch) => {
 };
 
 export const createShop = (newShop) => async (dispatch) => {
-  const res = await fetch("/api/shops", {
+  const res = await fetch("/api/shops/new", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(newShop),
   });
-
-  if (res.ok) {
+  console.log('============>',res)
+  if (!res.ok) {
     const data = await res.json();
     dispatch(addShop(data));
     return data;
@@ -52,8 +50,6 @@ export const createShop = (newShop) => async (dispatch) => {
 
 export const loadShopDetailsThunk = (id) => async (dispatch) => {
   const response = await fetch(`/api/shops/${id}`);
-  console.log("this is the response", response);
-
   if (response.ok) {
     const shop = await response.json();
     dispatch(loadShopDetail(shop));

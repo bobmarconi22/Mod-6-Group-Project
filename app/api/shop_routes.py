@@ -69,7 +69,7 @@ def get_all_shops():
     return jsonify(shop_dicts)
 
 # CREATE SHOP
-@shop_routes.route("/", methods=['POST'])
+@shop_routes.route("/new", methods=['POST'])
 @login_required
 def create_shop():
     data = request.get_json()
@@ -143,7 +143,7 @@ def create_review(shop_id):
     if review_form.validate_on_submit():
         new_review = Review(
             user_id = current_user.id,
-            shop_id = shop_id, 
+            shop_id = shop_id,
             review = review_form.review.data,
             rating = review_form.rating.data
         )
@@ -152,7 +152,7 @@ def create_review(shop_id):
 
         image_urls = [review_form.img_url1.data, review_form.img_url2.data, review_form.img_url3.data]
         for img_url in image_urls:
-            if img_url:  
+            if img_url:
                 new_image = Image(
                     user_id=current_user.id,
                     shop_id=shop_id,
@@ -170,7 +170,3 @@ def create_review(shop_id):
 
     else:
         return jsonify({'errors': review_form.errors})
-    
-        
-
-
