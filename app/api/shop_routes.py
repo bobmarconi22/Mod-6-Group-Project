@@ -131,12 +131,13 @@ def create_shop():
 
 # Create a Review for a shop based on the shop's id
 
-@shop_routes.route('/<shop_id>/reviews', methods=['POST'])
+@shop_routes.route('/<int:shop_id>/reviews', methods=['POST'])
 @login_required
 def create_review(shop_id):
     body = request.get_json()
 
-    review_form = ReviewForm(body.review)
+    review_form = ReviewForm()
+    review_form['csrf_token'].data = request.cookies['csrf_token']
     if review_form.validate_on_submit():
         new_review = Review(
             user_id = current_user.id,
@@ -145,11 +146,11 @@ def create_review(shop_id):
             rating = review_form.rating.data
         )
         db.session.add(new_review)
-        db.session.commit
+        db.session.commit()
 
         image_urls = [review_form.img_url1.data, review_form.img_url2.data, review_form.img_url3.data]
         for img_url in image_urls:
-            if img_url:  # Check if the img_url is not empty
+            if img_url:  
                 new_image = Image(
                     user_id=current_user.id,
                     shop_id=shop_id,
@@ -161,9 +162,10 @@ def create_review(shop_id):
 
         db.session.commit()
 
-        review = Review.query.options(joinedload(Review.images)).filter_by(id=new_review.id).first()
+        review = Review.query.options(joinedload(Review.image)).filter_by(id=new_review.id).first()
 
-        return review.to_dict(include_reviewer=True)
+        return jsonify(review.to_dict(include_reviewer=True))
 
     else:
         return jsonify({'errors': review_form.errors})
+
