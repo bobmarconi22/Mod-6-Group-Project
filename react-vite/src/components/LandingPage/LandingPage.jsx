@@ -1,7 +1,7 @@
 // import { useState } from "react";
 // import { thunkLogin } from "../../redux/session";
 // import { useModal } from "../../context/Modal";
-
+import ShopCardMaker from "../ShopCardMaker";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from "react-router-dom";
@@ -18,28 +18,28 @@ function LandingPage() {
   let shopsArr = Object.values(shopsObj)
   // console.log(shopsArr)
 
-  const shopMapper =
-    // temporary code until seeder data is used, swap inputs with seeder info
-    // add to map input later { shop, id }
-    // need to change values after backend response is changed 5/22
-    shopsArr.map((shop, i) => {
-      return (
-        <div key={i} className="shop-container" onClick={() => navigate(`/shops/${shop.id}`)}>
-          <img src='img.png'></img>
-          <div className="shop-text">{shop.name}</div>
-          <div className="shop-text">{'Rating: ' + shop.avg_rating + ' Number of Reviews: ' + shop.num_reviews}</div>
-          <div className="shop-text">
-            {'Price Range: ' + shop.price_range}
-            <div>
-              {'categories: ' + shop.categories}
-            </div>
-          </div>
-          <button className="shop-text" onClick={() => alert('Function coming soon')}>Get Directions</button>
-          {/* open time is difficult to use for front end given this format */}
-          {/* <div className="shop-text">{shop.hours}</div> */}
-        </div>
-      )
-    });
+  // const shopMapper =
+  //   // temporary code until seeder data is used, swap inputs with seeder info
+  //   // add to map input later { shop, id }
+  //   // need to change values after backend response is changed 5/22
+  //   shopsArr.map((shop, i) => {
+  //     return (
+  //       <div key={i} className="shop-container" onClick={() => navigate(`/shops/${shop.id}`)}>
+  //         <img src='img.png'></img>
+  //         <div className="shop-text">{shop.name}</div>
+  //         <div className="shop-text">{'Rating: ' + shop.avg_rating + ' Number of Reviews: ' + shop.num_reviews}</div>
+  //         <div className="shop-text">
+  //           {'Price Range: ' + shop.price_range}
+  //           <div>
+  //             {'categories: ' + shop.categories}
+  //           </div>
+  //         </div>
+  //         <button className="shop-text" onClick={() => alert('Function coming soon')}>Get Directions</button>
+  //         {/* open time is difficult to use for front end given this format */}
+  //         {/* <div className="shop-text">{shop.hours}</div> */}
+  //       </div>
+  //     )
+  //   });
 
   useEffect(() => {
     dispatch(loadShopsThunk())
@@ -65,7 +65,7 @@ function LandingPage() {
         <h1># all Coffee Shops</h1>
         <div className="shop-list-container">
           <>
-            {shopMapper}
+            <ShopCardMaker shopsArr={shopsArr}/>
           </>
         </div>
       </div>
