@@ -1,11 +1,17 @@
 //action type constants
 
+export const LOAD_REVIEWS_BY_SHOPID = 'reviews/LOAD_REVIEWS_BY_SHOPID'
 export const CREATE_REVIEW = 'reviews/CREATE_REVIEW'
 export const UPDATE_REVIEW = 'reviews/UPDATE_REVIEW'
 export const DELETE_REVIEW = 'reviews/DELETE REVIEW'
 export const USER_REVIEW = 'reviews/USER REVIEW'
 
 // action creators
+
+export const loadReviewsByShopId = (reviews) => ({
+    type: LOAD_REVIEWS_BY_SHOPID,
+    payload: reviews
+})
 
 export const createReview = (review) => ({
     type: CREATE_REVIEW,
@@ -28,6 +34,18 @@ export const userReviews = (reviews) => ({
 })
 
 // thunk action creators
+export const loadReviewsByShopIdThunk = (shopId) => async (dispatch) => {
+    const res = await fetch(`/api/shops/${shopId}/reviews`)
+    if (res.ok) {
+        const reviews = await res.json()
+        dispatch(loadReviewsByShopId(reviews))
+        return reviews
+    } else {
+        const errors = await res.json()
+        return errors
+    }
+}
+
 export const createReviewThunk = (newReviewData, shopId) => async (dispatch) => {
     const res = await fetch(`/api/shops/${shopId}/reviews`, {
         method: 'POST',
@@ -97,6 +115,13 @@ export const getReviewsByUserIdThunk = () => async (dispatch) => {
 const reviewReducer = (state = {}, action) => {
     let newState = {}
     switch (action.type) {
+        case LOAD_REVIEWS_BY_SHOPID: {
+            const allReviews = {};
+            action.payload.forEach((review) => {
+                allReviews[review.id] = review;
+            });
+            return { ...state, ...allReviews };
+        }
         case CREATE_REVIEW: {
             return { ...state, ...action.payload }
         }
