@@ -37,15 +37,15 @@ function SearchBar() {
     e.preventDefault()
     let priceRangeArr = Object.keys(priceRange).filter(num => priceRange[num] === true)
 
-    const query = {
-        priceRange,
-        categories,
-        name,
-    }
+    const query = {}
+    if (priceRangeArr.length > 0) query.priceRange = priceRangeArr.join(',')
+    if(name.length > 0) query.name = name
+    if(categories.length > 0) query.categories = categories
 
-    let queriedShops = await dispatch(searchShops(query))
+    const params = new URLSearchParams(query)
 
-    navigate('/shops/search')
+    console.log("url =====> ", `/shops/search${params.toString()}`)
+    navigate(`/shops/search?${params.toString()}`)
   }
 
 
