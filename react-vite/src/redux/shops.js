@@ -37,23 +37,17 @@ export const loadShopsThunk = () => async (dispatch) => {
 };
 
 export const createShop = (newShop) => async (dispatch) => {
-  console.log('=====================>',newShop)
-  const res = await fetch("/api/shops/new", {
+  const res = await fetch("/api/shops", {
     method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(newShop)
-    })
-    console.log(res)
-    if (res.ok) {
-        const shop = await res.json()
-        dispatch(addShop(shop))
-        return shop
-    } else {
-        const errors = await res.json()
-        return errors
-    }
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(newShop),
+  });
+
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(addShop(data));
+    return data;
+  }
 };
 
 export const loadShopDetailsThunk = (id) => async (dispatch) => {
@@ -67,7 +61,7 @@ export const loadShopDetailsThunk = (id) => async (dispatch) => {
   }
 };
 
-export const getShopsByUserId = () => async (dispatch) => {
+export const getShopsByUserId = (id) => async (dispatch) => {
   const response = await fetch(`/api/shops/current`);
   if (response.ok) {
     const shops = await response.json();
@@ -78,26 +72,22 @@ export const getShopsByUserId = () => async (dispatch) => {
 
 const shopsReducer = (state = {}, action) => {
   switch (action.type) {
-    case LOAD_SHOPS: {
+    case LOAD_SHOPS:
       const allShops = {};
       action.shops.forEach((shop) => {
         allShops[shop.id] = shop;
       });
       return { ...state, ...allShops };
-    }
-    case CREATE_SHOP: {
+    case CREATE_SHOP:
       return { ...state, [action.payload.id]: action.payload };
-    }
-    case LOAD_SHOP_DETAIL: {
+    case LOAD_SHOP_DETAIL:
       return { ...state, ShopDetail: action.payload };
-    }
-    case USER_SHOPS: {
+    case USER_SHOPS:
       const newState = { ...state, userShops: {} };
       action.payload.forEach((shop) => {
         newState.userShops[shop.id] = shop;
       });
       return newState;
-    }
     default:
       return state;
   }
