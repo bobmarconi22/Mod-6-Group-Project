@@ -60,7 +60,7 @@ export const loadShopDetailsThunk = (id) => async (dispatch) => {
   }
 };
 
-export const getShopsByUserId = (id) => async (dispatch) => {
+export const getShopsByUserId = () => async (dispatch) => {
   const response = await fetch(`/api/shops/current`);
   if (response.ok) {
     const shops = await response.json();
@@ -71,22 +71,25 @@ export const getShopsByUserId = (id) => async (dispatch) => {
 
 const shopsReducer = (state = {}, action) => {
   switch (action.type) {
-    case LOAD_SHOPS:
+    case LOAD_SHOPS: {
       const allShops = {};
       action.shops.forEach((shop) => {
         allShops[shop.id] = shop;
       });
       return { ...state, ...allShops };
+    }
     case CREATE_SHOP:
       return { ...state, [action.payload.id]: action.payload };
     case LOAD_SHOP_DETAILS:
       return { ...state, ShopDetails: action.payload };
-    case USER_SHOPS:
+    case USER_SHOPS:{
       const newState = { ...state, userShops: {} };
       action.payload.forEach((shop) => {
         newState.userShops[shop.id] = shop;
       });
       return newState;
+    }
+
     default:
       return state;
   }
