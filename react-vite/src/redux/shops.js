@@ -40,12 +40,15 @@ export const createShop = (newShop) => async (dispatch) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(newShop),
   });
-  console.log('============>',res)
-  if (!res.ok) {
-    const data = await res.json();
-    dispatch(addShop(data));
-    return data;
-  }
+  console.log(res)
+  if (res.ok) {
+    const shop = await res.json()
+    dispatch(addShop(shop))
+    return shop
+} else {
+    const errors = await res.json()
+    return errors
+}
 };
 
 export const loadShopDetailsThunk = (id) => async (dispatch) => {
