@@ -52,7 +52,7 @@
   align-items: center;
   width: fit-content;
   border: 1px solid grey;
-  border-radius: 5px;
+  border-radius: 3px;
 }
 .price-range-div > button {
   border: none;
@@ -63,13 +63,13 @@
 
 
 .left-button {
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
   border-right: 1px,;
 }
 .right-button {
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
 }
 .dollar {
     color: lightgrey;
