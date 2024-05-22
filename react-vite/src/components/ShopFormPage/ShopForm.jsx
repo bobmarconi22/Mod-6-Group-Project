@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createShop } from "../../redux/shops";
-import { redirect, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./ShopForm.css";
 import { getAllCategories } from "../../redux/categories";
 import { loadShopsThunk } from "../../redux/shops";
@@ -44,8 +44,8 @@ function ShopFormPage() {
       setIsLoaded(true);
     };
     fetchCategories();
-    dispatch(loadShopsThunk());
-    setEdit(true);
+    dispatch(loadShopsThunk())
+    setEdit(true)
   }, [dispatch]);
 
   const times = [
@@ -120,39 +120,49 @@ function ShopFormPage() {
     if (!postal) err.postal = "Please enter a Postal Code";
     setErrors(err);
 
-    if (Object.keys(errors).length === 0) {
+    if (Object.keys(err).length === 0) {
       const newShop = {
-        name,
-        owner_id: sessionUser.id,
-        description,
-        hours,
-        website,
-        phone_number: phoneNumber,
-        price_range: priceRange,
-        monday_open: hours.Monday.open,
-        monday_close: hours.Monday.close,
-        tuesday_open: hours.Tuesday.open,
-        tuesday_close: hours.Tuesday.close,
-        wednesday_open: hours.Wednesday.open,
-        wednesday_close: hours.Wednesday.close,
-        thursday_open: hours.Thursday.open,
-        thursday_close: hours.Thursday.close,
-        friday_open: hours.Friday.open,
-        friday_close: hours.Friday.close,
-        saturday_open: hours.Saturday.open,
-        saturday_close: hours.Saturday.close,
-        sunday_open: hours.Sunday.open,
-        sunday_close: hours.Sunday.close,
-        address_line1: streetOne,
-        address_line2: streetTwo,
-        city,
-        state,
-        postal_code: postal,
-        country,
+        shop: {
+          name,
+          owner_id: sessionUser.id,
+          description,
+          hours,
+          website,
+          phone_number: phoneNumber,
+          price_range: priceRange,
+          monday_open: hours.Monday.open,
+          monday_close: hours.Monday.close,
+          tuesday_open: hours.Tuesday.open,
+          tuesday_close: hours.Tuesday.close,
+          wednesday_open: hours.Wednesday.open,
+          wednesday_close: hours.Wednesday.close,
+          thursday_open: hours.Thursday.open,
+          thursday_close: hours.Thursday.close,
+          friday_open: hours.Friday.open,
+          friday_close: hours.Friday.close,
+          saturday_open: hours.Saturday.open,
+          saturday_close: hours.Saturday.close,
+          sunday_open: hours.Sunday.open,
+          sunday_close: hours.Sunday.close,
+        },
+        address: {
+          shop_id: newShop.id,
+          address_line1: streetOne,
+          address_line2: streetTwo,
+          city,
+          state,
+          postal_code: postal,
+          country,
+        },
         categories,
       };
-      dispatch(createShop(newShop)).then(() => redirect("/"));
+      const data = await dispatch(createShop(newShop));
+      dispatch(loadShopsThunk())
+      if(!data.ok){
+      navigate('/')
     }
+    }
+
   };
 
   const handleOpenChange = (day, value) => {
@@ -208,7 +218,9 @@ function ShopFormPage() {
             <div>
               <select
                 value={selectedDay}
-                onChange={(e) => setSelectedDay(e.target.value)}
+                onChange={(e) =>
+                  setSelectedDay(e.target.value)
+                }
                 required
               >
                 {Object.keys(hours).map((day, index) => (
@@ -443,7 +455,10 @@ function ShopFormPage() {
           {edit && (
             <>
               <h2>Images</h2>
-              <input type="text" value={"images"} />
+              <input
+                type="text"
+                value={'images'}
+              />
             </>
           )}
           <button type="submit">Create Shop</button>

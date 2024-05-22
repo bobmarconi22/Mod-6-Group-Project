@@ -69,18 +69,17 @@ def get_all_shops():
     return jsonify(shop_dicts)
 
 # CREATE SHOP
-@shop_routes.route("/new", methods=['POST'])
+@shop_routes.route("/", methods=['POST'])
 @login_required
 def create_shop():
-        data = request.get_json()
-        shop_form = ShopForm()
-        address_form = AddressForm()
-        shop_form['csrf_token'].data = request.cookies['csrf_token']
-        address_form['csrf_token'].data = request.cookies['csrf_token']
-
-        print('===========>', data)
-
-        if shop_form.validate_on_submit() and address_form.validate_on_submit():
+    data = request.get_json()
+    shop_form = ShopForm(data)
+    address_form = AddressForm(data)
+    shop_form['csrf_token'].data = request.cookies['csrf_token']
+    address_form['csrf_token'].data = request.cookies['csrf_token']
+    print('===========>',data)
+    if shop_form.validate_on_submit() and address_form.validate_on_submit():
+        try:
             new_shop = Shop(
                 name=shop_form.name.data,
                 description=shop_form.description.data,
@@ -96,8 +95,9 @@ def create_shop():
                 website=shop_form.website.data,
                 phone_number=shop_form.phone_number.data,
                 price_range=shop_form.price_range.data,
-                owner_id=current_user.id
+                owner_id=current_user.id  # Assuming the Shop model has an owner_id field
             )
+
             db.session.add(new_shop)
             db.session.commit()
 
@@ -118,12 +118,14 @@ def create_shop():
                 db.session.execute(selected_categories.insert().values(shop_id=new_shop.id, category_id=category_id))
             db.session.commit()
 
-            shop = Shop.query.options(joinedload(Shop.images)).filter_by(id=new_shop.id).first()
-
-            return shop.to_dict()
-
-        return {"errors": shop_form.errors or address_form.errors}, 400
-
+            return jsonify(new_shop.to_dict()), 201
+        except Exception as e:
+            db.session.rollback()
+            print(f"Error creating shop: {e}")
+            return jsonify({'error': str(e)}), 500
+    else:
+        errors = {**shop_form.errors, **address_form.errors}
+        return jsonify(errors), 400
 
 
 
@@ -141,7 +143,7 @@ def create_review(shop_id):
     if review_form.validate_on_submit():
         new_review = Review(
             user_id = current_user.id,
-            shop_id = shop_id,
+            shop_id = shop_id, 
             review = review_form.review.data,
             rating = review_form.rating.data
         )
@@ -168,4 +170,7 @@ def create_review(shop_id):
 
     else:
         return jsonify({'errors': review_form.errors})
+    
+        
+
 
