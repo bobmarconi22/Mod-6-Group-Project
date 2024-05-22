@@ -1,7 +1,8 @@
-from flask import Blueprint, jsonify, abort
+from flask import Blueprint, jsonify, abort, request
 from flask_login import login_required, current_user
 from app.models import Review, db
 from sqlalchemy.orm import joinedload
+from ..forms import ReviewEditForm
 
 review_routes = Blueprint('reviews', __name__)
 
@@ -15,6 +16,30 @@ def current_user_reviews():
 
 
     return [review.to_dict(include_shop=True, include_reviewer=True) for review in reviews]
+
+# edit a review 
+
+@review_routes.route('/<int:review_id>', methods=['PUT'])
+@login_required 
+def update_review(review_id):
+    
+    review = Review.query.get(review_id)
+
+    if review.user_id == current_user.id:
+        review_form = ReviewEditForm()
+        review_form['csrf_token'].data = request.cookies['csrf_token']
+        if review_form.validate_on_submit():
+            review.rating = review_form.rating.data 
+            review.review = review_form.review.data
+        
+            db.session.commit()
+
+            return review.to_dict()
+
+    abort(401, description='Unauthorized')
+
+    
+ 
 
 
 # delete review 
