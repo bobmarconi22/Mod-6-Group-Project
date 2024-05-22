@@ -11,8 +11,15 @@ function SearchPage() {
     const queryString = location.search;
     console.log("QUERY STRING", queryString)
     fetch(`/api/search${queryString}`)
-      .then(response => response.json())
+      .then(response => {
+        // Check if response is OK and log the response status
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
       .then(results => {
+        console.log("API Results:", results);
         setFilteredShops(results);
         setLoading(false);
       })
@@ -43,9 +50,9 @@ function SearchPage() {
 
 
     return (
-        !loading && (<div>
+        !loading && filteredShops.length > 0 ? (<div>
             {shopMapper}
-        </div>)
+        </div>) : (<h1>Sorry no results!</h1>)
     )
 }
 
