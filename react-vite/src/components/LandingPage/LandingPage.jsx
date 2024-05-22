@@ -4,14 +4,12 @@
 import ShopCardMaker from "../ShopCardMaker";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from "react-router-dom";
 import { loadShopsThunk } from "../../redux/shops";
 
 import "./LandingPage.css";
 
 function LandingPage() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   // let shopsList = ['temp shop seeder', 'temp shop seeder', 'temp shop seeder', 'temp shop seeder', 'temp shop seeder', 'temp shop seeder']
   let shopsObj = useSelector((state) => state.shops)
