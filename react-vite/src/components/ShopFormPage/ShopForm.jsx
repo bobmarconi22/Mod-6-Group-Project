@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createShop } from "../../redux/shop";
+import { createShop } from "../../redux/shops";
 import { useNavigate } from "react-router-dom";
 import "./ShopForm.css";
-import { getAllCategories } from "../../redux/category";
+import { getAllCategories } from "../../redux/categories";
+import { loadShopsThunk } from "../../redux/shops";
 
 function ShopFormPage() {
   const navigate = useNavigate();
@@ -11,7 +12,7 @@ function ShopFormPage() {
   const sessionUser = useSelector((state) => state.session.user);
   const allCategories = useSelector((state) => state.categories.categories);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [edit, setEdit] = useState(true)
+  const [edit, setEdit] = useState(false);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [hours, setHours] = useState({
@@ -23,7 +24,7 @@ function ShopFormPage() {
     Saturday: { open: "Open", close: "Close" },
     Sunday: { open: "Open", close: "Close" },
   });
-  const [selectedDay, setSelectedDay] = useState('Monday');
+  const [selectedDay, setSelectedDay] = useState("Monday");
   const [streetOne, setStreetOne] = useState("");
   const [streetTwo, setStreetTwo] = useState("");
   const [city, setCity] = useState("");
@@ -43,6 +44,8 @@ function ShopFormPage() {
       setIsLoaded(true);
     };
     fetchCategories();
+    dispatch(loadShopsThunk())
+    setEdit(true)
   }, [dispatch]);
 
   const times = [
@@ -119,7 +122,7 @@ function ShopFormPage() {
 
     if (Object.keys(err).length === 0) {
       const newShop = {
-        shop:  {
+        shop: {
           name,
           owner_id: sessionUser.id,
           description,
@@ -154,8 +157,12 @@ function ShopFormPage() {
         categories,
       };
       const data = await dispatch(createShop(newShop));
-      navigate(`/shops/${data.id}`);
+      dispatch(loadShopsThunk())
+      if(!data.ok){
+      navigate('/')
     }
+    }
+
   };
 
   const handleOpenChange = (day, value) => {
@@ -212,7 +219,7 @@ function ShopFormPage() {
               <select
                 value={selectedDay}
                 onChange={(e) =>
-                  setSelectedDay((prevDays) => [prevDays, e.target.value])
+                  setSelectedDay(e.target.value)
                 }
                 required
               >
@@ -222,7 +229,6 @@ function ShopFormPage() {
                   </option>
                 ))}
               </select>
-              {console.log("===============>", selectedDay)}
               <select
                 value={selectedDay.open}
                 onChange={(e) => handleOpenChange(selectedDay, e.target.value)}
@@ -232,7 +238,7 @@ function ShopFormPage() {
                   Open
                 </option>
                 {times.map((time, index) => (
-                  <option key={index} value={time}>
+                  <option key={index} value={time} defaultValue={"6:00am"}>
                     {time}
                   </option>
                 ))}
@@ -253,7 +259,7 @@ function ShopFormPage() {
                       times.indexOf(hours[selectedDay].open)
                   )
                   .map((time, index) => (
-                    <option key={index} value={time}>
+                    <option key={index} value={time} defaultValue={"6:00pm"}>
                       {time}
                     </option>
                   ))}
@@ -446,15 +452,15 @@ function ShopFormPage() {
             </select>
           </label>
           {errors.categories && <p>{errors.categories}</p>}
-          {edit &&
+          {edit && (
             <>
-            <h2>Images</h2>
-            <input
-              type="text"
-              value={'images'}
-            />
+              <h2>Images</h2>
+              <input
+                type="text"
+                value={'images'}
+              />
             </>
-          }
+          )}
           <button type="submit">Create Shop</button>
         </form>
       </div>
