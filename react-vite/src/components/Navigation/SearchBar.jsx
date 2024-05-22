@@ -48,13 +48,13 @@ function SearchBar() {
 
     return (
     isLoaded && (
-      <div className="search-bar">
-        <form onSubmit={(e) => handleSearch(e)}>
+      <div className="search-bar-div">
+        <form onSubmit={(e) => handleSearch(e)} className="search-bar">
             <div>
-          <input placeholder="Search by name of shop" value={name} onChange={(e)=> setName(e.target.value)}></input>
+          <input placeholder="Shop Name" value={name} onChange={(e)=> setName(e.target.value)}></input>
           </div>
-          <div>
-          <label>
+          <div >
+          <label className="category-label">
             Category:
             <select
               value={category}
