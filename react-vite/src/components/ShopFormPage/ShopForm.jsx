@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createShop } from "../../redux/shops";
+import { createShopThunk } from "../../redux/shops";
 import { useNavigate } from "react-router-dom";
 import "./ShopForm.css";
 import { getAllCategories } from "../../redux/categories";
@@ -44,8 +44,8 @@ function ShopFormPage() {
       setIsLoaded(true);
     };
     fetchCategories();
-    dispatch(loadShopsThunk())
-    setEdit(true)
+    dispatch(loadShopsThunk());
+    setEdit(true);
   }, [dispatch]);
 
   const times = [
@@ -122,45 +122,39 @@ function ShopFormPage() {
 
     if (Object.keys(err).length === 0) {
       const newShop = {
-        shop: {
-          name,
-          owner_id: sessionUser.id,
-          description,
-          hours,
-          website,
-          phone_number: phoneNumber,
-          price_range: priceRange,
-          monday_open: hours.Monday.open,
-          monday_close: hours.Monday.close,
-          tuesday_open: hours.Tuesday.open,
-          tuesday_close: hours.Tuesday.close,
-          wednesday_open: hours.Wednesday.open,
-          wednesday_close: hours.Wednesday.close,
-          thursday_open: hours.Thursday.open,
-          thursday_close: hours.Thursday.close,
-          friday_open: hours.Friday.open,
-          friday_close: hours.Friday.close,
-          saturday_open: hours.Saturday.open,
-          saturday_close: hours.Saturday.close,
-          sunday_open: hours.Sunday.open,
-          sunday_close: hours.Sunday.close,
-        },
-        address: {
-          shop_id: newShop.id,
-          address_line1: streetOne,
-          address_line2: streetTwo,
-          city,
-          state,
-          postal_code: postal,
-          country,
-        },
+        name,
+        owner_id: sessionUser.id,
+        description,
+        website,
+        phone_number: phoneNumber,
+        price_range: priceRange,
+        monday_open: hours.Monday.open,
+        monday_close: hours.Monday.close,
+        tuesday_open: hours.Tuesday.open,
+        tuesday_close: hours.Tuesday.close,
+        wednesday_open: hours.Wednesday.open,
+        wednesday_close: hours.Wednesday.close,
+        thursday_open: hours.Thursday.open,
+        thursday_close: hours.Thursday.close,
+        friday_open: hours.Friday.open,
+        friday_close: hours.Friday.close,
+        saturday_open: hours.Saturday.open,
+        saturday_close: hours.Saturday.close,
+        sunday_open: hours.Sunday.open,
+        sunday_close: hours.Sunday.close,
+        address_line1: streetOne,
+        address_line2: streetTwo,
+        city,
+        state,
+        postal_code: postal,
+        country,
         categories,
       };
-      const data = await dispatch(createShop(newShop));
+      const data = await dispatch(createShopThunk(newShop));
       dispatch(loadShopsThunk())
-      if(!data.ok){
-      navigate('/')
-    }
+      if (!data.ok) {
+        navigate('/')
+      }
     }
 
   };

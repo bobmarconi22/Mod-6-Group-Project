@@ -18,7 +18,8 @@ def get_shop_by_id(id):
         joinedload(Shop.categories),
         joinedload(Shop.address),
         joinedload(Shop.review),
-        joinedload(Shop.image)
+        joinedload(Shop.image),
+        joinedload(Shop.menu)
     ).get(id)
     if not shop:
         return jsonify({"error": "Shop not found"}), 404
@@ -39,7 +40,9 @@ def current_user_shops():
      shop_dicts = []
      for shop in shops:
           shop_dict = shop.to_dict(include_categories=True)
-          shop_dict['preview_image'] = Image.query.filter_by(shop_id = shop.id, preview_image=True).first().to_dict()
+          preview_image = Image.query.filter_by(shop_id = shop.id, preview_image=True).first()
+          if (preview_image):
+            shop_dict['preview_image'] = preview_image.to_dict()
           avg_and_num_reviews = find_avg(shop)
           shop_dict['avg_rating'] = avg_and_num_reviews['avg']
           shop_dict['num_reviews'] = avg_and_num_reviews['num_reviews']
@@ -51,13 +54,15 @@ def current_user_shops():
 
 # GET ALL SHOPS
 @shop_routes.route("/")
-
 def get_all_shops():
+    print("SHOP ROUTES!!")
     shops = Shop.query.options(joinedload(Shop.categories), joinedload(Shop.address), joinedload(Shop.review)).all()
     shop_dicts = []
     for shop in shops:
          shop_dict = shop.to_dict(include_categories=True)
-         shop_dict['preview_image'] = Image.query.filter_by(shop_id = shop.id, preview_image=True).first().to_dict()
+         preview_image = Image.query.filter_by(shop_id = shop.id, preview_image=True).first()
+         if (preview_image):
+            shop_dict['preview_image'] = preview_image.to_dict()
          avg_and_num_reviews = find_avg(shop)
          shop_dict['avg_rating'] = avg_and_num_reviews['avg']
          shop_dict['num_reviews'] = avg_and_num_reviews['num_reviews']
@@ -69,17 +74,17 @@ def get_all_shops():
     return jsonify(shop_dicts)
 
 # CREATE SHOP
-@shop_routes.route("/", methods=['POST'])
+@shop_routes.route("/new", methods=['POST'])
 @login_required
 def create_shop():
-    data = request.get_json()
-    shop_form = ShopForm(data)
-    address_form = AddressForm(data)
+    print('hello from route')
+    body = request.get_json()
+    shop_form = ShopForm()
+    address_form = AddressForm()
     shop_form['csrf_token'].data = request.cookies['csrf_token']
     address_form['csrf_token'].data = request.cookies['csrf_token']
-    print('===========>',data)
+    print(address_form.validate_on_submit())
     if shop_form.validate_on_submit() and address_form.validate_on_submit():
-        try:
             new_shop = Shop(
                 name=shop_form.name.data,
                 description=shop_form.description.data,
@@ -100,6 +105,7 @@ def create_shop():
 
             db.session.add(new_shop)
             db.session.commit()
+            print('===============================>',new_shop)
 
             new_shop_address = Address(
                 shop_id=new_shop.id,
@@ -107,26 +113,21 @@ def create_shop():
                 address_line2=address_form.address_line2.data,
                 city=address_form.city.data,
                 state=address_form.state.data,
-                postal=address_form.postal.data,
+                postal_code=address_form.postal_code.data,
                 country=address_form.country.data
             )
             db.session.add(new_shop_address)
             db.session.commit()
 
-            categories = data.get('categories', [])
+            categories = body.get('categories', [])
             for category_id in categories:
                 db.session.execute(selected_categories.insert().values(shop_id=new_shop.id, category_id=category_id))
             db.session.commit()
 
-            return jsonify(new_shop.to_dict()), 201
-        except Exception as e:
-            db.session.rollback()
-            print(f"Error creating shop: {e}")
-            return jsonify({'error': str(e)}), 500
-    else:
-        errors = {**shop_form.errors, **address_form.errors}
-        return jsonify(errors), 400
+            shop = Shop.query.options(joinedload(Shop.address), joinedload(Shop.categories)).filter_by(id = new_shop.id).first()
 
+            print(jsonify(shop.to_dict(include_categories=True)))
+            return jsonify(shop.to_dict(include_categories= True))
 
 
 # REVIEW ROUTES
@@ -143,7 +144,7 @@ def create_review(shop_id):
     if review_form.validate_on_submit():
         new_review = Review(
             user_id = current_user.id,
-            shop_id = shop_id, 
+            shop_id = shop_id,
             review = review_form.review.data,
             rating = review_form.rating.data
         )
@@ -152,7 +153,7 @@ def create_review(shop_id):
 
         image_urls = [review_form.img_url1.data, review_form.img_url2.data, review_form.img_url3.data]
         for img_url in image_urls:
-            if img_url:  
+            if img_url:
                 new_image = Image(
                     user_id=current_user.id,
                     shop_id=shop_id,
@@ -170,7 +171,3 @@ def create_review(shop_id):
 
     else:
         return jsonify({'errors': review_form.errors})
-    
-        
-
-
