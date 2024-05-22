@@ -74,7 +74,7 @@ function SearchBar() {
 
           </div>
           <div className="price-range-div">
-            <button type="button" onClick={(e) => handlePriceRangeToggle(e)} value="1" className={priceRange["1"] ? "dollar-filled" : "dollar"}>
+            <button type="button" onClick={(e) => handlePriceRangeToggle(e)} value="1" className={priceRange["1"] ? "dollar-filled left-button" : "dollar left-button"}>
               &#36;
             </button>
              <button type="button" onClick={(e) => handlePriceRangeToggle(e)} value="2" className={priceRange["2"] ? "dollar-filled" : "dollar"}>
@@ -83,7 +83,7 @@ function SearchBar() {
              <button type="button" onClick={(e) => handlePriceRangeToggle(e)} value="3" className={priceRange["3"] ? "dollar-filled" : "dollar"}>
               &#36; &#36; &#36;
             </button>
-             <button type="button" onClick={(e) => handlePriceRangeToggle(e)} value="4" className={priceRange["4"] ? "dollar-filled" : "dollar"}>
+             <button type="button" onClick={(e) => handlePriceRangeToggle(e)} value="4" className={priceRange["4"] ? "dollar-filled right-button" : "dollar right-button"}>
               &#36; &#36; &#36; &#36;
             </button>
           </div>

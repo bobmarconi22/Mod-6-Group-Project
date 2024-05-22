@@ -51,15 +51,39 @@
   display: flex;
   align-items: center;
   width: fit-content;
+  border: 1px solid grey;
+  border-radius: 5px;
+}
+.price-range-div > button {
+  border: none;
+  background-color: white;
+  border-right: 1px solid grey
 }
 
+
+
+.left-button {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-right: 1px,;
+}
+.right-button {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
 .dollar {
     color: lightgrey;
-    display: flex;
-    width: fit-content;
+  }
+.dollar:hover {
+  background-color: #2B5A8D;
+  color: white;
+}
+.dollar-filled:hover {
+    background-color: #2B5A8D;
 
   }
 
   .dollar-filled {
     color: black;
+
   }
