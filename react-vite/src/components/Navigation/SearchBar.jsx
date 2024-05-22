@@ -55,12 +55,12 @@ function SearchBar() {
           </div>
           <div>
           <label>
-            Categories
+            Category:
             <select
               value={category}
               onChange={(e) => setCategory(e.target.value)}
             >
-                <option value="" >Choose a category</option>
+                <option value="" >All Categories</option>
               {Object.entries(allCategories).map((category, index) => (
                 <option
                   key={index}
