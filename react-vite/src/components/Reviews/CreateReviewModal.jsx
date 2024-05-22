@@ -4,7 +4,7 @@ import { useModal } from '../../context/Modal'
 import { useParams } from 'react-router-dom'
 import { loadShopDetailsThunk } from '../../redux/shops'
 import { BeanRating } from './BeanRating'
-import { createReview } from '../../redux/reviews'
+import { createAReview } from '../../redux/reviews'
 
 
 function CreateReviewModal() {
@@ -22,6 +22,8 @@ function CreateReviewModal() {
     const {id} = useParams()
     const dispatch = useDispatch()
 
+    const current_user = useSelector((state) => state.session.user);
+
     useEffect(() => {
         dispatch(loadShopDetailsThunk(id))
     },[dispatch])
@@ -33,17 +35,17 @@ function CreateReviewModal() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     const reviewData = {
-        user_id: current_user.id,
-        shop_id: id,
         review,
-        rating,
-        ...(img1.length > 0 && img1),
-        ...(img2.length > 0 && img2),
-        ...(img3.length > 0 && img3)
+        rating: beans,
+        img_url1: (img1.length > 0 && img1),
+        img_url2: (img2.length > 0 && img2),
+        img_url3: (img3.length > 0 && img3)
     }
 
-    return dispatch(createReview(reviewData, spotId)).then(() => closeModal())
-}
+    const response = await dispatch(createAReview(reviewData, id))
+    
+        closeModal()
+    }
 
 
     return (
