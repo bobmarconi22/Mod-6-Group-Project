@@ -10,7 +10,6 @@ function SearchBar() {
     const [name, setName] = useState('')
     const [priceRange, setPriceRange] = useState({"1": false, "2": false, "3": false, "4": false, "5": false})
     const allCategories = useSelector((state) => state.categories.categories);
-    const navigate = useNavigate();
     const dispatch = useDispatch();
 
     useEffect( () => {
@@ -57,6 +56,9 @@ function SearchBar() {
             <div>
           <input placeholder="Search by name of shop" value={name} onChange={(e)=> setName(e.target.value)}></input>
           </div>
+          <button type="submit">Search by Shop Name</button>
+          </form>
+          <form onSubmit={(e) => handleFilterSearch(e)}>
           <div>
           <label>
             Categories
