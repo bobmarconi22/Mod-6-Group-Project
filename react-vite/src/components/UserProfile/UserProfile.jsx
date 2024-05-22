@@ -3,7 +3,7 @@ import "./UserProfile.css";
 import { FaUserCircle } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { deleteReview, getReviewsByUserId } from "../../redux/reviews";
-import { getShopsByUserIdThunk } from "../../redux/shops";
+import { deleteShopThunk, getShopsByUserIdThunk } from "../../redux/shops";
 import { useNavigate } from "react-router-dom";
 
 // use prop or context to get the shop information
@@ -16,6 +16,7 @@ function UserProfile() {
   const [isLoaded, setIsLoaded] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   useEffect(() => {
     if (sessionUser) {
       dispatch(getReviewsByUserId(sessionUser.id)).then(() => {});
@@ -33,12 +34,12 @@ function UserProfile() {
     dispatch(deleteReview(id))
   };
 
-  const handleShopUpdate = async() => {
-    console.log("update shop");
+  const handleShopUpdate = async(id) => {
+    navigate(`/shop/${id}/update`)
   };
 
-  const handleShopDelete = async() => {
-    console.log("delete shop");
+  const handleShopDelete = async(id) => {
+    dispatch(deleteShopThunk(id))
   };
 
   return (
@@ -105,7 +106,11 @@ function UserProfile() {
 
         {isLoaded && (
           <div className="profile-section">
-            <h2>Your Shops</h2>
+            <div id="user-profile-header">
+              <h2>Your Shops</h2>
+              <button id='new-shop-button' onClick={() => navigate('/new-shop')}>+</button>
+            </div>
+
             {Object.values(userShops).map((shop) => (
             <>
               <a
