@@ -2,9 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "./UserProfile.css";
 import { FaUserCircle } from "react-icons/fa";
 import { useEffect, useState } from "react";
-import { deleteReview, getReviewsByUserIdThunk } from "../../redux/reviews";
-import { getShopsByUserIdThunk } from "../../redux/shops";
-import { deleteReview, getReviewsByUserId } from "../../redux/reviews";
+import { deleteReviewThunk, getReviewsByUserIdThunk } from "../../redux/reviews";
 import { deleteShopThunk, getShopsByUserIdThunk } from "../../redux/shops";
 import { useNavigate } from "react-router-dom";
 
@@ -33,7 +31,7 @@ function UserProfile() {
   };
 
   const handleReviewDelete = async (id) => {
-    dispatch(deleteReview(id))
+    dispatch(deleteReviewThunk(id))
   };
 
   const handleShopUpdate = async (id) => {
