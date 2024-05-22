@@ -31,9 +31,9 @@ export const updateShop = (shop) => ({
   payload: shop
 })
 
-export const deleteShop = (shop) => ({
+export const deleteShop = (shopId) => ({
   type: DELETE_SHOP,
-  payload: shop
+  payload: shopId
 })
 
 // Thunk action creators
@@ -43,6 +43,9 @@ export const loadShopsThunk = () => async (dispatch) => {
     const shops = await response.json();
     dispatch(loadShops(shops));
     return shops;
+  } else {
+    const errors = await res.json()
+    return errors
   }
 };
 
@@ -68,6 +71,9 @@ export const loadShopDetailsThunk = (id) => async (dispatch) => {
     const shop = await response.json();
     dispatch(loadShopDetails(shop));
     return shop;
+  } else {
+    const errors = await res.json()
+    return errors
   }
 };
 
@@ -77,6 +83,9 @@ export const getShopsByUserIdThunk = () => async (dispatch) => {
     const shops = await response.json();
     dispatch(userShops(shops));
     return shops;
+  } else {
+    const errors = await res.json()
+    return errors
   }
 };
 
@@ -90,15 +99,25 @@ export const updateShopThunk = (shop) => async (dispatch) => {
     const shop = await response.json();
     dispatch(updateShop(shop));
     return shop
+  } else {
+    const errors = await res.json()
+    return errors
   }
 }
 
-export const deleteShopThunk = (id) => async (dispatch) => {
-  await fetch(`/api/shops/${id}/delete`, {
+export const deleteShopThunk = (shopId) => async (dispatch) => {
+  await fetch(`/api/shops/${shopId}/delete`, {
     method: "DELETE",
+    headers: { "Content-Type": "application/json" },
   });
-  await dispatch(getShopsByUserIdThunk());
-  return;
+  if (response.ok) {
+    const message = await response.json();
+    dispatch(deleteShop(shopId));
+    return message
+  } else {
+    const errors = await res.json()
+    return errors
+  }
 };
 // Shops Reducer
 const shopsReducer = (state = {}, action) => {
@@ -123,12 +142,17 @@ const shopsReducer = (state = {}, action) => {
       });
       return newState;
     case UPDATE_SHOP: {
-        const newState = { ...state };
-        newState[action.payload.id] = action.payload
-        return newState
+      const newState = { ...state };
+      newState[action.payload.id] = action.payload
+      return newState
     }
-      default:
-    return state;
+    case DELETE_SHOP: {
+      newState = { ...state }
+      delete newState[action.payload]
+      return newState
+    }
+    default:
+      return state;
   }
 };
 
