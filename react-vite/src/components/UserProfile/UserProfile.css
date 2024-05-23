@@ -3,32 +3,37 @@
     padding-top: 20px;
 }
 
-#user-page-subtitle{
+.user-page-subtitle{
     text-align: center;
 }
 
 #profile-info{
     text-align: center;
-    border: 1px solid black;
+    border: 1px solid rgb(14,35,58);
+    border-radius: 2em;
+    box-shadow: 4px 3px 5px rgb(14,35,58, 0.5);
     margin: 0 auto;
     width: 250px;
     margin-bottom: 20px;
 }
 
 #profile-info > h2{
-    border-bottom: 1px solid black;
+    border-bottom: 3px solid #87A9CB;
     padding-bottom: 5px;
 }
 
 .profile-section{
     text-align: center;
-    border: 1px solid black;
+    border: 1px solid rgb(14,35,58);
     margin: 0 auto;
     margin-bottom: 5px;
+    border-radius: 2em;
+    box-shadow: 4px 3px 5px rgb(14,35,58, 0.5);
+    padding: 20px;
 }
 
 .profile-section > h2{
-    border-bottom: 1px solid black;
+    border-bottom: 3px solid #87A9CB;
     padding-bottom: 5px;
 }
 
@@ -38,28 +43,48 @@
 }
 
 .profile-review-tile{
-    border: 1px solid black;
+    border: 1px solid rgb(14,35,58);
     width: 50%;
     display: flex;
     flex-direction: column;
     margin: 0 auto;
     margin-bottom: 15px;
+    border-radius: 2em;
+    padding: 25px;
 }
+
+.profile-shop-tile{
+    border: 1px solid rgb(14,35,58);
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    margin-bottom: 15px;
+    border-radius: 2em;
+    padding: 25px;
+}
+
+.profile-review-tile:hover{
+    box-shadow: 4px 3px 5px rgb(14,35,58, 0.7);
+    cursor: pointer;
+}
+
+
 #user-profile-header{
     display: flex;
     justify-content: center;
+    border-bottom: 3px solid #87A9CB;
+    margin-bottom: 10px;
 }
 #new-shop-button{
     position: absolute;
     right: 0;
-    margin-top: 20px;
+    margin-top: 15px;
     margin-right: 30px;
-    font-size: 20px;
-    padding: 0 10px;
-
+    font-size: 12px;
 }
 .profile-shop-tile{
-    border: 1px solid black;
+    border: 1px solid rgb(14,35,58);
     width: 50%;
     display: flex;
     flex-direction: column;
@@ -67,13 +92,24 @@
     margin-bottom: 15px;
 }
 
-.user-review-image-block {
-   display: flex;
+.profile-shop-tile:hover{
+    box-shadow: 4px 3px 5px rgb(14,35,58, 0.7);
+    cursor: pointer;
 }
 
-img {
-    width: 200px;
-    height: 200px;
-    
+.update{
+    padding: 10px;
+    margin: 5px;
+}
 
+.delete{
+    padding: 10px;
+    margin: 5px;
+    color: white;
+    background-color: #FF253F;
+}
+
+.delete:hover{
+    background-color: rgb(255, 0, 0);
+    cursor: pointer;
 }

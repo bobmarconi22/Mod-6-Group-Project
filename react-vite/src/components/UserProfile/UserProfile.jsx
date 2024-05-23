@@ -7,6 +7,7 @@ import { deleteShopThunk, getShopsByUserIdThunk } from "../../redux/shops";
 import { useNavigate } from "react-router-dom";
 import { UpdateReviewModal } from '../ReviewModals'
 import OpenModalButton from '../OpenModalButton'
+import { BeanRating } from "./BeanRatingModal";
 
 // use prop or context to get the shop information
 // change headers to label or headers?
@@ -49,7 +50,7 @@ function UserProfile() {
       <>
         <h1 id="user-page-title">Hi, {sessionUser.username}!</h1>
         <div id="profile-info">
-          <h2 id="user-page-subtitle">User Info</h2>
+          <h2 className="user-page-subtitle">User Info</h2>
           <FaUserCircle />
           <div>
             <h4>
@@ -78,11 +79,11 @@ function UserProfile() {
               <>
                 <a
                   className="profile-review-tile"
-                  onClick={() => navigate("/shops/${review.shop_id}")}
+                  onClick={() => navigate(`/shops/${review.shop_id}`)}
                   key={review.id}
                 >
                   <h4>{review.shop.name}</h4>
-                  <p>{review.rating}/5 Coffee Beans</p>
+                  <div className='beans'><BeanRating beanRating={review.rating}/></div>
                   <p>{review.review}</p>
                   <div className="user-review-img-block">
                     {review.images.map((image, index) => (
@@ -99,7 +100,7 @@ function UserProfile() {
                   buttonText="Edit Review"
                   modalComponent={<UpdateReviewModal reviewToEdit={review} setIsSubmitted={setIsSubmitted} />}
                 />
-                <button id="delete" onClick={() => handleReviewDelete(review.id)}>
+                <button className="delete" onClick={() => handleReviewDelete(review.id)}>
                   Delete Review
                 </button>
               </>
@@ -109,9 +110,9 @@ function UserProfile() {
 
         {isLoaded && (
           <div className="profile-section">
-            <div id="user-profile-header">
+            <div id="user-profile-header" className="user-page-subtitle">
               <h2>Your Shops</h2>
-              <button id='new-shop-button' onClick={() => navigate('/new-shop')}>+</button>
+              <button id='new-shop-button' onClick={() => navigate('/new-shop')}>Create a Shop</button>
             </div>
 
             {Object.values(userShops).map((shop) => (
@@ -139,10 +140,10 @@ function UserProfile() {
                     <div>{"categories: " + shop.categories}</div>
                   </div>
                 </a>
-                <button id="update" onClick={() => navigate(`/shops/${shop.id}/update`)}>
+                <button className="update" onClick={() => navigate(`/shops/${shop.id}/update`)}>
                   Update Shop
                 </button>
-                <button id="delete" onClick={() => handleShopDelete(shop.id)}>
+                <button className="delete" onClick={() => handleShopDelete(shop.id)}>
                   Delete Shop
                 </button>
               </>
