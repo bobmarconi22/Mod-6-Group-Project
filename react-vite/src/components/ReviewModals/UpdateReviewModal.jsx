@@ -7,7 +7,7 @@ import { updateReviewThunk } from '../../redux/reviews'
 
 
 
-function UpdateReviewModal ({reviewToEdit, setIsSubmitted}){
+function UpdateReviewModal({ reviewToEdit, setIsSubmitted }) {
 
     const shop = useSelector((state) => state.shops.userShops)
     console.log(shop && shop.name)
@@ -29,7 +29,7 @@ function UpdateReviewModal ({reviewToEdit, setIsSubmitted}){
 
         return dispatch(updateReviewThunk(updatedReview)).then(() => setIsSubmitted(true)).then(() => closeModal()).catch(async (res) => {
             const data = await res.json();
-            if(data?.errors) {
+            if (data?.errors) {
                 setErrors(data.errors)
             }
         })
@@ -38,10 +38,10 @@ function UpdateReviewModal ({reviewToEdit, setIsSubmitted}){
 
     return (
         <>
-            <h1>{shop?.name}</h1>
+            <h1>{shop && shop.name}</h1>
             <form onSubmit={handleSubmit}>
-            <div><span>{errors.review}</span><span>{errors.rating}</span> </div>
-                <BeanRating setBeans={setBeans} filledBeans={beans}/>
+                <div><span>{errors.review}</span><span>{errors.rating}</span> </div>
+                <BeanRating setBeans={setBeans} filledBeans={beans} />
                 <input className='review'
                     type='text'
                     placeholder='Leave your review here...'
@@ -50,7 +50,7 @@ function UpdateReviewModal ({reviewToEdit, setIsSubmitted}){
                 />
                 <button onSubmit={handleSubmit}>Update Review</button>
             </form>
-            
+
         </>
     )
 }

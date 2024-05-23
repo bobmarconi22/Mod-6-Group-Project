@@ -7,7 +7,6 @@ import { BeanRating } from './BeanRating'
 import { createReviewThunk } from '../../redux/reviews'
 import './CreateReviewModal.css'
 
-
 function CreateReviewModal() {
 
     const [review, setReview] = useState('')

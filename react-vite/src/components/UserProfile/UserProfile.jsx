@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { deleteReviewThunk, getReviewsByUserIdThunk } from "../../redux/reviews";
 import { deleteShopThunk, getShopsByUserIdThunk } from "../../redux/shops";
 import { useNavigate } from "react-router-dom";
-import { UpdateReviewModal } from '../Reviews'
+import { UpdateReviewModal } from '../ReviewModals'
 import OpenModalButton from '../OpenModalButton'
 
 // use prop or context to get the shop information
@@ -15,12 +15,12 @@ function UserProfile() {
   const sessionUser = useSelector((state) => state.session.user);
   const userReviews = useSelector((state) => state.reviews.userReviews);
   const userShops = useSelector((state) => state.shops.userShops || {});
-  
+
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [isLoaded, setIsLoaded] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
+
 
   useEffect(() => {
     if (sessionUser) {
@@ -96,8 +96,8 @@ function UserProfile() {
                   <p>{review.created_at}</p>
                 </a>
                 <OpenModalButton
-                buttonText="Edit Review"
-                modalComponent={<UpdateReviewModal reviewToEdit={review} setIsSubmitted={setIsSubmitted}/>}
+                  buttonText="Edit Review"
+                  modalComponent={<UpdateReviewModal reviewToEdit={review} setIsSubmitted={setIsSubmitted} />}
                 />
                 <button id="delete" onClick={() => handleReviewDelete(review.id)}>
                   Delete Review

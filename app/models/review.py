@@ -40,14 +40,14 @@ class Review(db.Model):
                 'name': self.shop.name,
                 'id': self.shop.id
             }
- 
+
         }
         if 'image' in state.dict:
             review_dict['images'] = [
                 {
-                    'img_link': img.img_link, 
+                    'img_link': img.img_link,
                     'preview_image': img.preview_image
-                } 
+                }
                 for img in self.image]
 
 

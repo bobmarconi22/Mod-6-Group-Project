@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, request, make_response
+from flask import Blueprint, jsonify, request, abort, make_response
 
 from flask_login import login_required, current_user
 from app.models import db, Shop, Address, selected_categories, Category, Image, Review
@@ -257,6 +257,18 @@ def create_image(shop_id):
     db.session.commit()
     return make_response("Image created", 201)
 
+#Delete an image from a shop based on shop ID:
+@shop_routes.route('/<int:shop_id>/images/<int:image_id>', methods=['DELETE'])
+@login_required
+def delete_image(image_id, shop_id):
+    image = Image.query.filter(Image.id == image_id)
+    if (image):
+        return abort(404, message ="shop Image couldn't be found")
+    if (image.shop_id == shop_id):
+        return abort(401, message='Image does not belong to this shop')
+    db.session.delete(image)
+    db.session.commit()
+    return make_response('Successfully deleted', 200)
 
 
 
