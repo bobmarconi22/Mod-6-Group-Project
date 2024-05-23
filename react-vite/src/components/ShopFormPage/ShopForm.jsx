@@ -154,7 +154,7 @@ function ShopFormPage() {
     setErrors(err);
 
     if (Object.keys(err).length === 0) {
-      const shop = {
+      const new_shop = {
         name,
         owner_id: sessionUser.id,
         description,
@@ -185,10 +185,11 @@ function ShopFormPage() {
         preview_image: image
       };
       if(edit){
-        const data = await dispatch(updateShopThunk(shop));
+        const data = await dispatch(updateShopThunk(new_shop, shop.id));
+        console.log('================>',data)
         navigate(`/shops/${data.id}`);
       }else{
-        const data = await dispatch(createShopThunk(shop));
+        const data = await dispatch(createShopThunk(new_shop));
         navigate(`/shops/${data.id}`);
       }
 
