@@ -7,4 +7,3 @@ __pycache__/
 node_modules
 package-lock.json
 instance/dev.db
-instance/dev.db
