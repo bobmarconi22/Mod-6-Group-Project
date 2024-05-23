@@ -48,8 +48,9 @@ function ShopImagesPage() {
                                     <GoDotFill className='user-dot' />
                                 </div>
                                 <div className='overlay-div2'>
-
+                                    <button>
                                     <FaTrashAlt className='trashcan' />
+                                    </button>
                                 </div>
                             </>
                          )
