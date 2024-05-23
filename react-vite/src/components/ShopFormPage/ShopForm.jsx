@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createShopThunk } from "../../redux/shops";
-import { useNavigate } from "react-router-dom";
+import { createShopThunk, loadShopDetailsThunk, updateShopThunk } from "../../redux/shops";
+import { useNavigate, useParams } from "react-router-dom";
 import "./ShopForm.css";
 import { getAllCategories } from "../../redux/categories";
 import { loadShopsThunk } from "../../redux/shops";
@@ -9,8 +9,10 @@ import { loadShopsThunk } from "../../redux/shops";
 function ShopFormPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { id } = useParams()
   const sessionUser = useSelector((state) => state.session.user);
   const allCategories = useSelector((state) => state.categories.categories);
+  const shop = useSelector((state) => state.shops.ShopDetails)
   const [isLoaded, setIsLoaded] = useState(false);
   const [edit, setEdit] = useState(false);
   const [name, setName] = useState("");
@@ -37,15 +39,46 @@ function ShopFormPage() {
   const [priceRange, setPriceRange] = useState("");
   const [errors, setErrors] = useState({});
   const [categories, setCategories] = useState([]);
+  const [image, setImage] = useState("");
 
   useEffect(() => {
     const fetchCategories = async () => {
       await dispatch(getAllCategories());
       setIsLoaded(true);
     };
-    fetchCategories();
-    dispatch(loadShopsThunk());
-    setEdit(true);
+    if (id) {
+      dispatch(loadShopDetailsThunk(id)).then((shop) => {
+        setName(shop.name)
+        setDescription(shop.description)
+        setWebsite(shop.website)
+        setPhoneNumber(shop.phone_number)
+        setPriceRange(shop.price_range)
+        setStreetOne(shop.address.address_line1)
+        setStreetTwo(shop.address.address_line2 )
+        setCity(shop.address.city)
+        setState(shop.address.state)
+        setPostal(shop.address.postal_code)
+        setCountry(shop.address.country)
+        setCategories(shop.categories)
+
+        Object.keys(hours).forEach((day) => {
+          setHours((prevHours) => ({
+            ...prevHours,
+            [day]: {
+              ...prevHours[day],
+              open: shop.hours[day].split(' -')[0],
+              close: shop.hours[day].split('- ')[1],
+            },
+          }));
+        });
+
+        setEdit(true)
+        setIsLoaded(true)
+      })
+    }else{
+      fetchCategories();
+      dispatch(loadShopsThunk());
+      }
   }, [dispatch]);
 
   const times = [
@@ -121,7 +154,7 @@ function ShopFormPage() {
     setErrors(err);
 
     if (Object.keys(err).length === 0) {
-      const newShop = {
+      const shop = {
         name,
         owner_id: sessionUser.id,
         description,
@@ -149,27 +182,32 @@ function ShopFormPage() {
         postal_code: postal,
         country,
         categories,
+        preview_image: image
       };
-      const data = await dispatch(createShopThunk(newShop));
-      navigate(`/shops/${data.id}`)
-    }
+      if(edit){
+        const data = await dispatch(updateShopThunk(shop));
+        navigate(`/shops/${data.id}`);
+      }else{
+        const data = await dispatch(createShopThunk(shop));
+        navigate(`/shops/${data.id}`);
+      }
 
+    }
   };
 
   const handleDemoHours = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     Object.keys(hours).forEach((day) => {
       setHours((prevHours) => ({
-      ...prevHours,
-      [day]: {
-        ...prevHours[day],
-        open: '6:30am',
-        close: '6:30pm',
-      },
-    }));
-    })
-
-  }
+        ...prevHours,
+        [day]: {
+          ...prevHours[day],
+          open: "6:30am",
+          close: "6:30pm",
+        },
+      }));
+    });
+  };
 
   const handleOpenChange = (day, value) => {
     setHours((prevHours) => ({
@@ -204,7 +242,7 @@ function ShopFormPage() {
       <h1 style={{ textAlign: "center" }}>Please Log In or Sign Up</h1>
     )) || (
       <div>
-        <h1>Create A Shop</h1>
+        { edit ? <h1>Update {shop.name}</h1> : <h1>Create A Shop</h1>}
         {Object.values(errors).map((message, idx) => (
           <p key={idx}>{message}</p>
         ))}
@@ -224,9 +262,7 @@ function ShopFormPage() {
             <div>
               <select
                 value={selectedDay}
-                onChange={(e) =>
-                  setSelectedDay(e.target.value)
-                }
+                onChange={(e) => setSelectedDay(e.target.value)}
                 required
               >
                 {Object.keys(hours).map((day, index) => (
@@ -272,7 +308,9 @@ function ShopFormPage() {
               </select>
             </div>
           </label>
-          <button id="set-hours-button" onClick={(e) => handleDemoHours(e)}>Demo Hours</button>
+          <button id="set-hours-button" onClick={(e) => handleDemoHours(e)}>
+            Demo Hours
+          </button>
           {Object.keys(hours).map((day) => (
             <div key={day}>
               <p>
@@ -459,16 +497,16 @@ function ShopFormPage() {
             </select>
           </label>
           {errors.categories && <p>{errors.categories}</p>}
-          {edit && (
+          {!edit && (
             <>
               <h2>Images</h2>
-              <input
-                type="text"
-                value={'images'}
-              />
+              <label>
+                Preview Image
+                <input type="text" value={image} onChange={(e) => setImage(e.target.value)}/>
+              </label>
             </>
           )}
-          <button type="submit">Create Shop</button>
+          {edit ? <button type="submit">Update</button> : <button type="submit">Create</button>}
         </form>
       </div>
     )

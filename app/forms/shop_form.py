@@ -23,3 +23,4 @@ class ShopForm(FlaskForm):
     website = StringField('Website', validators=[DataRequired()])
     phone_number = StringField('Phone')
     price_range = IntegerField('Price', validators=[DataRequired(), NumberRange(min=1, max=4)])
+    preview_image = StringField('Preview Img')
