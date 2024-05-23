@@ -6,6 +6,7 @@
 }
 
 .gallery-div {
+    width: 100%;
     max-width: 1000px;
 }
 
@@ -14,6 +15,7 @@
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 10px;
     max-width: 1000px;
+    grid-auto-rows: 1fr;
 }
 
 .container {
@@ -32,7 +34,7 @@
   height: 100%;
   display: flex;
   color: white;
-  border-radius: 12px;
+  border-radius: 2em;
 }
 .overlay-div {
     z-index: 1;
@@ -58,7 +60,7 @@
     padding-bottom: calc(100% - 2px);
     background-size: cover;
     background-position: center;
-    border-radius: 12px;
+    border-radius: 2em;
     box-sizing: border-box;
     background-color: grey;
     z-index: 0,
