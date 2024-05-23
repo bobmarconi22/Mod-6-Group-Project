@@ -16,11 +16,59 @@
     max-width: 1000px;
 }
 
+.container {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  box-sizing: border-box;
+}
+
+
+.overlay-div, .overlay-div2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  color: white;
+  border-radius: 12px;
+}
+.overlay-div {
+    z-index: 1;
+     align-items: flex-start;
+  justify-content: flex-start;
+}
+.overlay-div2 {
+    display: none;
+    background-color: rgba(246, 240, 226, 0.7);
+    z-index: 2;
+    justify-content: center;
+    align-items: center;
+}
+.container:hover .overlay-div2{
+   display: flex;
+}
+
+
 .shop-image {
+    position: absolute;
+     width: 100%;
+    height: 100%;
     padding-bottom: calc(100% - 2px);
     background-size: cover;
     background-position: center;
-    border: 1px solid red;
     border-radius: 12px;
     box-sizing: border-box;
+    background-color: grey;
+    z-index: 0,
+}
+.user-dot {
+    color: aqua;
+    font-size: 50px;
+}
+.trashcan {
+    color: #FF253F;
+    font-size: 100px;
+    margin: 10px; /* Adjust as needed for spacing */
 }
