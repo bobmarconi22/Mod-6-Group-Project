@@ -91,7 +91,7 @@ export const getShopsByUserIdThunk = () => async (dispatch) => {
 };
 
 export const updateShopThunk = (shop) => async (dispatch) => {
-  const response = await fetch(`/api/shops/${shop.id}`, {
+  const response = await fetch(`/api/shops/${shop.id}/update`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(shop),
@@ -116,7 +116,7 @@ export const deleteShopThunk = (shopId) => async (dispatch) => {
     dispatch(deleteShop(shopId));
     return message
   } else {
-    const errors = await res.json()
+    const errors = await response.json()
     return errors
   }
 };
