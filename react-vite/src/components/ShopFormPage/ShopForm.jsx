@@ -150,25 +150,10 @@ function ShopFormPage() {
         country,
         categories,
       };
-      const data = await dispatch(createShopThunk(newShop));
-      navigate(`/shops/${data.id}`)
+
+      dispatch(createShop(newShop)).then((res) => navigate(`/shops/${res.id}`));
     }
   };
-
-  const handleDemoHours = (e) => {
-    e.preventDefault()
-    Object.keys(hours).forEach((day) => {
-      setHours((prevHours) => ({
-      ...prevHours,
-      [day]: {
-        ...prevHours[day],
-        open: '6:30am',
-        close: '6:30pm',
-      },
-    }));
-    })
-
-  }
 
   const handleOpenChange = (day, value) => {
     setHours((prevHours) => ({
