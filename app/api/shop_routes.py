@@ -146,8 +146,8 @@ def update_shop(shop_id):
     shop_to_update = Shop.query.get_or_404(shop_id)
     body = request.get_json()
 
-    shop_form = ShopForm.from_json(body)
-    address_form = AddressForm.from_json(body)
+    shop_form = ShopForm()
+    address_form = AddressForm()
 
     shop_form['csrf_token'].data = request.cookies['csrf_token']
     address_form['csrf_token'].data = request.cookies['csrf_token']
