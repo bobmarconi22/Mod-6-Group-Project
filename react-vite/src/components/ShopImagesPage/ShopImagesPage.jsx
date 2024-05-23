@@ -18,11 +18,11 @@ function ShopImagesPage() {
         fetchShopDetails()
 
     }, [id, dispatch])
-        if( isLoaded) console.log(shopDetails)
+        if(isLoaded) console.log(shopDetails)
     return (
         isLoaded && (
         <div>
-            <h1>image loaded</h1>
+            <h1>shop Image loaded</h1>
         </div>
         )
     )
