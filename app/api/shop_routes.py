@@ -142,6 +142,41 @@ def delete_shop(shop_id):
     db.session.commit()
 
 
+
+
+# ========================================================
+
+
+#IMAGES
+#Add an image to a shop by shop ID:
+@shop_routes.route('/<int:shop_id>/images', methods=['POST'])
+@login_required
+def create_image(shop_id):
+    body = request.get_json()
+    print("BODY=========>", body)
+    if(not body['img_link'].lower().endswith(("png", "jpg", "jpeg"))):
+        return jsonify({"error": "Image url must be of type: png, jpg, or jpeg"}), 404
+
+    new_image = Image(
+        user_id = current_user.id,
+        shop_id = shop_id,
+        img_link = body['img_link'],
+    )
+    if 'review_id' in body:
+        new_image.review_id = body['review_id']
+
+    db.session.add(new_image)
+    db.session.commit()
+    return jsonify(new_image.to_dict())
+
+
+
+
+
+
+#=======================================================================
+
+
 # REVIEW ROUTES
 
 # Create a Review for a shop based on the shop's id
