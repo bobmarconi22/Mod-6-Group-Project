@@ -306,3 +306,20 @@ def create_review(shop_id):
 
     else:
         return jsonify({'errors': review_form.errors})
+
+
+# get all reviews by shop
+    
+
+@shop_routes.route('/<int:shopId>/reviews')
+def get_all_reviews_by_shop(shopId):
+
+    reviews = Review.query.options(joinedload(Review.image)).filter_by(shop_id = shopId).all()
+
+    reviews_to_dict = []
+    for review in reviews:
+        review_dict = review.to_dict(include_shop=True, include_reviewer=True)
+        reviews_to_dict.append(review_dict)
+        
+
+    return jsonify(reviews_to_dict)
