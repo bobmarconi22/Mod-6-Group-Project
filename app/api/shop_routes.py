@@ -85,18 +85,25 @@ def create_shop():
     address_form['csrf_token'].data = request.cookies['csrf_token']
     print(address_form.validate_on_submit())
     if shop_form.validate_on_submit() and address_form.validate_on_submit():
+
+            hours = {}
+
+            days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
+
+            for day in days:
+
+                day_open = f'{day}_open'
+                day_close = f'{day}_close'
+
+                if shop_form[day_open].data and shop_form[day_close].data:
+                    hours[day] = f'{shop_form.monday_open.data} - {shop_form.monday_close.data}'
+                else:
+                    hours[day] = 'Closed'
+
             new_shop = Shop(
                 name=shop_form.name.data,
                 description=shop_form.description.data,
-                hours={
-                    'monday': f'{shop_form.monday_open.data} - {shop_form.monday_close.data}',
-                    'tuesday': f'{shop_form.tuesday_open.data} - {shop_form.tuesday_close.data}',
-                    'wednesday': f'{shop_form.wednesday_open.data} - {shop_form.wednesday_close.data}',
-                    'thursday': f'{shop_form.thursday_open.data} - {shop_form.thursday_close.data}',
-                    'friday': f'{shop_form.friday_open.data} - {shop_form.friday_close.data}',
-                    'saturday': f'{shop_form.saturday_open.data} - {shop_form.saturday_close.data}',
-                    'sunday': f'{shop_form.sunday_open.data} - {shop_form.sunday_close.data}',
-                },
+                hours=hours,
                 website=shop_form.website.data,
                 phone_number=shop_form.phone_number.data,
                 price_range=shop_form.price_range.data,
@@ -153,20 +160,27 @@ def update_shop(shop_id):
     address_form['csrf_token'].data = request.cookies['csrf_token']
 
     if shop_form.validate_on_submit() and address_form.validate_on_submit():
+
+        hours = {}
+
+        days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
+
+        for day in days:
+
+            day_open = f'{day}_open'
+            day_close = f'{day}_close'
+
+            if shop_form[day_open].data and shop_form[day_close].data:
+                hours[day] = f'{shop_form.monday_open.data} - {shop_form.monday_close.data}'
+            else:
+                hours[day] = 'Closed'
+
         shop_to_update.name = shop_form.name.data
         shop_to_update.description = shop_form.description.data
         shop_to_update.website = shop_form.website.data
         shop_to_update.phone_number = shop_form.phone_number.data
         shop_to_update.price_range = shop_form.price_range.data
-        shop_to_update.hours = {
-            'monday': f'{shop_form.monday_open.data} - {shop_form.monday_close.data}',
-            'tuesday': f'{shop_form.tuesday_open.data} - {shop_form.tuesday_close.data}',
-            'wednesday': f'{shop_form.wednesday_open.data} - {shop_form.wednesday_close.data}',
-            'thursday': f'{shop_form.thursday_open.data} - {shop_form.thursday_close.data}',
-            'friday': f'{shop_form.friday_open.data} - {shop_form.friday_close.data}',
-            'saturday': f'{shop_form.saturday_open.data} - {shop_form.saturday_close.data}',
-            'sunday': f'{shop_form.sunday_open.data} - {shop_form.sunday_close.data}',
-        }
+        shop_to_update.hours = hours
 
         address_to_update = shop_to_update.address
         address_to_update.address_line1 = address_form.address_line1.data
