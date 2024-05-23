@@ -1,5 +1,6 @@
 //action type constants
 
+export const LOAD_REVIEWS_BY_SHOPID = 'reviews/LOAD_REVIEWS_BY_SHOPID'
 export const CREATE_REVIEW = 'reviews/CREATE_REVIEW'
 export const UPDATE_REVIEW = 'reviews/UPDATE_REVIEW'
 export const DELETE_REVIEW = 'reviews/DELETE REVIEW'
@@ -7,24 +8,45 @@ export const USER_REVIEW = 'reviews/USER REVIEW'
 
 // action creators
 
+export const loadReviewsByShopId = (reviews) => ({
+    type: LOAD_REVIEWS_BY_SHOPID,
+    payload: reviews
+})
+
 export const createReview = (review) => ({
     type: CREATE_REVIEW,
-    review
+    payload: review
+})
+
+export const updateReview = (review) => ({
+    type: UPDATE_REVIEW,
+    payload: review
 })
 
 export const deleteReview = (reviewId) => ({
     type: DELETE_REVIEW,
-    reviewId
+    payload: reviewId
 })
 
 export const userReviews = (reviews) => ({
     type: USER_REVIEW,
-    reviews
+    payload: reviews
 })
 
 // thunk action creators
+export const loadReviewsByShopIdThunk = (shopId) => async (dispatch) => {
+    const res = await fetch(`/api/shops/${shopId}/reviews`)
+    if (res.ok) {
+        const reviews = await res.json()
+        dispatch(loadReviewsByShopId(reviews))
+        return reviews
+    } else {
+        const errors = await res.json()
+        return errors
+    }
+}
 
-export const createAReview = (newReviewData, shopId) => async (dispatch) => {
+export const createReviewThunk = (newReviewData, shopId) => async (dispatch) => {
     const res = await fetch(`/api/shops/${shopId}/reviews`, {
         method: 'POST',
         headers: {
@@ -42,7 +64,42 @@ export const createAReview = (newReviewData, shopId) => async (dispatch) => {
     }
 }
 
-export const getReviewsByUserId = () => async (dispatch) => {
+export const updateReviewThunk = (review) => async (dispatch) => {
+    const res = await fetch(`/api/reviews/${review.id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(review)
+    })
+    if (res.ok) {
+        const review = await res.json()
+        dispatch(updateReview(review))
+        return review
+    } else {
+        const errors = await res.json()
+        return errors
+    }
+}
+
+export const deleteReviewThunk = (reviewId) => async (dispatch) => {
+    const res = await fetch(`/api/reviews/${reviewId}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    })
+    if (res.ok) {
+        const message = await res.json()
+        dispatch(deleteReview(reviewId))
+        return message
+    } else {
+        const errors = await res.json()
+        return errors
+    }
+}
+
+export const getReviewsByUserIdThunk = () => async (dispatch) => {
     const res = await fetch(`/api/reviews/current`)
     if (res.ok) {
         const reviews = await res.json()
@@ -53,23 +110,41 @@ export const getReviewsByUserId = () => async (dispatch) => {
         return errors
     }
 }
-// reducer
 
+// reducer
 const reviewReducer = (state = {}, action) => {
+    let newState = {}
     switch (action.type) {
+        case LOAD_REVIEWS_BY_SHOPID: {
+            const allReviews = {};
+            action.payload.forEach((review) => {
+                allReviews[review.id] = review;
+            });
+            return { ...state, ...allReviews };
+        }
         case CREATE_REVIEW: {
-            return {...state, ...action.review}
+            return { ...state, ...action.payload }
         }
         case USER_REVIEW: {
-            const newState = { ...state }
+            newState = { ...state }
             newState.userReviews = {}
-            action.reviews.forEach(review => {
+            action.payload.forEach(review => {
                 newState.userReviews[review.id] = review
             });
             return newState
         }
+        case UPDATE_REVIEW: {
+            newState = { ...state }
+            newState[action.payload.id] = action.payload
+            return newState
+        }
+        case DELETE_REVIEW: {
+            newState = { ...state }
+            delete newState[action.payload]
+            return newState
+        }
         default:
-        return state
+            return state
     }
 
 }

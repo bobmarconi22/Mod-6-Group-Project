@@ -1,7 +1,7 @@
 import './ShopDetails.css'
 import OpenModalButton from "../OpenModalButton";
 import CreateReviewModal from '../Reviews/CreateReviewModal'
-
+import { Link} from "react-router-dom";
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { loadShopDetailsThunk } from '../../redux/shops'
@@ -23,6 +23,7 @@ function ShopDetails() {
     return (
         <>
             <div id='shop-detail-cover-container'>
+
                 <img src='img.png' />
                 <div className='shop-detail-heading-container'>
                     <div>{shopDetails?.name}</div>
@@ -32,7 +33,9 @@ function ShopDetails() {
                     {/* hours not working because how it is formatted */}
                     {/* <div>see hours</div> */}
                 </div>
-                <div className='see-all-photos-button'>See all #(total photos) photos</div>
+                <Link to={`images`}>
+                <button className='see-all-photos-button'>See all #{shopDetails?.image.length} photos</button>
+                </Link>
             </div>
 
             <div>Menu</div>
