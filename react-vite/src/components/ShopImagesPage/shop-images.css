@@ -1,0 +1,26 @@
+.shop-images-page{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+     margin: 50px;
+}
+
+.gallery-div {
+    max-width: 1000px;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+    max-width: 1000px;
+}
+
+.shop-image {
+    padding-bottom: calc(100% - 2px);
+    background-size: cover;
+    background-position: center;
+    border: 1px solid red;
+    border-radius: 12px;
+    box-sizing: border-box;
+}

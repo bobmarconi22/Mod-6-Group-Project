@@ -136,9 +136,7 @@ const shopsReducer = (state = {}, action) => {
       return { ...state, [action.payload.id]: action.payload };
 
     case LOAD_SHOP_DETAILS:
-      console.log("SHOP DETAILS INSIDE OF REDUCER", action.payload)
-      console.log("STATE", state)
-      console.log("STATE PLUS SHOP DETAILS", { ...state, ShopDetails: action.payload })
+
       return { ...state, ShopDetails: action.payload };
 
     case USER_SHOPS:
