@@ -79,7 +79,7 @@ function UserProfile() {
               <>
                 <a
                   className="profile-review-tile"
-                  onClick={() => navigate("/shops/${review.shop_id}")}
+                  onClick={() => navigate(`/shops/${review.shop_id}`)}
                   key={review.id}
                 >
                   <h4>{review.shop.name}</h4>

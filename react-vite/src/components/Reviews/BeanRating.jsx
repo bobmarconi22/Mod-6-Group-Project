@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { CiCoffeeBean } from "react-icons/ci";
 import { BiSolidCoffeeBean } from "react-icons/bi";
+import './BeanRating.css'
 
 
 const BeanRating =({setBeans, filledBeans}) => {
@@ -17,8 +18,8 @@ const BeanRating =({setBeans, filledBeans}) => {
             onClick={() => setBeans(i)}
           >
             {activeRating > i - 1 || filledBeans > i - 1 ? 
-            < BiSolidCoffeeBean />
-            : < CiCoffeeBean/>}
+            < BiSolidCoffeeBean className='custom-icon'/>
+            : < CiCoffeeBean className='custom-icon'/>}
           </div>
         ))}
       </div>

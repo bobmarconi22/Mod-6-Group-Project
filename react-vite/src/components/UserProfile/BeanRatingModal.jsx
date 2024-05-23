@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { CiCoffeeBean } from "react-icons/ci";
 import { BiSolidCoffeeBean } from "react-icons/bi";
+import '../Reviews/BeanRating.css'
 
 
 const BeanRating =({beanRating}) => {
@@ -12,8 +13,8 @@ const BeanRating =({beanRating}) => {
         {[1, 2, 3, 4, 5].map(i => (
           <div> 
             {beanRating >= i  ? 
-            < BiSolidCoffeeBean />
-            : < CiCoffeeBean/>}
+            < BiSolidCoffeeBean className='custom-icon' />
+            : < CiCoffeeBean className='custom-icon'/>}
           </div>
         ))}
       </div>
