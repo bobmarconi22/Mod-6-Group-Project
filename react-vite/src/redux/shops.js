@@ -2,7 +2,7 @@ const LOAD_SHOPS = "LOAD_SHOPS";
 const LOAD_SHOP_DETAILS = "LOAD_SHOP_DETAILS";
 const CREATE_SHOP = "CREATE_SHOP";
 const UPDATE_SHOP = "UPDATE_SHOP"
-// const DELETE_SHOP = 'DELETE_SHOP'
+const DELETE_SHOP = 'DELETE_SHOP'
 const USER_SHOPS = "USER_SHOPS";
 
 // Action creators
@@ -31,6 +31,11 @@ export const updateShop = (shop) => ({
   payload: shop
 })
 
+export const deleteShop = (shopId) => ({
+  type: DELETE_SHOP,
+  payload: shopId
+})
+
 // Thunk action creators
 export const loadShopsThunk = () => async (dispatch) => {
   const response = await fetch("/api/shops");
@@ -38,6 +43,9 @@ export const loadShopsThunk = () => async (dispatch) => {
     const shops = await response.json();
     dispatch(loadShops(shops));
     return shops;
+  } else {
+    const errors = await res.json()
+    return errors
   }
 };
 
@@ -47,7 +55,6 @@ export const createShopThunk = (newShop) => async (dispatch) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(newShop),
   });
-  console.log(res)
   if (res.ok) {
     const shop = await res.json()
     dispatch(addShop(shop))
@@ -64,6 +71,9 @@ export const loadShopDetailsThunk = (id) => async (dispatch) => {
     const shop = await response.json();
     dispatch(loadShopDetails(shop));
     return shop;
+  } else {
+    const errors = await res.json()
+    return errors
   }
 };
 
@@ -73,6 +83,9 @@ export const getShopsByUserIdThunk = () => async (dispatch) => {
     const shops = await response.json();
     dispatch(userShops(shops));
     return shops;
+  } else {
+    const errors = await res.json()
+    return errors
   }
 };
 
@@ -86,9 +99,26 @@ export const updateShopThunk = (shop) => async (dispatch) => {
     const shop = await response.json();
     dispatch(updateShop(shop));
     return shop
+  } else {
+    const errors = await res.json()
+    return errors
   }
 }
 
+export const deleteShopThunk = (shopId) => async (dispatch) => {
+  await fetch(`/api/shops/${shopId}/delete`, {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+  });
+  if (response.ok) {
+    const message = await response.json();
+    dispatch(deleteShop(shopId));
+    return message
+  } else {
+    const errors = await res.json()
+    return errors
+  }
+};
 // Shops Reducer
 const shopsReducer = (state = {}, action) => {
   let newState = {}
@@ -112,12 +142,17 @@ const shopsReducer = (state = {}, action) => {
       });
       return newState;
     case UPDATE_SHOP: {
-        const newState = { ...state };
-        newState[action.payload.id] = action.payload
-        return newState
+      const newState = { ...state };
+      newState[action.payload.id] = action.payload
+      return newState
     }
-      default:
-    return state;
+    case DELETE_SHOP: {
+      newState = { ...state }
+      delete newState[action.payload]
+      return newState
+    }
+    default:
+      return state;
   }
 };
 

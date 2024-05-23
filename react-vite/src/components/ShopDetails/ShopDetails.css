@@ -13,10 +13,11 @@
 }
 
 .see-all-photos-button {
-    background-color: white;
+    /* background-color: white;
+    /*  */
     width: fit-content;
-    border: black solid;
-    padding: 10px;
+    /* border: black solid;
+    padding: 10px; */
 }
 
 #shop-detail-additional-info-container {

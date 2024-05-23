@@ -2,10 +2,9 @@ import { useDispatch, useSelector } from "react-redux";
 import "./UserProfile.css";
 import { FaUserCircle } from "react-icons/fa";
 import { useEffect, useState } from "react";
-import { getReviewsByUserId } from "../../redux/reviews";
-import { getShopsByUserIdThunk } from "../../redux/shops";
+import { deleteReviewThunk, getReviewsByUserIdThunk } from "../../redux/reviews";
+import { deleteShopThunk, getShopsByUserIdThunk } from "../../redux/shops";
 import { useNavigate } from "react-router-dom";
-
 
 // use prop or context to get the shop information
 // change headers to label or headers?
@@ -16,15 +15,32 @@ function UserProfile() {
   const userShops = useSelector((state) => state.shops.userShops || {});
   const [isLoaded, setIsLoaded] = useState(false);
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (sessionUser) {
-      dispatch(getReviewsByUserId(sessionUser.id)).then(() => { });
+      dispatch(getReviewsByUserIdThunk(sessionUser.id)).then(() => { });
       dispatch(getShopsByUserIdThunk(sessionUser.id)).then(() => {
         setIsLoaded(true);
       });
     }
   }, [dispatch, sessionUser]);
+
+  const handleReviewUpdate = async () => {
+    console.log("update review");
+  };
+
+  const handleReviewDelete = async (id) => {
+    dispatch(deleteReviewThunk(id))
+  };
+
+  const handleShopUpdate = async (id) => {
+    navigate(`/shop/${id}/update`)
+  };
+
+  const handleShopDelete = async (id) => {
+    dispatch(deleteShopThunk(id))
+  };
 
   return (
     isLoaded && (
@@ -53,51 +69,80 @@ function UserProfile() {
             </p>
           </div>
         </div>
-        {isLoaded &&
+        {isLoaded && (
           <div className="profile-section">
             <h2 id="user-page-subtitle">Your Reviews</h2>
             {Object.values(userReviews).map((review) => (
-              <a className="profile-review-tile" onClick={() => navigate('/shops/${review.shop_id}')} key={review.id}>
-                <h4>{review.shop.name}</h4>
-                <p>{review.rating}/5 Coffee Beans</p>
-                <p>{review.review}</p>
-                <div className="user_review_img_block">
-                  {review.images.map((image, index) => (
-                    <img
-                      key={index}
-                      src={image.img_link}
-                      alt={"Review Image"}
-                    />
-                  ))}
-                </div>
-                <p>{review.created_at}</p>
-              </a>
+              <>
+                <a
+                  className="profile-review-tile"
+                  onClick={() => navigate("/shops/${review.shop_id}")}
+                  key={review.id}
+                >
+                  <h4>{review.shop.name}</h4>
+                  <p>{review.rating}/5 Coffee Beans</p>
+                  <p>{review.review}</p>
+                  <div className="user_review_img_block">
+                    {review.images.map((image, index) => (
+                      <img
+                        key={index}
+                        src={image.img_link}
+                        alt={"Review Image"}
+                      />
+                    ))}
+                  </div>
+                  <p>{review.created_at}</p>
+                </a>
+                <button id="update" onClick={() => handleReviewUpdate(review.id)}>
+                  Update Review
+                </button>
+                <button id="delete" onClick={() => handleReviewDelete(review.id)}>
+                  Delete Review
+                </button>
+              </>
             ))}
-          </div>}
+          </div>
+        )}
 
         {isLoaded && (
           <div className="profile-section">
-            <h2>Your Shops</h2>
+            <div id="user-profile-header">
+              <h2>Your Shops</h2>
+              <button id='new-shop-button' onClick={() => navigate('/new-shop')}>+</button>
+            </div>
+
             {Object.values(userShops).map((shop) => (
-              <a className="profile-shop-tile" onClick={() => navigate('/shops/${shop.id}')} key={shop.id}>
-                <img src="img.png"></img>
-                <div className="user-shop-text">{shop.name}</div>
-                <p>
-                  {shop.address.address_line1} {shop.address.address_line2}{" "}
-                  {shop.address.city}, {shop.address.state},{" "}
-                  {shop.address.postal_code}
-                </p>
-                <div className="user-shop-text">
-                  {"Rating: " +
-                    shop.avg_rating +
-                    " Number of Reviews: " +
-                    shop.num_reviews}
-                </div>
-                <div className="user-shop-text">
-                  {"Price Range: " + shop.price_range}
-                  <div>{"categories: " + shop.categories}</div>
-                </div>
-              </a>
+              <>
+                <a
+                  className="profile-shop-tile"
+                  onClick={() => navigate("/shops/${shop.id}")}
+                  key={shop.id}
+                >
+                  <img src="img.png"></img>
+                  <div className="user-shop-text">{shop.name}</div>
+                  <p>
+                    {shop.address.address_line1} {shop.address.address_line2}{" "}
+                    {shop.address.city}, {shop.address.state},{" "}
+                    {shop.address.postal_code}
+                  </p>
+                  <div className="user-shop-text">
+                    {"Rating: " +
+                      shop.avg_rating +
+                      " Number of Reviews: " +
+                      shop.num_reviews}
+                  </div>
+                  <div className="user-shop-text">
+                    {"Price Range: " + shop.price_range}
+                    <div>{"categories: " + shop.categories}</div>
+                  </div>
+                </a>
+                <button id="update" onClick={() => handleShopUpdate(shop.id)}>
+                  Update Shop
+                </button>
+                <button id="delete" onClick={() => handleShopDelete(shop.id)}>
+                  Delete Shop
+                </button>
+              </>
             ))}
           </div>
         )}

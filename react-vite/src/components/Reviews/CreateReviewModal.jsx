@@ -4,7 +4,7 @@ import { useModal } from '../../context/Modal'
 import { useParams } from 'react-router-dom'
 import { loadShopDetailsThunk } from '../../redux/shops'
 import { BeanRating } from './BeanRating'
-import { createAReview } from '../../redux/reviews'
+import { createReviewThunk } from '../../redux/reviews'
 
 
 function CreateReviewModal() {
@@ -17,30 +17,30 @@ function CreateReviewModal() {
 
     // const [errors, setErrors] = useState({})
 
-    const {closeModal} = useModal()
+    const { closeModal } = useModal()
 
-    const {id} = useParams()
+    const { id } = useParams()
     const dispatch = useDispatch()
 
     useEffect(() => {
         dispatch(loadShopDetailsThunk(id))
-    },[id, dispatch])
+    }, [id, dispatch])
 
     const shop = useSelector((state) => state.shops.ShopDetails)
     console.log(shop)
 
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    const reviewData = {
-        review,
-        rating: beans,
-        img_url1: (img1.length > 0 && img1),
-        img_url2: (img2.length > 0 && img2),
-        img_url3: (img3.length > 0 && img3)
-    }
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        const reviewData = {
+            review,
+            rating: beans,
+            img_url1: (img1.length > 0 && img1),
+            img_url2: (img2.length > 0 && img2),
+            img_url3: (img3.length > 0 && img3)
+        }
 
-    dispatch(createAReview(reviewData, id)).then(() => closeModal())
+        dispatch(createReviewThunk(reviewData, id)).then(() => closeModal())
 
 
     }
@@ -50,7 +50,7 @@ function CreateReviewModal() {
         <>
             <h1>{shop && shop.name}</h1>
             <form onSubmit={handleSubmit}>
-                <BeanRating setBeans={setBeans} filledBeans={beans}/>
+                <BeanRating setBeans={setBeans} filledBeans={beans} />
                 <input className='review'
                     type='text'
                     placeholder='Leave your review here...'
