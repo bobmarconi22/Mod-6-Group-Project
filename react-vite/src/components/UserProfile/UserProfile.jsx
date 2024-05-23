@@ -26,7 +26,7 @@ function UserProfile() {
         setIsLoaded(true);
       });
     }
-  }, [dispatch, sessionUser, userReviews]);
+  }, [dispatch, sessionUser]);
 
 
   const handleReviewDelete = async (id) => {

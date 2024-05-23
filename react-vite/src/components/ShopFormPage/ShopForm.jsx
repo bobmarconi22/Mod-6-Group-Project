@@ -137,12 +137,6 @@ function ShopFormPage() {
     const err = {};
     if (!name) err.name = "Name is required!";
     if (!description) err.description = "Description is required!";
-    if (
-      Object.values(hours).some(
-        (day) => day.open === "Open" || day.close === "Close"
-      )
-    )
-      err.hours = "Please specify Opening and Closing hours for every day!";
     if (!website) err.website = "Website is required!";
     if (!priceRange || isNaN(priceRange) || priceRange < 1 || priceRange > 5)
       err.priceRange = "Please select an average price!";
