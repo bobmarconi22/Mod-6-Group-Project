@@ -1,8 +1,13 @@
 
-
 function ShopImagesForm() {
 
-    return <h1>form page!</h1>
+    return (
+        <div>
+            <form on onSubmit={(e)=> }>
+
+            </form>
+        </div>
+    )
 }
 
 export default ShopImagesForm

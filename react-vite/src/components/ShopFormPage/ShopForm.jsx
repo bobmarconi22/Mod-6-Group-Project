@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createShopThunk } from "../../redux/shops";
+import { createShop } from "../../redux/shops";
 import { useNavigate } from "react-router-dom";
 import "./ShopForm.css";
 import { getAllCategories } from "../../redux/categories";
@@ -150,13 +150,9 @@ function ShopFormPage() {
         country,
         categories,
       };
-      const data = await dispatch(createShopThunk(newShop));
-      dispatch(loadShopsThunk())
-      if (!data.ok) {
-        navigate('/')
-      }
-    }
 
+      dispatch(createShop(newShop)).then((res) => navigate(`/shops/${res.id}`));
+    }
   };
 
   const handleOpenChange = (day, value) => {
@@ -196,7 +192,7 @@ function ShopFormPage() {
         {Object.values(errors).map((message, idx) => (
           <p key={idx}>{message}</p>
         ))}
-        <form onSubmit={handleSubmit}>
+        <form method="POST" onSubmit={handleSubmit}>
           <label>
             Name
             <input
@@ -212,9 +208,7 @@ function ShopFormPage() {
             <div>
               <select
                 value={selectedDay}
-                onChange={(e) =>
-                  setSelectedDay(e.target.value)
-                }
+                onChange={(e) => setSelectedDay(e.target.value)}
                 required
               >
                 {Object.keys(hours).map((day, index) => (
@@ -449,10 +443,7 @@ function ShopFormPage() {
           {edit && (
             <>
               <h2>Images</h2>
-              <input
-                type="text"
-                value={'images'}
-              />
+              <input type="text" value={"images"} />
             </>
           )}
           <button type="submit">Create Shop</button>
