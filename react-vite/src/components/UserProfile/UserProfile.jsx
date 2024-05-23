@@ -7,6 +7,7 @@ import { deleteShopThunk, getShopsByUserIdThunk } from "../../redux/shops";
 import { useNavigate } from "react-router-dom";
 import { UpdateReviewModal } from '../Reviews'
 import OpenModalButton from '../OpenModalButton'
+import { BeanRating } from "./BeanRatingModal";
 
 // use prop or context to get the shop information
 // change headers to label or headers?
@@ -82,7 +83,7 @@ function UserProfile() {
                   key={review.id}
                 >
                   <h4>{review.shop.name}</h4>
-                  <p>{review.rating}/5 Coffee Beans</p>
+                  <div className='beans'><BeanRating beanRating={review.rating}/></div>
                   <p>{review.review}</p>
                   <div className="user-review-img-block">
                     {review.images.map((image, index) => (
