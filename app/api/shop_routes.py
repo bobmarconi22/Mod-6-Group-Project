@@ -240,6 +240,7 @@ def delete_shop(shop_id):
 @shop_routes.route('/<int:shop_id>/images', methods=['POST'])
 @login_required
 def create_image(shop_id):
+    print("route happening")
     body = request.get_json()
     print("BODY=========>", body)
     if(not body['img_link'].lower().endswith(("png", "jpg", "jpeg"))):
@@ -321,7 +322,7 @@ def create_review(shop_id):
 
 
 # get all reviews by shop
-    
+
 
 @shop_routes.route('/<int:shopId>/reviews')
 def get_all_reviews_by_shop(shopId):
@@ -332,6 +333,6 @@ def get_all_reviews_by_shop(shopId):
     for review in reviews:
         review_dict = review.to_dict(include_shop=True, include_reviewer=True)
         reviews_to_dict.append(review_dict)
-        
+
 
     return jsonify(reviews_to_dict)

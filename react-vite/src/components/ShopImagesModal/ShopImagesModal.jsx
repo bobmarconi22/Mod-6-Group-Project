@@ -13,6 +13,7 @@ function ShopImagesModal({user_id, shop_id, shop_name}) {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        console.log("SUBMIT HAPPENING")
         if(!imgLink.toLowerCase().endsWith('.png') && !imgLink.toLowerCase().endsWith('.jpg') && !imgLink.toLowerCase().endsWith('.jpeg')) {
             return setErrors("Image url must be of type: png, jpg, or jpeg")
         }
@@ -26,6 +27,7 @@ function ShopImagesModal({user_id, shop_id, shop_name}) {
                 },
                 body: JSON.stringify({img_link: imgLink}),
         })
+        console.log("RESPONSE===>", response)
         if(response.ok){
              await dispatch(loadShopDetailsThunk(shop_id))
             closeModal()
@@ -48,6 +50,7 @@ function ShopImagesModal({user_id, shop_id, shop_name}) {
                 <input value={imgLink} onChange={(e) => setImageLink(e.target.value)}></input>
                 <button type="submit">Add a photo</button>
             </form>
+            {errors.length > 0 && <div><p style={{color: "#FF253F", fontSize: "12px"}}>{errors}</p></div>}
         </div>
     )
 }
