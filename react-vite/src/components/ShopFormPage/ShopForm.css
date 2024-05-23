@@ -1,8 +1,30 @@
-.dollar {
-    color: lightgrey;
-    display: inline-flex;
-  }
+#form-title{
+  text-align: center;
+  border-bottom: 2px solid #87A9CB;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  font-size: 38px;
+}
 
-  .dollar-filled {
-    color: black;
-  }
+.form-header > h3{
+  font-size: 30px;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.form-header > p{
+  font-size: 15px;
+  margin-top: 0;
+  margin-left: 30px;
+  margin-bottom: 1px solid grey;
+  font-style: italic
+}
+
+.form-header{
+  border-bottom: 2px solid #b8c0c8;
+  margin-bottom: 10px;
+}
+
+.form-label{
+
+}

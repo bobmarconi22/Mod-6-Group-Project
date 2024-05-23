@@ -49,7 +49,7 @@ function UserProfile() {
       <>
         <h1 id="user-page-title">Hi, {sessionUser.username}!</h1>
         <div id="profile-info">
-          <h2 id="user-page-subtitle">User Info</h2>
+          <h2 className="user-page-subtitle">User Info</h2>
           <FaUserCircle />
           <div>
             <h4>
@@ -99,7 +99,7 @@ function UserProfile() {
                   buttonText="Edit Review"
                   modalComponent={<UpdateReviewModal reviewToEdit={review} setIsSubmitted={setIsSubmitted} />}
                 />
-                <button id="delete" onClick={() => handleReviewDelete(review.id)}>
+                <button className="delete" onClick={() => handleReviewDelete(review.id)}>
                   Delete Review
                 </button>
               </>
@@ -109,9 +109,9 @@ function UserProfile() {
 
         {isLoaded && (
           <div className="profile-section">
-            <div id="user-profile-header">
+            <div id="user-profile-header" className="user-page-subtitle">
               <h2>Your Shops</h2>
-              <button id='new-shop-button' onClick={() => navigate('/new-shop')}>+</button>
+              <button id='new-shop-button' onClick={() => navigate('/new-shop')}>Create a Shop</button>
             </div>
 
             {Object.values(userShops).map((shop) => (
@@ -139,10 +139,10 @@ function UserProfile() {
                     <div>{"categories: " + shop.categories}</div>
                   </div>
                 </a>
-                <button id="update" onClick={() => navigate(`/shops/${shop.id}/update`)}>
+                <button className="update" onClick={() => navigate(`/shops/${shop.id}/update`)}>
                   Update Shop
                 </button>
-                <button id="delete" onClick={() => handleShopDelete(shop.id)}>
+                <button className="delete" onClick={() => handleShopDelete(shop.id)}>
                   Delete Shop
                 </button>
               </>
