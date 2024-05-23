@@ -135,8 +135,10 @@ def create_shop():
 @login_required
 def delete_shop(shop_id):
     shop = Shop.query.get(shop_id)
+    shop_categories = selected_categories.query.filter(selected_categories.shop_id == shop_id).all()
 
     db.session.delete(shop)
+    db.session.delete(shop_categories)
     db.session.commit()
 
 

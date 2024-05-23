@@ -151,10 +151,24 @@ function ShopFormPage() {
         categories,
       };
       const data = await dispatch(createShopThunk(newShop));
-        navigate(`/shops/${data.id}`)
-
+      navigate(`/shops/${data.id}`)
     }
   };
+
+  const handleDemoHours = (e) => {
+    e.preventDefault()
+    Object.keys(hours).forEach((day) => {
+      setHours((prevHours) => ({
+      ...prevHours,
+      [day]: {
+        ...prevHours[day],
+        open: '6:30am',
+        close: '6:30pm',
+      },
+    }));
+    })
+
+  }
 
   const handleOpenChange = (day, value) => {
     setHours((prevHours) => ({
@@ -227,7 +241,7 @@ function ShopFormPage() {
                   Open
                 </option>
                 {times.map((time, index) => (
-                  <option key={index} value={time} defaultValue={"6:00am"}>
+                  <option key={index} value={time}>
                     {time}
                   </option>
                 ))}
@@ -248,13 +262,14 @@ function ShopFormPage() {
                       times.indexOf(hours[selectedDay].open)
                   )
                   .map((time, index) => (
-                    <option key={index} value={time} defaultValue={"6:00pm"}>
+                    <option key={index} value={time}>
                       {time}
                     </option>
                   ))}
               </select>
             </div>
           </label>
+          <button id="set-hours-button" onClick={(e) => handleDemoHours(e)}>Demo Hours</button>
           {Object.keys(hours).map((day) => (
             <div key={day}>
               <p>
