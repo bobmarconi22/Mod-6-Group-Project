@@ -136,7 +136,7 @@ function UserProfile() {
                     <div>{"categories: " + shop.categories}</div>
                   </div>
                 </a>
-                <button id="update" onClick={() => handleShopUpdate(shop.id)}>
+                <button id="update" onClick={() => navigate(`/shops/${shop.id}/update`)}>
                   Update Shop
                 </button>
                 <button id="delete" onClick={() => handleShopDelete(shop.id)}>

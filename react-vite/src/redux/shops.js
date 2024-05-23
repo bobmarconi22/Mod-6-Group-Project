@@ -90,8 +90,8 @@ export const getShopsByUserIdThunk = () => async (dispatch) => {
   }
 };
 
-export const updateShopThunk = (shop) => async (dispatch) => {
-  const response = await fetch(`/api/shops/${shop.id}`, {
+export const updateShopThunk = (shop, id) => async (dispatch) => {
+  const response = await fetch(`/api/shops/${id}/update`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(shop),
@@ -101,7 +101,7 @@ export const updateShopThunk = (shop) => async (dispatch) => {
     dispatch(updateShop(shop));
     return shop
   } else {
-    const errors = await res.json()
+    const errors = await response.json()
     return errors
   }
 }
@@ -116,7 +116,7 @@ export const deleteShopThunk = (shopId) => async (dispatch) => {
     dispatch(deleteShop(shopId));
     return message
   } else {
-    const errors = await res.json()
+    const errors = await response.json()
     return errors
   }
 };
