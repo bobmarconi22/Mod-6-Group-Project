@@ -11,10 +11,9 @@ import { useEffect } from 'react'
 // change headers to label or headers?
 function ShopDetails() {
     const { id } = useParams()
-
     const dispatch = useDispatch()
 
-    const shopDetails = useSelector((state) => state.shops.ShopDetails)
+    const shopDetails = useSelector((state) => state.shops.id)
     // console.log(shopDetails)
 
     useEffect(() => {

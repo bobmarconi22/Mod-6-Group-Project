@@ -150,8 +150,9 @@ function ShopFormPage() {
         country,
         categories,
       };
+      const data = await dispatch(createShopThunk(newShop));
+        navigate(`/shops/${data.id}`)
 
-      dispatch(createShop(newShop)).then((res) => navigate(`/shops/${res.id}`));
     }
   };
 
