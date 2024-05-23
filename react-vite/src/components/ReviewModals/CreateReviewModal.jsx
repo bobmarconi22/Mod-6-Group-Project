@@ -5,7 +5,6 @@ import { useParams } from 'react-router-dom'
 import { loadShopDetailsThunk } from '../../redux/shops'
 import { BeanRating } from './BeanRating'
 import { createReviewThunk } from '../../redux/reviews'
-import './CreateReviewModal.css'
 
 function CreateReviewModal() {
 
