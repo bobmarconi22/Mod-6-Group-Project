@@ -7,6 +7,7 @@ import Layout from "./Layout";
 import ShopDetails from "../components/ShopDetails";
 import UserProfile from "../components/UserProfile";
 import SearchPage from "../components/SearchPage";
+import ShopImagesPage from "../components/ShopImagesPage";
 
 export const router = createBrowserRouter([
   {
@@ -28,10 +29,15 @@ export const router = createBrowserRouter([
         path: "new-shop",
         element: <ShopFormPage />,
       },
+
       {
         path: "shops/:id",
         element: <ShopDetails />,
       },
+       {
+            path: "shops/:id/images",
+            element: <ShopImagesPage />
+          },
       {
         path: "/profile",
         element: <UserProfile />,
