@@ -8,7 +8,7 @@ import { loadShopDetailsThunk } from '../../redux/shops'
 import { useEffect, useState } from 'react'
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import ShopImagesModal from '../ShopImagesModal';
-import Reviews from '../Reviews';
+import ShopDetailsReviews from '../ShopDetailsReviews';
 
 // use prop or context to get the shop information
 // change headers to label or headers?
@@ -91,7 +91,7 @@ function ShopDetails() {
                     buttonText="Write a Review"
                     modalComponent={<CreateReviewModal />}
                 />
-                <Reviews reviews={shopDetails?.review} />
+                <ShopDetailsReviews />
             </>
         )
     )
