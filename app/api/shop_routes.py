@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, make_response
 
 from flask_login import login_required, current_user
 from app.models import db, Shop, Address, selected_categories, Category, Image, Review
@@ -167,7 +167,7 @@ def create_image(shop_id):
 
     db.session.add(new_image)
     db.session.commit()
-    return jsonify(new_image.to_dict())
+    return make_response("Image created", 201)
 
 
 

@@ -6,6 +6,8 @@ import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { loadShopDetailsThunk } from '../../redux/shops'
 import { useEffect, useState  } from 'react'
+import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
+import ShopImagesModal from '../ShopImagesModal';
 
 // use prop or context to get the shop information
 // change headers to label or headers?
@@ -13,10 +15,11 @@ function ShopDetails() {
     const { id } = useParams()
     const dispatch = useDispatch()
     const [isLoaded, setIsLoaded] = useState(false);
+    const sessionUser = useSelector((state) => state.session.user);
 
     const shopDetails = useSelector((state) => state.shops.ShopDetails)
     if(isLoaded) console.log(shopDetails)
-useEffect( () => {
+    useEffect( () => {
     const fetchShopDetails = async() => {
         await dispatch(loadShopDetailsThunk(id))
         setIsLoaded(true);
@@ -44,6 +47,13 @@ useEffect( () => {
                 <Link to={`images`}>
                 <button className='see-all-photos-button'>See all #{shopDetails?.image.length} photos</button>
                 </Link>
+                {sessionUser.id === shopDetails.owner_id ?  (<button>
+                  <OpenModalMenuItem
+                itemText="Add an Image"
+                modalComponent={<ShopImagesModal shop_id={shopDetails.id} user_id={sessionUser.id} shop_name={shopDetails.name}/>}
+              />
+              </button>) : null}
+
             </div>
 
             <div>Menu</div>
