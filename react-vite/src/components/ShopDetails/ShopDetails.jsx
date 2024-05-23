@@ -45,12 +45,12 @@ function ShopDetails() {
                         <button className='see-all-photos-button'>See all #{shopDetails?.image.length} photos</button>
                     </Link>
                     {/* shop details is checked before it gets the information, must check if shopdetails exists */}
-                    {/* {sessionUser.id === shopDetails.owner_id ? (<button>
+                    {sessionUser && shopDetails && sessionUser.id === shopDetails.owner_id ? (<button>
                         <OpenModalMenuItem
                             itemText="Add an Image"
                             modalComponent={<ShopImagesModal shop_id={shopDetails.id} user_id={sessionUser.id} shop_name={shopDetails.name} />}
                         />
-                    </button>) : null} */}
+                    </button>) : null}
 
                 </div>
                 {/* <div>Menu</div>
