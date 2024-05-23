@@ -161,7 +161,10 @@ def update_shop(shop_id):
         shop_to_update.hours = {
             'monday': f'{shop_form.monday_open.data} - {shop_form.monday_close.data}',
             'tuesday': f'{shop_form.tuesday_open.data} - {shop_form.tuesday_close.data}',
-            # Repeat for other days
+            'wednesday': f'{shop_form.wednesday_open.data} - {shop_form.wednesday_close.data}',
+            'thursday': f'{shop_form.thursday_open.data} - {shop_form.thursday_close.data}',
+            'friday': f'{shop_form.friday_open.data} - {shop_form.friday_close.data}',
+            'saturday': f'{shop_form.saturday_open.data} - {shop_form.saturday_close.data}',
             'sunday': f'{shop_form.sunday_open.data} - {shop_form.sunday_close.data}',
         }
 

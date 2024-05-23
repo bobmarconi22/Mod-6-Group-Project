@@ -61,13 +61,13 @@ function ShopFormPage() {
         setCountry(shop.address.country)
         setCategories(shop.categories)
 
-        Object.keys(hours).forEach((day) => {
+        Object.keys(shop.hours).forEach((day) => {
           setHours((prevHours) => ({
             ...prevHours,
-            [day]: {
-              ...prevHours[day],
-              open: shop.hours[day].split(' -')[0],
-              close: shop.hours[day].split('- ')[1],
+            [day[0].toUpperCase() + day.slice(1)]: {
+              ...prevHours[day[0].toUpperCase() + day.slice(1)],
+              open: shop.hours[day].split(' - ')[0],
+              close: shop.hours[day].split(' - ')[1],
             },
           }));
         });
