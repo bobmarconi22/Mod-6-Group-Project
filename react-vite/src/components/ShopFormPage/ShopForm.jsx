@@ -246,16 +246,20 @@ function ShopFormPage() {
 
   return (
     (isLoaded && !sessionUser && (
-      <h1 style={{ textAlign: "center" }}>Please Log In or Sign Up</h1>
+      <h1 style={{ textAlign: "center", marginTop: '25px' }}>Please Log In or Sign Up</h1>
     )) || (
       <div>
-        {edit ? <h1>Update {shop.name}</h1> : <h1>Create A Shop</h1>}
+        {edit ? <h1 id="form-title">Update {shop.name}</h1> : <h1 id="form-title">Create A Shop</h1>}
         {Object.values(errors).map((message, idx) => (
           <p key={idx}>{message}</p>
         ))}
         <form onSubmit={handleSubmit}>
+          <div className="form-header">
+          <h3>General Information</h3>
+          <p>Give people some details about your coffee shop!</p>
+          </div>
           <label>
-            Name
+            <p className="form-label">Name</p>
             <input
               type="text"
               value={name}
