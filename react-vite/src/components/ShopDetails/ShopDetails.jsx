@@ -5,22 +5,30 @@ import { Link} from "react-router-dom";
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { loadShopDetailsThunk } from '../../redux/shops'
-import { useEffect } from 'react'
+import { useEffect, useState  } from 'react'
 
 // use prop or context to get the shop information
 // change headers to label or headers?
 function ShopDetails() {
     const { id } = useParams()
     const dispatch = useDispatch()
+    const [isLoaded, setIsLoaded] = useState(false);
 
-    const shopDetails = useSelector((state) => state.shops.id)
-    // console.log(shopDetails)
+    const shopDetails = useSelector((state) => state.shops.ShopDetails)
+    if(isLoaded) console.log(shopDetails)
+useEffect( () => {
+    const fetchShopDetails = async() => {
+        await dispatch(loadShopDetailsThunk(id))
+        setIsLoaded(true);
 
-    useEffect(() => {
-        dispatch(loadShopDetailsThunk(id))
+        }
+
+        fetchShopDetails()
+
     }, [id, dispatch])
 
     return (
+        isLoaded && (
         <>
             <div id='shop-detail-cover-container'>
 
@@ -78,7 +86,7 @@ function ShopDetails() {
             />
         </>
     )
-
+    )
 }
 
 export default ShopDetails

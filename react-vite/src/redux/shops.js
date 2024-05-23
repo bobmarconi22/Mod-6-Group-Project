@@ -69,6 +69,7 @@ export const loadShopDetailsThunk = (id) => async (dispatch) => {
   const response = await fetch(`/api/shops/${id}`);
   if (response.ok) {
     const shop = await response.json();
+    // console.log("SHOP IN THUNK", shop)
     dispatch(loadShopDetails(shop));
     return shop;
   } else {
@@ -133,8 +134,13 @@ const shopsReducer = (state = {}, action) => {
     }
     case CREATE_SHOP:
       return { ...state, [action.payload.id]: action.payload };
+
     case LOAD_SHOP_DETAILS:
+      console.log("SHOP DETAILS INSIDE OF REDUCER", action.payload)
+      console.log("STATE", state)
+      console.log("STATE PLUS SHOP DETAILS", { ...state, ShopDetails: action.payload })
       return { ...state, ShopDetails: action.payload };
+
     case USER_SHOPS:
       newState = { ...state, userShops: {} };
       action.payload.forEach((shop) => {
