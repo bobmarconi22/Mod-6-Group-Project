@@ -15,9 +15,12 @@ function UserProfile() {
   const sessionUser = useSelector((state) => state.session.user);
   const userReviews = useSelector((state) => state.reviews.userReviews);
   const userShops = useSelector((state) => state.shops.userShops || {});
+  
+  const [isSubmitted, setIsSubmitted] = useState(false)
   const [isLoaded, setIsLoaded] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  
 
   useEffect(() => {
     if (sessionUser) {
@@ -26,7 +29,7 @@ function UserProfile() {
         setIsLoaded(true);
       });
     }
-  }, [dispatch, sessionUser, userReviews]);
+  }, [dispatch, sessionUser, isSubmitted]);
 
 
   const handleReviewDelete = async (id) => {
@@ -81,7 +84,7 @@ function UserProfile() {
                   <h4>{review.shop.name}</h4>
                   <p>{review.rating}/5 Coffee Beans</p>
                   <p>{review.review}</p>
-                  <div className="user_review_img_block">
+                  <div className="user-review-img-block">
                     {review.images.map((image, index) => (
                       <img
                         key={index}
@@ -94,7 +97,7 @@ function UserProfile() {
                 </a>
                 <OpenModalButton
                 buttonText="Edit Review"
-                modalComponent={<UpdateReviewModal reviewToEdit={review}/>}
+                modalComponent={<UpdateReviewModal reviewToEdit={review} setIsSubmitted={setIsSubmitted}/>}
                 />
                 <button id="delete" onClick={() => handleReviewDelete(review.id)}>
                   Delete Review
@@ -136,7 +139,7 @@ function UserProfile() {
                     <div>{"categories: " + shop.categories}</div>
                   </div>
                 </a>
-                <button id="update" onClick={() => handleShopUpdate(shop.id)}>
+                <button id="update" onClick={() => navigate(`/shops/${shop.id}/update`)}>
                   Update Shop
                 </button>
                 <button id="delete" onClick={() => handleShopDelete(shop.id)}>

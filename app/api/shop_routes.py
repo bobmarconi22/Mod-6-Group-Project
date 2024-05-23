@@ -85,18 +85,25 @@ def create_shop():
     address_form['csrf_token'].data = request.cookies['csrf_token']
     print(address_form.validate_on_submit())
     if shop_form.validate_on_submit() and address_form.validate_on_submit():
+
+            hours = {}
+
+            days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
+
+            for day in days:
+
+                day_open = f'{day}_open'
+                day_close = f'{day}_close'
+
+                if shop_form[day_open].data and shop_form[day_close].data:
+                    hours[day] = f'{shop_form.monday_open.data} - {shop_form.monday_close.data}'
+                else:
+                    hours[day] = 'Closed'
+
             new_shop = Shop(
                 name=shop_form.name.data,
                 description=shop_form.description.data,
-                hours={
-                    'monday': f'{shop_form.monday_open.data} - {shop_form.monday_close.data}',
-                    'tuesday': f'{shop_form.tuesday_open.data} - {shop_form.tuesday_close.data}',
-                    'wednesday': f'{shop_form.wednesday_open.data} - {shop_form.wednesday_close.data}',
-                    'thursday': f'{shop_form.thursday_open.data} - {shop_form.thursday_close.data}',
-                    'friday': f'{shop_form.friday_open.data} - {shop_form.friday_close.data}',
-                    'saturday': f'{shop_form.saturday_open.data} - {shop_form.saturday_close.data}',
-                    'sunday': f'{shop_form.sunday_open.data} - {shop_form.sunday_close.data}',
-                },
+                hours=hours,
                 website=shop_form.website.data,
                 phone_number=shop_form.phone_number.data,
                 price_range=shop_form.price_range.data,
@@ -105,7 +112,16 @@ def create_shop():
 
             db.session.add(new_shop)
             db.session.commit()
-            print('===============================>',new_shop)
+
+            new_image = Image(
+                user_id = current_user.id,
+                shop_id = new_shop.id,
+                img_link = shop_form.preview_image.data,
+                preview_image = True,
+            )
+
+            db.session.add(new_image)
+            db.session.commit()
 
             new_shop_address = Address(
                 shop_id=new_shop.id,
@@ -130,15 +146,87 @@ def create_shop():
             return jsonify(shop.to_dict(include_categories= True))
 
 
+#UPDATE SHOP
+@shop_routes.route("/<int:shop_id>/update", methods=['PUT'])
+@login_required
+def update_shop(shop_id):
+    shop_to_update = Shop.query.get_or_404(shop_id)
+    body = request.get_json()
+
+    shop_form = ShopForm()
+    address_form = AddressForm()
+
+    shop_form['csrf_token'].data = request.cookies['csrf_token']
+    address_form['csrf_token'].data = request.cookies['csrf_token']
+
+    if shop_form.validate_on_submit() and address_form.validate_on_submit():
+
+        hours = {}
+
+        days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
+
+        for day in days:
+
+            day_open = f'{day}_open'
+            day_close = f'{day}_close'
+
+            if shop_form[day_open].data and shop_form[day_close].data:
+                hours[day] = f'{shop_form.monday_open.data} - {shop_form.monday_close.data}'
+            else:
+                hours[day] = 'Closed'
+
+        shop_to_update.name = shop_form.name.data
+        shop_to_update.description = shop_form.description.data
+        shop_to_update.website = shop_form.website.data
+        shop_to_update.phone_number = shop_form.phone_number.data
+        shop_to_update.price_range = shop_form.price_range.data
+        shop_to_update.hours = hours
+
+        address_to_update = shop_to_update.address
+        address_to_update.address_line1 = address_form.address_line1.data
+        address_to_update.address_line2 = address_form.address_line2.data
+        address_to_update.city = address_form.city.data
+        address_to_update.state = address_form.state.data
+        address_to_update.postal_code = address_form.postal_code.data
+        address_to_update.country = address_form.country.data
+
+        current_category_ids = {category.id for category in shop_to_update.categories}
+        new_category_ids = set(body.get('categories', []))
+
+        for category_id in new_category_ids - current_category_ids:
+            category = Category.query.get(category_id)
+            if category:
+                shop_to_update.categories.append(category)
+
+        for category_id in current_category_ids - new_category_ids:
+            category = Category.query.get(category_id)
+            if category:
+                shop_to_update.categories.remove(category)
+
+        db.session.commit()
+
+        return jsonify(shop_to_update.to_dict(include_categories=True))
+
+    return jsonify({'error': 'Invalid data'}), 400
+
+
+
+
 #DELETE SHOP
 @shop_routes.route("/<int:shop_id>/delete", methods=['DELETE'])
 @login_required
 def delete_shop(shop_id):
     shop = Shop.query.get(shop_id)
-    shop_categories = selected_categories.query.filter(selected_categories.shop_id == shop_id).all()
+    categories = selected_categories.query.filter(selected_categories.shop_id == shop_id).all()
+    reviews = Review.query.filter(Review.shop_id == shop_id).all()
+    address = Address.query.filter(Address.shop_id == shop_id).all()
+    images = Image.query.filter(Image.shop_id == shop_id).all()
 
     db.session.delete(shop)
-    db.session.delete(shop_categories)
+    db.session.delete(categories)
+    db.session.delete(reviews)
+    db.session.delete(address)
+    db.session.delete(images)
     db.session.commit()
 
 
@@ -218,3 +306,20 @@ def create_review(shop_id):
 
     else:
         return jsonify({'errors': review_form.errors})
+
+
+# get all reviews by shop
+    
+
+@shop_routes.route('/<int:shopId>/reviews')
+def get_all_reviews_by_shop(shopId):
+
+    reviews = Review.query.options(joinedload(Review.image)).filter_by(shop_id = shopId).all()
+
+    reviews_to_dict = []
+    for review in reviews:
+        review_dict = review.to_dict(include_shop=True, include_reviewer=True)
+        reviews_to_dict.append(review_dict)
+        
+
+    return jsonify(reviews_to_dict)

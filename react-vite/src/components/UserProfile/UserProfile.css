@@ -66,3 +66,14 @@
     margin: 0 auto;
     margin-bottom: 15px;
 }
+
+.user-review-image-block {
+   display: flex;
+}
+
+img {
+    width: 200px;
+    height: 200px;
+    
+
+}

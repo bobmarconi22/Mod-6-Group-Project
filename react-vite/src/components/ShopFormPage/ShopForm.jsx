@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createShopThunk } from "../../redux/shops";
-import { useNavigate } from "react-router-dom";
+import {
+  createShopThunk,
+  loadShopDetailsThunk,
+  updateShopThunk,
+} from "../../redux/shops";
+import { useNavigate, useParams } from "react-router-dom";
 import "./ShopForm.css";
 import { getAllCategories } from "../../redux/categories";
 import { loadShopsThunk } from "../../redux/shops";
@@ -9,22 +13,24 @@ import { loadShopsThunk } from "../../redux/shops";
 function ShopFormPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { id } = useParams();
   const sessionUser = useSelector((state) => state.session.user);
   const allCategories = useSelector((state) => state.categories.categories);
+  const shop = useSelector((state) => state.shops.ShopDetails);
   const [isLoaded, setIsLoaded] = useState(false);
   const [edit, setEdit] = useState(false);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [hours, setHours] = useState({
-    Monday: { open: "Open", close: "Close" },
-    Tuesday: { open: "Open", close: "Close" },
-    Wednesday: { open: "Open", close: "Close" },
-    Thursday: { open: "Open", close: "Close" },
-    Friday: { open: "Open", close: "Close" },
-    Saturday: { open: "Open", close: "Close" },
-    Sunday: { open: "Open", close: "Close" },
+    Monday: { open: "", close: "" },
+    Tuesday: { open: "", close: "" },
+    Wednesday: { open: "", close: "" },
+    Thursday: { open: "", close: "" },
+    Friday: { open: "", close: "" },
+    Saturday: { open: "", close: "" },
+    Sunday: { open: "", close: "" },
   });
-  const [selectedDay, setSelectedDay] = useState("Monday");
+  const [selectedDays, setSelectedDays] = useState([]);
   const [streetOne, setStreetOne] = useState("");
   const [streetTwo, setStreetTwo] = useState("");
   const [city, setCity] = useState("");
@@ -37,15 +43,46 @@ function ShopFormPage() {
   const [priceRange, setPriceRange] = useState("");
   const [errors, setErrors] = useState({});
   const [categories, setCategories] = useState([]);
+  const [image, setImage] = useState("");
 
   useEffect(() => {
     const fetchCategories = async () => {
       await dispatch(getAllCategories());
       setIsLoaded(true);
     };
-    fetchCategories();
-    dispatch(loadShopsThunk());
-    setEdit(true);
+    if (id) {
+      dispatch(loadShopDetailsThunk(id)).then((shop) => {
+        setName(shop.name);
+        setDescription(shop.description);
+        setWebsite(shop.website);
+        setPhoneNumber(shop.phone_number);
+        setPriceRange(shop.price_range);
+        setStreetOne(shop.address.address_line1);
+        setStreetTwo(shop.address.address_line2);
+        setCity(shop.address.city);
+        setState(shop.address.state);
+        setPostal(shop.address.postal_code);
+        setCountry(shop.address.country);
+        setCategories(shop.categories);
+
+        Object.keys(shop.hours).forEach((day) => {
+          setHours((prevHours) => ({
+            ...prevHours,
+            [day[0].toUpperCase() + day.slice(1)]: {
+              ...prevHours[day[0].toUpperCase() + day.slice(1)],
+              open: shop.hours[day].split(" - ")[0],
+              close: shop.hours[day].split(" - ")[1],
+            },
+          }));
+        });
+
+        setEdit(true);
+        setIsLoaded(true);
+      });
+    } else {
+      fetchCategories();
+      dispatch(loadShopsThunk());
+    }
   }, [dispatch]);
 
   const times = [
@@ -79,6 +116,7 @@ function ShopFormPage() {
     "1:30pm",
     "2:00pm",
     "2:30pm",
+    "3:00pm",
     "3:30pm",
     "4:00pm",
     "4:30pm",
@@ -104,12 +142,6 @@ function ShopFormPage() {
     const err = {};
     if (!name) err.name = "Name is required!";
     if (!description) err.description = "Description is required!";
-    if (
-      Object.values(hours).some(
-        (day) => day.open === "Open" || day.close === "Close"
-      )
-    )
-      err.hours = "Please specify Opening and Closing hours for every day!";
     if (!website) err.website = "Website is required!";
     if (!priceRange || isNaN(priceRange) || priceRange < 1 || priceRange > 5)
       err.priceRange = "Please select an average price!";
@@ -121,7 +153,7 @@ function ShopFormPage() {
     setErrors(err);
 
     if (Object.keys(err).length === 0) {
-      const newShop = {
+      const new_shop = {
         name,
         owner_id: sessionUser.id,
         description,
@@ -149,46 +181,59 @@ function ShopFormPage() {
         postal_code: postal,
         country,
         categories,
+        preview_image: image,
       };
-      const data = await dispatch(createShopThunk(newShop));
-      navigate(`/shops/${data.id}`)
+      if (edit) {
+        const data = await dispatch(updateShopThunk(new_shop, shop.id));
+        console.log("================>", data);
+        navigate(`/shops/${data.id}`);
+      } else {
+        const data = await dispatch(createShopThunk(new_shop));
+        navigate(`/shops/${data.id}`);
+      }
     }
-
   };
 
   const handleDemoHours = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     Object.keys(hours).forEach((day) => {
       setHours((prevHours) => ({
-      ...prevHours,
-      [day]: {
-        ...prevHours[day],
-        open: '6:30am',
-        close: '6:30pm',
-      },
-    }));
-    })
-
-  }
-
-  const handleOpenChange = (day, value) => {
-    setHours((prevHours) => ({
-      ...prevHours,
-      [day]: {
-        ...prevHours[day],
-        open: value,
-      },
-    }));
+        ...prevHours,
+        [day]: {
+          ...prevHours[day],
+          open: "6:30am",
+          close: "6:30pm",
+        },
+      }));
+    });
   };
 
-  const handleCloseChange = (day, value) => {
-    setHours((prevHours) => ({
-      ...prevHours,
-      [day]: {
-        ...prevHours[day],
-        close: value,
-      },
-    }));
+  const handleClearDays = (e) => {
+    e.preventDefault();
+    setSelectedDays([]);
+  };
+  const handleOpenChange = (days, value) => {
+    days.forEach((day) => {
+      setHours((prevHours) => ({
+        ...prevHours,
+        [day]: {
+          ...prevHours[day],
+          open: value,
+        },
+      }));
+    });
+  };
+
+  const handleCloseChange = (days, value) => {
+    days.forEach((day) => {
+      setHours((prevHours) => ({
+        ...prevHours,
+        [day]: {
+          ...prevHours[day],
+          close: value,
+        },
+      }));
+    });
   };
 
   const handleCategoriesChange = (e) => {
@@ -204,7 +249,7 @@ function ShopFormPage() {
       <h1 style={{ textAlign: "center" }}>Please Log In or Sign Up</h1>
     )) || (
       <div>
-        <h1>Create A Shop</h1>
+        {edit ? <h1>Update {shop.name}</h1> : <h1>Create A Shop</h1>}
         {Object.values(errors).map((message, idx) => (
           <p key={idx}>{message}</p>
         ))}
@@ -223,24 +268,26 @@ function ShopFormPage() {
             Hours
             <div>
               <select
-                value={selectedDay}
-                onChange={(e) =>
-                  setSelectedDay(e.target.value)
-                }
-                required
+                multiple
+                value={selectedDays}
+                onChange={(e) => setSelectedDays((prevDays) => [...prevDays, e.target.value])}
               >
                 {Object.keys(hours).map((day, index) => (
                   <option key={index} value={day}>
-                    {day}
+                    {day.charAt(0).toUpperCase() + day.slice(1)}
                   </option>
                 ))}
               </select>
               <select
-                value={selectedDay.open}
-                onChange={(e) => handleOpenChange(selectedDay, e.target.value)}
-                required
+                disabled={!selectedDays.length}
+                value={
+                  selectedDays.length && hours[selectedDays[0]]
+                    ? hours[selectedDays[0]].open
+                    : ""
+                }
+                onChange={(e) => handleOpenChange(selectedDays, e.target.value)}
               >
-                <option value="Open" disabled>
+                <option value="" disabled>
                   Open
                 </option>
                 {times.map((time, index) => (
@@ -251,18 +298,25 @@ function ShopFormPage() {
               </select>
               -
               <select
-                value={selectedDay.close}
-                onChange={(e) => handleCloseChange(selectedDay, e.target.value)}
-                required
+                disabled={!selectedDays.length}
+                value={
+                  selectedDays.length && hours[selectedDays[0]]
+                    ? hours[selectedDays[0]].close
+                    : ""
+                }
+                onChange={(e) =>
+                  handleCloseChange(selectedDays, e.target.value)
+                }
               >
-                <option value="Close" disabled>
+                <option value="" disabled>
                   Close
                 </option>
                 {times
                   .filter(
                     (time) =>
+                      selectedDays.length &&
                       times.indexOf(time) >
-                      times.indexOf(hours[selectedDay].open)
+                        times.indexOf(hours[selectedDays[0]].open)
                   )
                   .map((time, index) => (
                     <option key={index} value={time}>
@@ -272,14 +326,25 @@ function ShopFormPage() {
               </select>
             </div>
           </label>
-          <button id="set-hours-button" onClick={(e) => handleDemoHours(e)}>Demo Hours</button>
-          {Object.keys(hours).map((day) => (
-            <div key={day}>
-              <p>
-                {day}: {hours[day].open} - {hours[day].close}
-              </p>
-            </div>
-          ))}
+          <button id="clear-days-button" onClick={(e) => handleClearDays(e)}>
+            Clear Days
+          </button>
+          <button id="set-hours-button" onClick={(e) => handleDemoHours(e)}>
+            Demo Hours
+          </button>
+          {Object.keys(hours).map((day) =>
+            hours[day].open ? (
+              <div key={day}>
+                <p>
+                  {day}: {hours[day].open} - {hours[day].close}
+                </p>
+              </div>
+            ) : (
+              <div key={day}>
+                <p>{day}: Closed</p>
+              </div>
+            )
+          )}
           {errors.hours && <p>{errors.hours}</p>}
           <h2>Address</h2>
           <label>
@@ -459,16 +524,24 @@ function ShopFormPage() {
             </select>
           </label>
           {errors.categories && <p>{errors.categories}</p>}
-          {edit && (
+          {!edit && (
             <>
               <h2>Images</h2>
-              <input
-                type="text"
-                value={'images'}
-              />
+              <label>
+                Preview Image
+                <input
+                  type="text"
+                  value={image}
+                  onChange={(e) => setImage(e.target.value)}
+                />
+              </label>
             </>
           )}
-          <button type="submit">Create Shop</button>
+          {edit ? (
+            <button type="submit">Update</button>
+          ) : (
+            <button type="submit">Create</button>
+          )}
         </form>
       </div>
     )

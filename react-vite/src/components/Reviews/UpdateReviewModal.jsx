@@ -7,9 +7,10 @@ import { updateReviewThunk } from '../../redux/reviews'
 
 
 
-function UpdateReviewModal ({reviewToEdit}){
+function UpdateReviewModal ({reviewToEdit, setIsSubmitted}){
 
-    const shop = useSelector((state) => state.shops.ShopDetails)
+    const shop = useSelector((state) => state.shops.userShops)
+    console.log(shop && shop.name)
 
     const [beans, setBeans] = useState(reviewToEdit?.rating)
     const [review, setReview] = useState(reviewToEdit?.review)
@@ -26,16 +27,20 @@ function UpdateReviewModal ({reviewToEdit}){
             review
         }
 
-        await dispatch(updateReviewThunk(updatedReview))
+        return dispatch(updateReviewThunk(updatedReview)).then(() => setIsSubmitted(true)).then(() => closeModal()).catch(async (res) => {
+            const data = await res.json();
+            if(data?.errors) {
+                setErrors(data.errors)
+            }
+        })
 
-        closeModal()
     }
-
 
     return (
         <>
-            <h1>{shop && shop.name}</h1>
+            <h1>{shop?.name}</h1>
             <form onSubmit={handleSubmit}>
+            <div><span>{errors.review}</span><span>{errors.rating}</span> </div>
                 <BeanRating setBeans={setBeans} filledBeans={beans}/>
                 <input className='review'
                     type='text'

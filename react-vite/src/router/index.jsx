@@ -29,15 +29,18 @@ export const router = createBrowserRouter([
         path: "new-shop",
         element: <ShopFormPage />,
       },
-
+      {
+        path: "shops/:id/update",
+        element: <ShopFormPage />
+      },
       {
         path: "shops/:id",
         element: <ShopDetails />,
       },
-       {
-            path: "shops/:id/images",
-            element: <ShopImagesPage />
-          },
+      {
+        path: "shops/:id/images",
+        element: <ShopImagesPage />
+      },
       {
         path: "/profile",
         element: <UserProfile />,

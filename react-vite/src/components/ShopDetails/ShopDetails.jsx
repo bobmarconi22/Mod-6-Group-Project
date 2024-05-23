@@ -1,13 +1,14 @@
 import './ShopDetails.css'
 import OpenModalButton from "../OpenModalButton";
 import CreateReviewModal from '../Reviews/CreateReviewModal'
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { loadShopDetailsThunk } from '../../redux/shops'
-import { useEffect, useState  } from 'react'
+import { useEffect, useState } from 'react'
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import ShopImagesModal from '../ShopImagesModal';
+import ReviewsComponent from '../ReviewsComponent/ReviewsComponent';
 
 // use prop or context to get the shop information
 // change headers to label or headers?
@@ -18,84 +19,81 @@ function ShopDetails() {
     const sessionUser = useSelector((state) => state.session.user);
 
     const shopDetails = useSelector((state) => state.shops.ShopDetails)
-    if(isLoaded) console.log(shopDetails)
-    useEffect( () => {
-    const fetchShopDetails = async() => {
-        await dispatch(loadShopDetailsThunk(id))
+    if (isLoaded) console.log(shopDetails)
+    useEffect(() => {
+
+        dispatch(loadShopDetailsThunk(id))
         setIsLoaded(true);
-
-        }
-
-        fetchShopDetails()
 
     }, [id, dispatch])
 
     return (
         isLoaded && (
-        <>
-            <div id='shop-detail-cover-container'>
+            <>
+                <div id='shop-detail-cover-container'>
 
-                <img src='img.png' />
-                <div className='shop-detail-heading-container'>
-                    <div>{shopDetails?.name}</div>
-                    <div>{'Avg Rating: ' + shopDetails?.avg_rating} {' Num Reviews: ' + shopDetails?.num_reviews}</div>
-                    <div>{shopDetails?.price_range}</div>
-                    <div>{shopDetails?.categories}</div>
-                    {/* hours not working because how it is formatted */}
-                    {/* <div>see hours</div> */}
+                    <img src='img.png' />
+                    <div className='shop-detail-heading-container'>
+                        <div>{shopDetails?.name}</div>
+                        <div>{'Avg Rating: ' + shopDetails?.avg_rating} {' Num Reviews: ' + shopDetails?.num_reviews}</div>
+                        <div>{shopDetails?.price_range}</div>
+                        <div>{shopDetails?.categories}</div>
+                        {/* hours not working because how it is formatted */}
+                        {/* <div>see hours</div> */}
+                    </div>
+                    <Link to={`images`}>
+                        <button className='see-all-photos-button'>See all #{shopDetails?.image.length} photos</button>
+                    </Link>
+                    {/* shop details is checked before it gets the information, must check if shopdetails exists */}
+                    {sessionUser && shopDetails && sessionUser.id === shopDetails.owner_id ? (<button>
+                        <OpenModalMenuItem
+                            itemText="Add an Image"
+                            modalComponent={<ShopImagesModal shop_id={shopDetails.id} user_id={sessionUser.id} shop_name={shopDetails.name} />}
+                        />
+                    </button>) : null}
+
                 </div>
-                <Link to={`images`}>
-                <button className='see-all-photos-button'>See all #{shopDetails?.image.length} photos</button>
-                </Link>
-                {sessionUser.id === shopDetails.owner_id ?  (<button>
-                  <OpenModalMenuItem
-                itemText="Add an Image"
-                modalComponent={<ShopImagesModal shop_id={shopDetails.id} user_id={sessionUser.id} shop_name={shopDetails.name}/>}
-              />
-              </button>) : null}
-
-            </div>
-
-            <div>Menu</div>
+                {/* <div>Menu</div>
             <div>
                 <div>
                     <img src='img.png'></img>
                     insert menu items here
                 </div>
-            </div>
-            <div id='shop-detail-additional-info-container'>
-                <a href={shopDetails?.website}>{shopDetails?.website}</a>
-                {/* shop details address not finished, spread it out/break down values */}
-                {/* <div>{(shopDetails?.address)}</div> */}
-                {/* reformat phone number to be in (###)###-#### */}
-                <div>{shopDetails?.phone_number}</div>
-            </div>
+            </div> */}
+                <div id='shop-detail-additional-info-container'>
+                    <a href={shopDetails?.website}>{shopDetails?.website}</a>
+                    {/* shop details address not finished, spread it out/break down values */}
+                    {/* <div>{(shopDetails?.address)}</div> */}
+                    {/* reformat phone number to be in (###)###-#### */}
+                    <div>{shopDetails?.phone_number}</div>
+                </div>
 
-            <div id='hours-address-container'>
-                <div>
-                    {/* hours not working because how it is formatted */}
-                    All hours
-                    <div>insert hours here</div>
+                <div id='hours-address-container'>
+                    <div>
+                        {/* hours not working because how it is formatted */}
+                        All hours
+                        <div>insert hours here</div>
+                    </div>
+                    <div>
+                        Address
+                        <img src='img.png' />
+                        <button>Get Directions</button>
+                    </div>
                 </div>
-                <div>
-                    Address
-                    <img src='img.png' />
-                    <button>Get Directions</button>
-                </div>
-            </div>
 
-            <div>
-                About {shopDetails?.name}
                 <div>
-                    {shopDetails?.description}
+                    About {shopDetails?.name}
+                    <div>
+                        {shopDetails?.description}
+                    </div>
                 </div>
-            </div>
-            <OpenModalButton
-                buttonText="Write a Review"
-                modalComponent={<CreateReviewModal />}
-            />
-        </>
-    )
+                <OpenModalButton
+                    buttonText="Write a Review"
+                    modalComponent={<CreateReviewModal />}
+                />
+                <ReviewsComponent review={shopDetails?.review} />
+            </>
+        )
     )
 }
 
