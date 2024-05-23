@@ -151,10 +151,8 @@ function ShopFormPage() {
         categories,
       };
       const data = await dispatch(createShopThunk(newShop));
-      dispatch(loadShopsThunk())
-      if (!data.ok) {
-        navigate('/')
-      }
+        navigate(`/shops/${data.id}`)
+
     }
 
   };
