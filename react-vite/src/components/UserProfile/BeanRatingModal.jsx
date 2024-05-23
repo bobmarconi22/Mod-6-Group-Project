@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { CiCoffeeBean } from "react-icons/ci";
 import { BiSolidCoffeeBean } from "react-icons/bi";
-import '../Reviews/BeanRating.css'
+import '../ReviewModals/BeanRating.css'
 
 
 const BeanRating =({beanRating}) => {
