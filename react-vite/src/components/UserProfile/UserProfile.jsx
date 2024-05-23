@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import { deleteReviewThunk, getReviewsByUserIdThunk } from "../../redux/reviews";
 import { deleteShopThunk, getShopsByUserIdThunk } from "../../redux/shops";
 import { useNavigate } from "react-router-dom";
+import { UpdateReviewModal } from '../Reviews'
+import OpenModalButton from '../OpenModalButton'
 
 // use prop or context to get the shop information
 // change headers to label or headers?
@@ -24,11 +26,8 @@ function UserProfile() {
         setIsLoaded(true);
       });
     }
-  }, [dispatch, sessionUser]);
+  }, [dispatch, sessionUser, userReviews]);
 
-  const handleReviewUpdate = async () => {
-    console.log("update review");
-  };
 
   const handleReviewDelete = async (id) => {
     dispatch(deleteReviewThunk(id))
@@ -93,9 +92,10 @@ function UserProfile() {
                   </div>
                   <p>{review.created_at}</p>
                 </a>
-                <button id="update" onClick={() => handleReviewUpdate(review.id)}>
-                  Update Review
-                </button>
+                <OpenModalButton
+                buttonText="Edit Review"
+                modalComponent={<UpdateReviewModal reviewToEdit={review}/>}
+                />
                 <button id="delete" onClick={() => handleReviewDelete(review.id)}>
                   Delete Review
                 </button>

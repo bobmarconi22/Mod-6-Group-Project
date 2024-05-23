@@ -23,18 +23,18 @@ def current_user_reviews():
 @login_required 
 def update_review(review_id):
     
-    review = Review.query.get(review_id)
+    review_to_edit = Review.query.get(review_id)
 
-    if review.user_id == current_user.id:
+    if review_to_edit.user_id == current_user.id:
         review_form = ReviewEditForm()
         review_form['csrf_token'].data = request.cookies['csrf_token']
         if review_form.validate_on_submit():
-            review.rating = review_form.rating.data 
-            review.review = review_form.review.data
+            review_to_edit.rating = review_form.rating.data 
+            review_to_edit.review = review_form.review.data
         
             db.session.commit()
 
-            return review.to_dict()
+            return jsonify(review_to_edit.to_dict())
 
     abort(401, description='Unauthorized')
 
