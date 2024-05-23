@@ -212,6 +212,12 @@ function ShopFormPage() {
     e.preventDefault();
     setSelectedDays([]);
   };
+
+  const handleClearCategories = (e) => {
+    e.preventDefault();
+    setCategories([]);
+  };
+
   const handleOpenChange = (days, value) => {
     days.forEach((day) => {
       setHours((prevHours) => ({
@@ -246,20 +252,33 @@ function ShopFormPage() {
 
   return (
     (isLoaded && !sessionUser && (
-      <h1 style={{ textAlign: "center", marginTop: '25px' }}>Please Log In or Sign Up</h1>
+      <h1 style={{ textAlign: "center", marginTop: "25px" }}>
+        Please Log In or Sign Up
+      </h1>
     )) || (
       <div>
-        {edit ? <h1 id="form-title">Update {shop.name}</h1> : <h1 id="form-title">Create A Shop</h1>}
-        {Object.values(errors).map((message, idx) => (
-          <p key={idx}>{message}</p>
-        ))}
-        <form onSubmit={handleSubmit}>
+        {edit ? (
+            <h1 className="form-title">Update `{shop.name}`</h1>
+        ) : (
+          <>
+            <h1 className="form-title">Create a Shop</h1>
+            <button
+              id="form-demo-button"
+              onClick={(e) => handleDemoData(e)}
+            >
+              Demo Form Data
+            </button>
+          </>
+        )}
+        <form id="create-edit-form" onSubmit={handleSubmit}>
           <div className="form-header">
-          <h3>General Information</h3>
-          <p>Give people some details about your coffee shop!</p>
+            <h3>General Information</h3>
+            <p>Give your customers some details about your new coffee shop!</p>
           </div>
           <label>
-            <p className="form-label">Name</p>
+            <p className="form-label" style={{ borderTop: "none" }}>
+              Name
+            </p>
             <input
               type="text"
               value={name}
@@ -267,22 +286,31 @@ function ShopFormPage() {
               required
             />
           </label>
-          {errors.name && <p>{errors.name}</p>}
           <label>
-            Hours
+            <p className="form-label">Hours</p>
             <div>
               <select
+                id="multiple-select"
                 multiple
                 value={selectedDays}
-                onChange={(e) => setSelectedDays((prevDays) => [...prevDays, e.target.value])}
+                onChange={(e) =>
+                  setSelectedDays((prevDays) => [...prevDays, e.target.value])
+                }
               >
-                {Object.keys(hours).map((day, index) => (
-                  <option key={index} value={day}>
-                    {day.charAt(0).toUpperCase() + day.slice(1)}
-                  </option>
-                ))}
+                {Object.keys(hours).map((day) =>
+                  hours[day] && hours[day].open ? (
+                    <option key={day} value={day}>
+                      {day}: {hours[day].open} - {hours[day].close}
+                    </option>
+                  ) : (
+                    <option key={day} value={day}>
+                      {day}: Closed
+                    </option>
+                  )
+                )}
               </select>
               <select
+                className="time-select"
                 disabled={!selectedDays.length}
                 value={
                   selectedDays.length && hours[selectedDays[0]]
@@ -300,9 +328,9 @@ function ShopFormPage() {
                   </option>
                 ))}
               </select>
-              -
               <select
                 disabled={!selectedDays.length}
+                className="time-select"
                 value={
                   selectedDays.length && hours[selectedDays[0]]
                     ? hours[selectedDays[0]].close
@@ -312,7 +340,7 @@ function ShopFormPage() {
                   handleCloseChange(selectedDays, e.target.value)
                 }
               >
-                <option value="" disabled>
+                <option className="time-select" value="" disabled>
                   Close
                 </option>
                 {times
@@ -328,31 +356,110 @@ function ShopFormPage() {
                     </option>
                   ))}
               </select>
+              <button
+                className="hours-button"
+                onClick={(e) => handleClearDays(e)}
+              >
+                Clear Days
+              </button>
             </div>
           </label>
-          <button id="clear-days-button" onClick={(e) => handleClearDays(e)}>
-            Clear Days
-          </button>
-          <button id="set-hours-button" onClick={(e) => handleDemoHours(e)}>
-            Demo Hours
-          </button>
-          {Object.keys(hours).map((day) =>
-            hours[day].open ? (
-              <div key={day}>
-                <p>
-                  {day}: {hours[day].open} - {hours[day].close}
-                </p>
-              </div>
-            ) : (
-              <div key={day}>
-                <p>{day}: Closed</p>
-              </div>
-            )
-          )}
-          {errors.hours && <p>{errors.hours}</p>}
-          <h2>Address</h2>
           <label>
-            Street Address 1
+            <p className="form-label">Website</p>
+            <input
+              type="text"
+              value={website}
+              onChange={(e) => setWebsite(e.target.value)}
+              required
+            />
+          </label>
+          <label>
+            <div className="text-specification">
+              <p className="form-label">Phone Number</p>
+              <i>(optional)</i>
+            </div>
+            <input
+              type="number"
+              value={phoneNumber}
+              onChange={(e) => setPhoneNumber(e.target.value)}
+            />
+          </label>
+          <label>
+            <div>
+              <p className="form-label">Price Range</p>
+              {[1, 2, 3, 4].map((value) => (
+                <span
+                  key={value}
+                  className={
+                    value <= priceRange ? "form-dollar-filled" : "form-dollar"
+                  }
+                  onClick={() => setPriceRange(value)}
+                >
+                  &#36;
+                </span>
+              ))}
+            </div>
+          </label>
+          {errors.priceRange && (
+            <i style={{ color: "#FF253F", fontSize: "10px" }}>
+              {errors.priceRange}
+            </i>
+          )}
+          <div className="form-header">
+            <h3>Additional Information</h3>
+            <p>
+              Tell customers more about your shop, be specific about things you
+              offer and serve!
+            </p>
+          </div>
+          <label>
+            <div className="text-specification">
+              <p className="form-label">Description</p>
+              <i>Up to 200 characters</i>
+            </div>
+            <textarea
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              required
+            />
+          </label>
+          <label>
+            <div className="text-specification">
+              <p className="form-label">Categories</p>
+              <i>Select up to 8 (optional)</i>
+            </div>
+            <select
+              multiple
+              id="multiple-select"
+              value={categories}
+              onChange={(e) => handleCategoriesChange(e)}
+            >
+              {Object.entries(allCategories).map((category, index) => (
+                <option
+                  key={index}
+                  value={category[1].name}
+                  disabled={
+                    categories.length === 8 &&
+                    !categories.includes(category[1].name)
+                  }
+                >
+                  {category[1].name}
+                </option>
+              ))}
+            </select>
+          </label>
+          <button
+            className="hours-button"
+            onClick={(e) => handleClearCategories(e)}
+          >
+            Clear Categories
+          </button>
+          <div className="form-header">
+            <h3>Location</h3>
+            <p>Where are you located?</p>
+          </div>
+          <label>
+            <p className="form-label">Street Address 1</p>
             <input
               type="text"
               value={streetOne}
@@ -360,18 +467,19 @@ function ShopFormPage() {
               required
             />
           </label>
-          {errors.streetOne && <p>{errors.streetOne}</p>}
           <label>
-            Street Address 2
+            <div className="text-specification">
+              <p className="form-label">Street Address 2</p>
+              <i>(optional)</i>
+            </div>
             <input
               type="text"
               value={streetTwo}
               onChange={(e) => setStreetTwo(e.target.value)}
             />
           </label>
-          {errors.streetTwo && <p>{errors.streetTwo}</p>}
           <label>
-            City
+            <p className="form-label">City</p>
             <input
               type="text"
               value={city}
@@ -379,12 +487,11 @@ function ShopFormPage() {
               required
             />
           </label>
-          {errors.city && <p>{errors.city}</p>}
           <label>
-            State
             <select
               value={state}
               onChange={(e) => setState(e.target.value)}
+              style={{fontSize: '16px', marginTop: '30px'}}
               required
             >
               <option value="" disabled>
@@ -443,7 +550,7 @@ function ShopFormPage() {
             </select>
           </label>
           <label>
-            Country
+            <p className="form-label">Country</p>
             <input
               type="text"
               value={country}
@@ -451,9 +558,8 @@ function ShopFormPage() {
               required
             />
           </label>
-          {errors.country && <p>{errors.country}</p>}
           <label>
-            Postal Code
+            <p className="form-label">Postal Code</p>
             <input
               type="number"
               value={postal}
@@ -461,90 +567,39 @@ function ShopFormPage() {
               required
             />
           </label>
-          {errors.postal && <p>{errors.postal}</p>}
-          <h2>Additional Information</h2>
-          <label>
-            Website
-            <input
-              type="text"
-              value={website}
-              onChange={(e) => setWebsite(e.target.value)}
-              required
-            />
-          </label>
-          {errors.website && <p>{errors.website}</p>}
-          <label>
-            Phone Number
-            <input
-              type="number"
-              value={phoneNumber}
-              onChange={(e) => setPhoneNumber(e.target.value)}
-              required
-            />
-          </label>
-          <label>
-            <div>
-              Price Range:
-              {[1, 2, 3, 4, 5].map((value) => (
-                <span
-                  key={value}
-                  className={value <= priceRange ? "dollar-filled" : "dollar"}
-                  onClick={() => setPriceRange(value)}
-                >
-                  &#36;
-                </span>
-              ))}
-            </div>
-          </label>
-          {errors.priceRange && <p>{errors.priceRange}</p>}
-          <label>
-            Description
-            <textarea
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              required
-            />
-          </label>
-          {errors.description && <p>{errors.description}</p>}
-          <label>
-            Categories
-            <select
-              multiple
-              value={categories}
-              onChange={(e) => handleCategoriesChange(e)}
-            >
-              {Object.entries(allCategories).map((category, index) => (
-                <option
-                  key={index}
-                  value={category[1].name}
-                  disabled={
-                    categories.length === 8 &&
-                    !categories.includes(category[1].name)
-                  }
-                >
-                  {category[1].name}
-                </option>
-              ))}
-            </select>
-          </label>
-          {errors.categories && <p>{errors.categories}</p>}
           {!edit && (
             <>
-              <h2>Images</h2>
+              <div className="form-header">
+                <h3>Photos</h3>
+                <p>
+                  Attach an image that we will display as your main photo for
+                  guests to see. Be sure to make a good first impression!
+                </p>
+              </div>
               <label>
-                Preview Image
+                <p className="form-label">Preview Photo Url</p>
                 <input
                   type="text"
                   value={image}
                   onChange={(e) => setImage(e.target.value)}
+                  required
                 />
               </label>
             </>
           )}
+          {Object.values(errors).map((message, idx) => (
+            <i key={idx} style={{ color: "#FF253F", fontSize: "10px" }}>
+              {message}
+            </i>
+          ))}
           {edit ? (
-            <button type="submit">Update</button>
+            <button type="submit" className="form-submit-button">
+              Update
+            </button>
           ) : (
-            <button type="submit">Create</button>
+            <button type="submit" className="form-submit-button">
+              Create
+            </button>
           )}
         </form>
       </div>
