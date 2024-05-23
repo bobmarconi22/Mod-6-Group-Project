@@ -25,7 +25,7 @@ function ShopImagesPage() {
         isLoaded && (
         <div className='shop-images-page'>
             <div className='gallery-div'>
-            <h1>Photos for the <Link to={`/shops/${shopDetails.id}`}>{shopDetails.name}</Link></h1>
+            <h1>Photos for <Link to={`/shops/${shopDetails.id}`}>{shopDetails.name}</Link></h1>
             <div className='gallery'>
                 {shopDetails.image.map(imageObj => {
                     console.log("IMAGE IN MAP", imageObj)
