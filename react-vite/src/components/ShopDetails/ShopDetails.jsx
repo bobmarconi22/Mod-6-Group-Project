@@ -24,6 +24,7 @@ function ShopDetails() {
     return (
         <>
             <div id='shop-detail-cover-container'>
+
                 <img src='img.png' />
                 <div className='shop-detail-heading-container'>
                     <div>{shopDetails?.name}</div>
