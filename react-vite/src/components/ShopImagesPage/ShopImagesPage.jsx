@@ -7,7 +7,7 @@ import { Link} from "react-router-dom";
 import { GoDotFill } from "react-icons/go";
 import { FaTrashAlt } from "react-icons/fa";
 import ShopImagesModal from '../ShopImagesModal';
-import NotListItemModal from './NotListItemModal';
+import NotListItemModal from '../NotListItemModal';
 import DeleteImagesModal from './DeleteImageModal';
 
 
