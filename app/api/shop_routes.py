@@ -191,19 +191,12 @@ def update_shop(shop_id):
         address_to_update.postal_code = address_form.postal_code.data
         address_to_update.country = address_form.country.data
 
-        current_category_ids = {category.id for category in shop_to_update.categories}
-        new_category_ids = set(body.get('categories', []))
+        shop_to_update.categories.clear()
 
-        for category_id in new_category_ids - current_category_ids:
-            category = Category.query.get(category_id)
-            if category:
-                shop_to_update.categories.append(category)
-
-        for category_id in current_category_ids - new_category_ids:
-            category = Category.query.get(category_id)
-            if category:
-                shop_to_update.categories.remove(category)
-
+        categories = body.get('categories', [])
+        for category_name in categories:
+            category = Category.query.filter_by(name = category_name).first()
+            db.session.execute(selected_categories.insert().values(shop_id=shop_to_update.id, category_id=category.id))
         db.session.commit()
 
         return jsonify(shop_to_update.to_dict(include_categories=True))
