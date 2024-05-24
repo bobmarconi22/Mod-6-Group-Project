@@ -1,8 +1,8 @@
-"""updating cascade again
+"""initial migrate
 
-Revision ID: fd61245f24b6
+Revision ID: 915a3b5af1ab
 Revises:
-Create Date: 2024-05-24 00:10:31.778424
+Create Date: 2024-05-24 14:23:19.489113
 
 """
 from alembic import op
@@ -14,7 +14,7 @@ environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
 # revision identifiers, used by Alembic.
-revision = 'fd61245f24b6'
+revision = '915a3b5af1ab'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -32,7 +32,7 @@ def upgrade():
     sa.Column('username', sa.String(length=40), nullable=False),
     sa.Column('first_name', sa.String(length=25), nullable=False),
     sa.Column('last_name', sa.String(length=25), nullable=False),
-    sa.Column('email', sa.String(length=1000), nullable=False),
+    sa.Column('email', sa.String(length=255), nullable=False),
     sa.Column('phone_number', sa.String(length=18), nullable=True),
     sa.Column('city', sa.String(length=25), nullable=False),
     sa.Column('state', sa.String(length=25), nullable=False),
@@ -48,7 +48,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('owner_id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=40), nullable=False),
-    sa.Column('description', sa.String(length=255), nullable=False),
+    sa.Column('description', sa.String(length=1000), nullable=False),
     sa.Column('hours', postgresql.JSON(astext_type=Text()), nullable=False),
     sa.Column('website', sa.String(length=500), nullable=False),
     sa.Column('phone_number', sa.String(length=10), nullable=True),
@@ -112,6 +112,7 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
     )
+
     if environment == "production":
         op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
     # ### end Alembic commands ###
