@@ -72,7 +72,7 @@ function ShopFormPage() {
               ...prevHours[day[0].toUpperCase() + day.slice(1)],
               open: shop.hours[day].split(" - ")[0],
               close: shop.hours[day].split(" - ")[1],
-            },
+            } || 'Closed',
           }));
         });
 
@@ -194,7 +194,8 @@ function ShopFormPage() {
     }
   };
 
-  const handleDemoHours = (e) => {
+  const handleDemoData = (e) => {
+    setName('Created Coffee Shop')
     e.preventDefault();
     Object.keys(hours).forEach((day) => {
       setHours((prevHours) => ({
@@ -206,6 +207,16 @@ function ShopFormPage() {
         },
       }));
     });
+    setWebsite('www.created-shop.com')
+    setPhoneNumber('4444444444')
+    setPriceRange(3)
+    setDescription('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.')
+    setCategories(['Outdoor Seating', 'Free Wifi', 'Late Night', 'Study Area'])
+    setStreetOne('123 CreateShop Road')
+    setCity('Created City')
+    setState('Pennsylvania')
+    setPostal(123123)
+    setImage('img.url')
   };
 
   const handleClearDays = (e) => {
