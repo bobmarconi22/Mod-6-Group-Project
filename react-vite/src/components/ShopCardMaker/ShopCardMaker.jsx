@@ -5,7 +5,7 @@ import './ShopCardMaker.css';
 function ShopCardMaker({ shopsArr }) {
   const navigate = useNavigate();
   // console.log("shopsARR=====>", shopsArr)
-  let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+  let days = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"]
   let dayOfWeek = days[new Date().getDay()]
   // console.log(dayOfWeek)
 

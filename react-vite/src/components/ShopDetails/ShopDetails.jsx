@@ -93,13 +93,13 @@ function ShopDetails() {
                             {/* hours not working because how it is formatted */}
                             All hours
                             <div id='hours_container'>
-                                <p>Monday: {shopDetails?.hours?.Monday}</p>
-                                <p>Tuesday: {shopDetails?.hours?.Tuesday}</p>
-                                <p>Wednesday: {shopDetails?.hours?.Wednesday}</p>
-                                <p>Thursday: {shopDetails?.hours?.Thursday}</p>
-                                <p>Friday: {shopDetails?.hours?.Friday}</p>
-                                <p>Saturday: {shopDetails?.hours?.Saturday}</p>
-                                <p>Sunday: {shopDetails?.hours?.Sunday}</p>
+                                <p>Monday: {shopDetails?.hours?.monday}</p>
+                                <p>Tuesday: {shopDetails?.hours?.tuesday}</p>
+                                <p>Wednesday: {shopDetails?.hours?.wednesday}</p>
+                                <p>Thursday: {shopDetails?.hours?.thursday}</p>
+                                <p>Friday: {shopDetails?.hours?.friday}</p>
+                                <p>Saturday: {shopDetails?.hours?.saturday}</p>
+                                <p>Sunday: {shopDetails?.hours?.sunday}</p>
 
                             </div>
                         </div>

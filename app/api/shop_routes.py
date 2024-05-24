@@ -96,7 +96,7 @@ def create_shop():
                 day_close = f'{day}_close'
 
                 if shop_form[day_open].data and shop_form[day_close].data:
-                    hours[day] = f'{shop_form.monday_open.data} - {shop_form.monday_close.data}'
+                    hours[day] = f'{shop_form[day_open].data} - {shop_form[day_close].data}'
                 else:
                     hours[day] = 'Closed'
 
@@ -136,8 +136,9 @@ def create_shop():
             db.session.commit()
 
             categories = body.get('categories', [])
-            for category_id in categories:
-                db.session.execute(selected_categories.insert().values(shop_id=new_shop.id, category_id=category_id))
+            for category_name in categories:
+                category = Category.query.filter_by(name = category_name).first()
+                db.session.execute(selected_categories.insert().values(shop_id=new_shop.id, category_id=category.id))
             db.session.commit()
 
             shop = Shop.query.options(joinedload(Shop.address), joinedload(Shop.categories)).filter_by(id = new_shop.id).first()
@@ -171,7 +172,7 @@ def update_shop(shop_id):
             day_close = f'{day}_close'
 
             if shop_form[day_open].data and shop_form[day_close].data:
-                hours[day] = f'{shop_form.monday_open.data} - {shop_form.monday_close.data}'
+                hours[day] = f'{shop_form[day_open].data} - {shop_form[day_close].data}'
             else:
                 hours[day] = 'Closed'
 
