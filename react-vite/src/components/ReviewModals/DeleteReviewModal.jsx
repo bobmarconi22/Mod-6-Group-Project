@@ -17,7 +17,9 @@ function DeleteReviewModal ({reviewToDelete, setReviewIsDeleted}) {
 
     return (
         <div className='delete-modal-container'>
-            <h2>Confirm Delete</h2>
+            <div>
+              <h1>NO TAKEBACKSIES</h1>
+            </div>
             <p>Are you sure you want to delete this review?</p>
             <button className='confirm-delete' onClick={() => handleDelete(reviewToDelete.id)}>Delete Review</button>
             <button className='stop-delete' onClick={() => closeModal()}>Keep Review</button>
