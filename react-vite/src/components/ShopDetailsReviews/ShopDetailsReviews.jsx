@@ -39,11 +39,11 @@ function ShopDetailsReviews({ rating }) {
         isLoaded && reviews.map((review, id) => {
             return (
                 <div key={id}>
-                    <div>{review.reviewer.first_name}</div>
-                    <div>{review.reviewer.city + ', ' + review.reviewer.state}</div>
-                    <div>{review.created_at}</div>
-                    <div>{review.review}</div>
-                    <div>{reviewImagesMapper(review.images)}</div>
+                    <div>{review.reviewer.first_name || ''}</div>
+                    <div>{review.reviewer.city + ', ' + review.reviewer.state || ''}</div>
+                    <div>{review.created_at || ''}</div>
+                    <div>{review.review || ''}</div>
+                    <div>{reviewImagesMapper(review.images) || ''}</div>
                     <hr></hr>
                 </div>
             )
