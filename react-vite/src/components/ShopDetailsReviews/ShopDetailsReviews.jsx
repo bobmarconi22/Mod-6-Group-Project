@@ -19,7 +19,7 @@ function ShopDetailsReviews({ rating, shop }) {
     const [isNewReview, setIsNewReview] = useState(false)
 
     const sessionUser = useSelector((state) => state.session.user);
-    let reviews = Object.values(useSelector((state) => state.reviews))
+    let reviews = Object.values(useSelector((state) => state.reviews)).filter((review) => review.shop_id === parseInt(id))
     // console.log('reviews', reviews[3].user_id)
     // console.log('sessionUser', sessionUser.id)
 
@@ -64,24 +64,24 @@ function ShopDetailsReviews({ rating, shop }) {
             )
         })
 
-        return (
-            <>
-                {console.log(shop?.owner_id === sessionUser?.id)}
-                <div className='title'>Overall Rating</div>
-                <div>{BeanRating({ rating })}</div>
-                <div>
-                    {shop?.review !== null ? `${Object.values(reviews).length} review${Object.values(reviews).length === 1 ? '' : 's'}` : 'No reviews'}
-                </div>
-                {(!sessionUser || shop?.owner_id === sessionUser?.id || reviews.some(review => review.user_id === sessionUser.id)) ? null : (
-                    <OpenModalButton
-                        buttonText="Write a Review"
-                        modalComponent={<CreateReviewModal setIsNewReview={setIsNewReview} />}
-                    />
-                )}
-                <hr />
-                {shop?.review && <>{reviewMapper}</>}
-            </>
-        );
+    return (
+        <>
+            {console.log(shop?.owner_id === sessionUser?.id)}
+            <div className='title'>Overall Rating</div>
+            <div>{BeanRating({ rating })}</div>
+            <div>
+                {shop?.review !== null ? `${Object.values(reviews).length} review${Object.values(reviews).length === 1 ? '' : 's'}` : 'No reviews'}
+            </div>
+            {(!sessionUser || shop?.owner_id === sessionUser?.id || reviews.some(review => review.user_id === sessionUser.id)) ? null : (
+                <OpenModalButton
+                    buttonText="Write a Review"
+                    modalComponent={<CreateReviewModal setIsNewReview={setIsNewReview} />}
+                />
+            )}
+            <hr />
+            {shop?.review && <>{reviewMapper}</>}
+        </>
+    );
 }
 
 
