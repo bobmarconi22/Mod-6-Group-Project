@@ -16,7 +16,7 @@ function ShopFormPage() {
   const { id } = useParams();
   const sessionUser = useSelector((state) => state.session.user);
   const allCategories = useSelector((state) => state.categories.categories);
-  const shop = useSelector((state) => state.shops.ShopDetails);
+  const shop = useSelector((state) => state.shops.shopDetails);
   const [isLoaded, setIsLoaded] = useState(false);
   const [edit, setEdit] = useState(false);
   const [name, setName] = useState("");

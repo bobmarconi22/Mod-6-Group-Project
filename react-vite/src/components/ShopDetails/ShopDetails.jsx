@@ -16,7 +16,7 @@ function ShopDetails() {
     const [isLoaded, setIsLoaded] = useState(false);
     const sessionUser = useSelector((state) => state.session.user);
 
-    const shopDetails = useSelector((state) => state.shops.ShopDetails)
+    const shopDetails = useSelector((state) => state.shops.shopDetails)
     // if (isLoaded) console.log(shopDetails)
     useEffect(() => {
         dispatch(loadShopDetailsThunk(id))

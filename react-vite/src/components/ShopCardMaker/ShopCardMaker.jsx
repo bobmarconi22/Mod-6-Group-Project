@@ -2,11 +2,11 @@ import { useNavigate } from "react-router-dom";
 
 function ShopCardMaker({shopsArr}) {
   const navigate = useNavigate();
-  // console.log("shopsARR=====>",shopsArr[0])
+  console.log("shopsARR=====>",shopsArr)
   const shopMapper =
     shopsArr.map((shop, i) => {
       return (
-        <div key={i} className="shop-container" onClick={() => navigate(`/shops/${shop.id}`)}>
+        <div key={shop.id} className="shop-container" onClick={() => navigate(`/shops/${shop.id}`)}>
           <img src='img.png'></img>
           <div className="shop-text">{shop.name}</div>
           <div className="shop-text">{'Rating: ' + shop.avg_rating + ' Number of Reviews: ' + shop.num_reviews}</div>

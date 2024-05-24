@@ -25,7 +25,7 @@ function CreateReviewModal({setIsNewReview}) {
         dispatch(loadShopDetailsThunk(id))
     }, [id, dispatch])
 
-    const shop = useSelector((state) => state.shops.ShopDetails)
+    const shop = useSelector((state) => state.shops.shopDetails)
     // console.log(shop)
 
 

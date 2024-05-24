@@ -3,7 +3,7 @@ import "./UserProfile.css";
 import { FaUserCircle } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { deleteReviewThunk, getReviewsByUserIdThunk } from "../../redux/reviews";
-import { deleteShopThunk, getShopsByUserIdThunk } from "../../redux/shops";
+import { deleteShopThunk, getShopsByUserIdThunk, loadShopsThunk } from "../../redux/shops";
 import { useNavigate } from "react-router-dom";
 import { UpdateReviewModal } from '../ReviewModals'
 import OpenModalButton from '../OpenModalButton'
@@ -48,10 +48,14 @@ function UserProfile() {
     navigate(`/shop/${id}/update`)
   };
 
-  const handleShopDelete = async (id) => {
+  const handleShopDelete = (id) => {
+
     // console.log('===>', id)
     dispatch(deleteShopThunk(id.toString()))
-  };
+    dispatch(getShopsByUserIdThunk(sessionUser.id))
+   dispatch(loadShopsThunk())
+
+}
 
 
   return (

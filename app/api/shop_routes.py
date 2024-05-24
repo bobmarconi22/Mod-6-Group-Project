@@ -217,17 +217,22 @@ def update_shop(shop_id):
 @login_required
 def delete_shop(shop_id):
     shop = Shop.query.get(shop_id)
-    categories = selected_categories.query.filter(selected_categories.shop_id == shop_id).all()
-    reviews = Review.query.filter(Review.shop_id == shop_id).all()
-    address = Address.query.filter(Address.shop_id == shop_id).all()
-    images = Image.query.filter(Image.shop_id == shop_id).all()
-
+    if not shop:
+        return jsonify({"message": "Shop couldn't be found"}), 404
+    # categories = selected_categories.query.filter(selected_categories.shop_id == shop_id).all()
+    # reviews = Review.query.filter(Review.shop_id == shop_id).all()
+    # address = Address.query.filter(Address.shop_id == shop_id).all()
+    # images = Image.query.filter(Image.shop_id == shop_id).all()
+    db.session.execute(
+            selected_categories.delete().where(selected_categories.c.shop_id == shop_id)
+        )
     db.session.delete(shop)
-    db.session.delete(categories)
-    db.session.delete(reviews)
-    db.session.delete(address)
-    db.session.delete(images)
+    # db.session.delete(categories)
+    # db.session.delete(reviews)
+    # db.session.delete(address)
+    # db.session.delete(images)
     db.session.commit()
+    return jsonify({"message": "Successfully deleted"}), 200
 
 
 
@@ -333,7 +338,7 @@ def create_review(shop_id):
 
 @shop_routes.route('/<int:shopId>/reviews')
 def get_all_reviews_by_shop(shopId):
-    
+
     reviews = Review.query.options(joinedload(Review.image)).filter_by(shop_id = shopId).all()
 
     reviews_to_dict = []

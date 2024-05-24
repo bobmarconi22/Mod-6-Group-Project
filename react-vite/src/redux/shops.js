@@ -1,3 +1,5 @@
+import ShopDetails from "../components/ShopDetails/ShopDetails";
+
 const LOAD_SHOPS = "LOAD_SHOPS";
 const LOAD_SHOP_DETAILS = "LOAD_SHOP_DETAILS";
 const CREATE_SHOP = "CREATE_SHOP";
@@ -123,7 +125,7 @@ export const deleteShopThunk = (shopId) => async (dispatch) => {
   }
 };
 // Shops Reducer
-const shopsReducer = (state = {}, action) => {
+const shopsReducer = (state = { allShops: {}, userShops: {}, shopDetails: null}, action) => {
   let newState = {}
   switch (action.type) {
     case LOAD_SHOPS: {
@@ -132,14 +134,22 @@ const shopsReducer = (state = {}, action) => {
       action.payload.forEach((shop) => {
         allShops[shop.id] = shop;
       });
-      return { ...state, ...allShops };
+      return { ...state, allShops };
     }
     case CREATE_SHOP:
-      return { ...state, [action.payload.id]: action.payload };
+      const newAllShops = {
+        ...state.allShops,
+        [action.payload.id]: action.payload
+      }
+      const newUserShops = {
+        ...state.userShops,
+        [action.payload.id]: action.payload
+      }
+      return { ...state, allShops: newAllShops, userShops: newUserShops };
 
     case LOAD_SHOP_DETAILS:
 
-      return { ...state, ShopDetails: action.payload };
+      return { ...state, shopDetails: action.payload };
 
     case USER_SHOPS:
       newState = { ...state, userShops: {} };
@@ -148,14 +158,32 @@ const shopsReducer = (state = {}, action) => {
       });
       return newState;
     case UPDATE_SHOP: {
-      const newState = { ...state };
-      newState[action.payload.id] = action.payload
-      return newState
+
+      const newAllShops = {
+        ...state.allShops,
+        [action.payload.id]: action.payload
+      }
+      const newUserShops = {
+        ...state.userShops,
+        [action.payload.id]: action.payload
+      }
+      return { ...state, allShops: newAllShops, userShops: newUserShops };
     }
     case DELETE_SHOP: {
-      newState = { ...state }
-      delete newState[action.payload]
-      return newState
+       const newAllShops = {
+        ...state.allShops,
+      }
+      const newUserShops = {
+        ...state.userShops,
+      }
+
+      delete newAllShops[action.payload]
+      delete newUserShops[action.payload]
+      let newShopDetails = state.shopDetails
+      if(state.shopDetails !== null && state.shopDetails.id === action.payload) {
+        newShopDetails = null
+      }
+      return { allShops: newAllShops, userShops: newUserShops, shopDetails: newShopDetails };
     }
     default:
       return state;

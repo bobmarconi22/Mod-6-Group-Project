@@ -16,7 +16,7 @@ function ShopImagesPage() {
     const [isLoaded, setIsLoaded] = useState(false);
     const sessionUser = useSelector((state) => state.session.user);
     const dispatch = useDispatch();
-    const shopDetails = useSelector((state) => state.shops.ShopDetails)
+    const shopDetails = useSelector((state) => state.shops.shopDetails)
 
     useEffect(() => {
         const fetchShopDetails = async () => {

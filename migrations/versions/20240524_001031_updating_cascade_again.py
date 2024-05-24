@@ -1,8 +1,8 @@
-"""initial migrate
+"""updating cascade again
 
-Revision ID: feed4194f7cc
+Revision ID: fd61245f24b6
 Revises:
-Create Date: 2024-05-22 23:06:39.570716
+Create Date: 2024-05-24 00:10:31.778424
 
 """
 from alembic import op
@@ -13,9 +13,8 @@ import os
 environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
-
 # revision identifiers, used by Alembic.
-revision = 'feed4194f7cc'
+revision = 'fd61245f24b6'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -113,7 +112,6 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
     )
-
     if environment == "production":
         op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
     # ### end Alembic commands ###

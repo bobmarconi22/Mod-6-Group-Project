@@ -12,7 +12,7 @@ function LandingPage() {
   const dispatch = useDispatch();
 
   // let shopsList = ['temp shop seeder', 'temp shop seeder', 'temp shop seeder', 'temp shop seeder', 'temp shop seeder', 'temp shop seeder']
-  let shopsObj = useSelector((state) => state.shops)
+  let shopsObj = useSelector((state) => state.shops.allShops)
   let shopsArr = Object.values(shopsObj)
   // console.log(shopsArr)
 
