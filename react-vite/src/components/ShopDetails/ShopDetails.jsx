@@ -1,6 +1,4 @@
 import './ShopDetails.css'
-import OpenModalButton from "../OpenModalButton";
-import CreateReviewModal from '../ReviewModals/CreateReviewModal'
 import { Link } from "react-router-dom";
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
@@ -21,10 +19,8 @@ function ShopDetails() {
     const shopDetails = useSelector((state) => state.shops.ShopDetails)
     if (isLoaded) console.log(shopDetails)
     useEffect(() => {
-
         dispatch(loadShopDetailsThunk(id))
         setIsLoaded(true);
-
     }, [id, dispatch])
 
     return (
@@ -87,11 +83,7 @@ function ShopDetails() {
                         {shopDetails?.description}
                     </div>
                 </div>
-                <OpenModalButton
-                    buttonText="Write a Review"
-                    modalComponent={<CreateReviewModal />}
-                />
-                <ShopDetailsReviews />
+                <ShopDetailsReviews rating={shopDetails?.avg_rating} />
             </>
         )
     )

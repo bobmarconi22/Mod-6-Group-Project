@@ -1,61 +1,65 @@
 import { loadReviewsByShopIdThunk } from '../../redux/reviews'
+import OpenModalButton from "../OpenModalButton";
+import CreateReviewModal from '../ReviewModals/CreateReviewModal'
+import BeanRating from './BeanRating'
 import './ShopDetailsReviews.css'
 
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 
-function ShopDetailsReviews() {
+function ShopDetailsReviews({ rating }) {
 
     const dispatch = useDispatch()
     const { id } = useParams()
     // console.log(id)
+    console.log(rating)
 
-    const reviews = useSelector((state) => state.reviews)
-    // console.log('reviews', reviews)
+    const [isLoaded, setIsLoaded] = useState(false);
+
+    let reviews = Object.values(useSelector((state) => state.reviews))
+    console.log('reviews', reviews)
 
     useEffect(() => {
         dispatch(loadReviewsByShopIdThunk(id))
+        setIsLoaded(true)
     }, [dispatch])
 
     function reviewImagesMapper(images) {
         // console.log(images)
-        images?.map((image, id) => {
+        let mappedImages = images.map((image, id) => {
             return (
-                <div key={id}>{image?.img_link}</div>
+                <img key={id} src={image.img_link} />
             )
         })
-
+        return mappedImages
     }
 
-    // const reviewMapper =
-    //     reviews?.map((review, id) => {
-    //         return (
-    //             <div key={id}>
-    //                 <div>{review.reviewer.first_name}</div>
-    //                 <div>{review.reviewer.city + ', ' + review.reviewer.state}</div>
-    //                 <div>{review.created_at}</div>
-    //                 <div>{review.review}</div>
-    //                 <div>{reviewImagesMapper(review.image)}</div>
-    //                 <hr></hr>
-    //             </div>
-    //         )
-    //     })
-
-
-
-    // useEffect(() => { }, [review])
-
-
+    const reviewMapper =
+        isLoaded && reviews.map((review, id) => {
+            return (
+                <div key={id}>
+                    <div>{review.reviewer.first_name}</div>
+                    <div>{review.reviewer.city + ', ' + review.reviewer.state}</div>
+                    <div>{review.created_at}</div>
+                    <div>{review.review}</div>
+                    <div>{reviewImagesMapper(review.images)}</div>
+                    <hr></hr>
+                </div>
+            )
+        })
 
     return (
         <>
             <div>Overall Rating</div>
             <div>Amount of rating with coffee beans here</div>
             <div>Total # of reviews</div>
-            <button>Write a Review NOT WORKING</button>
-            {/* <>hallo</> */}
-            {/* <>{reviewMapper}</> */}
+            <OpenModalButton
+                buttonText="Write a Review"
+                modalComponent={<CreateReviewModal />}
+            />
+            <> {reviewMapper}</>
+            <div>{BeanRating({ rating })}</div>
         </>
     )
 }
