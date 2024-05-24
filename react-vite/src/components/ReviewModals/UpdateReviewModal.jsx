@@ -4,6 +4,7 @@ import { useModal } from '../../context/Modal'
 import { useParams } from 'react-router-dom'
 import { BeanRating } from './BeanRating'
 import { updateReviewThunk } from '../../redux/reviews'
+import './UpdateReviewModal.jsx'
 
 
 

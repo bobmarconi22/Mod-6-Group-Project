@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { UpdateReviewModal } from '../ReviewModals'
 import OpenModalButton from '../OpenModalButton'
 import { BeanRating } from "./BeanRatingModal";
+import { DeleteReviewModal } from "../ReviewModals";
 
 // use prop or context to get the shop information
 // change headers to label or headers?
@@ -19,6 +20,7 @@ function UserProfile() {
 
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [isLoaded, setIsLoaded] = useState(false);
+  const [reviewIsDeleted, setReviewIsDeleted] = useState(false)
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -30,7 +32,7 @@ function UserProfile() {
         setIsLoaded(true);
       });
     }
-  }, [dispatch, sessionUser, isSubmitted]);
+  }, [dispatch, sessionUser, isSubmitted, reviewIsDeleted]);
 
 
   const handleReviewDelete = async (id) => {
@@ -41,9 +43,6 @@ function UserProfile() {
     navigate(`/shop/${id}/update`)
   };
 
-  const handleShopDelete = async (id) => {
-    dispatch(deleteShopThunk(id))
-  };
 
   return (
     isLoaded && (
@@ -100,9 +99,10 @@ function UserProfile() {
                   buttonText="Edit Review"
                   modalComponent={<UpdateReviewModal reviewToEdit={review} setIsSubmitted={setIsSubmitted} />}
                 />
-                <button className="delete" onClick={() => handleReviewDelete(review.id)}>
-                  Delete Review
-                </button>
+                 <OpenModalButton
+                  buttonText="Delete Review"
+                  modalComponent={<DeleteReviewModal reviewToDelete={review} setReviewIsDeleted={setReviewIsDeleted} />}
+                />
               </>
             ))}
           </div>
