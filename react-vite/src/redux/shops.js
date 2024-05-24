@@ -44,7 +44,7 @@ export const loadShopsThunk = () => async (dispatch) => {
     dispatch(loadShops(shops));
     return shops;
   } else {
-    const errors = await res.json()
+    const errors = await response.json()
     return errors
   }
 };
@@ -73,7 +73,7 @@ export const loadShopDetailsThunk = (id) => async (dispatch) => {
     dispatch(loadShopDetails(shop));
     return shop;
   } else {
-    const errors = await res.json()
+    const errors = await response.json()
     return errors
   }
 };

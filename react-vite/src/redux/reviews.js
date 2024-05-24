@@ -36,6 +36,7 @@ export const userReviews = (reviews) => ({
 // thunk action creators
 export const loadReviewsByShopIdThunk = (shopId) => async (dispatch) => {
     const res = await fetch(`/api/shops/${shopId}/reviews`)
+    
     if (res.ok) {
         const reviews = await res.json()
         dispatch(loadReviewsByShopId(reviews))
@@ -116,11 +117,11 @@ const reviewReducer = (state = {}, action) => {
     let newState = {}
     switch (action.type) {
         case LOAD_REVIEWS_BY_SHOPID: {
-            const allReviews = {};
+            const allReviews = {}
             action.payload.forEach((review) => {
                 allReviews[review.id] = review;
             });
-            return { ...state, ...allReviews };
+            return {...state, ...allReviews};
             // return action.payload
         }
         case CREATE_REVIEW: {

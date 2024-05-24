@@ -27,7 +27,6 @@ function ShopImagesPage() {
         fetchShopDetails()
 
     }, [id, dispatch])
-        if(isLoaded) console.log(shopDetails.image)
     return (
         isLoaded && (
         <div className='shop-images-page'>

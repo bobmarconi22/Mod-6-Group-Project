@@ -8,7 +8,7 @@ function SearchPage() {
   const location = useLocation();
 
   useEffect(() => {
-    console.log("USE EFFECT RUNNING")
+    // console.log("USE EFFECT RUNNING")
     const queryString = location.search;
     fetch(`/api/search${queryString}`)
       .then(response => {
@@ -19,7 +19,7 @@ function SearchPage() {
         return response.json();
       })
       .then(results => {
-        console.log("API Results:", results);
+        // console.log("API Results:", results);
         setFilteredShops(results);
         setLoading(false);
       })

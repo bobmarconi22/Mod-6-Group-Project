@@ -12,13 +12,13 @@ function DeleteImagesModal({shop_id, img_id}){
                 let response = await fetch(`/api/shops/${shop_id}/images/${img_id}`, {
                     method: 'DELETE',
                 });
-                console.log("response=======.", response.ok)
+                // console.log("response=======.", response.ok)
 
                 if (response.ok) {
                     await dispatch(loadShopDetailsThunk(shop_id));
                     closeModal();
                 } else {
-                    console.log("ENTERING ERROR")
+                    // console.log("ENTERING ERROR")
                     const errorData = await response.json();
                     alert(errorData.message);  // Display the error message in an alert
                 }
