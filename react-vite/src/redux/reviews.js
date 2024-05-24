@@ -47,7 +47,7 @@ export const loadReviewsByShopIdThunk = (shopId) => async (dispatch) => {
 }
 
 export const createReviewThunk = (newReviewData, shopId) => async (dispatch) => {
-    const res = await fetch(`/api/shops/${shopId}/reviews`, {
+    const res = await fetch(`/api/shops/${shopId}/reviews/new`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
