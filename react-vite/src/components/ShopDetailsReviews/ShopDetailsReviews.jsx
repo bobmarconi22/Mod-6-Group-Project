@@ -28,7 +28,7 @@ function ShopDetailsReviews({ rating, shop }) {
     useEffect(() => {
         dispatch(loadReviewsByShopIdThunk(id))
         setIsLoaded(true)
-    }, [dispatch, isNewReview, shop.id])
+    }, [dispatch, isNewReview, shop, id])
 
     const reviewImagesMapper = (review) => {
         return review.images?.map((image, id) => {
@@ -64,8 +64,10 @@ function ShopDetailsReviews({ rating, shop }) {
             )
         })
 
-    return ( isLoaded && parseInt(id) === shop?.id &&
+    return (
         <>
+        {console.log(shop?.owner_id === sessionUser?.id)}
+            <div className='title'>Overall Rating</div>
             <div>{BeanRating({ rating })}</div>
             <div>{Object.values(reviews)?.length} review{Object.values(reviews)?.length === 1 ? '' : 's'}</div>
             {!sessionUser || (shop?.owner_id !== sessionUser?.id && reviews.some(review => review.user_id === sessionUser.id) || shop?.owner_id === sessionUser?.id) ? <></> : <OpenModalButton
