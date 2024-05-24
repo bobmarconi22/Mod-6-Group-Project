@@ -36,6 +36,7 @@ function UserProfile() {
       dispatch(getShopsByUserIdThunk(sessionUser.id)).then(() => {
         setIsLoaded(true);
         setIsSubmitted(false)
+        setReviewIsDeleted(false)
       });
     }
   }, [dispatch, sessionUser, isSubmitted, reviewIsDeleted]);
