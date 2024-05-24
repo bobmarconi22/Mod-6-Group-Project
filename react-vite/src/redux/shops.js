@@ -108,12 +108,13 @@ export const updateShopThunk = (shop, id) => async (dispatch) => {
 }
 
 export const deleteShopThunk = (shopId) => async (dispatch) => {
-  await fetch(`/api/shops/${shopId}/delete`, {
+  const response = await fetch(`/api/shops/${shopId}/delete`, {
     method: "DELETE",
     headers: { "Content-Type": "application/json" },
   });
   if (response.ok) {
     const message = await response.json();
+    console.log('this is the shopId', shopId)
     dispatch(deleteShop(shopId));
     return message
   } else {
