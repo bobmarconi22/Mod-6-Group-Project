@@ -1,0 +1,15 @@
+.title {
+    font-size: x-large;
+}
+
+.first-name {
+    font-size: x-large;
+}
+
+.rating-date {
+    display: flex;
+}
+
+.date {
+    margin-left: 10px;
+}

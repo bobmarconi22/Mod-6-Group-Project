@@ -4,11 +4,17 @@
     border: 1px solid #2b5a8d;
     border-radius: 1em;
     padding: 10px;
-    margin: 10px auto;
+    /* margin: 10px auto; */
+    width: auto;
+    background-color: #DEB98E;
+}
+
+#title {
+    font-size: xx-large;
 }
 
 .shop-detail-heading-container {
-    background-color: white;
+    background-color: #F6F0E2;
     width: 35%;
     border: 1px solid #2b5a8d;
     border-radius: 1em;
@@ -34,9 +40,43 @@
     padding: 10px;
 }
 
+#categories {
+    display: flex;
+}
+
+#rating-container {
+    display: flex;
+}
+
+#price-categories-container {
+    display: flex;
+    align-items: center;
+}
+
+.separator {
+    margin: 0px 10px;
+}
+
 #hours-address-container {
     background-color: white;
     width: fit-content;
     border: black solid;
     padding: 10px;
+}
+
+/* .additonal-info-grid-container {
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+} */
+
+
+.additional-info-flexbox-container {
+    display: flex;
+    justify-content: flex-end;
+    position: absolute;
+    right: 0%;
+}
+
+.address-text {
+    padding: 15px 0px;
 }

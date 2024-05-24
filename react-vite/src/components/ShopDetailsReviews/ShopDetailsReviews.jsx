@@ -13,13 +13,17 @@ function ShopDetailsReviews({ rating }) {
     const dispatch = useDispatch()
     const { id } = useParams()
     // console.log(id)
-    console.log(rating)
+    // console.log(rating)
 
     const [isLoaded, setIsLoaded] = useState(false);
     const [isNewReview, setIsNewReview] = useState(false)
 
+    const sessionUser = useSelector((state) => state.session.user);
     let reviews = Object.values(useSelector((state) => state.reviews))
-    console.log('reviews', reviews)
+    // console.log('reviews', reviews[3].user_id)
+    // console.log('sessionUser', sessionUser.id)
+
+    // console.log('from user', reviews.find((review) => review.user_id == sessionUser.id) ? 'false' : 'true')
 
     useEffect(() => {
         dispatch(loadReviewsByShopIdThunk(id))
@@ -45,13 +49,16 @@ function ShopDetailsReviews({ rating }) {
             return (
                 review.id &&
                 <div key={id}>
-                    <div>{review?.reviewer?.first_name || ''}</div>
+                    <div className='first-name'>{review?.reviewer?.first_name || ''}</div>
                     <div>{review?.reviewer?.city + ', ' + review?.reviewer?.state || ''}</div>
-                    <div>{BeanRating({ rating }) || ''}</div>
-                    <div>{`${month} ${year}` || ''}</div>
+                    <div className='rating-date'>
+                        <div>{BeanRating({ rating }) || ''}</div>
+                        <div className='date'>{`${month} ${year}` || ''}</div>
+                    </div>
+                    <div>{review?.images.length} Photo{review?.images.length === 1 ? '' : 's'} in this Review</div>
                     <div>{review?.review || ''}</div>
                     <div>{reviewImagesMapper(review) || ''}</div>
-                    <div>{review?.images.length} Photo{review?.images.length === 1 ? '' : 's'} in this Review</div>
+
                     <hr></hr>
                 </div>
             )
@@ -59,14 +66,15 @@ function ShopDetailsReviews({ rating }) {
 
     return (
         <>
-            <div>Overall Rating</div>
+            <div className='title'>Overall Rating</div>
             <div>{BeanRating({ rating })}</div>
-            <div>Amount of rating with coffee beans here</div>
-            {/* <div>Total # of reviews: {reviews.length()}</div> */}
-            <OpenModalButton
+            <div>{Object.values(reviews).length} review{Object.values(reviews).length == 1 ? '' : 's'}</div>
+            {reviews.find((review) => review.user_id == sessionUser.id) ? <></> : <OpenModalButton
+
                 buttonText="Write a Review"
                 modalComponent={<CreateReviewModal setIsNewReview={setIsNewReview} />}
-            />
+            />}
+            <hr></hr>
             <> {reviewMapper}</>
 
         </>
