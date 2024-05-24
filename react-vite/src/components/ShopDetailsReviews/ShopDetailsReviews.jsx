@@ -16,14 +16,15 @@ function ShopDetailsReviews({ rating }) {
     // console.log(rating)
 
     const [isLoaded, setIsLoaded] = useState(false);
+    const [isNewReview, setIsNewReview] = useState(false)
 
     let reviews = Object.values(useSelector((state) => state.reviews))
     // console.log('reviews', reviews)
-
+   
     useEffect(() => {
         dispatch(loadReviewsByShopIdThunk(id))
         setIsLoaded(true)
-    }, [dispatch])
+    }, [dispatch, isNewReview])
 
     function reviewImagesMapper(images) {
         // console.log(images)
@@ -39,10 +40,10 @@ function ShopDetailsReviews({ rating }) {
         isLoaded && reviews.map((review, id) => {
             return (
                 <div key={id}>
-                    <div>{review.reviewer.first_name || ''}</div>
-                    <div>{review.reviewer.city + ', ' + review.reviewer.state || ''}</div>
-                    <div>{review.created_at || ''}</div>
-                    <div>{review.review || ''}</div>
+                    <div>{review?.reviewer?.first_name || ''}</div>
+                    <div>{review?.reviewer?.city + ', ' + review?.reviewer?.state || ''}</div>
+                    <div>{review?.created_at || ''}</div>
+                    <div>{review?.review || ''}</div>
                     <div>{reviewImagesMapper(review.images) || ''}</div>
                     <hr></hr>
                 </div>
@@ -56,7 +57,7 @@ function ShopDetailsReviews({ rating }) {
             <div>Total # of reviews</div>
             <OpenModalButton
                 buttonText="Write a Review"
-                modalComponent={<CreateReviewModal />}
+                modalComponent={<CreateReviewModal setIsNewReview={setIsNewReview} />}
             />
             <> {reviewMapper}</>
             <div>{BeanRating({ rating })}</div>

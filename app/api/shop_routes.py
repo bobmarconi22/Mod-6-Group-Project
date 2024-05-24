@@ -333,7 +333,7 @@ def create_review(shop_id):
 
 @shop_routes.route('/<int:shopId>/reviews')
 def get_all_reviews_by_shop(shopId):
-
+    
     reviews = Review.query.options(joinedload(Review.image)).filter_by(shop_id = shopId).all()
 
     reviews_to_dict = []
