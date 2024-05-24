@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   createShopThunk,
+  getShopsByUserIdThunk,
   loadShopDetailsThunk,
   updateShopThunk,
 } from "../../redux/shops";
@@ -9,6 +10,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import "./ShopForm.css";
 import { getAllCategories } from "../../redux/categories";
 import { loadShopsThunk } from "../../redux/shops";
+import { getReviewsByUserIdThunk } from "../../redux/reviews";
 
 function ShopFormPage() {
   const navigate = useNavigate();
@@ -184,11 +186,13 @@ function ShopFormPage() {
         preview_image: image,
       };
       if (edit) {
-        const data = await dispatch(updateShopThunk(new_shop, shop.id));
+        const data = await dispatch(updateShopThunk(new_shop, shop.id))
+        await dispatch(getReviewsByUserIdThunk(data.id));
         // console.log("================>", data);
         navigate(`/shops/${data.id}`);
       } else {
         const data = await dispatch(createShopThunk(new_shop));
+        await dispatch(getReviewsByUserIdThunk(data.id));
         navigate(`/shops/${data.id}`);
       }
     }
