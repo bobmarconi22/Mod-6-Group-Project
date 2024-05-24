@@ -17,6 +17,7 @@ function ShopDetails() {
     const [isLoaded, setIsLoaded] = useState(false);
     const sessionUser = useSelector((state) => state.session.user);
 
+
     const shopDetails = useSelector((state) => state.shops.shopDetails)
     // if (isLoaded) console.log(shopDetails)
 
@@ -60,7 +61,7 @@ function ShopDetails() {
                         <a href='#hours_container'>See hours</a>
                     </div>
                     <Link to={`images`}>
-                        <button className='see-all-photos-button'>See all #{shopDetails?.image.length} photos</button>
+                        <button className='see-all-photos-button'>See all #{shopDetails?.image?.length} photos</button>
                     </Link>
                     {/* shop details is checked before it gets the information, must check if shopdetails exists */}
                     {sessionUser && shopDetails && sessionUser.id === shopDetails.owner_id ? (
