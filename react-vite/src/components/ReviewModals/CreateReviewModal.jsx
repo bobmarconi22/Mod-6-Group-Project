@@ -13,6 +13,7 @@ function CreateReviewModal({setIsNewReview}) {
     const [img1, setImg1] = useState('')
     const [img2, setImg2] = useState('')
     const [img3, setImg3] = useState('')
+    const [errors, setErrors] = useState({})
 
     // const [errors, setErrors] = useState({})
 
@@ -28,19 +29,26 @@ function CreateReviewModal({setIsNewReview}) {
     const shop = useSelector((state) => state.shops.shopDetails)
     // console.log(shop)
 
-
+    const err = {}
     const handleSubmit = async (e) => {
         e.preventDefault()
-        const reviewData = {
-            review,
-            rating: beans,
-            img_url1: (img1.length > 0 && img1),
-            img_url2: (img2.length > 0 && img2),
-            img_url3: (img3.length > 0 && img3)
+
+        if (beans < 1) {
+            err.beans = "Please choose between 1 and 5 beans." 
+            setErrors(err)
+
+        } else {
+
+            const reviewData = {
+                review,
+                rating: beans,
+                img_url1: (img1.length > 0 && img1),
+                img_url2: (img2.length > 0 && img2),
+                img_url3: (img3.length > 0 && img3)
+            }
+
+            dispatch(createReviewThunk(reviewData, id)).then(() => setIsNewReview(true)).then(() => closeModal())
         }
-
-        dispatch(createReviewThunk(reviewData, id)).then(() => setIsNewReview(true)).then(() => closeModal())
-
 
     }
 
@@ -48,6 +56,7 @@ function CreateReviewModal({setIsNewReview}) {
     return (
         <div className='whole-form'>
             <h1>{shop && shop.name}</h1>
+            <div>{errors.beans}</div>
             <form onSubmit={handleSubmit} className='form'>
                 <BeanRating setBeans={setBeans} filledBeans={beans} />
                 <input className='review'

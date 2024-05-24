@@ -26,18 +26,14 @@ function UpdateReviewModal({ reviewToEdit, setIsSubmitted, reviewShopName }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+        
         let updatedReview = {
             id: reviewToEdit.id,
             rating: beans,
             review
         }
 
-        return dispatch(updateReviewThunk(updatedReview)).then(() => setIsSubmitted(true)).then(() => closeModal()).catch(async (res) => {
-            const data = await res.json();
-            if (data?.errors) {
-                setErrors(data.errors)
-            }
-        })
+        return dispatch(updateReviewThunk(updatedReview)).then(() => setIsSubmitted(true)).then(() => closeModal())
 
     }
 
