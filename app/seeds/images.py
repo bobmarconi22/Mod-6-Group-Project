@@ -4,7 +4,7 @@ from sqlalchemy.sql import text
 def seed_images():
     images = [
         # Shop 1
-        Image(user_id=1, shop_id=1, img_link='http://example.com/shop1_owner_preview.jpg', preview_image=True),
+        Image(user_id=1, shop_id=1, img_link='https://s3-media0.fl.yelpcdn.com/bphoto/IE19sZJw3i-tzhsi1EXwtg/o.jpg', preview_image=True),
         Image(user_id=10, shop_id=1, review_id=1, img_link='http://example.com/shop1_review1.jpg', preview_image=False),
         Image(user_id=2, shop_id=1, review_id=2, img_link='http://example.com/shop1_review2.jpg', preview_image=False),
         Image(user_id=3, shop_id=1, review_id=3, img_link='http://example.com/shop1_review3.jpg', preview_image=False),
@@ -94,4 +94,3 @@ def undo_images():
         db.session.execute(text("DELETE FROM images"))
 
     db.session.commit()
-
