@@ -40,8 +40,8 @@ function ShopDetails() {
         isLoaded && (
             <>
                 <div id='shop-detail-cover-container'>
-
-                    <img src='img.png' />
+                    {console.log('================>', shopDetails?.image.find((img) => img.preview_image === true))}
+                    <img src={shopDetails?.image.find((img) => img.preview_image === true)?.img_link} style={{maxHeight: '50%', marginLeft: '50%'}} />
                     <div className='shop-detail-heading-container'>
                         <div id='title'>{shopDetails?.name}</div>
                         <div id='rating-container'>
@@ -120,7 +120,7 @@ function ShopDetails() {
                         <div>{shopDetails?.phone_number}</div>
                     </div>
                 </div>
-                <ShopDetailsReviews rating={shopDetails?.avg_rating} />
+                <ShopDetailsReviews rating={shopDetails?.avg_rating} shop={shopDetails} />
             </>
         )
     )

@@ -15,7 +15,7 @@ function ShopCardMaker({ shopsArr }) {
       let avg_rating = shop.avg_rating
       return (
         <div key={shop.id} className="shop-container" onClick={() => navigate(`/shops/${shop.id}`)}>
-          <img src={shop.preview_image.img_link}></img>
+          <img src={shop.preview_image.img_link} style={{maxWidth: '100%', maxHeight: '39%'}}></img>
           <div className="shop-text title">{shop.name}</div>
           <div className="shop-text rating-container">
             <span className="beans">{BeanRating({ avg_rating })} </span>
