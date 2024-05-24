@@ -29,7 +29,7 @@ function ShopCardMaker({ shopsArr }) {
             })}
 
           </div>
-          <button className="shop-text" onClick={() => alert('Function coming soon')}>Get Directions</button>
+          <button className="shop-text" onClick={() => alert('Feature coming soon')}>Get Directions</button>
           {/* open time is difficult to use for front end given this format */}
           <div className="shop-text open-today-text">Open today from {shop.hours[dayOfWeek]}</div>
         </div>

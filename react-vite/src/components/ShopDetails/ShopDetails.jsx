@@ -1,5 +1,5 @@
 import './ShopDetails.css'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { loadShopDetailsThunk } from '../../redux/shops'
@@ -16,7 +16,7 @@ function ShopDetails() {
     const dispatch = useDispatch()
     const [isLoaded, setIsLoaded] = useState(false);
     const sessionUser = useSelector((state) => state.session.user);
-
+    const navigate = useNavigate()
 
     const shopDetails = useSelector((state) => state.shops.shopDetails)
     // if (isLoaded) console.log(shopDetails)
@@ -53,7 +53,7 @@ function ShopDetails() {
                             <div>{'$'.repeat(shopDetails?.price_range)}</div>
                             <div className='separator'>○</div>
                             <div id='categories'>{shopDetails?.categories?.map((category, i) => {
-                                return (<div key={i} className="category-tag">{category}</div>)
+                                return (<div key={i} className="category-tag" onClick={() => navigate(`/search?category=${category.split(' ').join('+')}`)}>{category}</div>)
 
                             })}</div>
                         </div>
@@ -106,9 +106,7 @@ function ShopDetails() {
                         </div>
 
                         <div id='address-container'>
-                            Address
-                            <img src='img.png' />
-                            <button>Get Directions</button>
+                            <button onClick={() => alert('Feature Coming Soon!')}>Get Directions</button>
                         </div>
                     </div>
                     <div id='shop-detail-additional-info-container'>
