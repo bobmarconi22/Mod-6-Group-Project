@@ -1,7 +1,7 @@
 import { CiCoffeeBean } from "react-icons/ci";
 import { BiSolidCoffeeBean } from "react-icons/bi";
 // import '../ReviewModals/BeanRating.css'
-
+import './ShopCardMaker.css'
 
 const BeanRating = ({ avg_rating }) => {
 

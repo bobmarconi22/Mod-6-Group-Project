@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import BeanRating from "./BeanRating";
+import './ShopCardMaker.css';
 
 function ShopCardMaker({ shopsArr }) {
   const navigate = useNavigate();
@@ -15,23 +16,22 @@ function ShopCardMaker({ shopsArr }) {
       return (
         <div key={shop.id} className="shop-container" onClick={() => navigate(`/shops/${shop.id}`)}>
           <img src='img.png'></img>
-          <div className="shop-text">{shop.name}</div>
-          <div className="shop-text">
-            <span>{BeanRating({ avg_rating })} </span>
-            <span>{` (${shop.num_reviews})`}</span>
+          <div className="shop-text title">{shop.name}</div>
+          <div className="shop-text rating-container">
+            <span className="beans">{BeanRating({ avg_rating })} </span>
+            <span>{`(${shop.num_reviews})`}</span>
           </div>
-          <div className="shop-text">
-            {'$'.repeat(shop.price_range)}
-            <div>
-              {shop.categories.map((category, i) => {
-                return (<div key={i} className="category-tag">{category}</div>)
+          <div>{'$'.repeat(shop.price_range)}</div>
+          <div className="shop-text categories-container">
+            {shop.categories.map((category, i) => {
+              return (<div key={i} className="category-tag">{category}</div>)
 
-              })}
-            </div>
+            })}
+
           </div>
           <button className="shop-text" onClick={() => alert('Function coming soon')}>Get Directions</button>
           {/* open time is difficult to use for front end given this format */}
-          <div className="shop-text">Open today from {shop.hours[dayOfWeek]}</div>
+          <div className="shop-text open-today-text">Open today from {shop.hours[dayOfWeek]}</div>
         </div>
       )
     });
