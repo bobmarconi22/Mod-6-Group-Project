@@ -8,6 +8,9 @@ import { useNavigate } from "react-router-dom";
 import { UpdateReviewModal } from '../ReviewModals'
 import OpenModalButton from '../OpenModalButton'
 import { BeanRating } from "./BeanRatingModal";
+import { FaTrashAlt } from "react-icons/fa";
+import NotListItemModal from "../NotListItemModal";
+import DeleteImagesModal from "../ShopImagesPage/DeleteImageModal";
 
 // use prop or context to get the shop information
 // change headers to label or headers?
@@ -22,12 +25,14 @@ function UserProfile() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  if(isLoaded) console.log("userReview", userReviews)
 
   useEffect(() => {
     if (sessionUser) {
       dispatch(getReviewsByUserIdThunk(sessionUser.id)).then(() => { });
       dispatch(getShopsByUserIdThunk(sessionUser.id)).then(() => {
         setIsLoaded(true);
+
       });
     }
   }, [dispatch, sessionUser, isSubmitted]);
@@ -85,15 +90,23 @@ function UserProfile() {
                   <h4>{review.shop.name}</h4>
                   <div className='beans'><BeanRating beanRating={review.rating}/></div>
                   <p>{review.review}</p>
-                  <div className="user-review-img-block">
-                    {review.images.map((image, index) => (
-                      <img
-                        key={index}
-                        src={image.img_link}
-                        alt={"Review Image"}
-                      />
-                    ))}
-                  </div>
+                 <div className='gallery'>
+                {review.images.map(imageObj => {
+                    console.log("REVIEW IN MAP", imageObj.id)
+                    return (
+                        <div key={imageObj.img_link} className='container'>
+                    <div className="shop-image"  alt={review.shop.name} style={{ backgroundImage: `url(${imageObj.img_link})` }}></div>
+                                <div className='overlay-div2'>
+                                    <button>
+                                        <NotListItemModal itemText={<FaTrashAlt className='trashcan' />}
+                            modalComponent={<DeleteImagesModal shop_id={review.shop_id} img_id={imageObj.id}/>}></NotListItemModal>
+                                    </button>
+                                </div>
+
+                    </div>
+                )
+                })}
+            </div>
                   <p>{review.created_at}</p>
                 </a>
                 <OpenModalButton
