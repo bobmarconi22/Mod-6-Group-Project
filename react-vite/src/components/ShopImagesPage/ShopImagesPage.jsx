@@ -7,7 +7,8 @@ import { Link} from "react-router-dom";
 import { GoDotFill } from "react-icons/go";
 import { FaTrashAlt } from "react-icons/fa";
 import ShopImagesModal from '../ShopImagesModal';
-import OpenModalMenuItem from '../Navigation/OpenModalMenuItem';
+import NotListItemModal from './NotListItemModal';
+import DeleteImagesModal from './DeleteImageModal';
 
 
 function ShopImagesPage() {
@@ -34,8 +35,8 @@ function ShopImagesPage() {
             <h1>Photos for <Link to={`/shops/${shopDetails.id}`}>{shopDetails.name}</Link></h1>
             {sessionUser && sessionUser.id === shopDetails.owner_id && (
             <button>
-            <OpenModalMenuItem itemText="Add an Image"
-                            modalComponent={<ShopImagesModal shop_id={shopDetails.id} user_id={sessionUser.id} shop_name={shopDetails.name} />}></OpenModalMenuItem>
+            <NotListItemModal itemText="Add an Image"
+                            modalComponent={<ShopImagesModal shop_id={shopDetails.id} user_id={sessionUser.id} shop_name={shopDetails.name} />}></NotListItemModal>
                             </button>)}
             <div className='gallery'>
                 {shopDetails.image.map(imageObj => {
@@ -49,7 +50,8 @@ function ShopImagesPage() {
                                 </div>
                                 <div className='overlay-div2'>
                                     <button>
-                                    <FaTrashAlt className='trashcan' />
+                                        <NotListItemModal itemText={<FaTrashAlt className='trashcan' />}
+                            modalComponent={<DeleteImagesModal shop_id={shopDetails.id} img_id={imageObj.id}/>}></NotListItemModal>
                                     </button>
                                 </div>
                             </>
