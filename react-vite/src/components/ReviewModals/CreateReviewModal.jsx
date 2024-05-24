@@ -26,7 +26,7 @@ function CreateReviewModal() {
     }, [id, dispatch])
 
     const shop = useSelector((state) => state.shops.ShopDetails)
-    console.log(shop)
+    // console.log(shop)
 
 
     const handleSubmit = async (e) => {

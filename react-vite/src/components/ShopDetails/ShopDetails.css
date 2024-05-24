@@ -1,23 +1,30 @@
 #shop-detail-cover-container {
-    background-color: white;
-    width: fit-content;
-    border: black solid;
+    width: 95%;
+    height: 235px;
+    border: 1px solid #2b5a8d;
+    border-radius: 1em;
     padding: 10px;
+    margin: 10px auto;
 }
 
 .shop-detail-heading-container {
     background-color: white;
-    width: fit-content;
-    border: black solid;
-    padding: 10px;
+    width: 35%;
+    border: 1px solid #2b5a8d;
+    border-radius: 1em;
+    padding: 20px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin-top: 203px;
 }
 
 .see-all-photos-button {
-    /* background-color: white;
-    /*  */
-    width: fit-content;
-    /* border: black solid;
-    padding: 10px; */
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin-top: 340px;
+    margin-right: 20px;
 }
 
 #shop-detail-additional-info-container {

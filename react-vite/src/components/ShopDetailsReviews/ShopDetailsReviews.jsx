@@ -13,12 +13,12 @@ function ShopDetailsReviews({ rating }) {
     const dispatch = useDispatch()
     const { id } = useParams()
     // console.log(id)
-    console.log(rating)
+    // console.log(rating)
 
     const [isLoaded, setIsLoaded] = useState(false);
 
     let reviews = Object.values(useSelector((state) => state.reviews))
-    console.log('reviews', reviews)
+    // console.log('reviews', reviews)
 
     useEffect(() => {
         dispatch(loadReviewsByShopIdThunk(id))

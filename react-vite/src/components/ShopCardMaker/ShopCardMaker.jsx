@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 
 function ShopCardMaker({shopsArr}) {
   const navigate = useNavigate();
-  console.log("shopsARR=====>",shopsArr[0])
+  // console.log("shopsARR=====>",shopsArr[0])
   const shopMapper =
     shopsArr.map((shop, i) => {
       return (

@@ -185,7 +185,7 @@ function ShopFormPage() {
       };
       if (edit) {
         const data = await dispatch(updateShopThunk(new_shop, shop.id));
-        console.log("================>", data);
+        // console.log("================>", data);
         navigate(`/shops/${data.id}`);
       } else {
         const data = await dispatch(createShopThunk(new_shop));
