@@ -16,7 +16,7 @@ class Shop(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     owner_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id'), ondelete='CASCADE'), nullable=False)
     name = db.Column(db.String(40), nullable=False)
-    description = db.Column(db.String(255), nullable=False)
+    description = db.Column(db.String(1000), nullable=False)
     hours = db.Column(JSON, nullable=False)
     website = db.Column(db.String(500), nullable=False)
     phone_number = db.Column(db.String(10))

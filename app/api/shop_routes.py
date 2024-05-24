@@ -197,7 +197,7 @@ def update_shop(shop_id):
         for category_id in new_category_ids - current_category_ids:
             category = Category.query.get(category_id)
             if category:
-                shop_to_update.categories.append(category)
+                shop_to_update.categories.append(category.id)
 
         for category_id in current_category_ids - new_category_ids:
             category = Category.query.get(category_id)
