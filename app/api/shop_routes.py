@@ -240,6 +240,7 @@ def delete_shop(shop_id):
 @shop_routes.route('/<int:shop_id>/images', methods=['POST'])
 @login_required
 def create_image(shop_id):
+    print("route happening")
     body = request.get_json()
     print("BODY=========>", body)
     if(not body['img_link'].lower().endswith(("png", "jpg", "jpeg"))):
@@ -257,18 +258,25 @@ def create_image(shop_id):
     db.session.commit()
     return make_response("Image created", 201)
 
+
+
 #Delete an image from a shop based on shop ID:
 @shop_routes.route('/<int:shop_id>/images/<int:image_id>', methods=['DELETE'])
 @login_required
-def delete_image(image_id, shop_id):
-    image = Image.query.filter(Image.id == image_id)
-    if (image):
-        return abort(404, message ="shop Image couldn't be found")
-    if (image.shop_id == shop_id):
-        return abort(401, message='Image does not belong to this shop')
+def delete_image(shop_id, image_id):
+    print("HITTING DELETE ROUTE==========.")
+    image = Image.query.get(image_id)
+    if not image:
+        response = jsonify({"message": "Shop Image couldn't be found"})
+        response.status_code = 404
+        return response
+    if image.shop_id != shop_id:
+        response = jsonify({"message": "Image does not belong to this shop"})
+        response.status_code = 401
+        return response
     db.session.delete(image)
     db.session.commit()
-    return make_response('Successfully deleted', 200)
+    return jsonify({"message": "Successfully deleted"}), 200
 
 
 
@@ -321,7 +329,7 @@ def create_review(shop_id):
 
 
 # get all reviews by shop
-    
+
 
 @shop_routes.route('/<int:shopId>/reviews')
 def get_all_reviews_by_shop(shopId):
@@ -332,6 +340,6 @@ def get_all_reviews_by_shop(shopId):
     for review in reviews:
         review_dict = review.to_dict(include_shop=True, include_reviewer=True)
         reviews_to_dict.append(review_dict)
-        
+
 
     return jsonify(reviews_to_dict)

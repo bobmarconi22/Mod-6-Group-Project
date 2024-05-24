@@ -55,7 +55,6 @@ function SearchBar() {
           </div>
           <div >
           <label className="category-label">
-            Category:
             <select
               value={category}
               onChange={(e) => setCategory(e.target.value)}
