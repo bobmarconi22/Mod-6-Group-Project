@@ -53,14 +53,15 @@ function ShopDetailsReviews({ rating }) {
     return (
         <>
             <div>Overall Rating</div>
+            <div>{BeanRating({ rating })}</div>
             <div>Amount of rating with coffee beans here</div>
-            <div>Total # of reviews</div>
+            {/* <div>Total # of reviews: {reviews.length()}</div> */}
             <OpenModalButton
                 buttonText="Write a Review"
                 modalComponent={<CreateReviewModal setIsNewReview={setIsNewReview} />}
             />
             <> {reviewMapper}</>
-            <div>{BeanRating({ rating })}</div>
+
         </>
     )
 }
