@@ -294,7 +294,7 @@ def delete_image(shop_id, image_id):
 
 # Create a Review for a shop based on the shop's id
 
-@shop_routes.route('/<int:shop_id>/reviews', methods=['POST'])
+@shop_routes.route('/<int:shop_id>/reviews/new', methods=['POST'])
 @login_required
 def create_review(shop_id):
     body = request.get_json()
