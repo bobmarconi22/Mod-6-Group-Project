@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react'
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import ShopImagesModal from '../ShopImagesModal';
 import ShopDetailsReviews from '../ShopDetailsReviews';
+import BeanRating from '../ShopCardMaker/BeanRating';
 
 // use prop or context to get the shop information
 // change headers to label or headers?
@@ -23,6 +24,7 @@ function ShopDetails() {
         setIsLoaded(true);
     }, [id, dispatch])
 
+    let avg_rating = shopDetails?.avg_rating
     return (
         isLoaded && (
             <>
@@ -31,11 +33,14 @@ function ShopDetails() {
                     <img src='img.png' />
                     <div className='shop-detail-heading-container'>
                         <div>{shopDetails?.name}</div>
-                        <div>{'Avg Rating: ' + shopDetails?.avg_rating} {' Num Reviews: ' + shopDetails?.num_reviews}</div>
-                        <div>{shopDetails?.price_range}</div>
-                        <div>{shopDetails?.categories}</div>
-                        {/* hours not working because how it is formatted */}
-                        {/* <div>see hours</div> */}
+                        <div>{BeanRating({ avg_rating })} {`(${shopDetails?.num_reviews})`}</div>
+                        <div>{'$'.repeat(shopDetails?.price_range)}</div>
+                        <div>{shopDetails.categories.map((category, i) => {
+                            return (<div key={i} className="category-tag">{category}</div>)
+
+                        })}</div>
+
+                        <a href='#hours_container'>See hours</a>
                     </div>
                     <Link to={`images`}>
                         <button className='see-all-photos-button'>See all #{shopDetails?.image.length} photos</button>
@@ -65,21 +70,21 @@ function ShopDetails() {
                 </div>
 
                 <div id='hours-address-container'>
-                    <div>
+                    <div id='hours-container'>
                         {/* hours not working because how it is formatted */}
                         All hours
-                        <div>
-                        <p>Monday: {shopDetails?.hours?.Monday}</p>
-                        <p>Tuesday: {shopDetails?.hours?.Tuesday}</p>
-                        <p>Wednesday: {shopDetails?.hours?.Wednesday}</p>
-                        <p>Thursday: {shopDetails?.hours?.Thursday}</p>
-                        <p>Friday: {shopDetails?.hours?.Friday}</p>
-                        <p>Saturday: {shopDetails?.hours?.Saturday}</p>
-                        <p>Sunday: {shopDetails?.hours?.Sunday}</p>
+                        <div id='hours_container'>
+                            <p>Monday: {shopDetails?.hours?.Monday}</p>
+                            <p>Tuesday: {shopDetails?.hours?.Tuesday}</p>
+                            <p>Wednesday: {shopDetails?.hours?.Wednesday}</p>
+                            <p>Thursday: {shopDetails?.hours?.Thursday}</p>
+                            <p>Friday: {shopDetails?.hours?.Friday}</p>
+                            <p>Saturday: {shopDetails?.hours?.Saturday}</p>
+                            <p>Sunday: {shopDetails?.hours?.Sunday}</p>
 
                         </div>
                     </div>
-                    <div>
+                    <div id='address-container'>
                         Address
                         <img src='img.png' />
                         <button>Get Directions</button>

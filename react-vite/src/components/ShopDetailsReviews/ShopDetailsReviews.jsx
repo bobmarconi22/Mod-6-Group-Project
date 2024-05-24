@@ -13,7 +13,7 @@ function ShopDetailsReviews({ rating }) {
     const dispatch = useDispatch()
     const { id } = useParams()
     // console.log(id)
-    // console.log(rating)
+    console.log(rating)
 
     const [isLoaded, setIsLoaded] = useState(false);
     const [isNewReview, setIsNewReview] = useState(false)
@@ -30,21 +30,28 @@ function ShopDetailsReviews({ rating }) {
         return review.images?.map((image, id) => {
             // console.log(image)
             return (
-                <img key={id} src={image.img_link} />
+                <img key={id} className='shop-details-review-image' src={image.img_link} />
             )
         })
     }
 
     const reviewMapper =
         isLoaded && reviews.map((review, id) => {
+            let rating = review?.rating
+            let monthsOfYear = ["January", "February", 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'November', 'December']
+            let month = monthsOfYear[new Date(review?.created_at).getMonth()]
+            let year = new Date(review?.created_at).getFullYear()
+
             return (
                 review.id &&
                 <div key={id}>
                     <div>{review?.reviewer?.first_name || ''}</div>
                     <div>{review?.reviewer?.city + ', ' + review?.reviewer?.state || ''}</div>
-                    <div>{review?.created_at || ''}</div>
+                    <div>{BeanRating({ rating }) || ''}</div>
+                    <div>{`${month} ${year}` || ''}</div>
                     <div>{review?.review || ''}</div>
                     <div>{reviewImagesMapper(review) || ''}</div>
+                    <div>{review?.images.length} Photo{review?.images.length === 1 ? '' : 's'} in this Review</div>
                     <hr></hr>
                 </div>
             )
