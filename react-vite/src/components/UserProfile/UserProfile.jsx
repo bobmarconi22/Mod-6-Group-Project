@@ -81,17 +81,19 @@ function UserProfile() {
             <h2 id="user-page-subtitle">Your Reviews</h2>
             {Object.values(userReviews).map((review) => (
               <>
+              <div className="profile-review-tile">
                 <a
-                  className="profile-review-tile"
                   onClick={() => navigate(`/shops/${review.shop_id}`)}
                   key={review.id}
                 >
                   <h4>{review.shop.name}</h4>
+                  </a>
                   <div className='beans'><BeanRating beanRating={review.rating}/></div>
                   <p>{review.review}</p>
                  <div className='gallery'>
                 {review.images.map(imageObj => {
                     console.log("REVIEW IN MAP", imageObj.id)
+                    console.log("revew shop id", review.shop_id)
                     return (
                         <div key={imageObj.img_link} className='container'>
                     <div className="shop-image"  alt={review.shop.name} style={{ backgroundImage: `url(${imageObj.img_link})` }}></div>
@@ -101,13 +103,13 @@ function UserProfile() {
                             modalComponent={<DeleteImagesModal shop_id={review.shop_id} img_id={imageObj.id}/>}></NotListItemModal>
                                     </button>
                                 </div>
-
                     </div>
                 )
                 })}
             </div>
                   <p>{review.created_at}</p>
-                </a>
+                  </div>
+
                 <OpenModalButton
                   buttonText="Edit Review"
                   modalComponent={<UpdateReviewModal reviewToEdit={review} setIsSubmitted={setIsSubmitted} />}

@@ -1,6 +1,7 @@
 import { useModal } from '../../context/Modal';
 import { loadShopDetailsThunk } from '../../redux/shops';
 import { useDispatch } from "react-redux";
+import { getReviewsByUserIdThunk } from "../../redux/reviews";
 
 function DeleteImagesModal({shop_id, img_id}){
     const { closeModal } = useModal();
@@ -16,6 +17,7 @@ function DeleteImagesModal({shop_id, img_id}){
 
                 if (response.ok) {
                     await dispatch(loadShopDetailsThunk(shop_id));
+                    await dispatch(getReviewsByUserIdThunk(sessionUser.id))
                     closeModal();
                 } else {
                     // console.log("ENTERING ERROR")
