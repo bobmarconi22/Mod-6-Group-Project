@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useModal } from '../../context/Modal'
-import { useParams } from 'react-router-dom'
+// import { useParams } from 'react-router-dom'
 import { BeanRating } from './BeanRating'
 import { updateReviewThunk } from '../../redux/reviews'
 import './UpdateReviewModal.jsx'
@@ -11,7 +11,7 @@ import './UpdateReviewModal.jsx'
 function UpdateReviewModal({ reviewToEdit, setIsSubmitted }) {
 
     const shop = useSelector((state) => state.shops.userShops)
-    
+
 
     const [beans, setBeans] = useState(reviewToEdit?.rating)
     const [review, setReview] = useState(reviewToEdit?.review)
