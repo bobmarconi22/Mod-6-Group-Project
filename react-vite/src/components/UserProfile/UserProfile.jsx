@@ -27,7 +27,7 @@ function UserProfile() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  if (isLoaded) console.log("userReview", userReviews)
+  // if (isLoaded) console.log("userReview", userReviews)
 
   useEffect(() => {
     if (sessionUser) {
@@ -53,9 +53,9 @@ function UserProfile() {
     // console.log('===>', id)
     dispatch(deleteShopThunk(id.toString()))
     dispatch(getShopsByUserIdThunk(sessionUser.id))
-   dispatch(loadShopsThunk())
+    dispatch(loadShopsThunk())
 
-}
+  }
 
 
   return (
@@ -77,18 +77,18 @@ function UserProfile() {
             <p>Phone: {sessionUser.phone_number || <a>Add a Number</a>}</p>
             <p>
               Total reviews:{" "}
-              {Object.values(userReviews).length || <a>Add a Review!</a>}
+              {userReviews && Object.values(userReviews).length || <a>Add a Review!</a>}
             </p>
             <p>
               Number of Shops Listed:{" "}
-              {Object.values(userShops).length || <a>Add a Shop!</a>}
+              {userShops && Object.values(userShops).length || <a>Add a Shop!</a>}
             </p>
           </div>
         </div>
         {isLoaded && (
           <div className="profile-section">
             <h2 id="user-page-subtitle">Your Reviews</h2>
-            {Object.values(userReviews).map((review) => (
+            {userReviews && Object.values(userReviews).map((review) => (
               <>
                 <div className="profile-review-tile">
                   <a
@@ -121,7 +121,7 @@ function UserProfile() {
 
                 <OpenModalButton
                   buttonText="Edit Review"
-                  modalComponent={<UpdateReviewModal reviewToEdit={review} setIsSubmitted={setIsSubmitted} />}
+                  modalComponent={<UpdateReviewModal reviewToEdit={review} setIsSubmitted={setIsSubmitted} reviewShopName={review.shop.name} />}
                 />
                 <OpenModalButton
                   buttonText="Delete Review"
@@ -139,7 +139,7 @@ function UserProfile() {
               <button id='new-shop-button' onClick={() => navigate('/new-shop')}>Create a Shop</button>
             </div>
 
-            {Object.values(userShops).map((shop) => (
+            {userShops && Object.values(userShops).map((shop) => (
               <>
                 <a
                   className="profile-shop-tile"

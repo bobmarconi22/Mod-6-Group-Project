@@ -1,17 +1,17 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useModal } from '../../context/Modal'
 // import { useParams } from 'react-router-dom'
 import { BeanRating } from './BeanRating'
 import { updateReviewThunk } from '../../redux/reviews'
+import { getReviewsByUserIdThunk } from '../../redux/reviews'
 import './UpdateReviewModal.jsx'
 
 
 
-function UpdateReviewModal({ reviewToEdit, setIsSubmitted }) {
+function UpdateReviewModal({ reviewToEdit, setIsSubmitted, reviewShopName }) {
 
-    const shop = useSelector((state) => state.shops.userShops)
-
+    const user = useSelector((state) => state.session.user)
 
     const [beans, setBeans] = useState(reviewToEdit?.rating)
     const [review, setReview] = useState(reviewToEdit?.review)
@@ -19,6 +19,10 @@ function UpdateReviewModal({ reviewToEdit, setIsSubmitted }) {
 
     const dispatch = useDispatch()
     const { closeModal } = useModal()
+
+    useEffect(() => {
+        dispatch(getReviewsByUserIdThunk(user.id))
+    }, [dispatch])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -39,7 +43,7 @@ function UpdateReviewModal({ reviewToEdit, setIsSubmitted }) {
 
     return (
         <>
-            <h1>{shop && shop[1].name}</h1>
+            <h1>{reviewShopName}</h1>
             <form onSubmit={handleSubmit}>
                 <div><span>{errors.review}</span><span>{errors.rating}</span> </div>
                 <BeanRating setBeans={setBeans} filledBeans={beans} />

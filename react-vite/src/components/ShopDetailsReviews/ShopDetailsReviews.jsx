@@ -19,24 +19,21 @@ function ShopDetailsReviews({ rating }) {
     const [isNewReview, setIsNewReview] = useState(false)
 
     let reviews = Object.values(useSelector((state) => state.reviews))
-    // console.log('reviews', reviews)
+    console.log('reviews', reviews)
 
     useEffect(() => {
         dispatch(loadReviewsByShopIdThunk(id))
         setIsLoaded(true)
     }, [dispatch, isNewReview])
 
-    // function reviewImagesMapper(images) {
-    //     // console.log(images)
-    //     let mappedImages =
-    // }
-
-    const reviewImagesMapper =
-        isLoaded && reviews.images?.map((image, id) => {
+    const reviewImagesMapper = (review) => {
+        return review.images?.map((image, id) => {
+            // console.log(image)
             return (
                 <img key={id} src={image.img_link} />
             )
         })
+    }
 
     const reviewMapper =
         isLoaded && reviews.map((review, id) => {
@@ -47,7 +44,7 @@ function ShopDetailsReviews({ rating }) {
                     <div>{review?.reviewer?.city + ', ' + review?.reviewer?.state || ''}</div>
                     <div>{review?.created_at || ''}</div>
                     <div>{review?.review || ''}</div>
-                    <div>{reviewImagesMapper || ''}</div>
+                    <div>{reviewImagesMapper(review) || ''}</div>
                     <hr></hr>
                 </div>
             )

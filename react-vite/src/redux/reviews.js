@@ -119,7 +119,7 @@ const reviewReducer = (state = {}, action) => {
     let newState = {}
     switch (action.type) {
         case LOAD_REVIEWS_BY_SHOPID: {
-            const allReviews = {}
+            const allReviews = {};
             action.payload.forEach((review) => {
                 allReviews[review.id] = review;
             });
