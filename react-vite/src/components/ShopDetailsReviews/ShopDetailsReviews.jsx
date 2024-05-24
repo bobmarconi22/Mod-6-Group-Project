@@ -68,8 +68,8 @@ function ShopDetailsReviews({ rating }) {
         <>
             <div className='title'>Overall Rating</div>
             <div>{BeanRating({ rating })}</div>
-            <div>{Object.values(reviews).length} review{Object.values(reviews).length == 1 ? '' : 's'}</div>
-            {reviews.find((review) => review.user_id == sessionUser.id) ? <></> : <OpenModalButton
+            <div>{Object.values(reviews).length} review{Object.values(reviews).length === 1 ? '' : 's'}</div>
+            {!sessionUser || reviews.find((review) => review.user_id === sessionUser?.id) ? <></> : <OpenModalButton
 
                 buttonText="Write a Review"
                 modalComponent={<CreateReviewModal setIsNewReview={setIsNewReview} />}
