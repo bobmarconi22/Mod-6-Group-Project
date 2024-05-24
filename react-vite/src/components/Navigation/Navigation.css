@@ -7,17 +7,17 @@
   justify-content: space-between;
   align-items: center;
   height: 100px;
-  background-color: #ABC2DB;
+  background-color: #abc2db;
   padding: 5px 20px;
 }
 
 .nav-text {
-  margin: 0px 30px
+  margin: 0px 30px;
 }
 
 .nav-text:hover {
   cursor: pointer;
-  color: #DEB98E;
+  color: #2b5a8d;
 }
 
 #nav-logo {
@@ -29,8 +29,6 @@
   font-size: larger;
   text-decoration: none;
 }
-
-
 
 /* Search Bar CSS */
 .search-bar {
@@ -47,43 +45,91 @@
   align-items: center;
   column-gap: 5px;
 }
+
 .price-range-div {
   display: flex;
   align-items: center;
   width: fit-content;
   border: 1px solid grey;
-  border-radius: 3px;
+  border-radius: 10px;
 }
+
 .price-range-div > button {
   border: none;
-  background-color: white;
-  border-right: 1px solid grey
+  border-right: 1px solid grey;
+  padding: 5px;
+  border-radius: 0;
 }
 
-
-
-.left-button {
-  border-top-left-radius: 3px;
-  border-bottom-left-radius: 3px;
-  border-right: 1px,;
+#left-button {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-right: 1px solid grey;
 }
-.right-button {
-  border-top-right-radius: 3px;
-  border-bottom-right-radius: 3px;
+
+#right-button {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+
 }
+
 .dollar {
-    color: lightgrey;
-  }
+  color: lightgrey;
+  background-color: white;
+}
+
 .dollar:hover {
-  background-color: #B8C0C8;
+  background-color: #2b5a8d;
   color: white;
 }
+
 .dollar-filled:hover {
-    background-color: #B8C0C8;
+  background-color: #2b5a8d;
+  color: lightblue;
+}
 
-  }
+.dollar-filled {
+  background-color: #2b5a8d;
+  color: white;
+}
 
-  .dollar-filled {
-    color: black;
+.dollar-filled:active{
+    background-color: #2b5a8d;
+    color: white;
+}
 
-  }
+#search-submit{
+  margin-left: 10px;
+}
+
+
+.profile-dropdown{
+  position: absolute;
+  right: 0;
+  margin-right: 8px;
+  margin-top: 36px;
+  padding-left: 0;
+  border-radius: 1em;
+  width: 175px;
+}
+
+.profile-dropdown > button{
+  width: 100%;
+  border-radius: 0 0 1em 1em;
+  font-size: 12px;
+  text-align: start;
+}
+
+.profile-dropdown > li{
+  background-color: #87a9cb;
+  border: none;
+  font-size: 12px;
+  color: white;
+  padding: 10px;
+}
+
+.profile-dropdown > li:hover{
+  background-color: #2b5a8d;
+  color: white;
+  cursor: pointer;
+}

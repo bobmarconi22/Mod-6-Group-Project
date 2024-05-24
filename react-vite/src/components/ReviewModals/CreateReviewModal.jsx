@@ -6,8 +6,7 @@ import { loadShopDetailsThunk } from '../../redux/shops'
 import { BeanRating } from './BeanRating'
 import { createReviewThunk } from '../../redux/reviews'
 
-
-function CreateReviewModal() {
+function CreateReviewModal({setIsNewReview}) {
 
     const [review, setReview] = useState('')
     const [beans, setBeans] = useState(0)
@@ -26,8 +25,8 @@ function CreateReviewModal() {
         dispatch(loadShopDetailsThunk(id))
     }, [id, dispatch])
 
-    const shop = useSelector((state) => state.shops.ShopDetails)
-    console.log(shop)
+    const shop = useSelector((state) => state.shops.shopDetails)
+    // console.log(shop)
 
 
     const handleSubmit = async (e) => {
@@ -40,16 +39,16 @@ function CreateReviewModal() {
             img_url3: (img3.length > 0 && img3)
         }
 
-        dispatch(createReviewThunk(reviewData, id)).then(() => closeModal())
+        dispatch(createReviewThunk(reviewData, id)).then(() => setIsNewReview(true)).then(() => closeModal())
 
 
     }
 
 
     return (
-        <>
+        <div className='whole-form'>
             <h1>{shop && shop.name}</h1>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className='form'>
                 <BeanRating setBeans={setBeans} filledBeans={beans} />
                 <input className='review'
                     type='text'
@@ -83,7 +82,7 @@ function CreateReviewModal() {
 
 
             </form>
-        </>
+        </div>
     )
 }
 

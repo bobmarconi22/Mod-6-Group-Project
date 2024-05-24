@@ -13,9 +13,9 @@ export const loadReviewsByShopId = (reviews) => ({
     payload: reviews
 })
 
-export const createReview = (review) => ({
+export const createReview = (newReview) => ({
     type: CREATE_REVIEW,
-    payload: review
+    payload: newReview
 })
 
 export const updateReview = (review) => ({
@@ -36,6 +36,7 @@ export const userReviews = (reviews) => ({
 // thunk action creators
 export const loadReviewsByShopIdThunk = (shopId) => async (dispatch) => {
     const res = await fetch(`/api/shops/${shopId}/reviews`)
+
     if (res.ok) {
         const reviews = await res.json()
         dispatch(loadReviewsByShopId(reviews))
@@ -47,7 +48,7 @@ export const loadReviewsByShopIdThunk = (shopId) => async (dispatch) => {
 }
 
 export const createReviewThunk = (newReviewData, shopId) => async (dispatch) => {
-    const res = await fetch(`/api/shops/${shopId}/reviews`, {
+    const res = await fetch(`/api/shops/${shopId}/reviews/new`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -100,9 +101,11 @@ export const deleteReviewThunk = (reviewId) => async (dispatch) => {
 }
 
 export const getReviewsByUserIdThunk = () => async (dispatch) => {
+
     const res = await fetch(`/api/reviews/current`)
     if (res.ok) {
         const reviews = await res.json()
+
         dispatch(userReviews(reviews))
         return reviews
     } else {
@@ -121,12 +124,15 @@ const reviewReducer = (state = {}, action) => {
                 allReviews[review.id] = review;
             });
             return { ...state, ...allReviews };
+            // return action.payload
         }
         case CREATE_REVIEW: {
-            return { ...state, ...action.payload }
+            newState[action.payload.id] = action.payload
+            return { ...state, ...newState }
         }
         case USER_REVIEW: {
             newState = { ...state }
+
             newState.userReviews = {}
             action.payload.forEach(review => {
                 newState.userReviews[review.id] = review

@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createShopThunk } from "../../redux/shops";
-import { useNavigate } from "react-router-dom";
+import {
+  createShopThunk,
+  loadShopDetailsThunk,
+  updateShopThunk,
+} from "../../redux/shops";
+import { useNavigate, useParams } from "react-router-dom";
 import "./ShopForm.css";
 import { getAllCategories } from "../../redux/categories";
 import { loadShopsThunk } from "../../redux/shops";
@@ -9,22 +13,24 @@ import { loadShopsThunk } from "../../redux/shops";
 function ShopFormPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { id } = useParams();
   const sessionUser = useSelector((state) => state.session.user);
   const allCategories = useSelector((state) => state.categories.categories);
+  const shop = useSelector((state) => state.shops.shopDetails);
   const [isLoaded, setIsLoaded] = useState(false);
   const [edit, setEdit] = useState(false);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [hours, setHours] = useState({
-    Monday: { open: "Open", close: "Close" },
-    Tuesday: { open: "Open", close: "Close" },
-    Wednesday: { open: "Open", close: "Close" },
-    Thursday: { open: "Open", close: "Close" },
-    Friday: { open: "Open", close: "Close" },
-    Saturday: { open: "Open", close: "Close" },
-    Sunday: { open: "Open", close: "Close" },
+    Monday: { open: "", close: "" },
+    Tuesday: { open: "", close: "" },
+    Wednesday: { open: "", close: "" },
+    Thursday: { open: "", close: "" },
+    Friday: { open: "", close: "" },
+    Saturday: { open: "", close: "" },
+    Sunday: { open: "", close: "" },
   });
-  const [selectedDay, setSelectedDay] = useState("Monday");
+  const [selectedDays, setSelectedDays] = useState([]);
   const [streetOne, setStreetOne] = useState("");
   const [streetTwo, setStreetTwo] = useState("");
   const [city, setCity] = useState("");
@@ -37,15 +43,46 @@ function ShopFormPage() {
   const [priceRange, setPriceRange] = useState("");
   const [errors, setErrors] = useState({});
   const [categories, setCategories] = useState([]);
+  const [image, setImage] = useState("");
 
   useEffect(() => {
     const fetchCategories = async () => {
       await dispatch(getAllCategories());
       setIsLoaded(true);
     };
-    fetchCategories();
-    dispatch(loadShopsThunk());
-    setEdit(true);
+    if (id) {
+      dispatch(loadShopDetailsThunk(id)).then((shop) => {
+        setName(shop.name);
+        setDescription(shop.description);
+        setWebsite(shop.website);
+        setPhoneNumber(shop.phone_number);
+        setPriceRange(shop.price_range);
+        setStreetOne(shop.address.address_line1);
+        setStreetTwo(shop.address.address_line2);
+        setCity(shop.address.city);
+        setState(shop.address.state);
+        setPostal(shop.address.postal_code);
+        setCountry(shop.address.country);
+        setCategories(shop.categories);
+
+        Object.keys(shop.hours).forEach((day) => {
+          setHours((prevHours) => ({
+            ...prevHours,
+            [day[0].toUpperCase() + day.slice(1)]: {
+              ...prevHours[day[0].toUpperCase() + day.slice(1)],
+              open: shop.hours[day].split(" - ")[0],
+              close: shop.hours[day].split(" - ")[1],
+            } || 'Closed',
+          }));
+        });
+
+        setEdit(true);
+        setIsLoaded(true);
+      });
+    } else {
+      fetchCategories();
+      dispatch(loadShopsThunk());
+    }
   }, [dispatch]);
 
   const times = [
@@ -79,6 +116,7 @@ function ShopFormPage() {
     "1:30pm",
     "2:00pm",
     "2:30pm",
+    "3:00pm",
     "3:30pm",
     "4:00pm",
     "4:30pm",
@@ -104,12 +142,6 @@ function ShopFormPage() {
     const err = {};
     if (!name) err.name = "Name is required!";
     if (!description) err.description = "Description is required!";
-    if (
-      Object.values(hours).some(
-        (day) => day.open === "Open" || day.close === "Close"
-      )
-    )
-      err.hours = "Please specify Opening and Closing hours for every day!";
     if (!website) err.website = "Website is required!";
     if (!priceRange || isNaN(priceRange) || priceRange < 1 || priceRange > 5)
       err.priceRange = "Please select an average price!";
@@ -121,7 +153,7 @@ function ShopFormPage() {
     setErrors(err);
 
     if (Object.keys(err).length === 0) {
-      const newShop = {
+      const new_shop = {
         name,
         owner_id: sessionUser.id,
         description,
@@ -149,46 +181,76 @@ function ShopFormPage() {
         postal_code: postal,
         country,
         categories,
+        preview_image: image,
       };
-      const data = await dispatch(createShopThunk(newShop));
-      navigate(`/shops/${data.id}`)
+      if (edit) {
+        const data = await dispatch(updateShopThunk(new_shop, shop.id));
+        // console.log("================>", data);
+        navigate(`/shops/${data.id}`);
+      } else {
+        const data = await dispatch(createShopThunk(new_shop));
+        navigate(`/shops/${data.id}`);
+      }
     }
-
   };
 
-  const handleDemoHours = (e) => {
-    e.preventDefault()
+  const handleDemoData = (e) => {
+    setName('Created Coffee Shop')
+    e.preventDefault();
     Object.keys(hours).forEach((day) => {
       setHours((prevHours) => ({
-      ...prevHours,
-      [day]: {
-        ...prevHours[day],
-        open: '6:30am',
-        close: '6:30pm',
-      },
-    }));
-    })
-
-  }
-
-  const handleOpenChange = (day, value) => {
-    setHours((prevHours) => ({
-      ...prevHours,
-      [day]: {
-        ...prevHours[day],
-        open: value,
-      },
-    }));
+        ...prevHours,
+        [day]: {
+          ...prevHours[day],
+          open: "6:30am",
+          close: "6:30pm",
+        },
+      }));
+    });
+    setWebsite('www.created-shop.com')
+    setPhoneNumber('4444444444')
+    setPriceRange(3)
+    setDescription('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.')
+    setCategories(['Outdoor Seating', 'Free Wifi', 'Late Night', 'Study Area'])
+    setStreetOne('123 CreateShop Road')
+    setCity('Created City')
+    setState('Pennsylvania')
+    setPostal(123123)
+    setImage('img.url')
   };
 
-  const handleCloseChange = (day, value) => {
-    setHours((prevHours) => ({
-      ...prevHours,
-      [day]: {
-        ...prevHours[day],
-        close: value,
-      },
-    }));
+  const handleClearDays = (e) => {
+    e.preventDefault();
+    setSelectedDays([]);
+  };
+
+  const handleClearCategories = (e) => {
+    e.preventDefault();
+    setCategories([]);
+  };
+
+  const handleOpenChange = (days, value) => {
+    days.forEach((day) => {
+      setHours((prevHours) => ({
+        ...prevHours,
+        [day]: {
+          ...prevHours[day],
+          open: value,
+        },
+      }));
+    });
+  };
+
+  const handleCloseChange = (days, value) => {
+    days.forEach((day) => {
+      setHours((prevHours) => ({
+        ...prevHours,
+        [day]: {
+          ...prevHours[day],
+          close: value,
+        },
+      }));
+    });
   };
 
   const handleCategoriesChange = (e) => {
@@ -201,16 +263,33 @@ function ShopFormPage() {
 
   return (
     (isLoaded && !sessionUser && (
-      <h1 style={{ textAlign: "center" }}>Please Log In or Sign Up</h1>
+      <h1 style={{ textAlign: "center", marginTop: "25px" }}>
+        Please Log In or Sign Up
+      </h1>
     )) || (
       <div>
-        <h1>Create A Shop</h1>
-        {Object.values(errors).map((message, idx) => (
-          <p key={idx}>{message}</p>
-        ))}
-        <form onSubmit={handleSubmit}>
+        {edit ? (
+            <h1 className="form-title">Update `{shop.name}`</h1>
+        ) : (
+          <>
+            <h1 className="form-title">Create a Shop</h1>
+            <button
+              id="form-demo-button"
+              onClick={(e) => handleDemoData(e)}
+            >
+              Demo Form Data
+            </button>
+          </>
+        )}
+        <form id="create-edit-form" onSubmit={handleSubmit}>
+          <div className="form-header">
+            <h3>General Information</h3>
+            <p>Give your customers some details about your new coffee shop!</p>
+          </div>
           <label>
-            Name
+            <p className="form-label" style={{ borderTop: "none" }}>
+              Name
+            </p>
             <input
               type="text"
               value={name}
@@ -218,29 +297,40 @@ function ShopFormPage() {
               required
             />
           </label>
-          {errors.name && <p>{errors.name}</p>}
           <label>
-            Hours
+            <p className="form-label">Hours</p>
             <div>
               <select
-                value={selectedDay}
+                id="multiple-select"
+                multiple
+                value={selectedDays}
                 onChange={(e) =>
-                  setSelectedDay(e.target.value)
+                  setSelectedDays((prevDays) => [...prevDays, e.target.value])
                 }
-                required
               >
-                {Object.keys(hours).map((day, index) => (
-                  <option key={index} value={day}>
-                    {day}
-                  </option>
-                ))}
+                {Object.keys(hours).map((day) =>
+                  hours[day] && hours[day].open ? (
+                    <option key={day} value={day}>
+                      {day}: {hours[day].open} - {hours[day].close}
+                    </option>
+                  ) : (
+                    <option key={day} value={day}>
+                      {day}: Closed
+                    </option>
+                  )
+                )}
               </select>
               <select
-                value={selectedDay.open}
-                onChange={(e) => handleOpenChange(selectedDay, e.target.value)}
-                required
+                className="time-select"
+                disabled={!selectedDays.length}
+                value={
+                  selectedDays.length && hours[selectedDays[0]]
+                    ? hours[selectedDays[0]].open
+                    : ""
+                }
+                onChange={(e) => handleOpenChange(selectedDays, e.target.value)}
               >
-                <option value="Open" disabled>
+                <option value="" disabled>
                   Open
                 </option>
                 {times.map((time, index) => (
@@ -249,20 +339,27 @@ function ShopFormPage() {
                   </option>
                 ))}
               </select>
-              -
               <select
-                value={selectedDay.close}
-                onChange={(e) => handleCloseChange(selectedDay, e.target.value)}
-                required
+                disabled={!selectedDays.length}
+                className="time-select"
+                value={
+                  selectedDays.length && hours[selectedDays[0]]
+                    ? hours[selectedDays[0]].close
+                    : ""
+                }
+                onChange={(e) =>
+                  handleCloseChange(selectedDays, e.target.value)
+                }
               >
-                <option value="Close" disabled>
+                <option className="time-select" value="" disabled>
                   Close
                 </option>
                 {times
                   .filter(
                     (time) =>
+                      selectedDays.length &&
                       times.indexOf(time) >
-                      times.indexOf(hours[selectedDay].open)
+                        times.indexOf(hours[selectedDays[0]].open)
                   )
                   .map((time, index) => (
                     <option key={index} value={time}>
@@ -270,20 +367,110 @@ function ShopFormPage() {
                     </option>
                   ))}
               </select>
+              <button
+                className="hours-button"
+                onClick={(e) => handleClearDays(e)}
+              >
+                Clear Days
+              </button>
             </div>
           </label>
-          <button id="set-hours-button" onClick={(e) => handleDemoHours(e)}>Demo Hours</button>
-          {Object.keys(hours).map((day) => (
-            <div key={day}>
-              <p>
-                {day}: {hours[day].open} - {hours[day].close}
-              </p>
-            </div>
-          ))}
-          {errors.hours && <p>{errors.hours}</p>}
-          <h2>Address</h2>
           <label>
-            Street Address 1
+            <p className="form-label">Website</p>
+            <input
+              type="text"
+              value={website}
+              onChange={(e) => setWebsite(e.target.value)}
+              required
+            />
+          </label>
+          <label>
+            <div className="text-specification">
+              <p className="form-label">Phone Number</p>
+              <i>(optional)</i>
+            </div>
+            <input
+              type="number"
+              value={phoneNumber}
+              onChange={(e) => setPhoneNumber(e.target.value)}
+            />
+          </label>
+          <label>
+            <div>
+              <p className="form-label">Price Range</p>
+              {[1, 2, 3, 4].map((value) => (
+                <span
+                  key={value}
+                  className={
+                    value <= priceRange ? "form-dollar-filled" : "form-dollar"
+                  }
+                  onClick={() => setPriceRange(value)}
+                >
+                  &#36;
+                </span>
+              ))}
+            </div>
+          </label>
+          {errors.priceRange && (
+            <i style={{ color: "#FF253F", fontSize: "10px" }}>
+              {errors.priceRange}
+            </i>
+          )}
+          <div className="form-header">
+            <h3>Additional Information</h3>
+            <p>
+              Tell customers more about your shop, be specific about things you
+              offer and serve!
+            </p>
+          </div>
+          <label>
+            <div className="text-specification">
+              <p className="form-label">Description</p>
+              <i>Up to 200 characters</i>
+            </div>
+            <textarea
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              required
+            />
+          </label>
+          <label>
+            <div className="text-specification">
+              <p className="form-label">Categories</p>
+              <i>Select up to 8 (optional)</i>
+            </div>
+            <select
+              multiple
+              id="multiple-select"
+              value={categories}
+              onChange={(e) => handleCategoriesChange(e)}
+            >
+              {Object.entries(allCategories).map((category, index) => (
+                <option
+                  key={index}
+                  value={category[1].name}
+                  disabled={
+                    categories.length === 8 &&
+                    !categories.includes(category[1].name)
+                  }
+                >
+                  {category[1].name}
+                </option>
+              ))}
+            </select>
+          </label>
+          <button
+            className="hours-button"
+            onClick={(e) => handleClearCategories(e)}
+          >
+            Clear Categories
+          </button>
+          <div className="form-header">
+            <h3>Location</h3>
+            <p>Where are you located?</p>
+          </div>
+          <label>
+            <p className="form-label">Street Address 1</p>
             <input
               type="text"
               value={streetOne}
@@ -291,18 +478,19 @@ function ShopFormPage() {
               required
             />
           </label>
-          {errors.streetOne && <p>{errors.streetOne}</p>}
           <label>
-            Street Address 2
+            <div className="text-specification">
+              <p className="form-label">Street Address 2</p>
+              <i>(optional)</i>
+            </div>
             <input
               type="text"
               value={streetTwo}
               onChange={(e) => setStreetTwo(e.target.value)}
             />
           </label>
-          {errors.streetTwo && <p>{errors.streetTwo}</p>}
           <label>
-            City
+            <p className="form-label">City</p>
             <input
               type="text"
               value={city}
@@ -310,12 +498,11 @@ function ShopFormPage() {
               required
             />
           </label>
-          {errors.city && <p>{errors.city}</p>}
           <label>
-            State
             <select
               value={state}
               onChange={(e) => setState(e.target.value)}
+              style={{fontSize: '16px', marginTop: '30px'}}
               required
             >
               <option value="" disabled>
@@ -374,7 +561,7 @@ function ShopFormPage() {
             </select>
           </label>
           <label>
-            Country
+            <p className="form-label">Country</p>
             <input
               type="text"
               value={country}
@@ -382,9 +569,8 @@ function ShopFormPage() {
               required
             />
           </label>
-          {errors.country && <p>{errors.country}</p>}
           <label>
-            Postal Code
+            <p className="form-label">Postal Code</p>
             <input
               type="number"
               value={postal}
@@ -392,83 +578,40 @@ function ShopFormPage() {
               required
             />
           </label>
-          {errors.postal && <p>{errors.postal}</p>}
-          <h2>Additional Information</h2>
-          <label>
-            Website
-            <input
-              type="text"
-              value={website}
-              onChange={(e) => setWebsite(e.target.value)}
-              required
-            />
-          </label>
-          {errors.website && <p>{errors.website}</p>}
-          <label>
-            Phone Number
-            <input
-              type="number"
-              value={phoneNumber}
-              onChange={(e) => setPhoneNumber(e.target.value)}
-              required
-            />
-          </label>
-          <label>
-            <div>
-              Price Range:
-              {[1, 2, 3, 4, 5].map((value) => (
-                <span
-                  key={value}
-                  className={value <= priceRange ? "dollar-filled" : "dollar"}
-                  onClick={() => setPriceRange(value)}
-                >
-                  &#36;
-                </span>
-              ))}
-            </div>
-          </label>
-          {errors.priceRange && <p>{errors.priceRange}</p>}
-          <label>
-            Description
-            <textarea
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              required
-            />
-          </label>
-          {errors.description && <p>{errors.description}</p>}
-          <label>
-            Categories
-            <select
-              multiple
-              value={categories}
-              onChange={(e) => handleCategoriesChange(e)}
-            >
-              {Object.entries(allCategories).map((category, index) => (
-                <option
-                  key={index}
-                  value={category[1].name}
-                  disabled={
-                    categories.length === 8 &&
-                    !categories.includes(category[1].name)
-                  }
-                >
-                  {category[1].name}
-                </option>
-              ))}
-            </select>
-          </label>
-          {errors.categories && <p>{errors.categories}</p>}
-          {edit && (
+          {!edit && (
             <>
-              <h2>Images</h2>
-              <input
-                type="text"
-                value={'images'}
-              />
+              <div className="form-header">
+                <h3>Photos</h3>
+                <p>
+                  Attach an image that we will display as your main photo for
+                  guests to see. Be sure to make a good first impression!
+                </p>
+              </div>
+              <label>
+                <p className="form-label">Preview Photo Url</p>
+                <input
+                  type="text"
+                  value={image}
+                  onChange={(e) => setImage(e.target.value)}
+                  required
+                />
+              </label>
             </>
           )}
-          <button type="submit">Create Shop</button>
+          {Object.values(errors).map((message, idx) => (
+            <i key={idx} style={{ color: "#FF253F", fontSize: "10px" }}>
+              {message}
+            </i>
+          ))}
+          {edit ? (
+            <button type="submit" className="form-submit-button">
+              Update
+            </button>
+          ) : (
+            <button type="submit" className="form-submit-button">
+              Create
+            </button>
+          )}
         </form>
       </div>
     )

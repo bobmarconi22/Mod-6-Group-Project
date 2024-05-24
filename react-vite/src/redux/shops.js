@@ -1,3 +1,5 @@
+import ShopDetails from "../components/ShopDetails/ShopDetails";
+
 const LOAD_SHOPS = "LOAD_SHOPS";
 const LOAD_SHOP_DETAILS = "LOAD_SHOP_DETAILS";
 const CREATE_SHOP = "CREATE_SHOP";
@@ -44,7 +46,7 @@ export const loadShopsThunk = () => async (dispatch) => {
     dispatch(loadShops(shops));
     return shops;
   } else {
-    const errors = await res.json()
+    const errors = await response.json()
     return errors
   }
 };
@@ -66,13 +68,15 @@ export const createShopThunk = (newShop) => async (dispatch) => {
 };
 
 export const loadShopDetailsThunk = (id) => async (dispatch) => {
+
   const response = await fetch(`/api/shops/${id}`);
   if (response.ok) {
     const shop = await response.json();
+    // console.log("SHOP IN THUNK", shop)
     dispatch(loadShopDetails(shop));
     return shop;
   } else {
-    const errors = await res.json()
+    const errors = await response.json()
     return errors
   }
 };
@@ -89,8 +93,8 @@ export const getShopsByUserIdThunk = () => async (dispatch) => {
   }
 };
 
-export const updateShopThunk = (shop) => async (dispatch) => {
-  const response = await fetch(`/api/shops/${shop.id}`, {
+export const updateShopThunk = (shop, id) => async (dispatch) => {
+  const response = await fetch(`/api/shops/${id}/update`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(shop),
@@ -100,27 +104,28 @@ export const updateShopThunk = (shop) => async (dispatch) => {
     dispatch(updateShop(shop));
     return shop
   } else {
-    const errors = await res.json()
+    const errors = await response.json()
     return errors
   }
 }
 
 export const deleteShopThunk = (shopId) => async (dispatch) => {
-  await fetch(`/api/shops/${shopId}/delete`, {
+  const response = await fetch(`/api/shops/${shopId}/delete`, {
     method: "DELETE",
     headers: { "Content-Type": "application/json" },
   });
   if (response.ok) {
     const message = await response.json();
+    console.log('this is the shopId', shopId)
     dispatch(deleteShop(shopId));
     return message
   } else {
-    const errors = await res.json()
+    const errors = await response.json()
     return errors
   }
 };
 // Shops Reducer
-const shopsReducer = (state = {}, action) => {
+const shopsReducer = (state = { allShops: {}, userShops: {}, shopDetails: null}, action) => {
   let newState = {}
   switch (action.type) {
     case LOAD_SHOPS: {
@@ -129,12 +134,23 @@ const shopsReducer = (state = {}, action) => {
       action.payload.forEach((shop) => {
         allShops[shop.id] = shop;
       });
-      return { ...state, ...allShops };
+      return { ...state, allShops };
     }
     case CREATE_SHOP:
-      return { ...state, [action.payload.id]: action.payload };
+      const newAllShops = {
+        ...state.allShops,
+        [action.payload.id]: action.payload
+      }
+      const newUserShops = {
+        ...state.userShops,
+        [action.payload.id]: action.payload
+      }
+      return { ...state, allShops: newAllShops, userShops: newUserShops };
+
     case LOAD_SHOP_DETAILS:
-      return { ...state, ShopDetails: action.payload };
+
+      return { ...state, shopDetails: action.payload };
+
     case USER_SHOPS:
       newState = { ...state, userShops: {} };
       action.payload.forEach((shop) => {
@@ -142,14 +158,32 @@ const shopsReducer = (state = {}, action) => {
       });
       return newState;
     case UPDATE_SHOP: {
-      const newState = { ...state };
-      newState[action.payload.id] = action.payload
-      return newState
+
+      const newAllShops = {
+        ...state.allShops,
+        [action.payload.id]: action.payload
+      }
+      const newUserShops = {
+        ...state.userShops,
+        [action.payload.id]: action.payload
+      }
+      return { ...state, allShops: newAllShops, userShops: newUserShops };
     }
     case DELETE_SHOP: {
-      newState = { ...state }
-      delete newState[action.payload]
-      return newState
+       const newAllShops = {
+        ...state.allShops,
+      }
+      const newUserShops = {
+        ...state.userShops,
+      }
+
+      delete newAllShops[action.payload]
+      delete newUserShops[action.payload]
+      let newShopDetails = state.shopDetails
+      if(state.shopDetails !== null && state.shopDetails.id === action.payload) {
+        newShopDetails = null
+      }
+      return { allShops: newAllShops, userShops: newUserShops, shopDetails: newShopDetails };
     }
     default:
       return state;
