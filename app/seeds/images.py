@@ -5,7 +5,7 @@ def seed_images():
     images = [
         # Shop 1
         Image(user_id=1, shop_id=1, img_link='https://s3-media0.fl.yelpcdn.com/bphoto/IE19sZJw3i-tzhsi1EXwtg/o.jpg', preview_image=True),
-        Image(user_id=10, shop_id=1, review_id=1, img_link='https://cdn.vox-cdn.com/thumbor/cBi0hSPVwOguGd0E2mU1o3h0uxk=/0x0:2000x1333/1200x800/filters:focal(840x507:1160x827)/cdn.vox-cdn.com/uploads/chorus_image/image/58802817/CafeReveille_PChang_6003.0.jpg', preview_image=False),
+        Image(user_id=10, shop_id=1, review_id=1, img_link='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwVoF49SZ-Hu3hAQywEIkoJWQz1nK4lQ-CXBYbctbP-g&s', preview_image=False),
         Image(user_id=2, shop_id=1, review_id=2, img_link='https://images.squarespace-cdn.com/content/v1/572e312db654f906290c6a68/1518029229926-IA875XL3TC5UAHTENJW3/unnamed-7.jpg', preview_image=False),
         Image(user_id=3, shop_id=1, review_id=3, img_link='https://s3-media0.fl.yelpcdn.com/bphoto/X5tKF5x7aF3dH9o8o9_udA/348s.jpg', preview_image=False),
         Image(user_id=1, shop_id=1, img_link='https://media-cdn.tripadvisor.com/media/photo-s/14/69/bd/9e/shakshuka-12-at-cafe.jpg', preview_image=False),
@@ -13,8 +13,8 @@ def seed_images():
 
         # Shop 2
         Image(user_id=2, shop_id=2, img_link='https://s3-media0.fl.yelpcdn.com/bphoto/IE19sZJw3i-tzhsi1EXwtg/o.jpg', preview_image=True),
-        Image(user_id=4, shop_id=2, review_id=4, img_link='https://cdn.vox-cdn.com/thumbor/41OBxMP6B6wIHBceYfgmvjzaey0=/0x0:2000x1333/1200x0/filters:focal(0x0:2000x1333):no_upscale()/cdn.vox-cdn.com/uploads/chorus_asset/file/10288311/CafeReveille_PChang_5986.jpg', preview_image=False),
-        Image(user_id=5, shop_id=2, review_id=5, img_link='https://images.squarespace-cdn.com/content/v1/56d3607086db43f4f775d205/1467992469962-1XHT2IEJP7BHI0XOGDST/image-asset.jpeg', preview_image=False),
+        Image(user_id=4, shop_id=2, review_id=4, img_link='https://s3-media0.fl.yelpcdn.com/bphoto/ZQyJOenQeNnv0X1qDPZIXA/348s.jpg', preview_image=False),
+        Image(user_id=5, shop_id=2, review_id=5, img_link='https://www.posist.com/restaurant-times/wp-content/uploads/2023/07/How-To-Start-A-Coffee-Shop-Business-A-Complete-Guide.jpg', preview_image=False),
         Image(user_id=6, shop_id=2, review_id=6, img_link='https://reveillecafe.com/wp-content/uploads/2019/02/Mystic-French-Toast-with-Bacon-cropped.jpg', preview_image=False),
         Image(user_id=2, shop_id=2, img_link='https://i0.wp.com/newspack-berkeleyside-cityside.s3.amazonaws.com/wp-content/uploads/2018/04/DSC_0142.jpg?fit=1500%2C994&ssl=1', preview_image=False),
         Image(user_id=2, shop_id=2, img_link='https://media.timeout.com/images/105179583/image.jpg', preview_image=False),
@@ -22,16 +22,16 @@ def seed_images():
         # Shop 3
         Image(user_id=3, shop_id=3, img_link='https://s3-media0.fl.yelpcdn.com/bphoto/IE19sZJw3i-tzhsi1EXwtg/o.jpg', preview_image=True),
         Image(user_id=7, shop_id=3, review_id=7, img_link='https://s3-media0.fl.yelpcdn.com/bphoto/IE19sZJw3i-tzhsi1EXwtg/o.jpg', preview_image=False),
-        Image(user_id=8, shop_id=3, review_id=8, img_link='https://images.squarespace-cdn.com/content/v1/56d3607086db43f4f775d205/1467992469962-1XHT2IEJP7BHI0XOGDST/image-asset.jpeg', preview_image=False),
-        Image(user_id=9, shop_id=3, review_id=9, img_link='https://images.squarespace-cdn.com/content/v1/56d3607086db43f4f775d205/1467992469962-1XHT2IEJP7BHI0XOGDST/image-asset.jpeg', preview_image=False),
+        Image(user_id=8, shop_id=3, review_id=8, img_link='https://www.posist.com/restaurant-times/wp-content/uploads/2023/07/How-To-Start-A-Coffee-Shop-Business-A-Complete-Guide.jpg', preview_image=False),
+        Image(user_id=9, shop_id=3, review_id=9, img_link='https://www.posist.com/restaurant-times/wp-content/uploads/2023/07/How-To-Start-A-Coffee-Shop-Business-A-Complete-Guide.jpg', preview_image=False),
         Image(user_id=3, shop_id=3, img_link='https://media-cdn.tripadvisor.com/media/photo-s/14/69/bd/9e/shakshuka-12-at-cafe.jpg', preview_image=False),
         Image(user_id=3, shop_id=3, img_link='https://media.timeout.com/images/105179583/image.jpg', preview_image=False),
 
         # Shop 4
         Image(user_id=4, shop_id=4, img_link='https://s3-media0.fl.yelpcdn.com/bphoto/IE19sZJw3i-tzhsi1EXwtg/o.jpg', preview_image=True),
-        Image(user_id=10, shop_id=4, review_id=10, img_link='https://cdn.vox-cdn.com/thumbor/cBi0hSPVwOguGd0E2mU1o3h0uxk=/0x0:2000x1333/1200x800/filters:focal(840x507:1160x827)/cdn.vox-cdn.com/uploads/chorus_image/image/58802817/CafeReveille_PChang_6003.0.jpg', preview_image=False),
+        Image(user_id=10, shop_id=4, review_id=10, img_link='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwVoF49SZ-Hu3hAQywEIkoJWQz1nK4lQ-CXBYbctbP-g&s', preview_image=False),
         Image(user_id=11, shop_id=4, review_id=11, img_link='https://media.timeout.com/images/105179583/image.jpg', preview_image=False),
-        Image(user_id=12, shop_id=4, review_id=12, img_link='https://images.squarespace-cdn.com/content/v1/56d3607086db43f4f775d205/1467992469962-1XHT2IEJP7BHI0XOGDST/image-asset.jpeg', preview_image=False),
+        Image(user_id=12, shop_id=4, review_id=12, img_link='https://www.posist.com/restaurant-times/wp-content/uploads/2023/07/How-To-Start-A-Coffee-Shop-Business-A-Complete-Guide.jpg', preview_image=False),
         Image(user_id=4, shop_id=4, img_link='https://assets.bonappetit.com/photos/570eb491ea4ae08245db648f/16:9/w_2560,c_limit/sightglass-san-francisco-coffee-shop-interior-lead-image.jpg', preview_image=False),
         Image(user_id=4, shop_id=4, img_link='https://media.cntraveler.com/photos/5a8037c1e9c49e2e4d80a36d/16:9/w_2560%2Cc_limit/Sightglass__2018_Divisidero_Sightglass_Interior_3541.jpg', preview_image=False),
 
@@ -45,32 +45,32 @@ def seed_images():
 
         # Shop 6
         Image(user_id=6, shop_id=6, img_link='https://s3-media0.fl.yelpcdn.com/bphoto/IE19sZJw3i-tzhsi1EXwtg/o.jpg', preview_image=True),
-        Image(user_id=1, shop_id=6, review_id=16, img_link='https://chateautivoli.com/wp-content/uploads/2024/01/breakslow-UMUCQcDdLws-unsplash.jpg', preview_image=False),
+        Image(user_id=1, shop_id=6, review_id=16, img_link='https://d259o9es2o749h.cloudfront.net/wp-content/uploads/2020/08/22202409/PALM-52-scaled-e1600831479551.jpg', preview_image=False),
         Image(user_id=2, shop_id=6, review_id=17, img_link='https://blog.mistobox.com/wp-content/uploads/2016/04/best-coffee-in-san-francisco.jpg', preview_image=False),
-        Image(user_id=3, shop_id=6, review_id=18, img_link='https://s3-media0.fl.yelpcdn.com/bphoto/_gdRlfJacx2WPVTLQhc7vg/1000s.jpg', preview_image=False),
+        Image(user_id=3, shop_id=6, review_id=18, img_link='https://s3-media0.fl.yelpcdn.com/bphoto/ZQyJOenQeNnv0X1qDPZIXA/348s.jpg', preview_image=False),
         Image(user_id=6, shop_id=6, img_link='https://dailycoffeenews.com/wp-content/uploads/2020/05/Inside-Sightglass-Hollywood.jpg', preview_image=False),
         Image(user_id=6, shop_id=6, img_link='https://sprudge.com/wp-content/uploads/2014/02/sightglass-coffee-mission-bar-marzocco-640x480.jpg', preview_image=False),
 
         # Shop 7
         Image(user_id=7, shop_id=7, img_link='https://s3-media0.fl.yelpcdn.com/bphoto/IE19sZJw3i-tzhsi1EXwtg/o.jpg', preview_image=True),
-        Image(user_id=4, shop_id=7, review_id=19, img_link='https://images.squarespace-cdn.com/content/51c8b108e4b050e44c477323/1458300253666-PYZY8NB8C5VQI848PRZ2/IMG_6193.jpg?format=1500w&content-type=image%2Fjpeg', preview_image=False),
-        Image(user_id=5, shop_id=7, review_id=20, img_link='https://sprudge.com/wp-content/uploads/2014/02/sightglass-coffee-mission-roaster-probat.jpg', preview_image=False),
-        Image(user_id=6, shop_id=7, review_id=21, img_link='https://images.squarespace-cdn.com/content/v1/6093287d801ee71d6155e865/1626390249722-NKRJTT2N3ED1EZ9LLJCD/SiteglassDivis_PhotoByBruceDamonte_06.jpeg', preview_image=False),
+        Image(user_id=4, shop_id=7, review_id=19, img_link='https://s3-media0.fl.yelpcdn.com/bphoto/ZQyJOenQeNnv0X1qDPZIXA/348s.jpg', preview_image=False),
+        Image(user_id=5, shop_id=7, review_id=20, img_link='https://s3-media0.fl.yelpcdn.com/bphoto/ZQyJOenQeNnv0X1qDPZIXA/348s.jpg', preview_image=False),
+        Image(user_id=6, shop_id=7, review_id=21, img_link='https://s3-media0.fl.yelpcdn.com/bphoto/ZQyJOenQeNnv0X1qDPZIXA/348s.jpg', preview_image=False),
         Image(user_id=7, shop_id=7, img_link='https://media-cdn.tripadvisor.com/media/photo-s/17/e6/1d/5d/excellently-smooth-tasty.jpg', preview_image=False),
         Image(user_id=7, shop_id=7, img_link='https://media-cdn.tripadvisor.com/media/photo-s/11/76/f7/f1/photo5jpg.jpg', preview_image=False),
 
         # Shop 8
         Image(user_id=8, shop_id=8, img_link='https://s3-media0.fl.yelpcdn.com/bphoto/IE19sZJw3i-tzhsi1EXwtg/o.jpg', preview_image=True),
-        Image(user_id=7, shop_id=8, review_id=22, img_link='https://static01.nyt.com/images/2015/10/07/business/07peetsjpg/07peetsjpg-superJumbo.jpg', preview_image=False),
-        Image(user_id=8, shop_id=8, review_id=23, img_link='https://artisti.com.au/cdn/shop/files/IMG_5845-3_1024x_f6254079-1440-4c17-b525-d856fdc73b9f_1024x.webp?v=1679902438', preview_image=False),
-        Image(user_id=9, shop_id=8, review_id=24, img_link='https://assets.bonappetit.com/photos/570eb4f4ea4ae08245db6493/16:9/w_2560,c_limit/saint-frank-san-francisco-behind-counter-lead-image.jpg', preview_image=False),
+        Image(user_id=7, shop_id=8, review_id=22, img_link='https://s3-media0.fl.yelpcdn.com/bphoto/ZQyJOenQeNnv0X1qDPZIXA/348s.jpg', preview_image=False),
+        Image(user_id=8, shop_id=8, review_id=23, img_link='https://s3-media0.fl.yelpcdn.com/bphoto/ZQyJOenQeNnv0X1qDPZIXA/348s.jpg', preview_image=False),
+        Image(user_id=9, shop_id=8, review_id=24, img_link='https://s3-media0.fl.yelpcdn.com/bphoto/ZQyJOenQeNnv0X1qDPZIXA/348s.jpg', preview_image=False),
         Image(user_id=8, shop_id=8, img_link='https://d1bb1mccaihlpl.cloudfront.net/variants/lk7vugl4n9f5psshwbyvrh9mc8hy/5495488087431af32265aaaaa1b8a274541d70555aa4d7c01d8d0fed27e7c152', preview_image=False),
         Image(user_id=8, shop_id=8, img_link='https://feelgoodfoodie.net/wp-content/uploads/2020/03/Whipped-Coffee-10-2.jpg', preview_image=False),
 
         # Shop 9
         Image(user_id=9, shop_id=9, img_link='https://s3-media0.fl.yelpcdn.com/bphoto/IE19sZJw3i-tzhsi1EXwtg/o.jpg', preview_image=True),
         Image(user_id=10, shop_id=9, review_id=25, img_link='https://www.eatingwell.com/thmb/ekNUGKJ50lP7-p2V4B-3W2mnq_0=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/coffee_960-7882dec1ea02416d830a0747eb657a2f.jpg', preview_image=False),
-        Image(user_id=11, shop_id=9, review_id=26, img_link='https://images.squarespace-cdn.com/content/v1/5be4ea9b55b02cf09b6748bd/1606319596294-917T47PYG7MLBEIDZ4NO/Web_Banner_jpeg-2017_04_25_02_Hayes+Valley+Kiosk+-+F080.JPG', preview_image=False),
+        Image(user_id=11, shop_id=9, review_id=26, img_link='https://s3-media0.fl.yelpcdn.com/bphoto/ZQyJOenQeNnv0X1qDPZIXA/348s.jpg', preview_image=False),
         Image(user_id=12, shop_id=9, review_id=27, img_link='https://images.squarespace-cdn.com/content/v1/5be4ea9b55b02cf09b6748bd/1545431394289-M7WNVYQ3RLA77UCR1XQG/vliguszakxaxcuohlksa.jpg', preview_image=False),
         Image(user_id=9, shop_id=9, img_link='https://s3-media0.fl.yelpcdn.com/bphoto/ZQyJOenQeNnv0X1qDPZIXA/348s.jpg', preview_image=False),
         Image(user_id=9, shop_id=9, img_link='https://sprudge.com/wp-content/uploads/2016/11/Sprudge-SaintFrankAtFacebook-NoahSanders-3P3A3034-740x494.jpg', preview_image=False),
