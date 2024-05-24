@@ -8,7 +8,7 @@ function Navigation() {
   return (
     <div className="nav-bar">
       <NavLink to="/">
-        <img id='nav-logo' src="../../public/logo.png" />
+        <img id='nav-logo' src="/logo.png" />
       </NavLink>
       <SearchBar />
       <div>

@@ -169,7 +169,7 @@ function UserProfile() {
                   Update Shop
                 </button>
                 <OpenModalButton
-                  buttonText="Delete Review"
+                  buttonText="Delete Shop"
                   modalComponent={<DeleteShopModal shopToDelete={shop} setIsSubmitted={setIsSubmitted} />}/>
               </>
             ))}
