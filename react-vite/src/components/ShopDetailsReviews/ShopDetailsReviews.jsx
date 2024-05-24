@@ -28,7 +28,7 @@ function ShopDetailsReviews({ rating, shop }) {
     useEffect(() => {
         dispatch(loadReviewsByShopIdThunk(id))
         setIsLoaded(true)
-    }, [dispatch, isNewReview])
+    }, [dispatch, isNewReview, shop])
 
     const reviewImagesMapper = (review) => {
         return review.images?.map((image, id) => {

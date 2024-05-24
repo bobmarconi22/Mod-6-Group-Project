@@ -12,6 +12,7 @@ import { FaTrashAlt } from "react-icons/fa";
 import NotListItemModal from "../NotListItemModal";
 import DeleteImagesModal from "../ShopImagesPage/DeleteImageModal";
 import { DeleteReviewModal } from "../ReviewModals";
+import { DeleteShopModal } from "../ShopFormPage/DeleteShopModal";
 
 // use prop or context to get the shop information
 // change headers to label or headers?
@@ -34,7 +35,7 @@ function UserProfile() {
       dispatch(getReviewsByUserIdThunk(sessionUser.id)).then(() => { });
       dispatch(getShopsByUserIdThunk(sessionUser.id)).then(() => {
         setIsLoaded(true);
-
+        setIsSubmitted(false)
       });
     }
   }, [dispatch, sessionUser, isSubmitted, reviewIsDeleted]);
@@ -167,9 +168,9 @@ function UserProfile() {
                 <button className="update" onClick={() => navigate(`/shops/${shop.id}/update`)}>
                   Update Shop
                 </button>
-                <button className="delete" onClick={() => handleShopDelete(shop.id)}>
-                  Delete Shop
-                </button>
+                <OpenModalButton
+                  buttonText="Delete Review"
+                  modalComponent={<DeleteShopModal shopToDelete={shop} setIsSubmitted={setIsSubmitted} />}/>
               </>
             ))}
           </div>
