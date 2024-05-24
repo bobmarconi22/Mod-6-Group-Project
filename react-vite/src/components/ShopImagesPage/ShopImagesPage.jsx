@@ -28,7 +28,7 @@ function ShopImagesPage() {
 
     }, [id, dispatch])
 
-    // if(isLoaded) console.log(shopDetails.image)
+    if(isLoaded) console.log(shopDetails.image)
 
     return (
         isLoaded && (
@@ -53,7 +53,7 @@ function ShopImagesPage() {
                                             <div className='overlay-div2'>
                                                 <button>
                                                     <NotListItemModal itemText={<FaTrashAlt className='trashcan' />}
-                                                        modalComponent={<DeleteImagesModal shop_id={shopDetails.id} img_id={imageObj.id} />}></NotListItemModal>
+                                                        modalComponent={<DeleteImagesModal shop_id={shopDetails.id} img_id={imageObj.id} preview_img={imageObj.preview_image}/>}></NotListItemModal>
                                                 </button>
                                             </div>
                                         </>
