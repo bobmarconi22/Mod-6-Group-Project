@@ -1,4 +1,4 @@
-import ShopDetails from "../components/ShopDetails/ShopDetails";
+import { loadReviewsByShopIdThunk } from "./reviews";
 
 const LOAD_SHOPS = "LOAD_SHOPS";
 const LOAD_SHOP_DETAILS = "LOAD_SHOP_DETAILS";
@@ -60,6 +60,7 @@ export const createShopThunk = (newShop) => async (dispatch) => {
   if (res.ok) {
     const shop = await res.json()
     dispatch(addShop(shop))
+    dispatch(loadReviewsByShopIdThunk(shop.id))
     return shop
   } else {
     const errors = await res.json()
@@ -102,6 +103,7 @@ export const updateShopThunk = (shop, id) => async (dispatch) => {
   if (response.ok) {
     const shop = await response.json();
     dispatch(updateShop(shop));
+    dispatch(loadReviewsByShopIdThunk(shop.id))
     return shop
   } else {
     const errors = await response.json()
