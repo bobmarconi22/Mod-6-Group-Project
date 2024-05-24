@@ -20,31 +20,34 @@ function ShopDetailsReviews({ rating }) {
 
     let reviews = Object.values(useSelector((state) => state.reviews))
     // console.log('reviews', reviews)
-   
+
     useEffect(() => {
         dispatch(loadReviewsByShopIdThunk(id))
         setIsLoaded(true)
     }, [dispatch, isNewReview])
 
-    function reviewImagesMapper(images) {
-        // console.log(images)
-        let mappedImages = images.map((image, id) => {
+    // function reviewImagesMapper(images) {
+    //     // console.log(images)
+    //     let mappedImages =
+    // }
+
+    const reviewImagesMapper =
+        isLoaded && reviews.images?.map((image, id) => {
             return (
                 <img key={id} src={image.img_link} />
             )
         })
-        return mappedImages
-    }
 
     const reviewMapper =
         isLoaded && reviews.map((review, id) => {
             return (
+                review.id &&
                 <div key={id}>
                     <div>{review?.reviewer?.first_name || ''}</div>
                     <div>{review?.reviewer?.city + ', ' + review?.reviewer?.state || ''}</div>
                     <div>{review?.created_at || ''}</div>
                     <div>{review?.review || ''}</div>
-                    <div>{reviewImagesMapper(review.images) || ''}</div>
+                    <div>{reviewImagesMapper || ''}</div>
                     <hr></hr>
                 </div>
             )
@@ -53,14 +56,15 @@ function ShopDetailsReviews({ rating }) {
     return (
         <>
             <div>Overall Rating</div>
+            <div>{BeanRating({ rating })}</div>
             <div>Amount of rating with coffee beans here</div>
-            <div>Total # of reviews</div>
+            {/* <div>Total # of reviews: {reviews.length()}</div> */}
             <OpenModalButton
                 buttonText="Write a Review"
                 modalComponent={<CreateReviewModal setIsNewReview={setIsNewReview} />}
             />
             <> {reviewMapper}</>
-            <div>{BeanRating({ rating })}</div>
+
         </>
     )
 }

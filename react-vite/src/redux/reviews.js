@@ -13,9 +13,9 @@ export const loadReviewsByShopId = (reviews) => ({
     payload: reviews
 })
 
-export const createReview = (review) => ({
+export const createReview = (newReview) => ({
     type: CREATE_REVIEW,
-    payload: review
+    payload: newReview
 })
 
 export const updateReview = (review) => ({
@@ -123,11 +123,12 @@ const reviewReducer = (state = {}, action) => {
             action.payload.forEach((review) => {
                 allReviews[review.id] = review;
             });
-            return {...state, ...allReviews};
+            return { ...state, ...allReviews };
             // return action.payload
         }
         case CREATE_REVIEW: {
-            return { ...state, ...action.payload }
+            newState[action.payload.id] = action.payload
+            return { ...state, ...newState }
         }
         case USER_REVIEW: {
             newState = { ...state }
