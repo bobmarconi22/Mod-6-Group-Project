@@ -1,11 +1,14 @@
 import { useModal } from '../../context/Modal';
 import { loadShopDetailsThunk } from '../../redux/shops';
-import { useDispatch } from "react-redux";
-import { getReviewsByUserIdThunk } from "../../redux/reviews";
+import { useDispatch, useSelector } from "react-redux";
+import { getReviewsByUserIdThunk } from "../../redux/reviews"
+
+// "../../redux/reviews";
 
 function DeleteImagesModal({shop_id, img_id}){
     const { closeModal } = useModal();
     const dispatch = useDispatch()
+    const sessionUser = useSelector((state) => state.session.user);
 
     const deleteImage = () => {
         const deleteAndUpdateState = async () => {
@@ -13,9 +16,10 @@ function DeleteImagesModal({shop_id, img_id}){
                 let response = await fetch(`/api/shops/${shop_id}/images/${img_id}`, {
                     method: 'DELETE',
                 });
-                // console.log("response=======.", response.ok)
+                // console.log("response=======.", response)
 
                 if (response.ok) {
+                    // console.log("THUNKS ARE ABOUT TO GO!")
                     await dispatch(loadShopDetailsThunk(shop_id));
                     await dispatch(getReviewsByUserIdThunk(sessionUser.id))
                     closeModal();

@@ -92,8 +92,8 @@ function UserProfile() {
                   <p>{review.review}</p>
                  <div className='gallery'>
                 {review.images.map(imageObj => {
-                    console.log("REVIEW IN MAP", imageObj.id)
-                    console.log("revew shop id", review.shop_id)
+                    // console.log("REVIEW IN MAP", imageObj.id)
+                    // console.log("revew shop id", review.shop_id)
                     return (
                         <div key={imageObj.img_link} className='container'>
                     <div className="shop-image"  alt={review.shop.name} style={{ backgroundImage: `url(${imageObj.img_link})` }}></div>

@@ -36,7 +36,7 @@ export const userReviews = (reviews) => ({
 // thunk action creators
 export const loadReviewsByShopIdThunk = (shopId) => async (dispatch) => {
     const res = await fetch(`/api/shops/${shopId}/reviews`)
-    
+
     if (res.ok) {
         const reviews = await res.json()
         dispatch(loadReviewsByShopId(reviews))
@@ -101,9 +101,11 @@ export const deleteReviewThunk = (reviewId) => async (dispatch) => {
 }
 
 export const getReviewsByUserIdThunk = () => async (dispatch) => {
+
     const res = await fetch(`/api/reviews/current`)
     if (res.ok) {
         const reviews = await res.json()
+
         dispatch(userReviews(reviews))
         return reviews
     } else {
@@ -129,6 +131,7 @@ const reviewReducer = (state = {}, action) => {
         }
         case USER_REVIEW: {
             newState = { ...state }
+
             newState.userReviews = {}
             action.payload.forEach(review => {
                 newState.userReviews[review.id] = review

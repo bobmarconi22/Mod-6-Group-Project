@@ -66,6 +66,7 @@ export const createShopThunk = (newShop) => async (dispatch) => {
 };
 
 export const loadShopDetailsThunk = (id) => async (dispatch) => {
+
   const response = await fetch(`/api/shops/${id}`);
   if (response.ok) {
     const shop = await response.json();
