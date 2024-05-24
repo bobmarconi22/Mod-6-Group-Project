@@ -36,6 +36,7 @@ function UserProfile() {
       dispatch(getShopsByUserIdThunk(sessionUser.id)).then(() => {
         setIsLoaded(true);
         setIsSubmitted(false)
+        setReviewIsDeleted(false)
       });
     }
   }, [dispatch, sessionUser, isSubmitted, reviewIsDeleted]);
@@ -90,14 +91,9 @@ function UserProfile() {
           <div className="profile-section">
             <h2 id="user-page-subtitle">Your Reviews</h2>
             {userReviews && Object.values(userReviews).map((review) => (
-              <>
+              <div onClick={() => navigate(`/shops/${review.shop_id}`)}>
                 <div className="profile-review-tile">
-                  <a
-                    onClick={() => navigate(`/shops/${review.shop_id}`)}
-                    key={review.id}
-                  >
                     <h4>{review.shop.name}</h4>
-                  </a>
                   <div className='beans'><BeanRating beanRating={review.rating} /></div>
                   <p>{review.review}</p>
                   <div className='gallery'>
@@ -128,7 +124,7 @@ function UserProfile() {
                   buttonText="Delete Review"
                   modalComponent={<DeleteReviewModal reviewToDelete={review} setReviewIsDeleted={setReviewIsDeleted} />}
                 />
-              </>
+              </div>
             ))}
           </div>
         )}
@@ -141,12 +137,7 @@ function UserProfile() {
             </div>
 
             {userShops && Object.values(userShops).map((shop) => (
-              <>
-                <a
-                  className="profile-shop-tile"
-                  onClick={() => navigate("/shops/${shop.id}")}
-                  key={shop.id}
-                >
+              <div onClick={() => navigate(`/shops/${shop.id}`)}>
                   <img src="img.png"></img>
                   <div className="user-shop-text">{shop.name}</div>
                   <p>
@@ -164,14 +155,13 @@ function UserProfile() {
                     {"Price Range: " + shop.price_range}
                     <div>{"categories: " + shop.categories}</div>
                   </div>
-                </a>
                 <button className="update" onClick={() => navigate(`/shops/${shop.id}/update`)}>
                   Update Shop
                 </button>
                 <OpenModalButton
-                  buttonText="Delete Review"
+                  buttonText="Delete Shop"
                   modalComponent={<DeleteShopModal shopToDelete={shop} setIsSubmitted={setIsSubmitted} />}/>
-              </>
+              </div>
             ))}
           </div>
         )}

@@ -44,6 +44,10 @@
     display: flex;
 }
 
+#categories:hover {
+    cursor: pointer;
+}
+
 #rating-container {
     display: flex;
 }
@@ -79,4 +83,8 @@
 
 .address-text {
     padding: 15px 0px;
+}
+
+.categories-tag:hover{
+    cursor: pointer;
 }
