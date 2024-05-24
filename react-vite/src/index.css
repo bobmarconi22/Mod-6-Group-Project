@@ -1,11 +1,15 @@
 /* TODO: Add sitewide styles */
 * {
     font-family: "Noticia Text", serif;
-    color: rgb(14,35,58);
+    color: rgb(14, 35, 58);
     /* background-color: #FADEB6; */
 }
 
-button{
+body {
+    margin: 0px;
+}
+
+button {
     background-color: #87a9cb;
     border: none;
     border-radius: 1em;
@@ -13,13 +17,13 @@ button{
     padding: 10px;
 }
 
-button:hover{
+button:hover {
     background-color: #2b5a8d;
     color: white;
     cursor: pointer;
 }
 
-input{
+input {
     border: none;
     background-color: transparent;
     border-bottom: 3px solid #2b5a8d;
@@ -27,20 +31,20 @@ input{
 }
 
 
-input:hover{
+input:hover {
     border: none;
     background-color: transparent;
     border-bottom: 3px solid #87a9cb;
 }
 
-input:focus{
+input:focus {
     border: none;
     background-color: transparent;
     outline: none;
     border-bottom: 3px solid #87a9cb;
 }
 
-textarea{
+textarea {
     border: none;
     background-color: transparent;
     border-bottom: 3px solid #2b5a8d;
@@ -50,13 +54,13 @@ textarea{
     padding-bottom: 0;
 }
 
-textarea:hover{
+textarea:hover {
     border: none;
     background-color: transparent;
     border-bottom: 3px solid #87a9cb;
 }
 
-textarea:focus{
+textarea:focus {
     border: none;
     background-color: transparent;
     outline: none;
@@ -64,28 +68,29 @@ textarea:focus{
 }
 
 
-select{
+select {
     border: none;
     background-color: transparent;
     border-radius: 5px;
     padding: 5px;
 }
 
-select:hover{
+select:hover {
     border: none;
     background-color: rgb(0, 0, 0, 0.1);
     border-radius: 5px;
     padding: 5px;
 }
 
-select:focus{
+select:focus {
     border: none;
     outline: none;
 }
-option{
-    background-color: rgb(0,0,0,0.1);
+
+option {
+    background-color: rgb(0, 0, 0, 0.1);
 }
 
-option:hover{
+option:hover {
     cursor: pointer;
 }
