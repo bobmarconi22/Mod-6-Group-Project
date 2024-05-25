@@ -36,13 +36,12 @@ function DeleteImagesModal({shop_id, img_id}){
     }
 
     return (
-        <div>
+        <div className='delete-modal-container'>
             <h1>NO TAKEBACKSIES</h1>
            <p>Are you sure you want to delete this photo?</p>
-           <div>
-           <button id="delete-button" onClick={deleteImage}>Delete it</button>
-           <button onClick={closeModal}>No, keep it</button>
-           </div>
+           <i>This cannot be undone</i>
+           <button className="confirm-delete" onClick={deleteImage}>Delete it</button>
+           <button onClick={closeModal} className='cancel-delete'>No, Keep it!</button>
         </div>
     )
 }

@@ -75,6 +75,7 @@ function ShopDetailsReviews({ rating, shop }) {
             {(!sessionUser || shop?.owner_id === sessionUser?.id || reviews.some(review => review.user_id === sessionUser.id)) ? null : (
                 <OpenModalButton
                     buttonText="Write a Review"
+                    className='add-review-button'
                     modalComponent={<CreateReviewModal setIsNewReview={setIsNewReview} />}
                 />
             )}

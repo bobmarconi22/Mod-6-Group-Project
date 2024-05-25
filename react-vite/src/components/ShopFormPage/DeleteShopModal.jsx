@@ -17,12 +17,11 @@ function DeleteShopModal ({shopToDelete, setIsSubmitted}) {
 
     return (
         <div className='delete-modal-container'>
-            <div>
               <h1>NO TAKEBACKSIES</h1>
-            </div>
             <p>Are you sure you want to delete this shop?</p>
-            <button className='confirm-delete' onClick={() => handleDelete(shopToDelete.id)}>Delete Shop</button>
-            <button className='stop-delete' onClick={() => closeModal()}>Keep Shop</button>
+            <i>This cannot be undone</i>
+            <button className='confirm-delete' onClick={() => handleDelete(shopToDelete.id)}>Delete it</button>
+            <button className='cancel-delete' onClick={() => closeModal()}>No, Keep it!</button>
         </div>
     )
 
