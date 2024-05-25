@@ -245,13 +245,20 @@ def create_image(shop_id):
     if(not body['img_link'].lower().endswith(("png", "jpg", "jpeg"))):
         return jsonify({"error": "Image url must be of type: png, jpg, or jpeg"}), 404
 
+    if(body.get('preview_image')):
+        preview_image = body['preview_image']
+    else:
+        preview_image = False
+
     new_image = Image(
         user_id = current_user.id,
         shop_id = shop_id,
         img_link = body['img_link'],
+        preview_image = preview_image
     )
     if 'review_id' in body:
         new_image.review_id = body['review_id']
+
 
     db.session.add(new_image)
     db.session.commit()
