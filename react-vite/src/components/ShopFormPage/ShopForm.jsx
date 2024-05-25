@@ -220,7 +220,7 @@ function ShopFormPage() {
     setCity('Created City')
     setState('Pennsylvania')
     setPostal(123123)
-    setImage('img.url')
+    setImage('https://s3-media0.fl.yelpcdn.com/bphoto/w-ppROhgsCcS2J1IXnoqSg/o.jpg')
   };
 
   const handleClearDays = (e) => {
