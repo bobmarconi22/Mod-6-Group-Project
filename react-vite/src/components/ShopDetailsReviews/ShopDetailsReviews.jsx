@@ -65,9 +65,9 @@ function ShopDetailsReviews({ rating, shop }) {
         })
 
     return (
-        <>
+        <div className='shop-reviews'>
             {console.log(shop?.owner_id === sessionUser?.id)}
-            <div className='title'>Overall Rating</div>
+            <div className='review-title'>Overall Rating</div>
             <div>{BeanRating({ rating })}</div>
             <div>
                 {shop?.review !== null ? `${Object.values(reviews).length} review${Object.values(reviews).length === 1 ? '' : 's'}` : 'No reviews'}
@@ -81,7 +81,7 @@ function ShopDetailsReviews({ rating, shop }) {
             )}
             <hr />
             {shop?.review && <>{reviewMapper}</>}
-        </>
+        </div>
     );
 }
 

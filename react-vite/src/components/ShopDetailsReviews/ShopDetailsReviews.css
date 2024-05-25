@@ -1,9 +1,15 @@
-.title {
-    font-size: x-large;
+.shop-reviews{
+    width: 60%;
+    margin: 0 auto;
+}
+
+.review-title {
+    font-size: 35px;
+    margin-top: 500px;
 }
 
 .first-name {
-    font-size: x-large;
+    font-size: 28px;
 }
 
 .rating-date {
@@ -12,4 +18,9 @@
 
 .date {
     margin-left: 10px;
+}
+
+.shop-details-review-image{
+    width: 125px;
+    margin: 10px;
 }

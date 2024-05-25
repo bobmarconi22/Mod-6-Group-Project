@@ -41,7 +41,7 @@ function ShopDetails() {
         isLoaded && (
             <>
                 <div id='shop-detail-cover-container'>
-                    <img src={shopDetails?.image.find((img) => img.preview_image === true)?.img_link} style={{maxHeight: '50%', marginLeft: '50%'}} />
+                    <img src={shopDetails?.image.find((img) => img.preview_image === true)?.img_link} id='prev-img' />
                     <div className='shop-detail-heading-container'>
                         <div id='title'>{shopDetails?.name}</div>
                         <div id='rating-container'>
@@ -62,7 +62,7 @@ function ShopDetails() {
                     </Link>
                     {/* shop details is checked before it gets the information, must check if shopdetails exists */}
                     {sessionUser && shopDetails && sessionUser.id === shopDetails.owner_id ? (
-                        <button className='add-photo-button'>
+                        <button id='add-image-button'>
                             <OpenModalMenuItem
                                 itemText="Add an Image"
                                 className='add-image-button'
@@ -79,8 +79,8 @@ function ShopDetails() {
                 </div>
             </div> */}
 
-                <div>
-                    About {shopDetails?.name}
+                <div id='about-section'>
+                    About {shopDetails?.name}:
                     <div>
                         {shopDetails?.description}
                     </div>
