@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import ShopCardMaker from '../ShopCardMaker/ShopCardMaker';
+import './SearchPage.css'
 
 function SearchPage() {
   const [filteredShops, setFilteredShops] = useState([]);
@@ -31,7 +32,7 @@ function SearchPage() {
 
 
     return (
-        !loading && filteredShops.length > 0 ? (<div>
+        !loading && filteredShops.length > 0 ? (<div className="shop-list-container">
             <ShopCardMaker shopsArr={filteredShops}/>
         </div>) : (<h1>Sorry no results!</h1>)
     )
