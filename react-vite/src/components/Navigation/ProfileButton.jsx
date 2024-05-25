@@ -35,10 +35,11 @@ function ProfileButton() {
 
   const closeMenu = () => setShowMenu(false);
 
-  const logout = (e) => {
+  const handleLogout = (e) => {
     e.preventDefault();
     dispatch(thunkLogout());
     closeMenu();
+    navigate('/')
   };
 
   const newShopFunc = (e) => {
@@ -64,7 +65,7 @@ function ProfileButton() {
             <>
               <li onClick={profileFunc}>{user.username}</li>
               <li onClick={newShopFunc}>Create a Shop</li>
-              <button onClick={logout}>Log Out</button>
+              <button onClick={handleLogout}>Log Out</button>
             </>
           ) : (
             <>

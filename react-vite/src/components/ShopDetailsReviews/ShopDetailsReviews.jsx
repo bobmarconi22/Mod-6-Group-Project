@@ -65,9 +65,8 @@ function ShopDetailsReviews({ rating, shop }) {
         })
 
     return (
-        <>
-            {console.log(shop?.owner_id === sessionUser?.id)}
-            <div className='title'>Overall Rating</div>
+        <div className='shop-reviews'>
+            <div className='review-title'>Overall Rating</div>
             <div>{BeanRating({ rating })}</div>
             <div>
                 {shop?.review !== null ? `${Object.values(reviews).length} review${Object.values(reviews).length === 1 ? '' : 's'}` : 'No reviews'}
@@ -75,12 +74,13 @@ function ShopDetailsReviews({ rating, shop }) {
             {(!sessionUser || shop?.owner_id === sessionUser?.id || reviews.some(review => review.user_id === sessionUser.id)) ? null : (
                 <OpenModalButton
                     buttonText="Write a Review"
+                    className='add-review-button'
                     modalComponent={<CreateReviewModal setIsNewReview={setIsNewReview} />}
                 />
             )}
             <hr />
             {shop?.review && <>{reviewMapper}</>}
-        </>
+        </div>
     );
 }
 

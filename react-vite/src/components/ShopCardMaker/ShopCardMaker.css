@@ -12,12 +12,12 @@
 }
 
 .title {
-    font-size: x-large;
+    font-size: 28px;
     font-weight: bold;
 }
 
 .custom-icon {
-    font-size: x-large;
+    font-size: 20px;
     color: #a57343
 }
 
@@ -30,12 +30,14 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin: 10px;
-    max-width: 300px;
+    max-width: 99%;
+    gap: 3px;
+    margin-top: 20px;
+    margin-bottom: 35px;
 }
 
 .category-tag {
-    border: #DEB98E solid 1px;
+    border: none;
     font-size: small;
     width: max-content;
     border-radius: 15px;
@@ -44,7 +46,9 @@
 }
 
 .open-today-text {
-
+    margin-top: 25px;
+    font-style: italic;
+    color: #A57343;
     /* align-self: space-around; */
     /* color: white; */
 }

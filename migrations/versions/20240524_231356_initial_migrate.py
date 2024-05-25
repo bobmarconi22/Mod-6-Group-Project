@@ -1,8 +1,8 @@
 """initial migrate
 
-Revision ID: 88af0612c77e
+Revision ID: 98bd69fc0acd
 Revises:
-Create Date: 2024-05-24 14:29:46.823631
+Create Date: 2024-05-24 23:13:56.054316
 
 """
 from alembic import op
@@ -14,7 +14,7 @@ environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
 # revision identifiers, used by Alembic.
-revision = '88af0612c77e'
+revision = '98bd69fc0acd'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -41,7 +41,6 @@ def upgrade():
     sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email'),
-    sa.UniqueConstraint('phone_number'),
     sa.UniqueConstraint('username')
     )
     op.create_table('shops',

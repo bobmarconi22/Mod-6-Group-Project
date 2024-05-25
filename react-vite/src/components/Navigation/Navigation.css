@@ -111,13 +111,15 @@
   padding-left: 0;
   border-radius: 1em;
   width: 175px;
+  background-color: #87a9cb;
+  text-align: center;
+
 }
 
 .profile-dropdown > button{
   width: 100%;
   border-radius: 0 0 1em 1em;
   font-size: 12px;
-  text-align: start;
 }
 
 .profile-dropdown > li{
@@ -126,6 +128,7 @@
   font-size: 12px;
   color: white;
   padding: 10px;
+  border-radius: 1em;
 }
 
 .profile-dropdown > li:hover{

@@ -41,8 +41,7 @@ function ShopDetails() {
         isLoaded && (
             <>
                 <div id='shop-detail-cover-container'>
-                    {console.log('================>', shopDetails?.image.find((img) => img.preview_image === true))}
-                    <img src={shopDetails?.image.find((img) => img.preview_image === true)?.img_link} style={{maxHeight: '50%', marginLeft: '50%'}} />
+                    <img src={shopDetails?.image.find((img) => img.preview_image === true)?.img_link} id='prev-img' />
                     <div className='shop-detail-heading-container'>
                         <div id='title'>{shopDetails?.name}</div>
                         <div id='rating-container'>
@@ -57,17 +56,16 @@ function ShopDetails() {
 
                             })}</div>
                         </div>
-
-                        <a href='#hours_container'>See hours</a>
                     </div>
                     <Link to={`images`}>
                         <button className='see-all-photos-button'>See all #{shopDetails?.image?.length} photos</button>
                     </Link>
                     {/* shop details is checked before it gets the information, must check if shopdetails exists */}
                     {sessionUser && shopDetails && sessionUser.id === shopDetails.owner_id ? (
-                        <button className='add-photo-button'>
+                        <button id='add-image-button'>
                             <OpenModalMenuItem
                                 itemText="Add an Image"
+                                className='add-image-button'
                                 modalComponent={<ShopImagesModal shop_id={shopDetails.id} user_id={sessionUser.id} shop_name={shopDetails.name} />}
                             />
                         </button>) : null}
@@ -81,8 +79,8 @@ function ShopDetails() {
                 </div>
             </div> */}
 
-                <div>
-                    About {shopDetails?.name}
+                <div id='about-section'>
+                    About {shopDetails?.name}:
                     <div>
                         {shopDetails?.description}
                     </div>
@@ -91,9 +89,10 @@ function ShopDetails() {
                 <div className='additional-info-flexbox-container'>
                     <div id='hours-address-container'>
                         <div id='hours-container'>
-                            {/* hours not working because how it is formatted */}
-                            All hours
+
+                            {shopDetails?.hours?.monday === 'Closed' && shopDetails?.hours?.tuesday === 'Closed' && shopDetails?.hours?.wednesday === 'Closed' && shopDetails?.hours?.thursday === 'Closed' && shopDetails?.hours?.friday === 'Closed' && shopDetails?.hours?.saturday === 'Closed' && shopDetails?.hours?.sunday === 'Closed' ? <>No Hours Specified For this Café</> :
                             <div id='hours_container'>
+                                All hours
                                 <p>Monday: {shopDetails?.hours?.monday}</p>
                                 <p>Tuesday: {shopDetails?.hours?.tuesday}</p>
                                 <p>Wednesday: {shopDetails?.hours?.wednesday}</p>
@@ -101,8 +100,8 @@ function ShopDetails() {
                                 <p>Friday: {shopDetails?.hours?.friday}</p>
                                 <p>Saturday: {shopDetails?.hours?.saturday}</p>
                                 <p>Sunday: {shopDetails?.hours?.sunday}</p>
-
                             </div>
+                            }
                         </div>
 
                         <div id='address-container'>

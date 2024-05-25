@@ -18,6 +18,17 @@ function SignupFormPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const err = {}
+    if(email.length < 5 || !email.includes('@') || !email.includes('.')) err.email = 'Please enter a valid Email'
+    if(username.length < 5) err.username = 'Username must be at least 5 characters long'
+    if(username) err.username = 'Username exists!'
+    if (firstName.length < 2) err.firstName = 'First Name must be at least 2 characters long'
+    if (lastName.length < 2) err.lastName = 'Last Name must be at least 1 character long'
+    if (phoneNumber) err.phoneNumber = 'Phone Number exists!'
+    if (!city) err.city = "City is required"
+    if (!state) err.state = "State is required"
+    if (!password) err.password = "Password is required"
+
     if (password !== confirmPassword) {
       return setErrors({
         confirmPassword:

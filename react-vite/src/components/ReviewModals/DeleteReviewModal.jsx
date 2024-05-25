@@ -17,12 +17,11 @@ function DeleteReviewModal ({reviewToDelete, setReviewIsDeleted}) {
 
     return (
         <div className='delete-modal-container'>
-            <div>
               <h1>NO TAKEBACKSIES</h1>
-            </div>
             <p>Are you sure you want to delete this review?</p>
-            <button className='confirm-delete' onClick={() => handleDelete(reviewToDelete.id)}>Delete Review</button>
-            <button className='stop-delete' onClick={() => closeModal()}>Keep Review</button>
+            <i>This cannot be undone</i>
+            <button className='confirm-delete' onClick={() => handleDelete(reviewToDelete.id)}>Delete it</button>
+            <button className='cancel-delete' onClick={() => closeModal()}>No, Keep it!</button>
         </div>
     )
 

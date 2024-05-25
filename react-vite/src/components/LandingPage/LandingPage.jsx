@@ -35,8 +35,7 @@ function LandingPage() {
         </div>
       </div> */}
 
-      <div id="shop-section-contianer">
-        <h1>Make your next BrewReview</h1>
+      <div id="shop-section-container">
         <div className="shop-list-container">
           <>
             <ShopCardMaker shopsArr={shopsArr} />

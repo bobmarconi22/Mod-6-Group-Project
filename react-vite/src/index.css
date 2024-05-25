@@ -98,3 +98,38 @@ option:hover {
 li{
     list-style-type: none;
 }
+
+.confirm-delete {
+    padding: 15px;
+    width: 75%;
+    margin: 5px;
+}
+
+.cancel-delete {
+    padding: 15px;
+    width: 75%;
+    margin: 5px;
+}
+.confirm-delete:hover {
+    background-color: #FF253F;
+    cursor: pointer;
+}
+
+.delete-modal-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+}
+
+.delete-modal-container > h1{
+    border-bottom: 1px solid #FF253F;
+}
+
+.delete-modal-container > i{
+    color: #FF253F;
+    padding: 0;
+    margin-bottom: 20px;
+    font-size: 12px;
+}

@@ -29,6 +29,14 @@ function SearchBar() {
     }));
   };
 
+  const clear = (e) => {
+    e.preventDefault()
+    setCategory("")
+    setName("")
+    setPriceRange({"1": false, "2": false, "3": false, "4": false, "5": false})
+    navigate('/')
+  }
+
 // Search
   const handleSearch= async (e) => {
     e.preventDefault()
@@ -87,6 +95,7 @@ function SearchBar() {
             </button>
           </div>
           <button id="search-submit" type="submit">Search</button>
+          <button id="search-submit" type="submit" onClick={(e) => clear(e)}>Clear</button>
         </form>
       </div>
     )
