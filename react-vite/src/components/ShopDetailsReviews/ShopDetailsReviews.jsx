@@ -66,7 +66,6 @@ function ShopDetailsReviews({ rating, shop }) {
 
     return (
         <div className='shop-reviews'>
-            {console.log(shop?.owner_id === sessionUser?.id)}
             <div className='review-title'>Overall Rating</div>
             <div>{BeanRating({ rating })}</div>
             <div>
