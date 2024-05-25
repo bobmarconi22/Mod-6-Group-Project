@@ -20,13 +20,62 @@ function SignupFormModal() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const newErrorObj = {}
 
     if (password !== confirmPassword) {
-      return setErrors({
-        confirmPassword:
-          "Confirm Password field must be the same as the Password field",
-      });
+       newErrorObj.confirmPassword = "Confirm Password field must be the same as the Password field"
     }
+    if(password.length < 8) {
+       newErrorObj.password = "Password must be at least 8 characters long."
+    }
+    if(password.length > 255) {
+       newErrorObj.password = "Password must be at least 255 characters long."
+    }
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if(!emailRegex.test(email)) {
+       newErrorObj.email = "Must be a valid email."
+    }
+     if (email.length > 255) {
+       newErrorObj.email = "Email must be less than 255 characters long."
+    }
+    if (firstName.length < 2) {
+       newErrorObj.firstName = "First name must be at least 2 characters long."
+    }
+    if (username.length > 40) {
+       newErrorObj.username = "Username must be less than 40 characters long."
+    }
+     if (username.length < 2) {
+       newErrorObj.username = "Username must be at least 2 characters long."
+    }
+    if (firstName.length > 25) {
+       newErrorObj.firstName = "First name must be less than 25 characters long."
+    }
+    if (lastName.length < 2) {
+       newErrorObj.lastName = "Last name must be at least 2 characters long."
+    }
+    if (lastName.length > 25) {
+       newErrorObj.lastName = "Last name must be less than 25 characters long."
+    }
+    if (city < 2) {
+       newErrorObj.lastName = "Last name must be at least 2 characters long."
+    }
+    if (city > 25) {
+       newErrorObj.city = "City must be less than 25 characters long."
+    }
+    const phoneRegex = /^[\d+-]+$/;
+    if(!phoneRegex.test(phoneNumber)) {
+       newErrorObj.phoneNumber = "Phone number may only have numbers, '+', and '-'"
+    }
+    if(phoneNumber.length < 7 || phoneNumber.length > 18) {
+       newErrorObj.phoneNumber = "Phone number must be at least 7 characters long and less than 18"
+    }
+
+    if(Object.keys(newErrorObj).length > 0) {
+      return setErrors(newErrorObj)
+    }
+
+
+
 
     const serverResponse = await dispatch(
       thunkSignup({
@@ -53,6 +102,7 @@ function SignupFormModal() {
       <h1>Sign Up</h1>
       {errors.server && <p>{errors.server}</p>}
       <form className="signup-form-container" onSubmit={handleSubmit}>
+        <label>Email</label>
         <input
           className="signup-input"
           placeholder="Email"
@@ -61,7 +111,8 @@ function SignupFormModal() {
           onChange={(e) => setEmail(e.target.value)}
           required
         />
-        {errors.email && <p>{errors.email}</p>}
+        {errors.email && <p style={{color:'#FF253F'}}>{errors.email}</p>}
+        <label>Username</label>
         <input
           className="signup-input"
           placeholder="Username"
@@ -70,7 +121,8 @@ function SignupFormModal() {
           onChange={(e) => setUsername(e.target.value)}
           required
         />
-        {errors.username && <p>{errors.username}</p>}
+        {errors.username && <p style={{color:'#FF253F'}}>{errors.username}</p>}
+        <label>First Name</label>
         <input
           className="signup-input"
           placeholder="First Name"
@@ -79,7 +131,8 @@ function SignupFormModal() {
           onChange={(e) => setFirstName(e.target.value)}
           required
         />
-        {errors.firstName && <p>{errors.firstName}</p>}
+        {errors.firstName && <p style={{color:'#FF253F'}}>{errors.firstName}</p>}
+        <label>Last Name</label>
         <input
           className="signup-input"
           placeholder="Last Name"
@@ -88,7 +141,8 @@ function SignupFormModal() {
           onChange={(e) => setLastName(e.target.value)}
           required
         />
-        {errors.lastName && <p>{errors.lastName}</p>}
+        {errors.lastName && <p style={{color:'#FF253F'}}>{errors.lastName}</p>}
+        <label>Phone Number</label>
         <input
           className="signup-input"
           placeholder={'Phone Number'}
@@ -96,7 +150,8 @@ function SignupFormModal() {
           value={phoneNumber}
           onChange={(e) => setPhoneNumber(e.target.value)}
         />
-        {errors.phoneNumber && <p>{errors.phoneNumber}</p>}
+        {errors.phoneNumber && <p style={{color:'#FF253F'}}>{errors.phoneNumber}</p>}
+        <label>City</label>
         <input
           className="signup-input"
           placeholder="City"
@@ -105,7 +160,8 @@ function SignupFormModal() {
           onChange={(e) => setCity(e.target.value)}
           required
         />
-        {errors.city && <p>{errors.city}</p>}
+        {errors.city && <p style={{color:'#FF253F'}}>{errors.city}</p>}
+
         <select
           className="signup-input"
           value={state}
@@ -167,6 +223,7 @@ function SignupFormModal() {
           <option value="WY">Wyoming</option>
         </select>
         {errors.state && <p>{errors.state}</p>}
+        <label>Password</label>
         <input
           className="signup-input"
           placeholder="Password"
@@ -175,7 +232,8 @@ function SignupFormModal() {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        {errors.password && <p>{errors.password}</p>}
+        {errors.password && <p style={{color:'#FF253F'}}>{errors.password}</p>}
+        <label>Conform Password</label>
         <input
           className="signup-input"
           placeholder="Confirm Password"
@@ -184,7 +242,7 @@ function SignupFormModal() {
           onChange={(e) => setConfirmPassword(e.target.value)}
           required
         />
-        {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
+        {errors.confirmPassword && <p style={{color:'#FF253F'}}>{errors.confirmPassword}</p>}
         <button id='signup-submit-button' type="submit">Sign Up</button>
       </form>
     </div >

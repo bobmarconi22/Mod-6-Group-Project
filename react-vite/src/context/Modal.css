@@ -5,23 +5,18 @@
   right: 0;
   left: 0;
   bottom: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background-color: rgba(0, 0, 0, 0.7);
+  overflow-y: scroll;
+  scroll-behavior: smooth;
 }
 
 #modal-background {
-  position: fixed;
-  z-index: 1001;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.7);
+  padding-top:100px;
+  padding-bottom:100px;
+  display: flex;
+  justify-content: center;
 }
 
 #modal-content {
-  z-index: 1002;
-  position: absolute;
-  background-color:white;
+  background-color: #FFF;
 }
