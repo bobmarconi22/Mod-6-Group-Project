@@ -1,6 +1,7 @@
-import { useRef, useState, useContext, createContext } from 'react';
+import { useRef, useState, useContext, createContext, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import './Modal.css';
+import { useLocation } from 'react-router-dom';
 
 const ModalContext = createContext();
 
@@ -43,6 +44,10 @@ export function ModalProvider({ children }) {
 
 export function Modal() {
   const { modalRef, modalContent, closeModal } = useContext(ModalContext);
+  const location = useLocation();
+  useEffect(() => {
+    closeModal()
+  }, [location]);
   // If there is no div referenced by the modalRef or modalContent is not a
   // truthy value, render nothing:
   if (!modalRef || !modalRef.current || !modalContent) return null;
