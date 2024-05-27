@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom'
 import { loadShopDetailsThunk } from '../../redux/shops'
 import { BeanRating } from './BeanRating'
 import { createReviewThunk } from '../../redux/reviews'
+import './CreateReviewModal.css'
 
 function CreateReviewModal({setIsNewReview}) {
 
@@ -56,7 +57,7 @@ function CreateReviewModal({setIsNewReview}) {
     return (
         <div className='whole-form'>
             <h1>{shop && shop.name}</h1>
-            <div>{errors.beans}</div>
+            <div className='errors'>{errors.beans}</div>
             <form onSubmit={handleSubmit} className='form'>
                 <BeanRating setBeans={setBeans} filledBeans={beans} />
                 <input className='review'
@@ -87,7 +88,7 @@ function CreateReviewModal({setIsNewReview}) {
                     onChange={(e) => setImg3(e.target.value)}
 
                 />
-                <button onSubmit={handleSubmit}>Create Review</button>
+                <button className='create-review-button' onSubmit={handleSubmit}>Create Review</button>
 
 
             </form>

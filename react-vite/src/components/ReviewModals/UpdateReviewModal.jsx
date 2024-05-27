@@ -5,7 +5,7 @@ import { useModal } from '../../context/Modal'
 import { BeanRating } from './BeanRating'
 import { updateReviewThunk } from '../../redux/reviews'
 import { getReviewsByUserIdThunk } from '../../redux/reviews'
-import './UpdateReviewModal.jsx'
+import './UpdateReviewModal.css'
 
 
 
@@ -38,7 +38,7 @@ function UpdateReviewModal({ reviewToEdit, setIsSubmitted, reviewShopName }) {
     }
 
     return (
-        <>
+        <div className='whole-form'>
             <h1>{reviewShopName}</h1>
             <form onSubmit={handleSubmit}>
                 <div><span>{errors.review}</span><span>{errors.rating}</span> </div>
@@ -49,10 +49,10 @@ function UpdateReviewModal({ reviewToEdit, setIsSubmitted, reviewShopName }) {
                     value={review}
                     onChange={(e) => setReview(e.target.value)}
                 />
-                <button onSubmit={handleSubmit}>Update Review</button>
+                <button className='update-review-button' onSubmit={handleSubmit}>Update Review</button>
             </form>
 
-        </>
+        </div>
     )
 }
 

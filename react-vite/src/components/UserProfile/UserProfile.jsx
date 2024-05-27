@@ -143,7 +143,7 @@ function UserProfile() {
                   </div>
                   <OpenModalButton
                     buttonText="Edit Review"
-                    className='cancel-delete'
+                    className='edit-review'
                     modalComponent={
                       <UpdateReviewModal
                         reviewToEdit={review}
@@ -153,7 +153,7 @@ function UserProfile() {
                   />
                   <OpenModalButton
                     buttonText="Delete Review"
-                    className='confirm-delete'
+                    className='delete-review'
                     modalComponent={
                       <DeleteReviewModal
                         reviewToDelete={review}
@@ -203,14 +203,14 @@ function UserProfile() {
                     </div>
                   </div>
                   <button
-                    className="cancel-delete"
+                    className="update-shop"
                     onClick={() => navigate(`/shops/${shop.id}/update`)}
                   >
                     Update Shop
                   </button>
                   <OpenModalButton
                     buttonText="Delete Shop"
-                    className='confirm-delete'
+                    className='delete-shop'
                     modalComponent={
                       <DeleteShopModal
                         shopToDelete={shop}
