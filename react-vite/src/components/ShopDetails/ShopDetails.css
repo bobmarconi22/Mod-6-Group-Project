@@ -45,7 +45,7 @@
     left: 0;
     top: 0;
     margin-top: 495px;
-    margin-left: 15%;
+    margin-left: 20%;
 }
 
 .see-all-photos-button {
@@ -67,7 +67,7 @@
     position: absolute;
     right: 0;
     margin-top: 400px;
-    margin-right: 16%;
+    margin-right: 22%;
     text-align: center;
     background-color: white;
     width: fit-content;
@@ -104,7 +104,7 @@
 #hours-address-container {
     position: absolute;
     right: 0;
-    margin-right: 15%;
+    margin-right: 20%;
     text-align: center;
     height: fit-content;
     background-color: white;

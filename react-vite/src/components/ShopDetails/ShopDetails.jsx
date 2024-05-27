@@ -14,7 +14,7 @@ import BeanRating from '../ShopCardMaker/BeanRating';
 function ShopDetails() {
     const { id } = useParams()
     const dispatch = useDispatch()
-    // const [isLoaded, setIsLoaded] = useState(false);
+    const [isLoaded, setIsLoaded] = useState(false);
     const sessionUser = useSelector((state) => state.session.user);
     const navigate = useNavigate()
 
@@ -33,12 +33,12 @@ function ShopDetails() {
 
     useEffect(() => {
 
-        dispatch(loadShopDetailsThunk(id))
+        dispatch(loadShopDetailsThunk(id)).then(() => setIsLoaded(true))
         // setIsLoaded(true);
     }, [id, dispatch])
 
     let avg_rating = shopDetails?.avg_rating
-    return (
+    return ( !isLoaded && <></> ||
         parseInt(id) === shopDetails?.id && (
             <>
                 <div id='shop-detail-cover-container'>
