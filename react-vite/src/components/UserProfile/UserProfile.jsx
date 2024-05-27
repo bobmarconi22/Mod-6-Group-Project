@@ -120,7 +120,7 @@ function UserProfile() {
                               className="shop-image"
                               alt={review.shop.name}
                               style={{
-                                backgroundImage: `url(${imageObj.img_link})`,
+                                backgroundImage: `url("${imageObj.img_link}")`,
                               }}
                             ></div>
                             <div className="overlay-div2">
