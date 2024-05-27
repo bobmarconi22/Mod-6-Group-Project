@@ -11,6 +11,7 @@ function SearchPage() {
   useEffect(() => {
     // console.log("USE EFFECT RUNNING")
     const queryString = location.search;
+    setLoading(true)
     fetch(`/api/search${queryString}`)
       .then(response => {
         // Check if response is OK and log the response status
@@ -32,9 +33,9 @@ function SearchPage() {
 
 
     return (
-        !loading && filteredShops.length > 0 ? (<div className="shop-list-container">
+        !loading && (filteredShops.length > 0 ? (<div className="shop-list-container">
             <ShopCardMaker shopsArr={filteredShops}/>
-        </div>) : (<h1>Sorry no results!</h1>)
+        </div>) : (<div className='sorry-div'><h1>Sorry no results!</h1></div>))
     )
 }
 
