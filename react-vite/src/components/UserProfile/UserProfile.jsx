@@ -29,6 +29,8 @@ function UserProfile() {
   const userReviews = useSelector((state) => state.reviews.userReviews);
   const userShops = useSelector((state) => state.shops.userShops || {});
 
+  console.log(userShops)
+
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [reviewIsDeleted, setReviewIsDeleted] = useState(false);
@@ -143,7 +145,7 @@ function UserProfile() {
                   </div>
                   <OpenModalButton
                     buttonText="Edit Review"
-                    className='cancel-delete'
+                    className='edit-review'
                     modalComponent={
                       <UpdateReviewModal
                         reviewToEdit={review}
@@ -153,7 +155,7 @@ function UserProfile() {
                   />
                   <OpenModalButton
                     buttonText="Delete Review"
-                    className='confirm-delete'
+                    className='delete-review'
                     modalComponent={
                       <DeleteReviewModal
                         reviewToDelete={review}
@@ -184,7 +186,7 @@ function UserProfile() {
               Object.values(userShops).map((shop) => (
                 <>
                   <div className='profile-shop-tile' onClick={() => navigate(`/shops/${shop.id}`)}>
-                    <img src="img.png"></img>
+                    <img className='shop-img'src={shop.preview_image.img_link}></img>
                     <div className="user-shop-text">{shop.name}</div>
                     <p>
                       {shop.address.address_line1} {shop.address.address_line2}{" "}
@@ -194,23 +196,23 @@ function UserProfile() {
                     <div className="user-shop-text">
                       {"Rating: " +
                         shop.avg_rating +
-                        " Number of Reviews: " +
+                        ", Number of Reviews: " +
                         shop.num_reviews}
                     </div>
                     <div className="user-shop-text">
                       {"Price Range: " + shop.price_range}
-                      <div>{"categories: " + shop.categories}</div>
+                      <div>{"Categories: " + shop.categories}</div>
                     </div>
                   </div>
                   <button
-                    className="cancel-delete"
+                    className="update-shop"
                     onClick={() => navigate(`/shops/${shop.id}/update`)}
                   >
                     Update Shop
                   </button>
                   <OpenModalButton
                     buttonText="Delete Shop"
-                    className='confirm-delete'
+                    className='delete-shop'
                     modalComponent={
                       <DeleteShopModal
                         shopToDelete={shop}

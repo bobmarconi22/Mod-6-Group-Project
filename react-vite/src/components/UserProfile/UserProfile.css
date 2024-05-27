@@ -200,3 +200,28 @@
     margin: 10px;
     /* Adjust as needed for spacing */
 }
+
+.edit-review {
+    width: 150px;
+    margin-right: 10px;
+}
+
+.delete-review {
+    width: 150px;
+}
+
+.update-shop {
+    width: 150px;
+    margin-right: 10px;
+}
+.delete-shop {
+    width: 150px;
+}
+
+.shop-img {
+    width: 200px;
+    height: 200px;
+    padding-bottom: 10px;
+    border-radius: 10%;
+
+}
