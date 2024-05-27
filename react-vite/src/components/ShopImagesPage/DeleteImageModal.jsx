@@ -95,7 +95,7 @@ function DeleteImagesModal({shop_id, img_id, preview_img}){
                 <input value={imgLink} onChange={(e) => setImageLink(e.target.value)}></input>
                 <div>
                 <button type="submit">Replace Preview Image</button>
-                <button type="button" onClick={closeModal}>No, keep it</button>
+                <button type="button" onClick={() => closeModal()}>No, keep it</button>
                 </div>
             </form>
             {errors.length > 0 && <div><p style={{color: "#FF253F", fontSize: "12px"}}>{errors}</p></div>}
@@ -105,7 +105,7 @@ function DeleteImagesModal({shop_id, img_id, preview_img}){
            <p>Are you sure you want to delete this photo?</p>
            <i>This cannot be undone</i>
            <button className="confirm-delete" onClick={deleteImage}>Delete it</button>
-           <button onClick={closeModal} className='cancel-delete'>No, Keep it!</button>
+           <button onClick={() => closeModal()} className='cancel-delete'>No, Keep it!</button>
         </div>
     )
 }
