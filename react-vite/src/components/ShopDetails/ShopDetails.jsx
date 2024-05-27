@@ -110,7 +110,7 @@ function ShopDetails() {
                         </div>
                     </div>
                     <div id='shop-detail-additional-info-container'>
-                        <a href={shopDetails?.website}>{shopDetails?.website}</a>
+                        <a target="_blank" href={shopDetails?.website}>{shopDetails?.website}</a>
                         {/* shop details address not finished, spread it out/break down values */}
                         <div>{(shopDetails?.address &&
                             addressFormatter(shopDetails)
