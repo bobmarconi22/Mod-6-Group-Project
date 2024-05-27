@@ -44,7 +44,8 @@ function ShopImagesPage() {
                         {shopDetails.image.map(imageObj => {
                             return (
                                 <div key={imageObj.id} className='container'>
-                                    <div className="shop-image" style={{ backgroundImage: `url(${imageObj.img_link})` }}></div>
+
+                                    <div className="shop-image" style={{ backgroundImage: `url("${imageObj.img_link}")` }}></div>
                                     {sessionUser && sessionUser.id === imageObj['user_id'] && (
                                         <>
                                             <div className='overlay-div'>
