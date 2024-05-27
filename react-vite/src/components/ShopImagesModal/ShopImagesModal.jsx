@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useModal } from '../../context/Modal';
 import { loadShopDetailsThunk } from '../../redux/shops';
+import './ShopImagesModal.css'
 
 
 
@@ -53,7 +54,7 @@ function ShopImagesModal({user_id, shop_id, shop_name}) {
             <form onSubmit={(e) => handleSubmit(e)}>
                 <label>Image Url</label>
                 <input value={imgLink} onChange={(e) => setImageLink(e.target.value)}></input>
-                <button type="submit">Add a photo</button>
+                <button type="submit" id='photo-submit-button'>Add a photo</button>
             </form>
             {errors.length > 0 && <div><p style={{color: "#FF253F", fontSize: "12px"}}>{errors}</p></div>}
         </div>
