@@ -32,10 +32,10 @@ function SearchPage() {
   }, [location.search]);
 
 
-    return (
+    return ( loading && <></> ||
         !loading && (filteredShops.length > 0 ? (<div className="shop-list-container">
             <ShopCardMaker shopsArr={filteredShops}/>
-        </div>) : (<div className='sorry-div'><h1>Sorry no results!</h1></div>))
+        </div>) : (<h1 id='sorry-res'>Sorry no results!</h1>))
     )
 }
 
