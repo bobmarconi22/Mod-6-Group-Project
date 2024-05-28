@@ -1,7 +1,6 @@
-.sorry-div {
-    display: flex;
-    justify-content: center;
+#sorry-res {
     margin-top: 50px;
+    text-align: center;
 }
 
 .shop-list-container {
