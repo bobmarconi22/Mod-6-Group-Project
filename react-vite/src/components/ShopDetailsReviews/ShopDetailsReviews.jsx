@@ -38,9 +38,9 @@ function ShopDetailsReviews({ rating, shop }) {
             )
         })
     }
-
+    let reversedReviews = reviews.reverse()
     const reviewMapper =
-        isLoaded && reviews.map((review, id) => {
+        isLoaded && reversedReviews.map((review, id) => {
             let rating = review?.rating
             let monthsOfYear = ["January", "February", 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'November', 'December']
             let month = monthsOfYear[new Date(review?.created_at).getMonth()]

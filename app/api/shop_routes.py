@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request, abort, make_response
-
 from flask_login import login_required, current_user
 from app.models import db, Shop, Address, selected_categories, Category, Image, Review
+from sqlalchemy import desc
 from sqlalchemy.orm import joinedload
 from flask_login import login_required
 from ..forms.shop_form import ShopForm
@@ -340,12 +340,13 @@ def create_review(shop_id):
 @shop_routes.route('/<int:shopId>/reviews')
 def get_all_reviews_by_shop(shopId):
 
-    reviews = Review.query.options(joinedload(Review.image)).filter_by(shop_id = shopId).all()
+    reviews = Review.query.options(joinedload(Review.image)).filter_by(shop_id = shopId).order_by(desc(Review.created_at)).all()
 
     reviews_to_dict = []
     for review in reviews:
+        
         review_dict = review.to_dict(include_shop=True, include_reviewer=True)
         reviews_to_dict.append(review_dict)
-
+        print("Review to dict =========================>", review_dict['updated_at'])
 
     return jsonify(reviews_to_dict)
