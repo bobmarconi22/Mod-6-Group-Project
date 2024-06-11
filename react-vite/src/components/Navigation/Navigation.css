@@ -1,5 +1,6 @@
 .profile-dropdown {
   position: absolute;
+  z-index: 10;
 }
 .nav-bar-background {
   display: flex;
