@@ -5,8 +5,9 @@
   /* background-color: #FADEB6; */
 }
 
-body {
-  margin: 0px;
+body, html {
+  margin: 0;
+  min-width: 100%;
   color: rgb(14, 35, 58);
 }
 
@@ -130,14 +131,9 @@ li {
   border-bottom: 1px solid #ff253f;
 }
 
-.delete-modal-container > i {
-  color: #ff253f;
-  padding: 0;
-  margin-bottom: 20px;
-  font-size: 12px;
-}
-
-#modal-content {
-  border-radius: 2em;
-  padding: 20px;
+.delete-modal-container > i{
+    color: #FF253F;
+    padding: 0;
+    margin-bottom: 20px;
+    font-size: 12px;
 }

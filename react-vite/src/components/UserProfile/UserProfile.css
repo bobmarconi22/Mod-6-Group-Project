@@ -15,6 +15,7 @@
     margin: 0 auto;
     width: 250px;
     margin-bottom: 20px;
+    background-color: #F6F0E2;
 }
 
 #profile-info>h2 {
@@ -52,6 +53,7 @@
     margin-bottom: 15px;
     border-radius: 2em;
     padding: 25px;
+    background-color: #F6F0E2;
 }
 
 .profile-shop-tile {
@@ -88,7 +90,10 @@
     right: 0;
     margin-top: 15px;
     margin-right: 12%;
-    font-size: 12px;
+    font-size: 22px;
+    padding: 10px;
+    padding-bottom: 12px;
+    line-height: 15px;
 }
 
 .profile-shop-tile {
@@ -98,6 +103,7 @@
     flex-direction: column;
     margin: 0 auto;
     margin-bottom: 15px;
+    background-color: #F6F0E2;
 }
 
 .profile-shop-tile:hover {
@@ -224,4 +230,20 @@
     padding-bottom: 10px;
     border-radius: 10%;
 
+}
+
+@media (max-width: 640px) {
+    .shop-img{
+        width: 100%;
+        height: 100%;
+    }
+
+    .gallery{
+        width: 100%;
+        height: 100%;
+    }
+
+    .container {
+        width: 10%;
+    }
 }

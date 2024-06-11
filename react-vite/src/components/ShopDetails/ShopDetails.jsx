@@ -15,6 +15,7 @@ function ShopDetails() {
     const { id } = useParams()
     const dispatch = useDispatch()
     const [isLoaded, setIsLoaded] = useState(false);
+    const [showHours, setShowHours] = useState(true);
     const sessionUser = useSelector((state) => state.session.user);
     const navigate = useNavigate()
 
@@ -88,12 +89,10 @@ function ShopDetails() {
                 </div>
 
                 <div className='additional-info-flexbox-container'>
-                    <div id='hours-address-container'>
-                        <div id='hours-container'>
+                    <div>
 
                             {shopDetails?.hours?.monday === 'Closed' && shopDetails?.hours?.tuesday === 'Closed' && shopDetails?.hours?.wednesday === 'Closed' && shopDetails?.hours?.thursday === 'Closed' && shopDetails?.hours?.friday === 'Closed' && shopDetails?.hours?.saturday === 'Closed' && shopDetails?.hours?.sunday === 'Closed' ? <>No Hours Specified For this Café</> :
-                            <div id='hours_container'>
-                                All hours
+                            <div className={showHours ? 'hours-container' : 'hours-container-hidden'}>
                                 <p>Monday: {shopDetails?.hours?.monday}</p>
                                 <p>Tuesday: {shopDetails?.hours?.tuesday}</p>
                                 <p>Wednesday: {shopDetails?.hours?.wednesday}</p>
@@ -101,13 +100,9 @@ function ShopDetails() {
                                 <p>Friday: {shopDetails?.hours?.friday}</p>
                                 <p>Saturday: {shopDetails?.hours?.saturday}</p>
                                 <p>Sunday: {shopDetails?.hours?.sunday}</p>
+                                <button onClick={()=> setShowHours(prevShow => !prevShow)}>Hours</button>
                             </div>
                             }
-                        </div>
-
-                        <div id='address-container'>
-                            <button onClick={() => alert('Feature Coming Soon!')}>Get Directions</button>
-                        </div>
                     </div>
                     <div id='shop-detail-additional-info-container'>
                         <a target="_blank" href={shopDetails?.website}>{shopDetails?.website}</a>

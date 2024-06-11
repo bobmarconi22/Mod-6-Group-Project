@@ -178,7 +178,7 @@ function UserProfile() {
                 id="new-shop-button"
                 onClick={() => navigate("/new-shop")}
               >
-                Create a Shop
+                +
               </button>
             </div>
 
