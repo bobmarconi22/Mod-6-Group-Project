@@ -1,3 +1,10 @@
+<<<<<<< HEAD
+=======
+.profile-dropdown {
+  position: absolute;
+  z-index: 10;
+}
+>>>>>>> bob-branch
 .nav-bar-background {
   display: flex;
   align-items: center;

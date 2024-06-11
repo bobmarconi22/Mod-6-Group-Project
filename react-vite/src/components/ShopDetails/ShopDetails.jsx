@@ -15,7 +15,7 @@ function ShopDetails() {
     const { id } = useParams()
     const dispatch = useDispatch()
     const [isLoaded, setIsLoaded] = useState(false);
-    const [showHours, setShowHours] = useState(true);
+    const [showHours, setShowHours] = useState(false);
     const sessionUser = useSelector((state) => state.session.user);
     const navigate = useNavigate()
 
@@ -25,9 +25,8 @@ function ShopDetails() {
     const addressFormatter = (shopDetails) => {
         return (
             <div className='address-text'>
-                <div>{shopDetails.address.address_line1 ? shopDetails.address.address_line1 : ''}{shopDetails.address.address_line2 ? shopDetails.address.address_line2 : ''}</div>
-                <div>{shopDetails.address.city ? shopDetails.address.city : ''}, {shopDetails.address.state ? shopDetails.address.state : ''}{shopDetails.address.postal_code ? shopDetails.address.postal_code : ''}</div>
-                {shopDetails.address.country ? shopDetails.address.country : ''}
+                <p>{shopDetails.address.address_line1 ? shopDetails.address.address_line1 : ''} {shopDetails.address.address_line2 ? shopDetails.address.address_line2 : ''}
+                {shopDetails.address.city ? shopDetails.address.city : ''}, {shopDetails.address.state ? shopDetails.address.state : ''} {shopDetails.address.postal_code ? shopDetails.address.postal_code : ''} {shopDetails.address.country ? shopDetails.address.country : ''}</p>
             </div>
         )
     }
@@ -49,6 +48,9 @@ function ShopDetails() {
                         <div id='rating-container'>
                             <div>{BeanRating({ avg_rating })}</div>
                             <div>{`(${shopDetails?.num_reviews} reviews)`}</div>
+                            <div id='shop-details-address'>{(shopDetails?.address &&
+                            addressFormatter(shopDetails)
+                        )}</div>
                         </div>
                         <div id='price-categories-container'>
                             <div>{'$'.repeat(shopDetails?.price_range)}</div>
@@ -93,6 +95,7 @@ function ShopDetails() {
 
                             {shopDetails?.hours?.monday === 'Closed' && shopDetails?.hours?.tuesday === 'Closed' && shopDetails?.hours?.wednesday === 'Closed' && shopDetails?.hours?.thursday === 'Closed' && shopDetails?.hours?.friday === 'Closed' && shopDetails?.hours?.saturday === 'Closed' && shopDetails?.hours?.sunday === 'Closed' ? <>No Hours Specified For this Café</> :
                             <div className={showHours ? 'hours-container' : 'hours-container-hidden'}>
+                                <p>All Hours</p>
                                 <p>Monday: {shopDetails?.hours?.monday}</p>
                                 <p>Tuesday: {shopDetails?.hours?.tuesday}</p>
                                 <p>Wednesday: {shopDetails?.hours?.wednesday}</p>
@@ -107,9 +110,6 @@ function ShopDetails() {
                     <div id='shop-detail-additional-info-container'>
                         <a target="_blank" href={shopDetails?.website}>{shopDetails?.website}</a>
                         {/* shop details address not finished, spread it out/break down values */}
-                        <div>{(shopDetails?.address &&
-                            addressFormatter(shopDetails)
-                        )}</div>
                         {/* reformat phone number to be in (###)###-#### */}
                         <div>{shopDetails?.phone_number}</div>
                     </div>
