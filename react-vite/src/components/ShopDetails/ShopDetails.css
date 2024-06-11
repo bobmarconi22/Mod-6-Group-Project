@@ -1,6 +1,6 @@
 #shop-detail-cover-container {
     width: 90%;
-    height: 500px;
+    height: 750px;
     border: none;
     margin: 0 auto;
     margin-top: 5px;
@@ -17,44 +17,41 @@
 
 #add-image-button{
     position: absolute;
-    right: 5px;
-    top: 40%;
+    right: 8px;
+    bottom: 49px;
     color: rgb(14, 35, 58);
-    width: 150px;
 }
 
 #add-image-button:hover{
-    background-color: #5c98d7;
+    background-color: #5c97d7;
 }
 
 #about-section{
     position: absolute;
     margin-top: 200px;
-    margin-left: 20%;
+    margin-left: 15%;
     max-width: 36%;
     border-bottom: 1px solid #2b5a8d;
 }
 
 .shop-detail-heading-container {
     background-color: #F6F0E2;
-    width: fit-content;
-    border: none;
+    width: 95.6%;
+    border: 1px solid #2b5a8d;
     border-radius: 1em;
     padding: 25px;
     position: absolute;
     left: 0;
     top: 0;
-    margin-top: 625px;
-    margin-left: 20%;
+    margin: 0 auto;
+    margin-top: 775px;
 }
 
 .see-all-photos-button {
     position: absolute;
-    right: 0;
-    top: 0;
-    margin-top: 280px;
-    width: 150px;
-    margin-right: 22%;
+    right: 2px;
+    left: 2px;
+    bottom: 5px;
     color: rgb(14, 35, 58);
 }
 
@@ -67,7 +64,7 @@
     position: absolute;
     right: 0;
     margin-top: 400px;
-    margin-right: 22%;
+    margin-right: 15%;
     text-align: center;
     background-color: white;
     width: fit-content;
@@ -97,23 +94,48 @@
 }
 
 #prev-img{
-    height: 99%;
+    max-height: 93.6%;
     margin: 1px;
-    width: 50%;
+    max-width: 99.7%;
+    object-fit: contain;
 }
 
-#hours-address-container {
+.hours-container {
     position: absolute;
     right: 0;
-    margin-right: 20%;
+    margin-right: 12%;
     text-align: center;
     height: fit-content;
     background-color: white;
-    width: 222px;
+    width: 250px;
     border: 1px solid #2b5a8d;
-    border-radius: 1em;
+    border-radius: 0 0 1em 1em;
     padding: 10px;
-    margin-top: 30px;
+    margin-top: 180px;
+    background-color: #F6F0E2;
+    border-top: none;
+    height: 0px;
+}
+
+.hours-container-hidden > p {
+    opacity: 0;
+}
+
+.hours-container-hidden {
+    position: absolute;
+    right: 0;
+    margin-right: 12%;
+    text-align: center;
+    height: fit-content;
+    background-color: white;
+    width: 250px;
+    border: 1px solid #2b5a8d;
+    border-radius: 0 0 1em 1em;
+    padding: 10px;
+    margin-top: 180px;
+    background-color: #F6F0E2;
+    border-top: none;
+    height: 0px;
 }
 
 .address-text {
