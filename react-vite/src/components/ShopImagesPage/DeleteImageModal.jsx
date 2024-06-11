@@ -82,7 +82,7 @@ function DeleteImagesModal({ shop_id, img_id, preview_img }) {
   };
 
   return preview_img ? (
-    <div className="image-form-modal">
+    <div  className="delete-modal-container">
       <h1>This is a Preview Image</h1>
       <p>Would you like to replace it?</p>
       <form onSubmit={(e) => handleSubmitNewPreview(e)}>
@@ -111,18 +111,16 @@ function DeleteImagesModal({ shop_id, img_id, preview_img }) {
       </form>
     </div>
   ) : (
-    <div className="image-form-modal">
+    <div className="delete-modal-container">
       <h1>NO TAKEBACKSIES</h1>
       <p>Are you sure you want to delete this photo?</p>
       <i>This cannot be undone</i>
-      <div className="delete-buttons">
         <button className="confirm-delete" onClick={deleteImage}>
           Delete it
         </button>
         <button onClick={() => closeModal()} className="cancel-delete">
           No, Keep it!
         </button>
-      </div>
     </div>
   );
 }
