@@ -1,14 +1,19 @@
 .profile-dropdown {
   position: absolute;
 }
+.nav-bar-background {
+  display: flex;
+  align-items: center;
+  height: 100px;
+  background-color: #abc2db;
+}
 
 .nav-bar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 100px;
-  background-color: #abc2db;
   padding: 5px 20px;
+  width: 100%;
 }
 
 .nav-text {
@@ -35,10 +40,14 @@
   height: 30px;
   /* width: 60%; */
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
   column-gap: 5px;
 }
+/* .top-half-search,
+.bottom-half-search {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+} */
 
 .category-label {
   display: flex;
@@ -70,7 +79,6 @@
 #right-button {
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
-
 }
 
 .dollar {
@@ -93,17 +101,16 @@
   color: white;
 }
 
-.dollar-filled:active{
-    background-color: #2b5a8d;
-    color: white;
+.dollar-filled:active {
+  background-color: #2b5a8d;
+  color: white;
 }
 
-#search-submit{
+#search-submit {
   margin-left: 10px;
 }
 
-
-.profile-dropdown{
+.profile-dropdown {
   position: absolute;
   right: 0;
   margin-right: 8px;
@@ -113,16 +120,15 @@
   width: 175px;
   background-color: #87a9cb;
   text-align: center;
-
 }
 
-.profile-dropdown > button{
+.profile-dropdown > button {
   width: 100%;
   border-radius: 0 0 1em 1em;
   font-size: 12px;
 }
 
-.profile-dropdown > li{
+.profile-dropdown > li {
   background-color: #87a9cb;
   border: none;
   font-size: 12px;
@@ -131,8 +137,50 @@
   border-radius: 1em;
 }
 
-.profile-dropdown > li:hover{
+.profile-dropdown > li:hover {
   background-color: #2b5a8d;
   color: white;
   cursor: pointer;
+}
+
+@media (max-width: 800px) {
+  .nav-bar-background {
+    height: 200px;
+  }
+  .nav-bar {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: flex-start;
+  }
+  .search-bar {
+    flex-direction: column;
+    height: fit-content;
+    gap: 10px;
+  }
+  .name-search {
+    width: 80%;
+  }
+  .catagory-search {
+    width: 80%;
+  }
+  .category-label {
+    width: 100%;
+  }
+  .catagory-select {
+    width: 100%;
+  }
+  .price-range-search {
+    display: flex;
+    justify-content: flex-start;
+    width: 80%;
+  }
+  .submit-buttons {
+    display: flex;
+    width: 80%;
+    justify-content: flex-start;
+    gap: 10px;
+  }
+  #search-submit {
+    margin: 0;
+  }
 }
