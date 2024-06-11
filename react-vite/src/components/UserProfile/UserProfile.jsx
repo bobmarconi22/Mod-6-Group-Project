@@ -77,7 +77,6 @@ function UserProfile() {
             <h4>
               {sessionUser.first_name} {sessionUser.last_name}{" "}
             </h4>
-            <button id="user-profile-edit" onClick={() => alert('Feature Coming Soon!')}>Edit Info</button>
             <p>
               {sessionUser.city}, {sessionUser.state}
             </p>
