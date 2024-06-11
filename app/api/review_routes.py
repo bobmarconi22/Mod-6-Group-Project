@@ -26,6 +26,7 @@ def update_review(review_id):
     review_to_edit = Review.query.get(review_id)
 
     if review_to_edit.user_id == current_user.id:
+        print("I'm getting here==============================================================================")
         review_form = ReviewEditForm()
         review_form['csrf_token'].data = request.cookies['csrf_token']
         if review_form.validate_on_submit():
