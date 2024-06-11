@@ -29,7 +29,7 @@ function UserProfile() {
   const userReviews = useSelector((state) => state.reviews.userReviews);
   const userShops = useSelector((state) => state.shops.userShops || {});
 
-  console.log(userShops)
+  console.log(userShops);
 
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -102,59 +102,65 @@ function UserProfile() {
             {userReviews &&
               Object.values(userReviews).map((review) => (
                 <>
-                <div onClick={() => navigate(`/shops/${review.shop_id}`)}>
-                  <div className="profile-review-tile">
-                    <h4>{review.shop.name}</h4>
-                    <div className="beans">
-                      <BeanRating beanRating={review.rating} />
-                    </div>
-                    <p>{review.review}</p>
-                    <div className="gallery">
-                      {review.images.map((imageObj) => {
-                        // console.log("REVIEW IN MAP", imageObj.id)
-                        // console.log("revew shop id", review.shop_id)
-                        return (
-                          <div key={imageObj.img_link} className="container" id="user-profile-container">
+                  <div onClick={() => navigate(`/shops/${review.shop_id}`)}>
+                    <div className="profile-review-tile">
+                      <h4>{review.shop.name}</h4>
+                      <div className="beans">
+                        <BeanRating beanRating={review.rating} />
+                      </div>
+                      <p>{review.review}</p>
+                      <div className="review-gallery">
+                        {review.images.map((imageObj) => {
+                          // console.log("REVIEW IN MAP", imageObj.id)
+                          // console.log("revew shop id", review.shop_id)
+                          return (
                             <div
-                              className="shop-image"
-                              alt={review.shop.name}
-                              style={{
-                                backgroundImage: `url("${imageObj.img_link}")`,
-                              }}
-                            ></div>
-                            <div className="overlay-div2">
-                              <button onClick={(e) => e.stopPropagation()}>
-                                <NotListItemModal
-                                  itemText={<FaTrashAlt className="trashcan" />}
-                                  modalComponent={
-                                    <DeleteImagesModal
-                                      shop_id={review.shop_id}
-                                      img_id={imageObj.id}
-                                    />
-                                  }
-                                ></NotListItemModal>
-                              </button>
+                              key={imageObj.img_link}
+                              className="review-container"
+                            >
+                              <div
+                                className="shop-image"
+                                alt={review.shop.name}
+                                style={{
+                                  backgroundImage: `url("${imageObj.img_link}")`,
+                                }}
+                              ></div>
+                              <div className="overlay-div2">
+                                <button onClick={(e) => e.stopPropagation()}>
+                                  <NotListItemModal
+                                    itemText={
+                                      <FaTrashAlt className="trashcan" />
+                                    }
+                                    modalComponent={
+                                      <DeleteImagesModal
+                                        shop_id={review.shop_id}
+                                        img_id={imageObj.id}
+                                      />
+                                    }
+                                  ></NotListItemModal>
+                                </button>
+                              </div>
                             </div>
-                          </div>
-                        );
-                      })}
+                          );
+                        })}
+                      </div>
+                      <p>{review.created_at}</p>
                     </div>
-                    <p>{review.created_at}</p>
-                  </div>
                   </div>
                   <OpenModalButton
                     buttonText="Edit Review"
-                    className='edit-review'
+                    className="edit-review"
                     modalComponent={
                       <UpdateReviewModal
                         reviewToEdit={review}
-                        setIsSubmitted={setIsSubmitted}                    reviewShopName={review.shop.name}
+                        setIsSubmitted={setIsSubmitted}
+                        reviewShopName={review.shop.name}
                       />
                     }
                   />
                   <OpenModalButton
                     buttonText="Delete Review"
-                    className='delete-review'
+                    className="delete-review"
                     modalComponent={
                       <DeleteReviewModal
                         reviewToDelete={review}
@@ -162,10 +168,9 @@ function UserProfile() {
                       />
                     }
                   />
-
                 </>
               ))}
-          <div className="profile-spacer"></div>
+            <div className="profile-spacer"></div>
           </div>
         )}
 
@@ -184,8 +189,14 @@ function UserProfile() {
             {userShops &&
               Object.values(userShops).map((shop) => (
                 <>
-                  <div className='profile-shop-tile' onClick={() => navigate(`/shops/${shop.id}`)}>
-                    <img className='shop-img'src={shop.preview_image.img_link}></img>
+                  <div
+                    className="profile-shop-tile"
+                    onClick={() => navigate(`/shops/${shop.id}`)}
+                  >
+                    <img
+                      className="shop-img"
+                      src={shop.preview_image.img_link}
+                    ></img>
                     <div className="user-shop-text">{shop.name}</div>
                     <p>
                       {shop.address.address_line1} {shop.address.address_line2}{" "}
@@ -211,7 +222,7 @@ function UserProfile() {
                   </button>
                   <OpenModalButton
                     buttonText="Delete Shop"
-                    className='delete-shop'
+                    className="delete-shop"
                     modalComponent={
                       <DeleteShopModal
                         shopToDelete={shop}
@@ -219,7 +230,7 @@ function UserProfile() {
                       />
                     }
                   />
-                <div className="profile-spacer"></div>
+                  <div className="profile-spacer"></div>
                 </>
               ))}
           </div>
