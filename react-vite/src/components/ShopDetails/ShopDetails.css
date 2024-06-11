@@ -26,13 +26,6 @@
     background-color: #5c97d7;
 }
 
-#shop-details-address{
-    position: absolute;
-    right: 5px;
-    bottom: 20px;
-    max-width: 50%;
-}
-
 #about-section{
     position: absolute;
     margin-top: 375px;
@@ -44,15 +37,15 @@
 
 .shop-detail-heading-container {
     background-color: #F6F0E2;
-    width: 95.6%;
     border: 1px solid #2b5a8d;
     border-radius: 1em;
     padding: 25px;
     position: absolute;
-    left: 0;
+    left: 5%;
     top: 0;
     margin: 0 auto;
     margin-top: 775px;
+    height: 175px;
 }
 
 .see-all-photos-button {
@@ -68,14 +61,12 @@
     color: rgb(14, 35, 58);
 }
 
-#shop-detail-additional-info-container {
-    position: absolute;
-    left: 12%;
-    margin-top: 200px;
+#additional-details {
     text-align: center;
-    background-color: white;
-    width: fit-content;
-    padding: 10px;
+    position: absolute;
+    bottom: -3px;
+    width: 80%;
+    margin: 0 7%;
 }
 
 #categories {
@@ -123,7 +114,6 @@
     border: 1px solid #2b5a8d;
     border-radius: 0 0 1em 1em;
     padding: 10px;
-    margin-top: 180px;
     background-color: #F6F0E2;
     border-top: none;
     height: 320px;
@@ -156,7 +146,7 @@
     border-radius: 0 0 1em 1em;
     padding: 0 10px;
     border: 1px solid #2b5a8d;
-    margin-top: 178px;
+    margin-top: -1px;
     background-color: #F6F0E2;
     border-top: none;
     height: 0px;
@@ -170,10 +160,6 @@
     border: 1px solid #2b5a8d;
     width: 33.3%;
     right: 33.3%;
-}
-
-.address-text {
-    padding: 15px 0px;
 }
 
 .categories-tag:hover{
@@ -202,6 +188,10 @@
     }
     #shop-details-address{
         font-size: 12px;
+    }
+    .shop-detail-heading-container {
+        width: 90%;
+        margin-left: -7%;
     }
 
 }
