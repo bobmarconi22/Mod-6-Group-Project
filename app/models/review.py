@@ -44,7 +44,7 @@ class Review(db.Model):
         }
         if 'image' in state.dict:
             review_dict['images'] = [
-                {   
+                {
                     'id': img.id,
                     'img_link': img.img_link,
                     'preview_image': img.preview_image
