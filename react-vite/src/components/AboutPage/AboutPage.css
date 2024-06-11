@@ -1,0 +1,44 @@
+#about-div{
+    text-align: center;
+    margin: 0 auto;
+    margin-bottom: 600px;
+}
+
+#authors{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+    margin: 5px auto;
+}
+
+.author-links{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.author-pfp{
+    width: 200px;
+    height: 200px;
+    border: none;
+    border-radius: 100%;
+    margin: 30px;
+    box-shadow: 0px 0px 10px #0a2d52;
+    object-fit: cover;
+}
+
+.link-img {
+    width: 50px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0px 0px 10px #0a2d52;
+    border-radius: 100%;
+    padding: 0;
+}
+
+.link-img:hover{
+    box-shadow: 0px 0px 16px #0a2d52;
+}
