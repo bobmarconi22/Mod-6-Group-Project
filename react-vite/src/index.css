@@ -4,8 +4,14 @@
   /* color: rgb(14, 35, 58); */
   /* background-color: #FADEB6; */
 }
+#root {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 
-body, html {
+body,
+html {
   margin: 0;
   min-width: 100%;
   color: rgb(14, 35, 58);
@@ -131,9 +137,9 @@ li {
   border-bottom: 1px solid #ff253f;
 }
 
-.delete-modal-container > i{
-    color: #FF253F;
-    padding: 0;
-    margin-bottom: 20px;
-    font-size: 12px;
+.delete-modal-container > i {
+  color: #ff253f;
+  padding: 0;
+  margin-bottom: 20px;
+  font-size: 12px;
 }
