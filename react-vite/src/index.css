@@ -134,6 +134,10 @@ li {
   align-items: center;
   padding: 15px;
 }
+#modal-content {
+  border-radius: 2em;
+  padding: 20px;
+}
 
 .delete-modal-container > h1 {
   border-bottom: 1px solid #ff253f;
