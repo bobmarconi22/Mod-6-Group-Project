@@ -16,12 +16,14 @@ export default function Layout() {
   return (
     <>
       <ModalProvider>
-        <div>
-          <Navigation />
-          {isLoaded && <Outlet />}
-          <Modal />
+        <div className="whole-body">
+          <div>
+            <Navigation />
+            {isLoaded && <Outlet />}
+            <Modal />
+          </div>
+          <Footer />
         </div>
-        <Footer />
       </ModalProvider>
     </>
   );
