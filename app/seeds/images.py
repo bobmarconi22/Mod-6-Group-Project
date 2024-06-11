@@ -10,14 +10,19 @@ def seed_images():
         Image(user_id=3, shop_id=1, review_id=3, img_link='https://s3-media0.fl.yelpcdn.com/bphoto/X5tKF5x7aF3dH9o8o9_udA/348s.jpg', preview_image=False),
         Image(user_id=1, shop_id=1, img_link='https://media-cdn.tripadvisor.com/media/photo-s/14/69/bd/9e/shakshuka-12-at-cafe.jpg', preview_image=False),
         Image(user_id=1, shop_id=1, img_link='https://media.timeout.com/images/105179583/image.jpg', preview_image=False),
+        Image(user_id=1, shop_id=1, img_link='https://res.cloudinary.com/dn8wjgxgv/image/upload/v1718134128/BrewReview%20Shop%20Images/SIGNAL-1_nmasfb.jpg', preview_image=False),
+        Image (user_id=16, shop_id=1, review_id=4, img_link='https://res.cloudinary.com/dn8wjgxgv/image/upload/v1718134128/BrewReview%20Shop%20Images/SIGNAL-3_mg0ff0.jpg', preview_image=False),
 
         # Shop 2
         Image(user_id=2, shop_id=2, img_link='https://s3-media0.fl.yelpcdn.com/bphoto/bCLn6LFGA03RHtwqAdfXAA/o.jpg', preview_image=True),
-        Image(user_id=4, shop_id=2, review_id=4, img_link='https://s3-media0.fl.yelpcdn.com/bphoto/ZQyJOenQeNnv0X1qDPZIXA/348s.jpg', preview_image=False),
-        Image(user_id=5, shop_id=2, review_id=5, img_link='https://www.posist.com/restaurant-times/wp-content/uploads/2023/07/How-To-Start-A-Coffee-Shop-Business-A-Complete-Guide.jpg', preview_image=False),
-        Image(user_id=6, shop_id=2, review_id=6, img_link='https://reveillecafe.com/wp-content/uploads/2019/02/Mystic-French-Toast-with-Bacon-cropped.jpg', preview_image=False),
+        Image(user_id=4, shop_id=2, review_id=5, img_link='https://s3-media0.fl.yelpcdn.com/bphoto/ZQyJOenQeNnv0X1qDPZIXA/348s.jpg', preview_image=False),
+        Image(user_id=5, shop_id=2, review_id=6, img_link='https://www.posist.com/restaurant-times/wp-content/uploads/2023/07/How-To-Start-A-Coffee-Shop-Business-A-Complete-Guide.jpg', preview_image=False),
+        Image(user_id=6, shop_id=2, review_id=7, img_link='https://reveillecafe.com/wp-content/uploads/2019/02/Mystic-French-Toast-with-Bacon-cropped.jpg', preview_image=False),
         Image(user_id=2, shop_id=2, img_link='https://i0.wp.com/newspack-berkeleyside-cityside.s3.amazonaws.com/wp-content/uploads/2018/04/DSC_0142.jpg?fit=1500%2C994&ssl=1', preview_image=False),
         Image(user_id=2, shop_id=2, img_link='https://media.timeout.com/images/105179583/image.jpg', preview_image=False),
+        Image(user_id=4, shop_id=2, review_id=5, img_link='https://res.cloudinary.com/dn8wjgxgv/image/upload/v1718134129/BrewReview%20Shop%20Images/VPC-1_cb6k5w.jpg', preview_image = False),
+        Image(user_id=4, shop_id=2, review_id=5, img_link='https://res.cloudinary.com/dn8wjgxgv/image/upload/v1718134128/BrewReview%20Shop%20Images/VPC-2_wgpsin.jpg', preview_image=False),
+        Image(user_id=6, shop_id=2, review_id=7, img_link='https://res.cloudinary.com/dn8wjgxgv/image/upload/v1718134127/BrewReview%20Shop%20Images/VPC-3_aptfuc.jpg', preview_image=False),
 
         # Shop 3
         Image(user_id=3, shop_id=3, img_link='https://s3-media0.fl.yelpcdn.com/bphoto/FF041pESeN3VfOt34Im_aQ/o.jpg', preview_image=True),
@@ -83,6 +88,21 @@ def seed_images():
         Image(user_id=10, shop_id=10, img_link='https://s3-media0.fl.yelpcdn.com/bphoto/2x7W81UeZOENZ1b0LLIjKQ/348s.jpg', preview_image=False),
         Image(user_id=10, shop_id=10, img_link='https://www.bcj.com/wp-content/uploads/2021/08/Blue-Bottle-Stanford_AR_0275_medium.jpg', preview_image=False)
     ]
+
+
+# https://res.cloudinary.com/dn8wjgxgv/image/upload/v1718134127/BrewReview%20Shop%20Images/MIND-2_at1xsu.jpg
+# https://res.cloudinary.com/dn8wjgxgv/image/upload/v1718134127/BrewReview%20Shop%20Images/MIND-1_jzls3u.jpg
+# https://res.cloudinary.com/dn8wjgxgv/image/upload/v1718134127/BrewReview%20Shop%20Images/MIND-3_vfp6oh.jpg
+# https://res.cloudinary.com/dn8wjgxgv/image/upload/v1718134126/BrewReview%20Shop%20Images/MIND-4_ogtwve.jpg
+# https://res.cloudinary.com/dn8wjgxgv/image/upload/v1718134125/BrewReview%20Shop%20Images/MIND-5_hlaj2c.jpg
+# https://res.cloudinary.com/dn8wjgxgv/image/upload/v1718134125/BrewReview%20Shop%20Images/CORO-1_ibwrab.jpg
+# https://res.cloudinary.com/dn8wjgxgv/image/upload/v1718134126/BrewReview%20Shop%20Images/CORO-2_ord45y.jpg
+# https://res.cloudinary.com/dn8wjgxgv/image/upload/v1718134125/BrewReview%20Shop%20Images/CORO-3_rzfbcs.jpg
+# https://res.cloudinary.com/dn8wjgxgv/image/upload/v1718134125/BrewReview%20Shop%20Images/CORO-4_cb6qth.jpg
+# https://res.cloudinary.com/dn8wjgxgv/image/upload/v1718134126/BrewReview%20Shop%20Images/1951-1_b6t8ii.jpg
+# https://res.cloudinary.com/dn8wjgxgv/image/upload/v1718134126/BrewReview%20Shop%20Images/1951-3_qzdpsg.jpg
+# https://res.cloudinary.com/dn8wjgxgv/image/upload/v1718134126/BrewReview%20Shop%20Images/1951-2_x3fpjy.jpg
+# https://res.cloudinary.com/dn8wjgxgv/image/upload/v1718134125/BrewReview%20Shop%20Images/CORO-5_bpb8zz.jpg
 
     db.session.add_all(images)
     db.session.commit()
