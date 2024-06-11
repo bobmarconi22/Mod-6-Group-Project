@@ -5,8 +5,9 @@
     /* background-color: #FADEB6; */
 }
 
-body {
-    margin: 0px;
+body, html {
+    margin: 0;
+    min-width: 100%;
 }
 
 button {
@@ -133,3 +134,20 @@ li{
     margin-bottom: 20px;
     font-size: 12px;
 }
+
+::-webkit-scrollbar {
+    width: 5px;
+    background-color: transparent;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+    border-radius: 10px;
+    padding-top: 2px;
+    height: 90%;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #2b5a8d;
+    border-radius: 10px;
+  }

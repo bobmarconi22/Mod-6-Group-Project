@@ -1,13 +1,14 @@
 #shop-detail-cover-container {
-    width: 60%;
-    height: 350px;
+    width: 90%;
+    height: 500px;
     border: none;
+    margin: 0 auto;
     margin-top: 5px;
-    margin-left: 20%;
     justify-content: center;
     align-items: center;
     border-radius: 1em;
     background-color: #2b5a8d;
+    position: relative;
 }
 
 #title {
@@ -16,9 +17,8 @@
 
 #add-image-button{
     position: absolute;
-    right: 0;
-    margin-right: 22%;
-    margin-top: 125px;
+    right: 5px;
+    top: 40%;
     color: rgb(14, 35, 58);
     width: 150px;
 }
@@ -44,7 +44,7 @@
     position: absolute;
     left: 0;
     top: 0;
-    margin-top: 495px;
+    margin-top: 625px;
     margin-left: 20%;
 }
 
@@ -98,9 +98,10 @@
 
 #prev-img{
     height: 99%;
-    margin-top: 2px;
-    margin-left: 10%;
+    margin: 1px;
+    width: 50%;
 }
+
 #hours-address-container {
     position: absolute;
     right: 0;

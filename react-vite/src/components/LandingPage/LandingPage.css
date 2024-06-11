@@ -56,3 +56,20 @@
 .shop-text {
   padding-top: 5px;
 }
+
+
+@media (max-width: 640px) {
+  .shop-container{
+    max-width: 40%;
+    justify-content: center;
+    margin: 10 auto;
+    font-size: 12px;
+    padding: 10px;
+  }
+
+  #shop-section-container{
+    max-width: 50%;
+    margin: 0 auto;
+    margin-top: 75px;
+  }
+}

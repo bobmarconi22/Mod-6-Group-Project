@@ -38,6 +38,7 @@
   flex-wrap: wrap;
   align-items: center;
   column-gap: 5px;
+  justify-content: center;
 }
 
 .category-label {
@@ -70,7 +71,6 @@
 #right-button {
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
-
 }
 
 .dollar {
@@ -93,17 +93,16 @@
   color: white;
 }
 
-.dollar-filled:active{
-    background-color: #2b5a8d;
-    color: white;
+.dollar-filled:active {
+  background-color: #2b5a8d;
+  color: white;
 }
 
-#search-submit{
+#search-submit {
   margin-left: 10px;
 }
 
-
-.profile-dropdown{
+.profile-dropdown {
   position: absolute;
   right: 0;
   margin-right: 8px;
@@ -113,16 +112,15 @@
   width: 175px;
   background-color: #87a9cb;
   text-align: center;
-
 }
 
-.profile-dropdown > button{
+.profile-dropdown > button {
   width: 100%;
   border-radius: 0 0 1em 1em;
   font-size: 12px;
 }
 
-.profile-dropdown > li{
+.profile-dropdown > li {
   background-color: #87a9cb;
   border: none;
   font-size: 12px;
@@ -131,8 +129,15 @@
   border-radius: 1em;
 }
 
-.profile-dropdown > li:hover{
+.profile-dropdown > li:hover {
   background-color: #2b5a8d;
   color: white;
   cursor: pointer;
+}
+
+@media (max-width: 500px) {
+  .nav-bar{
+    justify-content: center;
+    height: 150px;
+  }
 }
