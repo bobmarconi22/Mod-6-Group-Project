@@ -1,13 +1,14 @@
 #shop-detail-cover-container {
-    width: 60%;
-    height: 350px;
+    width: 90%;
+    height: 750px;
     border: none;
+    margin: 0 auto;
     margin-top: 5px;
-    margin-left: 20%;
     justify-content: center;
     align-items: center;
     border-radius: 1em;
     background-color: #2b5a8d;
+    position: relative;
 }
 
 #title {
@@ -16,45 +17,42 @@
 
 #add-image-button{
     position: absolute;
-    right: 0;
-    margin-right: 22%;
-    margin-top: 125px;
+    right: 8px;
+    bottom: 49px;
     color: rgb(14, 35, 58);
-    width: 150px;
 }
 
 #add-image-button:hover{
-    background-color: #5c98d7;
+    background-color: #5c97d7;
 }
 
 #about-section{
     position: absolute;
-    margin-top: 200px;
-    margin-left: 20%;
-    max-width: 36%;
+    margin-top: 375px;
+    margin-left: 7%;
+    padding-bottom: 5px;
+    max-width: 65%;
     border-bottom: 1px solid #2b5a8d;
 }
 
 .shop-detail-heading-container {
     background-color: #F6F0E2;
-    width: fit-content;
-    border: none;
+    border: 1px solid #2b5a8d;
     border-radius: 1em;
     padding: 25px;
     position: absolute;
-    left: 0;
+    left: 5%;
     top: 0;
-    margin-top: 495px;
-    margin-left: 20%;
+    margin: 0 auto;
+    margin-top: 775px;
+    height: 175px;
 }
 
 .see-all-photos-button {
     position: absolute;
-    right: 0;
-    top: 0;
-    margin-top: 280px;
-    width: 150px;
-    margin-right: 22%;
+    right: 2px;
+    left: 2px;
+    bottom: 5px;
     color: rgb(14, 35, 58);
 }
 
@@ -63,15 +61,12 @@
     color: rgb(14, 35, 58);
 }
 
-#shop-detail-additional-info-container {
-    position: absolute;
-    right: 0;
-    margin-top: 400px;
-    margin-right: 22%;
+#additional-details {
     text-align: center;
-    background-color: white;
-    width: fit-content;
-    padding: 10px;
+    position: absolute;
+    bottom: -3px;
+    width: 80%;
+    margin: 0 7%;
 }
 
 #categories {
@@ -97,28 +92,106 @@
 }
 
 #prev-img{
-    height: 99%;
-    margin-top: 2px;
-    margin-left: 10%;
+    max-height: 93.6%;
+    margin: 1px;
+    max-width: 99.7%;
+    object-fit: contain;
 }
-#hours-address-container {
+
+.hours-container > p {
+    opacity: 1;
+    transition: opacity 3.5s;
+}
+
+.hours-container {
     position: absolute;
     right: 0;
-    margin-right: 20%;
+    margin-right: 6%;
     text-align: center;
     height: fit-content;
     background-color: white;
-    width: 222px;
+    width: 250px;
     border: 1px solid #2b5a8d;
-    border-radius: 1em;
+    border-radius: 0 0 1em 1em;
     padding: 10px;
-    margin-top: 30px;
+    background-color: #F6F0E2;
+    border-top: none;
+    height: 320px;
+    transition: height 1s ease;
 }
 
-.address-text {
-    padding: 15px 0px;
+.hours-container > button {
+    position: absolute;
+    bottom: -40px;
+    border-radius: 0 0 1em 1em;
+    border: 1px solid #2b5a8d;
+    width: 33.3%;
+    right: 33.3%;
+}
+
+.hours-container-hidden > p {
+    opacity: 0;
+    transition: opacity 0.1s ease;
+}
+
+.hours-container-hidden {
+    position: absolute;
+    right: 0;
+    margin-right: 6%;
+    text-align: center;
+    height: fit-content;
+    background-color: white;
+    width: 250px;
+    border: 1px solid #2b5a8d;
+    border-radius: 0 0 1em 1em;
+    padding: 0 10px;
+    border: 1px solid #2b5a8d;
+    margin-top: -1px;
+    background-color: #F6F0E2;
+    border-top: none;
+    height: 0px;
+    transition: height 1s ease, margin 2.8s ease;
+}
+
+.hours-container-hidden > button {
+    position: absolute;
+    bottom: -40px;
+    border-radius: 0 0 1em 1em;
+    border: 1px solid #2b5a8d;
+    width: 33.3%;
+    right: 33.3%;
 }
 
 .categories-tag:hover{
     cursor: pointer;
+}
+@media (max-width: 900px) {
+    #shop-details-address{
+        max-width: 20%;
+        top: 0;
+        font-size: 14px;
+    }
+
+}
+@media (max-width: 640px) {
+    .hours-container{
+        margin-right: 2%;
+    }
+    .hours-container-hidden{
+        margin-right: 2%;
+    }
+    .hours-container > button {
+        right: 4%;
+    }
+    .hours-container-hidden > button {
+        right: 4%;
+    }
+    #shop-details-address{
+        font-size: 12px;
+    }
+    .shop-detail-heading-container {
+        width: 90%;
+        margin-left: -7%;
+    }
+
 }

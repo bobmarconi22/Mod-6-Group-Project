@@ -49,7 +49,7 @@ function ShopImagesPage() {
                                     {sessionUser && sessionUser.id === imageObj['user_id'] && (
                                         <>
                                             <div className='overlay-div'>
-                                                <GoDotFill className='user-dot' />
+                                                <GoDotFill id='user-dot' />
                                             </div>
                                             <div className='overlay-div2'>
                                                 <button>

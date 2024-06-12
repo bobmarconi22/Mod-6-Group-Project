@@ -223,6 +223,15 @@ function ShopFormPage() {
     setImage('https://s3-media0.fl.yelpcdn.com/bphoto/w-ppROhgsCcS2J1IXnoqSg/o.jpg')
   };
 
+  const handleDaysChange = (event) => {
+    const selectedValue = event.target.value;
+    setSelectedDays((prevDays) =>
+      prevDays.includes(selectedValue)
+        ? prevDays.filter((day) => day !== selectedValue)
+        : [...prevDays, selectedValue]
+    );
+  };
+
   const handleClearDays = (e) => {
     e.preventDefault();
     setSelectedDays([]);
@@ -308,13 +317,11 @@ function ShopFormPage() {
                 id="multiple-select"
                 multiple
                 value={selectedDays}
-                onChange={(e) =>
-                  setSelectedDays((prevDays) => [...prevDays, e.target.value])
-                }
+                onChange={handleDaysChange}
               >
                 {Object.keys(hours).map((day) =>
                   hours[day] && hours[day].open ? (
-                    <option key={day} value={day}>
+                    <option key={day} value={day} selected={selectedDays.includes(day)}>
                       {day}: {hours[day].open} - {hours[day].close}
                     </option>
                   ) : (

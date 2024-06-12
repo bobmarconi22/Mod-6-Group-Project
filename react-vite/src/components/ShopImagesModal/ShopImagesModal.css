@@ -1,8 +1,22 @@
-.image-form-modal{
-    padding: 25px;
+.image-form-modal {
+  padding: 25px;
+  display: grid;
+  grid-template-columns: 1fr;
+  border-radius: 2em;
+}
+.delete-buttons {
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  padding: 20px;
+}
+.replace-preview-buttons {
+  display: flex;
+  gap: 10px;
+  padding-top: 20px;
 }
 
 #photo-submit-button {
-    margin: 0 auto;
-    margin-top: 10px;
+  margin: 0 auto;
+  margin-top: 10px;
 }

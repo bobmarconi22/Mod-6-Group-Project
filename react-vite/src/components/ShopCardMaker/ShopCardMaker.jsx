@@ -15,7 +15,9 @@ function ShopCardMaker({ shopsArr }) {
       let avg_rating = shop.avg_rating
       return (
         <div key={shop.id} className="shop-container" style={{height: '500px', width: '500px', display: 'flex'}} onClick={() => navigate(`/shops/${shop.id}`)}>
-          <img src={shop.preview_image?.img_link} style={{height: '40%'}}></img>
+          <div className="img-div">
+          <img src={shop.preview_image?.img_link}></img>
+          </div>
           <div className="shop-text title">{shop.name}</div>
           <div className="shop-text rating-container">
             <span className="beans">{BeanRating({ avg_rating })} </span>
@@ -29,9 +31,7 @@ function ShopCardMaker({ shopsArr }) {
             })}
 
           </div>
-          <button className="shop-text" onClick={() => alert('Feature coming soon')}>Get Directions</button>
-          {/* open time is difficult to use for front end given this format */}
-          <div className="shop-text open-today-text">Open today from {shop.hours[dayOfWeek]}</div>
+          <p className="shop-text open-today-text">Open today from {shop.hours[dayOfWeek]}</p>
         </div>
       )
     });

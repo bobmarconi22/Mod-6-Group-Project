@@ -1,227 +1,245 @@
 #user-page-title {
-    text-align: center;
-    padding-top: 20px;
+  text-align: center;
+  padding-top: 20px;
 }
 
 .user-page-subtitle {
-    text-align: center;
+  text-align: center;
 }
 
 #profile-info {
-    text-align: center;
-    border: 1px solid rgb(14, 35, 58);
-    border-radius: 2em;
-    box-shadow: 4px 3px 5px rgb(14, 35, 58, 0.5);
-    margin: 0 auto;
-    width: 250px;
-    margin-bottom: 20px;
+  text-align: center;
+  border: 1px solid rgb(14, 35, 58);
+  border-radius: 2em;
+  box-shadow: 4px 3px 5px rgb(14, 35, 58, 0.5);
+  margin: 0 auto;
+  width: 250px;
+  margin-bottom: 20px;
+  background-color: #f6f0e2;
 }
 
-#profile-info>h2 {
-    border-bottom: 3px solid #87A9CB;
-    padding-bottom: 5px;
+#profile-info > h2 {
+  border-bottom: 3px solid #87a9cb;
+  padding-bottom: 5px;
 }
 
 .profile-section {
-    text-align: center;
-    border: 1px solid rgb(14, 35, 58);
-    margin: 0 10%;
-    margin-bottom: 5px;
-    border-radius: 2em;
-    box-shadow: 4px 3px 5px rgb(14, 35, 58, 0.5);
-    padding: 20px;
-    max-width: 80%;
+  text-align: center;
+  border: 1px solid rgb(14, 35, 58);
+  margin: 0 10%;
+  margin-bottom: 5px;
+  border-radius: 2em;
+  box-shadow: 4px 3px 5px rgb(14, 35, 58, 0.5);
+  padding: 20px;
+  max-width: 80%;
 }
 
-.profile-section>h2 {
-    border-bottom: 3px solid #87A9CB;
-    padding-bottom: 5px;
+.profile-section > h2 {
+  border-bottom: 3px solid #87a9cb;
+  padding-bottom: 5px;
 }
 
 #user-profile-edit {
-    font-size: 10px;
-    padding: 5px;
+  font-size: 10px;
+  padding: 5px;
 }
 
 .profile-review-tile {
-    border: 1px solid rgb(14, 35, 58);
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    margin: 0 auto;
-    margin-bottom: 15px;
-    border-radius: 2em;
-    padding: 25px;
+  border: 1px solid rgb(14, 35, 58);
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  margin-bottom: 15px;
+  border-radius: 2em;
+  padding: 25px;
+  background-color: #f6f0e2;
 }
 
 .profile-shop-tile {
-    border: 1px solid rgb(14, 35, 58);
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 0 auto;
-    margin-top: 40px;
-    border-radius: 2em;
-    padding: 25px;
+  border: 1px solid rgb(14, 35, 58);
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  margin-top: 40px;
+  border-radius: 2em;
+  padding: 25px;
 }
 
-.profile-spacer{
-    height: 50px;
+.profile-spacer {
+  height: 50px;
 }
 
 .profile-review-tile:hover {
-    box-shadow: 4px 3px 5px rgb(14, 35, 58, 0.7);
-    cursor: pointer;
+  box-shadow: 4px 3px 5px rgb(14, 35, 58, 0.7);
+  cursor: pointer;
 }
 
-
 #user-profile-header {
-    display: flex;
-    justify-content: center;
-    border-bottom: 3px solid #87A9CB;
-    margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  border-bottom: 3px solid #87a9cb;
+  margin-bottom: 10px;
 }
 
 #new-shop-button {
-    position: absolute;
-    right: 0;
-    margin-top: 15px;
-    margin-right: 12%;
-    font-size: 12px;
+  position: absolute;
+  right: 0;
+  margin-top: 15px;
+  margin-right: 12%;
+  font-size: 22px;
+  padding: 10px;
+  padding-bottom: 12px;
+  line-height: 15px;
 }
 
 .profile-shop-tile {
-    border: 1px solid rgb(14, 35, 58);
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    margin: 0 auto;
-    margin-bottom: 15px;
+  border: 1px solid rgb(14, 35, 58);
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  margin-bottom: 15px;
+  background-color: #f6f0e2;
 }
 
 .profile-shop-tile:hover {
-    box-shadow: 4px 3px 5px rgb(14, 35, 58, 0.7);
-    cursor: pointer;
+  box-shadow: 4px 3px 5px rgb(14, 35, 58, 0.7);
+  cursor: pointer;
 }
 
 .beans {
-    display: flex;
-    justify-content:center;
+  display: flex;
+  justify-content: center;
 }
 
 .update {
-    padding: 10px;
-    margin: 5px;
+  padding: 10px;
+  margin: 5px;
 }
 
 .delete {
-    padding: 10px;
-    margin: 5px;
-    color: white;
-    background-color: #FF253F;
+  padding: 10px;
+  margin: 5px;
+  color: white;
+  background-color: #ff253f;
 }
 
 .delete:hover {
-    background-color: rgb(255, 0, 0);
-    cursor: pointer;
+  background-color: rgb(255, 0, 0);
+  cursor: pointer;
 }
 
 /* REVIEW IMAGES =======================*/
 
-.gallery {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    max-width: 1000px;
-
+.review-gallery {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  max-width: 1000px;
+  flex-wrap: wrap;
 }
 
-.container {
-    position: relative;
-    display: flex;
-    width: 200px;
-    height: 200px;
-    box-sizing: border-box;
+.review-container {
+  position: relative;
+  display: flex;
+  width: 200px;
+  height: 200px;
+  box-sizing: border-box;
 }
 
-.container > .shop-image {
-    align-self: center;
+.review-container > .shop-image {
+  align-self: center;
 }
-
 
 .overlay-div,
 .overlay-div2 {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    color: white;
-    border-radius: 2em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  color: white;
+  border-radius: 2em;
 }
 
 .overlay-div {
-    z-index: 1;
-    align-items: flex-start;
-    justify-content: flex-start;
+  z-index: 1;
+  align-items: flex-start;
+  justify-content: flex-start;
 }
 
 .overlay-div2 {
-    display: none;
-    background-color: rgba(246, 240, 226, 0.7);
-    z-index: 2;
-    justify-content: center;
-    align-items: center;
+  display: none;
+  background-color: rgba(246, 240, 226, 0.7);
+  z-index: 2;
+  justify-content: center;
+  align-items: center;
 }
 
 .container:hover .overlay-div2 {
-    display: flex;
+  display: flex;
 }
 
-
 .shop-image {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    padding-bottom: calc(100% - 2px);
-    background-size: cover;
-    background-position: center;
-    border-radius: 2em;
-    box-sizing: border-box;
-    background-color: grey;
-    z-index: 0,
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  padding-bottom: calc(100% - 2px);
+  background-size: cover;
+  background-position: center;
+  border-radius: 2em;
+  box-sizing: border-box;
+  background-color: grey;
+  z-index: 0;
 }
 
 .trashcan {
-    color: #FF253F;
-    font-size: 100px;
-    margin: 10px;
-    /* Adjust as needed for spacing */
+  color: #ff253f;
+  font-size: 100px;
+  margin: 10px;
+  /* Adjust as needed for spacing */
 }
 
 .edit-review {
-    width: 150px;
-    margin-right: 10px;
+  width: 150px;
+  margin-right: 10px;
 }
 
 .delete-review {
-    width: 150px;
+  width: 150px;
 }
 
 .update-shop {
-    width: 150px;
-    margin-right: 10px;
+  width: 150px;
+  margin-right: 10px;
 }
 .delete-shop {
-    width: 150px;
+  width: 150px;
 }
 
 .shop-img {
-    width: 200px;
-    height: 200px;
-    padding-bottom: 10px;
-    border-radius: 10%;
+  width: 200px;
+  height: 200px;
+  padding-bottom: 10px;
+  border-radius: 10%;
+}
 
+@media (max-width: 640px) {
+  .review-gallery {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+  .shop-img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .container {
+    width: 10%;
+  }
 }

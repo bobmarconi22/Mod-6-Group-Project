@@ -8,6 +8,7 @@ import ShopDetails from "../components/ShopDetails";
 import UserProfile from "../components/UserProfile";
 import SearchPage from "../components/SearchPage";
 import ShopImagesPage from "../components/ShopImagesPage";
+import AboutPage from "../components/AboutPage";
 
 export const router = createBrowserRouter([
   {
@@ -48,6 +49,10 @@ export const router = createBrowserRouter([
       {
         path: "/search",
         element: <SearchPage />
+      },
+      {
+        path: "/about",
+        element: <AboutPage />
       }
     ],
   },
