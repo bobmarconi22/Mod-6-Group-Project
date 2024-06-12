@@ -63,13 +63,16 @@ Returns the information about the current user that is logged in.
 
     ```json
     {
-      "user": {
-        "id": 1,
-        "first_name": "John",
-        "last_name": "Smith",
-        "email": "john.smith@gmail.com",
-        "username": "JohnSmith"
-      }
+    "id": 1,
+    "first_name": "Demo",
+    "last_name": "User",
+    "username": "demo_u",
+    "email": "demo@aa.io",
+    "phone_number": "555-555-0001",
+    "city": "New York",
+    "state": "NY",
+    "created_at": "Wed, 12 Jun 2024 08:48:38 GMT",
+    "updated_at": "Wed, 12 Jun 2024 08:48:38 GMT",
     }
     ```
 
@@ -100,8 +103,8 @@ information.
 
     ```json
     {
-      "credential": "john.smith@gmail.com",
-      "password": "secret password"
+      "credential": "demo@aa.io",
+      "password": "password"
     }
     ```
 
@@ -113,13 +116,16 @@ information.
 
     ```json
     {
-      "user": {
-        "id": 1,
-        "first_name": "John",
-        "last_name": "Smith",
-        "email": "john.smith@gmail.com",
-        "username": "JohnSmith"
-      }
+    "id": 1,
+    "first_name": "Demo",
+    "last_name": "User",
+    "username": "demo_u",
+    "email": "demo@aa.io",
+    "phone_number": "555-555-0001",
+    "city": "New York",
+    "state": "NY",
+    "created_at": "Wed, 12 Jun 2024 08:48:38 GMT",
+    "updated_at": "Wed, 12 Jun 2024 08:48:38 GMT",
     }
     ```
 
@@ -166,11 +172,14 @@ user's information.
 
     ```json
     {
-      "first_name": "John",
-      "last_name": "Smith",
-      "email": "john.smith@gmail.com",
-      "username": "JohnSmith",
-      "password": "secret password"
+    "username": "demo_u",
+    "first_name": "Demo",
+    "last_name": "User",
+    "email": "demo@aa.io",
+    "phone_number": "555-555-0001",
+    "city": "New York",
+    "state": "NY",
+    "password": "password"
     }
     ```
 
@@ -181,44 +190,43 @@ user's information.
   * Body:
 
     ```json
-    {
-      "user": {
-        "id": 1,
-        "first_name": "John",
-        "last_name": "Smith",
-        "email": "john.smith@gmail.com",
-        "username": "JohnSmith"
-      }
+   {
+    "id": 1,
+    "first_name": "Demo",
+    "last_name": "User",
+    "username": "demo_u",
+    "email": "demo@aa.io",
+    "phone_number": "555-555-0001",
+    "city": "New York",
+    "state": "NY",
+    "created_at": "Wed, 12 Jun 2024 08:48:38 GMT",
+    "updated_at": "Wed, 12 Jun 2024 08:48:38 GMT",
     }
     ```
 
 * Error response: User already exists with the specified email
-  * Status Code: 500
+  * Status Code: 401
   * Headers:
     * Content-Type: application/json
   * Body:
 
     ```json
     {
-      "message": "User already exists",
-      "errors": {
-        "email": "User with that email already exists"
-      }
+      "email": [
+        "Email address is already in use."
+      ]
     }
     ```
 
 * Error response: User already exists with the specified username
-  * Status Code: 500
+  * Status Code: 401
   * Headers:
     * Content-Type: application/json
   * Body:
 
     ```json
     {
-      "message": "User already exists",
-      "errors": {
-        "username": "User with that username already exists"
-      }
+        "username":[ "Username is already in use."]
     }
     ```
 
@@ -232,10 +240,15 @@ user's information.
     {
       "message": "Bad Request",
       "errors": {
-        "email": "Invalid email",
         "username": "Username is required",
+        "email": "Invalid email",
         "first_name": "First Name is required",
-        "last_name": "Last Name is required"
+        "last_name": "Last Name is required",
+        "phone_number": "Phone Number is required",
+        "city": "City is required",
+        "state": "State is required",
+        "password": "Password is required"
+
       }
     }
     ```
