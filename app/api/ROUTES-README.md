@@ -63,13 +63,16 @@ Returns the information about the current user that is logged in.
 
     ```json
     {
-      "user": {
-        "id": 1,
-        "first_name": "John",
-        "last_name": "Smith",
-        "email": "john.smith@gmail.com",
-        "username": "JohnSmith"
-      }
+    "id": 1,
+    "first_name": "Demo",
+    "last_name": "User",
+    "username": "demo_u",
+    "email": "demo@aa.io",
+    "phone_number": "555-555-0001",
+    "city": "New York",
+    "state": "NY",
+    "created_at": "Wed, 12 Jun 2024 08:48:38 GMT",
+    "updated_at": "Wed, 12 Jun 2024 08:48:38 GMT",
     }
     ```
 
@@ -100,8 +103,8 @@ information.
 
     ```json
     {
-      "credential": "john.smith@gmail.com",
-      "password": "secret password"
+      "credential": "demo@aa.io",
+      "password": "password"
     }
     ```
 
@@ -113,13 +116,16 @@ information.
 
     ```json
     {
-      "user": {
-        "id": 1,
-        "first_name": "John",
-        "last_name": "Smith",
-        "email": "john.smith@gmail.com",
-        "username": "JohnSmith"
-      }
+    "id": 1,
+    "first_name": "Demo",
+    "last_name": "User",
+    "username": "demo_u",
+    "email": "demo@aa.io",
+    "phone_number": "555-555-0001",
+    "city": "New York",
+    "state": "NY",
+    "created_at": "Wed, 12 Jun 2024 08:48:38 GMT",
+    "updated_at": "Wed, 12 Jun 2024 08:48:38 GMT",
     }
     ```
 
@@ -166,11 +172,14 @@ user's information.
 
     ```json
     {
-      "first_name": "John",
-      "last_name": "Smith",
-      "email": "john.smith@gmail.com",
-      "username": "JohnSmith",
-      "password": "secret password"
+    "username": "demo_u",
+    "first_name": "Demo",
+    "last_name": "User",
+    "email": "demo@aa.io",
+    "phone_number": "555-555-0001",
+    "city": "New York",
+    "state": "NY",
+    "password": "password"
     }
     ```
 
@@ -181,44 +190,43 @@ user's information.
   * Body:
 
     ```json
-    {
-      "user": {
-        "id": 1,
-        "first_name": "John",
-        "last_name": "Smith",
-        "email": "john.smith@gmail.com",
-        "username": "JohnSmith"
-      }
+   {
+    "id": 1,
+    "first_name": "Demo",
+    "last_name": "User",
+    "username": "demo_u",
+    "email": "demo@aa.io",
+    "phone_number": "555-555-0001",
+    "city": "New York",
+    "state": "NY",
+    "created_at": "Wed, 12 Jun 2024 08:48:38 GMT",
+    "updated_at": "Wed, 12 Jun 2024 08:48:38 GMT",
     }
     ```
 
 * Error response: User already exists with the specified email
-  * Status Code: 500
+  * Status Code: 401
   * Headers:
     * Content-Type: application/json
   * Body:
 
     ```json
     {
-      "message": "User already exists",
-      "errors": {
-        "email": "User with that email already exists"
-      }
+      "email": [
+        "Email address is already in use."
+      ]
     }
     ```
 
 * Error response: User already exists with the specified username
-  * Status Code: 500
+  * Status Code: 401
   * Headers:
     * Content-Type: application/json
   * Body:
 
     ```json
     {
-      "message": "User already exists",
-      "errors": {
-        "username": "User with that username already exists"
-      }
+        "username":[ "Username is already in use."]
     }
     ```
 
@@ -232,10 +240,14 @@ user's information.
     {
       "message": "Bad Request",
       "errors": {
-        "email": "Invalid email",
         "username": "Username is required",
+        "email": "Invalid email",
         "first_name": "First Name is required",
-        "last_name": "Last Name is required"
+        "last_name": "Last Name is required",
+        "phone_number": "Phone Number is required",
+        "city": "City is required",
+        "state": "State is required",
+        "password": "Password is required"
       }
     }
     ```
@@ -259,42 +271,54 @@ Returns all the shops.
   * Body:
 
     ```json
+    [
     {
-      "Shops": [
-        {
-          "id": 1,
-          "owner_id": 1,
-          "name": "App Academy",
-          "description": "Place where web developers are created",
-          "hours": { "Monday": "1:00-16:00" ,
-                     "Tuesday": "1:00-16:00" ,
-                     "Wednesday": "1:00-16:00" ,
-                     "Thursday": "1:00-16:00" ,
-                     "Friday": "1:00-16:00" ,
-                     "Saturday": "2:00-7:00",
-                     "Sunday": "2:00-7:00"},
-          "website": "www.coffee.com",
-          "phone_number": "123-456-7890",
-          "price_range": 1,
-          "created_at": "2021-11-19 20:39:36",
-          "updated_at": "2021-11-19 20:39:36",
-          "preview_image": "img.png",
-          "avg_rating": 4.5,
-          "address": {
-                "address_line1": "123 Espresso Lane",
-                "address_line2": null,
-                "city": "Philadelphia",
-                "country": "United States of America",
-                "id": 1,
-                "postal_code": "19107",
-                "state": "PA"
-            },
-           "categories": [
-              "Outdoor Seating",
-                "Organic Coffee",
-                "Dinner Menu"
-      ]
+        "id": 1,
+        "owner_id": 1,
+        "name": "Roast and Toast",
+        "description": "Exceptional coffee and freshly baked goods.",
+        "price_range": 3,
+        "num_reviews": 4,
+        "phone_number": "5557890123",
+        "website": "http://roastandtoast.com",
+        "created_at": "Wed, 12 Jun 2024 08:48:38 GMT",
+        "updated_at": "Wed, 12 Jun 2024 08:48:38 GMT",
+        "preview_image": {
+            "id": 1,
+            "shop_id": 1,
+            "review_id": null,
+            "img_link": "https://s3-media0.fl.yelpcdn.com/bphoto/IE19sZJw3i-tzhsi1EXwtg/o.jpg",
+            "preview_image": true,
+            "created_at": "Wed, 12 Jun 2024 08:48:38 GMT",
+            "updated_at": "Wed, 12 Jun 2024 08:48:38 GMT",
+            "user_id": 1
+        },
+        "address": {
+            "id": 1,
+            "address_line1": "123 Espresso Lane",
+            "address_line2": null,
+            "city": "Philadelphia",
+            "state": "PA",
+            "country": "United States of America",
+            "postal_code": "19107",
+        },
+        "avg_rating": "4.50",
+        "categories": [
+            "Outdoor Seating",
+            "Organic Coffee",
+            "Dinner Menu"
+        ],
+        "hours": {
+            "monday": "7:00am - 8:00pm",
+            "tuesday": "7:00am - 8:00pm",
+            "wednesday": "7:00am - 8:00pm",
+            "thursday": "7:00am - 8:00pm",
+            "friday": "7:00am - 8:00pm",
+            "saturday": "8:00am - 6:00pm",
+            "sunday": "8:00am - 6:00pm",
+        },
     }
+    ]
     ```
 
 ### Get all shops owned by the Current User
@@ -314,13 +338,17 @@ Returns all the shops owned (created) by the current user.
   * Body:
 
     ```json
-    {
-      "Shops": [
+    [
         {
           "id": 1,
           "owner_id": 1,
           "name": "App Academy",
           "description": "Place where web developers are created",
+          "website": "www.coffee.com",
+          "phone_number": "123-456-7890",
+          "price_range": 1,
+          "avg_rating": 4.5,
+          "preview_image": "img.png",
           "hours": { "Monday": "1:00-16:00" ,
                      "Tuesday": "1:00-16:00" ,
                      "Wednesday": "1:00-16:00" ,
@@ -328,13 +356,6 @@ Returns all the shops owned (created) by the current user.
                      "Friday": "1:00-16:00" ,
                      "Saturday": "2:00-7:00",
                      "Sunday": "2:00-7:00"},
-          "website": "www.coffee.com",
-          "phone_number": "123-456-7890",
-          "price_range": 1,
-          "created_at": "2021-11-19 20:39:36",
-          "updated_at": "2021-11-19 20:39:36",
-          "preview_image": "img.png",
-          "avg_rating": 4.5,
             "address": {
                 "address_line1": "123 Espresso Lane",
                 "address_line2": null,
@@ -348,10 +369,12 @@ Returns all the shops owned (created) by the current user.
                "Outdoor Seating",
                 "Organic Coffee",
                 "Dinner Menu"
-      ]
+              ],
+          "created_at": "2021-11-19 20:39:36",
+          "updated_at": "2021-11-19 20:39:36",
         }
       ]
-    }
+
     ```
 
 ### Get details of a shop from an id
@@ -371,13 +394,14 @@ Returns the details of a shop specified by its id.
   * Body:
 
     ```json
-    {
-      "Shops": [
         {
           "id": 1,
           "owner_id": 1,
           "name": "App Academy",
           "description": "Place where web developers are created",
+          "website": "www.coffee.com",
+          "phone_number": "123-456-7890",
+          "price_range": 1,
           "hours": { "Monday": "1:00-16:00" ,
                      "Tuesday": "1:00-16:00" ,
                      "Wednesday": "1:00-16:00" ,
@@ -385,11 +409,6 @@ Returns the details of a shop specified by its id.
                      "Friday": "1:00-16:00" ,
                      "Saturday": "2:00-7:00",
                      "Sunday": "2:00-7:00"},
-          "website": "www.coffee.com",
-          "phone_number": "123-456-7890",
-          "price_range": 1,
-          "created_at": "2021-11-19 20:39:36",
-          "updated_at": "2021-11-19 20:39:36",
           "preview_image": "img.png",
           "avg_rating": 4.5,
            "categories": [
@@ -397,7 +416,7 @@ Returns the details of a shop specified by its id.
                 "Organic Coffee",
                 "Dinner Menu"
       ],
-          "Addresses": {
+          "address": {
             "id": 1,
             "shop_id": 1,
             "address_line1": "123 Coffee Way",
@@ -434,10 +453,10 @@ Returns the details of a shop specified by its id.
                 "created_at": "2021-11-19 20:39:36",
                 "updated_at": "2021-11-19 20:39:36"
              },
-          ]
+          ],
+          "created_at": "2021-11-19 20:39:36",
+          "updated_at": "2021-11-19 20:39:36",
         }
-      ]
-    }
     ```
 
 * Error response: Couldn't find a shop with the specified id
@@ -448,7 +467,7 @@ Returns the details of a shop specified by its id.
 
     ```json
     {
-      "message": "shop couldn't be found"
+      "error": "Shop not found"
     }
     ```
 
@@ -466,32 +485,38 @@ Creates and returns a new shop.
 
     ```json
     {
+          "owner_id": 1,
           "name": "App Academy",
           "description": "Place where web developers are created",
-          "hours": { "Monday": "1:00-16:00" ,
-                     "Tuesday": "1:00-16:00" ,
-                     "Wednesday": "1:00-16:00" ,
-                     "Thursday": "1:00-16:00" ,
-                     "Friday": "1:00-16:00" ,
-                     "Saturday": "2:00-7:00",
-                     "Sunday": "2:00-7:00"},
-          "website": "www.coffee.com",
           "phone_number": "123-456-7890",
           "price_range": 1,
+          "website": "www.coffee.com",
+          "preview_image": "https://s3-media0.fl.yelpcdn.com/bphoto/w-ppROhgsCcS2J1IXnoqSg/o.jpg",
+          "monday_open": "1:00pm",
+          "monday_close": "6:30pm",
+          "tuesday_open": "1:00pm",
+          "tuesday_close": "6:30pm",
+          "wednesday_open": "1:00pm",
+          "wednesday_close": "6:30pm",
+          "thursday_open": "1:00pm",
+          "thursday_close": "6:30pm",
+          "friday_open": "1:00pm",
+          "friday_close": "6:30pm",
+          "saturday_open": "1:00pm",
+          "saturday_close": "6:30pm",
+          "sunday_open": "1:00pm",
+          "sunday_close": "6:30pm",
            "categories": [
                 "Outdoor Seating",
                 "Organic Coffee",
                 "Dinner Menu"
       ],
-          "Addresses": {
-            "id": 1,
-            "shop_id": 1,
             "address_line1": "123 Coffee Way",
+            "address_line2": "",
             "city": "Espresso",
             "state": "CF",
             "postal_code": "12345",
             "country": "US"
-          },
     }
     ```
 
@@ -502,33 +527,31 @@ Creates and returns a new shop.
   * Body:
 
     ```json
-    {
-      "Shops": [
         {
           "id": 1,
           "owner_id": 1,
           "name": "App Academy",
           "description": "Place where web developers are created",
-          "hours": { "Monday": "1:00-16:00" ,
-                     "Tuesday": "1:00-16:00" ,
-                     "Wednesday": "1:00-16:00" ,
-                     "Thursday": "1:00-16:00" ,
-                     "Friday": "1:00-16:00" ,
-                     "Saturday": "2:00-7:00",
-                     "Sunday": "2:00-7:00"},
-          "website": "www.coffee.com",
           "phone_number": "123-456-7890",
           "price_range": 1,
-          "created_at": "2021-11-19 20:39:36",
-          "updated_at": "2021-11-19 20:39:36",
+          "website": "www.coffee.com",
           "preview_image": "img.png",
           "avg_rating": 4.5,
+          "created_at": "2021-11-19 20:39:36",
+          "updated_at": "2021-11-19 20:39:36",
+         "hours": { "monday": "1:00pm - 6:30pm" ,
+                     "tuesday": "1:00pm - 6:30pm" ,
+                     "wednesday": "1:00pm - 6:30pm" ,
+                     "thursday": "1:00pm - 6:30pm" ,
+                     "friday": "1:00pm - 6:30pm" ,
+                     "saturday": "1:00pm - 6:30pm",
+                     "sunday": "1:00pm - 6:30pm"},
            "categories": [
                 "Outdoor Seating",
                 "Organic Coffee",
                 "Dinner Menu"
       ],
-          "Addresses": {
+          "address": {
             "id": 1,
             "shop_id": 1,
             "address_line1": "123 Coffee Way",
@@ -536,39 +559,8 @@ Creates and returns a new shop.
             "state": "CF",
             "postal_code": "12345",
             "country": "US"
-          },
-          "Reviews":[
-            {
-            "User":{
-                "id":1,
-                "first_name": "Bob",
-                "last_name": "Marconi",
-                "city": "Espresso",
-                "state": "CF",
-                "num_reviews": 16,
-                "num_images": 30
-            },
-            "review": "I love this place I go here all the time!",
-            "rating": 5,
-            "created_at": "2021-11-19 20:39:36",
-            "updated_at": "2021-11-19 20:39:36"
-            },
-          ],
-          "Images": [
-             {
-                "id": 1,
-                "userId": 1,
-                "shop_id": 1,
-                "reviewId": 1,
-                "img_link": "img.png",
-                "preview_image": true,
-                "created_at": "2021-11-19 20:39:36",
-                "updated_at": "2021-11-19 20:39:36"
-             },
-          ]
+          }
         }
-      ]
-    }
     ```
 
 * Error Response: Body validation errors
@@ -593,56 +585,6 @@ Creates and returns a new shop.
     }
     ```
 
-
-### Add an Image to a shop based on the shop's id
-
-Create and return a new image for a shop specified by id.
-
-- Require Authentication: true
-- Require proper authorization: shop must belong to the current user
-- Request
-
-  - Method: POST
-  - URL: api/shops/:id/images
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "url": "image url",
-      "preview_image": true
-    }
-    ```
-
-- Successful Response
-
-  - Status Code: 200
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "id": 1,
-      "url": "image url",
-      "preview_image": true
-    }
-    ```
-
-- Error response: Couldn't find a shop with the specified id
-
-  - Status Code: 404
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "message": "shop couldn't be found"
-    }
-    ```
-
 ### Edit a shop
 
 Updates and returns an existing shop.
@@ -657,33 +599,39 @@ Updates and returns an existing shop.
   * Body:
 
     ```json
-     {
+    {
+          "owner_id": 1,
           "name": "App Academy",
           "description": "Place where web developers are created",
-          "hours": { "Monday": "1:00-16:00" ,
-                     "Tuesday": "1:00-16:00" ,
-                     "Wednesday": "1:00-16:00" ,
-                     "Thursday": "1:00-16:00" ,
-                     "Friday": "1:00-16:00" ,
-                     "Saturday": "2:00-7:00",
-                     "Sunday": "2:00-7:00"},
-          "website": "www.coffee.com",
           "phone_number": "123-456-7890",
           "price_range": 1,
+          "website": "www.coffee.com",
+          "preview_image": "https://s3-media0.fl.yelpcdn.com/bphoto/w-ppROhgsCcS2J1IXnoqSg/o.jpg",
+          "monday_open": "1:00pm",
+          "monday_close": "6:30pm",
+          "tuesday_open": "1:00pm",
+          "tuesday_close": "6:30pm",
+          "wednesday_open": "1:00pm",
+          "wednesday_close": "6:30pm",
+          "thursday_open": "1:00pm",
+          "thursday_close": "6:30pm",
+          "friday_open": "1:00pm",
+          "friday_close": "6:30pm",
+          "saturday_open": "1:00pm",
+          "saturday_close": "6:30pm",
+          "sunday_open": "1:00pm",
+          "sunday_close": "6:30pm",
            "categories": [
-               "Outdoor Seating",
+                "Outdoor Seating",
                 "Organic Coffee",
                 "Dinner Menu"
       ],
-          "Addresses": {
-            "id": 1,
-            "shop_id": 1,
             "address_line1": "123 Coffee Way",
+            "address_line2": "",
             "city": "Espresso",
             "state": "CF",
             "postal_code": "12345",
             "country": "US"
-          },
     }
     ```
 
@@ -701,13 +649,13 @@ Updates and returns an existing shop.
           "owner_id": 1,
           "name": "App Academy",
           "description": "Place where web developers are created",
-          "hours": { "Monday": "1:00-16:00" ,
-                     "Tuesday": "1:00-16:00" ,
-                     "Wednesday": "1:00-16:00" ,
-                     "Thursday": "1:00-16:00" ,
-                     "Friday": "1:00-16:00" ,
-                     "Saturday": "2:00-7:00",
-                     "Sunday": "2:00-7:00"},
+          "hours": { "monday": "1:00pm - 6:30pm" ,
+                     "tuesday": "1:00pm - 6:30pm" ,
+                     "wednesday": "1:00pm - 6:30pm" ,
+                     "thursday": "1:00pm - 6:30pm" ,
+                     "friday": "1:00pm - 6:30pm" ,
+                     "saturday": "1:00pm - 6:30pm",
+                     "sunday": "1:00pm - 6:30pm"},
           "website": "www.coffee.com",
           "phone_number": "123-456-7890",
           "price_range": 1,
@@ -718,7 +666,7 @@ Updates and returns an existing shop.
                 "Organic Coffee",
                 "Dinner Menu"
       ],
-          "Addresses": {
+          "address": {
             "id": 1,
             "shop_id": 1,
             "address_line1": "123 Coffee Way",
@@ -752,15 +700,15 @@ Updates and returns an existing shop.
     }
     ```
 
-* Error response: Couldn't find a shop with the specified id
-  * Status Code: 404
+* Error response: Invalid form input data
+  * Status Code: 400
   * Headers:
     * Content-Type: application/json
   * Body:
 
     ```json
     {
-      "message": "shop couldn't be found"
+      "error": "Invalid data"
     }
     ```
 
@@ -818,8 +766,7 @@ Returns all the reviews written by the current user.
   * Body:
 
     ```json
-    {
-      "Reviews": [
+  [
         {
           "id": 1,
           "userId": 1,
@@ -848,15 +795,15 @@ Returns all the reviews written by the current user.
                     "country": "US"
                 },
           },
-          "ReviewImages": [
+          "images": [
             {
               "id": 1,
-              "img_link": "image url"
+              "img_link": "image url",
+              "preview_image": false
             }
           ]
         }
       ]
-    }
     ```
 
 ### Get all Reviews by a shop's id
@@ -876,24 +823,22 @@ Returns all the reviews that belong to a shop specified by id.
   * Body:
 
     ```json
-    {
-        "Reviews": [
-            {
+      {"1":
+          {
             "id": 1,
             "userId": 1,
-            "shop_id": 1,
+            "shop": {
+              "id": 1,
+              "name": "Roast and Toast"
+            },
             "review": "This was an awesome shop!",
             "rating": 5,
             "created_at": "2021-11-19 20:39:36",
             "updated_at": "2021-11-19 20:39:36",
-             "User":{
-                "id":1,
+             "reviewer":{
                 "first_name": "Bob",
-                "last_name": "Marconi",
                 "city": "Espresso",
-                "state": "CF",
-                "num_reviews": 16,
-                "num_images": 30
+                "state": "CF"
             },
             "ReviewImages": [
                 {
@@ -902,8 +847,7 @@ Returns all the reviews that belong to a shop specified by id.
                 }
             ]
         }
-        ]
-    }
+        }
     ```
 
 * Error response: Couldn't find a shop with the specified id
@@ -962,7 +906,7 @@ Create and return a new review for a shop specified by id.
       "rating": 5,
       "created_at": "2021-11-19 20:39:36",
       "updated_at": "2021-11-19 20:39:36",
-      "Images": [
+      "images": [
          {
         "id": 9,
         "url": "image url",
@@ -1063,18 +1007,11 @@ Update and return an existing review.
       "rating": 5,
       "created_at": "2021-11-19 20:39:36",
       "updated_at": "2021-11-20 10:06:40",
-       "Images": [
-         {
-        "id": 9,
-        "url": "image url",
-        "preview_image": "False"
-        },
-        {
-        "id": 10,
-        "url": "image url",
-        "preview_image": "False"
-        }
-      ]
+       "reviewer": {
+        "first_name": "Demo",
+        "city": "New York",
+        "state": "NY"
+       }
     }
     ```
 
@@ -1144,6 +1081,55 @@ Delete an existing review.
 
 ## IMAGES
 
+### Add an Image to a shop based on the shop's id
+
+Create and return a new image for a shop specified by id.
+
+- Require Authentication: true
+- Require proper authorization: shop must belong to the current user
+- Request
+
+  - Method: POST
+  - URL: api/shops/:id/images
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+
+    ```json
+    {
+      "url": "image url",
+      "preview_image": true
+    }
+    ```
+
+- Successful Response
+
+  - Status Code: 200
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+
+    ```json
+    {
+      "id": 1,
+      "url": "image url",
+      "preview_image": true
+    }
+    ```
+
+- Error response: Couldn't find a shop with the specified id
+
+  - Status Code: 404
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+
+    ```json
+    {
+      "message": "shop couldn't be found"
+    }
+    ```
+
 ### Delete a shop Image
 
 Delete an existing image for a shop or a review
@@ -1190,8 +1176,8 @@ Return shops filtered by query parameters.
   * Query Parameters
     * page: integer, minimum: 1, maximum: 10, default: 1
     * size: integer, minimum: 1, maximum: 20, default: 20
-    * minPrice: integer, optional, minimum: 1, maximum: 5, default: none
-    * maxPrice: integer, optional, minimum: 1 or minPrice, maximum: 5, default: none
+    * minPrice: integer, optional, minimum: 1, maximum: 4, default: none
+    * maxPrice: integer, optional, minimum: 1 or minPrice, maximum: 4, default: none
     * categories: select, optional, default: none
     * name: string, optional, default: none
   * Body: none
@@ -1203,20 +1189,19 @@ Return shops filtered by query parameters.
   * Body:
 
     ```json
-    {
-      "shops": [
+    [
         {
           "id": 1,
           "owner_id": 1,
           "name": "App Academy",
           "description": "Place where web developers are created",
-          "hours": { "Monday": "1:00-16:00" ,
-                     "Tuesday": "1:00-16:00" ,
-                     "Wednesday": "1:00-16:00" ,
-                     "Thursday": "1:00-16:00" ,
-                     "Friday": "1:00-16:00" ,
-                     "Saturday": "2:00-7:00",
-                     "Sunday": "2:00-7:00"},
+          "hours": { "monday": "1:00-16:00" ,
+                     "tuesday": "1:00-16:00" ,
+                     "wednesday": "1:00-16:00" ,
+                     "thursday": "1:00-16:00" ,
+                     "friday": "1:00-16:00" ,
+                     "saturday": "2:00-7:00",
+                     "sunday": "2:00-7:00"},
           "website": "www.coffee.com",
           "phone_number": "123-456-7890",
           "price_range": 1,
@@ -1226,13 +1211,10 @@ Return shops filtered by query parameters.
           "avg_rating": 4.5,
           "categories": ["American", "To-Go", "Outdoor Seating"]
         }
-      ],
-      "page": 1,
-      "size": 20
-    }
+    ]
     ```
 
-* Error Response: Query parameter validation errors
+<!-- * Error Response: Query parameter validation errors
   * Status Code: 400
   * Headers:
     * Content-Type: application/json
@@ -1248,4 +1230,4 @@ Return shops filtered by query parameters.
         "maxPrice": "Maximum price must be between 1 and 5 and greater than min price",
       }
     }
-    ```
+    ``` -->

@@ -2,12 +2,14 @@
     text-align: center;
     margin: 0 auto;
     margin-bottom: 600px;
+    width: 90%;
 }
 
 #authors{
     display: flex;
+    flex-wrap: wrap;
     flex-direction: row;
-    width: 100%;
+    width: 90%;
     justify-content: center;
     margin: 5px auto;
 }
